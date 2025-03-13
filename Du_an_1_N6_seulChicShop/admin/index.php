@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Require file Common
 require_once '../commons/env.php'; // Khai báo biến môi trường
@@ -20,6 +20,9 @@ $act = $_GET['act'] ?? '/';
 
 match ($act) {
 
-//router
-'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
-  default => 'Trang không tồn tại'};
+  //router danh muc
+  'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
+  'form-them-danh-muc' => (new AdminDanhMucController())->formAddDanhMuc(),
+  'them-danh-muc' => (new AdminDanhMucController())->possAddDanhMuc(),
+ 
+};

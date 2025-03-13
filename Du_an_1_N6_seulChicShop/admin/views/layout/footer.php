@@ -1,8 +1,8 @@
 <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.2.0
+      BY-<b >NHÓM 4</b>
     </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>WEBSITE BÁN ĐỒ LƯU NIỆM &copy; THỜI TRANG TRANG <a href="https://adminlte.io">SHOP 4 CON CỪU</a>.</strong> 
   </footer>
 
   <!-- Control Sidebar -->

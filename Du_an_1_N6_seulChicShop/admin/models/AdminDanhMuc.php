@@ -23,4 +23,23 @@ class AdminDanhMuc
             echo "lỗi" . $e->getMessage();
         }
     }
+    
+    public function insertDanhMuc($ten_danh_muc, $mo_ta)
+    {
+        try {
+            $sql = 'INSERT INTO danh_mucs (ten_danh_muc, mo_ta)
+                    VALUES (:ten_danh_muc, :mo_ta)';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+             ':ten_danh_muc' => $ten_danh_muc,
+             ':mo_ta' => $mo_ta
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
 }
