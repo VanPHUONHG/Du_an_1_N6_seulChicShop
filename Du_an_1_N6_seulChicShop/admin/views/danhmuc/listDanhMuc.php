@@ -31,7 +31,7 @@
                     <div class="card">
                         <div class="card-header">
                             <a href="<?= BASE_URL_ADMIN . '?act=form-them-danh-muc' ?>">
-                             <button class="btn btn-success">Thêm danh mục</button>
+                                <button class="btn btn-success">Thêm danh mục</button>
                             </a>
                         </div>
                         <!-- /.card-header -->
@@ -52,8 +52,10 @@
                                             <td><?= $danhMuc['ten_danh_muc'] ?></td>
                                             <td><?= $danhMuc['mo_ta'] ?></td>
                                             <td>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=form-sua-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>">
+                                                    <button class="btn btn-warning">Sua</button>
+                                                </a>
                                                 <button class="btn btn-danger">Xoa</button>
-                                                <button class="btn btn-warning">Sua</button>
 
                                             </td>
                                         </tr>
