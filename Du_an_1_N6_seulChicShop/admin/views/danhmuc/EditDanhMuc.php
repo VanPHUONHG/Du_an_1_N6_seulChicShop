@@ -36,7 +36,7 @@
                         <!-- form start -->
                         <form action="<?= BASE_URL_ADMIN . '?act=sua-danh-muc' ?>" method="POST">
                         
-                        <input type="text" name="id" value="<?= $danhMuc['ten_danh_muc'] ?>" hidden>
+                        <input type="text" name="id" value="<?= $danhMuc['id'] ?>" hidden>
                         
                             <div class="card-body">
                                 <div class="form-group">

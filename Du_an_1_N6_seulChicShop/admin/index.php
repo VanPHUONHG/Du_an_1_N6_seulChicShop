@@ -28,4 +28,5 @@ match ($act) {
   'them-danh-muc' => (new AdminDanhMucController())->possAddDanhMuc(),
   'form-sua-danh-muc' => (new AdminDanhMucController())->formEditDanhMuc(),
   'sua-danh-muc' => (new AdminDanhMucController())->possEditDanhMuc(),
+  'xoa-danh-muc' => (new AdminDanhMucController())->deleteDanhMuc(),
 };
