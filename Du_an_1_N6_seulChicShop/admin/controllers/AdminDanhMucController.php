@@ -110,4 +110,16 @@ class AdminDanhMucController
             }
         }
     }
+
+    public function deleteDanhMuc()
+    {
+        $id = $_GET['id_danh_muc'];
+        $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($id);
+
+        if ($danhMuc) {
+            $this->modelDanhMuc->destroyDanhMuc($id);
+        }
+        header("Location: " . BASE_URL_ADMIN . '?act=danh-muc');
+        exit();
+    }
 }

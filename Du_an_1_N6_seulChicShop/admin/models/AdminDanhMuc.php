@@ -77,4 +77,19 @@ class AdminDanhMuc
             echo "lỗi" . $e->getMessage();
         }
     }
+    
+    public function destroyDanhMuc($id)
+    {
+        try {
+            $sql = "DELETE FROM danh_mucs WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id
+            ]);
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
 }
