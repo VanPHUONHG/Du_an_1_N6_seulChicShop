@@ -210,7 +210,7 @@
         </div>
     </div>
 </div>
-
+<!-- Footer -->
 <?php include './views/layout/footer.php'; ?>
 
 </body>

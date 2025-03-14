@@ -12,7 +12,7 @@ class AdminDanhMuc
     public function getAllDanhMuc()
     {
         try {
-            $sql = 'SELECT*FROM danh_mucs';
+            $sql = 'SELECT * FROM danh_mucs';
 
             $stmt = $this->conn->prepare($sql);
 
@@ -77,7 +77,7 @@ class AdminDanhMuc
             echo "lỗi" . $e->getMessage();
         }
     }
-    
+
     public function destroyDanhMuc($id)
     {
         try {
