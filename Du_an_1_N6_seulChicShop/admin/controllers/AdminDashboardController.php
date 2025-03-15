@@ -17,7 +17,7 @@ class AdminDashboardController
     {
         $listAllOrder = $this->ModelAdminOrder->getAllOrder();
         $listUser = $this->ModelAdminUser->getAllUser();
-        $tongThuNhap = $this->ModelAdminOrder->totalPriceOrder();
+        $totalOrder = $this->ModelAdminOrder->totalPriceOrder();
         $listDetailOrder = $this->ModelAdminOrder->getAllDetailBestSellingProducts();
         require_once './views/trangChuAdmin.php';
     }

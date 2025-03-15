@@ -40,11 +40,13 @@ class AdminProductController
     }
     public function formAddProduct()
     {
-        $listDanhmuc = $this->ModelAdminDanhMuc->getAllDanhMuc();
+        $listCategory = $this->ModelAdminDanhMuc->getAllDanhMuc();
         require_once './views/product/AddProduct.php';
+        deleteSessionError();
     }
-    public function insertProduct()
+    public function createProduct()
     {
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
             $gia_san_pham = $_POST['gia_san_pham'] ?? '';
@@ -63,6 +65,9 @@ class AdminProductController
             }
             if (empty($gia_san_pham)) {
                 $errors['gia_san_pham'] = 'Giá sản phẩm không được để trống';
+            }
+            if (empty($gia_khuyen_mai)) {
+                $errors['gia_khuyen_mai'] = 'Giá khuyến mãi sản phẩm không được để trống';
             }
             if (empty($so_luong)) {
                 $errors['so_luong'] = 'Số lượng sản phẩm không được để trống';
@@ -83,7 +88,7 @@ class AdminProductController
             $_SESSION['error'] = $errors;
             if (empty($errors)) {
 
-                $product = $this->ModelAdminProduct->insertProduct(
+                $san_pham_id = $this->ModelAdminProduct->insertProduct(
                     $ten_san_pham,
                     $gia_san_pham,
                     $gia_khuyen_mai,
@@ -103,6 +108,7 @@ class AdminProductController
             }
         }
     }
+
     public function formEditProduct()
     {
         $id = $_GET['id_san_pham'];

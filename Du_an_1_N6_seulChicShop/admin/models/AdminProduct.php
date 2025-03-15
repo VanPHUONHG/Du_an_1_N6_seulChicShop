@@ -18,17 +18,6 @@ class AdminProduct
             echo "loi" . $e->getMessage();
         }
     }
-    public function getNameCategory()
-    {
-        try {
-            $sql = 'SELECT * FROM danh_mucs';
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll();
-        } catch (Exception $e) {
-            echo "loi" . $e->getMessage();
-        }
-    }
     public function deleteProduct($id)
     {
         try {
@@ -56,7 +45,7 @@ class AdminProduct
     public function getCommentFromProduct($id)
     {
         try {
-            $sql = 'SELECT binh_luans.*, tai_khoans.ho_ten, tai_khoans.anh_dai_dien
+            $sql = 'SELECT binh_luans.*, tai_khoans.ten_tai_khoan, tai_khoans.anh_dai_dien
                     FROM binh_luans 
                     INNER JOIN tai_khoans 
                     ON binh_luans.tai_khoan_id = tai_khoans.id

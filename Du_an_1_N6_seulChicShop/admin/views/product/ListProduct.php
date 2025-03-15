@@ -8,7 +8,6 @@
 <!-- Main Sidebar Container -->
 <?php include './views/layout/sidebar.php'; ?>
 
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -28,7 +27,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="<?= BASE_URL_ADMIN . '?act=form-them-san-pham'  ?>" class="btn btn-success"><i class="fas fa-add"></i> Thêm sản phẩm</a>
+                            <a href="<?= BASE_URL_ADMIN . '?act=form-them-san-pham'  ?>" class="btn btn-success">Thêm sản phẩm</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -63,10 +62,10 @@
                                                 <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-san-pham&id_san_pham=' . $product['id'] ?>">
                                                     <button class="btn btn-warning"><i class="far fa-eye"></i></button>
                                                 </a>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=form-sua-san-pham&id_san_pham=' . $product['id'] ?>"><button class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=form-sua-san-pham&id_san_pham=' . $product['id'] ?>"><button class="btn btn-primary">Sửa</button>
                                                 </a>
                                                 <a href="<?= BASE_URL_ADMIN . '?act=xoa-san-pham&id_san_pham=' . $product['id'] ?>"
-                                                    onclick="return confirm('Bạn có chắc chắn xóa không')"><button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                                    onclick="return confirm('Bạn có chắc chắn xóa không')"><button class="btn btn-danger">Xóa</button>
 
                                             </td>
                                         </tr>
@@ -87,7 +86,11 @@
     </section>
     <!-- /.content -->
 </div>
-<!-- Script -->
+<!-- /.content-wrapper -->
+<!-- Footer -->
+<?php include './views/layout/footer.php'; ?>
+<!-- End Footer -->
+
 <script>
     $(function() {
         $("#example1").DataTable({
@@ -107,6 +110,6 @@
         });
     });
 </script>
+</body>
 
-<!-- footer -->
-<?php include './views/layout/footer.php'; ?>
+</html>
