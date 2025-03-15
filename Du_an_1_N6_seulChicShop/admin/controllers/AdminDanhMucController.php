@@ -3,15 +3,16 @@
 class AdminDanhMucController
 {
 
-    public $ModelAdminDanhMuc;
+    public $modelDanhMuc;
     public function __construct()
     {
-        $this->ModelAdminDanhMuc = new AdminDanhMuc();
+        $this->modelDanhMuc = new AdminDanhMuc();
     }
     public function danhSachDanhMuc()
     {
-        $listDanhmuc = $this->ModelAdminDanhMuc->getAllDanhMuc();
-        require_once './views/DanhMuc/listDanhMuc.php';
+
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+        require_once  './views/danhmuc/listDanhMuc.php';
     }
 
     public function formAddDanhMuc()
@@ -42,7 +43,7 @@ class AdminDanhMucController
                 //nếu không có lôiz thì tiến hành thêm danh mục
                 // var_dump('ok');
 
-                $this->ModelAdminDanhMuc->insertDanhMuc($ten_danh_muc, $mo_ta);
+                $this->modelDanhMuc->insertDanhMuc($ten_danh_muc, $mo_ta);
                 header("Location: " . BASE_URL_ADMIN . '?act=danh-muc');
                 exit();
             } else {
@@ -64,7 +65,7 @@ class AdminDanhMucController
         $id = $_GET['id_danh_muc'];
 
         // Lấy thông tin danh mục từ model
-        $danhMuc = $this->ModelAdminDanhMuc->getDetailDanhMuc($id);
+        $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($id);
 
         // Nếu không tìm thấy danh mục, quay lại danh sách
         if (!$danhMuc) {
@@ -78,7 +79,7 @@ class AdminDanhMucController
 
 
     //ham nay dun de them dl va xl dl
-    public function postEditDanhMuc()
+    public function possEditDanhMuc()
     {
         //   var_dump(($_POST)); //ham nay dung de xly csdl 
 
@@ -100,7 +101,7 @@ class AdminDanhMucController
                 //nếu không có lôiz thì tiến hành sua danh mục
                 // var_dump('ok');
 
-                $this->ModelAdminDanhMuc->updateDanhMuc($id, $ten_danh_muc, $mo_ta);
+                $this->modelDanhMuc->updateDanhMuc($id, $ten_danh_muc, $mo_ta);
                 header("Location: " . BASE_URL_ADMIN . '?act=danh-muc');
                 exit();
             } else {
@@ -113,10 +114,10 @@ class AdminDanhMucController
     public function deleteDanhMuc()
     {
         $id = $_GET['id_danh_muc'];
-        $danhMuc = $this->ModelAdminDanhMuc->getDetailDanhMuc($id);
+        $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($id);
 
         if ($danhMuc) {
-            $this->ModelAdminDanhMuc->destroyDanhMuc($id);
+            $this->modelDanhMuc->destroyDanhMuc($id);
         }
         header("Location: " . BASE_URL_ADMIN . '?act=danh-muc');
         exit();

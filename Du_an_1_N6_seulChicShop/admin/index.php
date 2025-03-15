@@ -7,12 +7,13 @@ require_once '../commons/function.php'; // Hàm hỗ trợ
 // Require toàn bộ file Controllers
 require_once './controllers/AdminDashboardController.php';
 require_once './controllers/AdminDanhMucController.php';
-require_once './controllers/AdminProductController.php';
+require_once './controllers/AdminSanPhamController.php';
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
-require_once './models/AdminProduct.php';
+require_once './models/AdminSanPham.php';
 require_once './models/AdminOrder.php';
 require_once './models/AdminUser.php';
+
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -26,14 +27,6 @@ match ($act) {
   'form-them-danh-muc' => (new AdminDanhMucController())->formAddDanhMuc(),
   'them-danh-muc' => (new AdminDanhMucController())->possAddDanhMuc(),
   'form-sua-danh-muc' => (new AdminDanhMucController())->formEditDanhMuc(),
-  'sua-danh-muc' => (new AdminDanhMucController())->postEditDanhMuc(),
+  'sua-danh-muc' => (new AdminDanhMucController())->possEditDanhMuc(),
   'xoa-danh-muc' => (new AdminDanhMucController())->deleteDanhMuc(),
-  //router san pham
-  'san-pham' => (new AdminProductController())->listProduct(),
-  'xoa-san-pham' => (new AdminProductController())->destroyProduct(),
-  'chi-tiet-san-pham' => (new AdminProductController())->detailProduct(),
-  'form-them-san-pham' => (new AdminProductController())->formAddProduct(),
-  'them-san-pham' => (new AdminProductController())->insertProduct(),
-  'form-sua-san-pham' => (new AdminProductController())->formEditProduct(),
-  'sua-san-pham' => (new AdminProductController())->editProduct()
 };
