@@ -44,7 +44,7 @@
 
         <li class="nav-item">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-          <a href="<?= BASE_URL_ADMIN . '?act=danh-muc' ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN . '?act=san-pham' ?>" class="nav-link">
             <i class="nav-icon fa-solid fa-shirt"></i>
             <p>Sản Phẩm</p>
           </a>

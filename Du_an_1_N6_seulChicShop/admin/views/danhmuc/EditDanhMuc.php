@@ -16,8 +16,9 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="d-flex justify-content-between">
                     <h1>Sửa Danh Mục Sản Phẩm</h1>
+                    <a href="<?= BASE_URL_ADMIN . "?act=danh-muc" ?>" class="btn btn-secondary">Quay lại</a>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -35,9 +36,9 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form action="<?= BASE_URL_ADMIN . '?act=sua-danh-muc' ?>" method="POST">
-                        
-                        <input type="text" name="id" value="<?= $danhMuc['id'] ?>" hidden>
-                        
+
+                            <input type="text" name="id" value="<?= $danhMuc['id'] ?>" hidden>
+
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Tên Danh Mục</label>
