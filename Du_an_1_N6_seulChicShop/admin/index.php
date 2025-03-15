@@ -8,6 +8,7 @@ require_once '../commons/function.php'; // Hàm hỗ trợ
 require_once './controllers/AdminDashboardController.php';
 require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminProductController.php';
+require_once './controllers/AdminOrderController.php';
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminProduct.php';
@@ -33,7 +34,10 @@ match ($act) {
   'xoa-san-pham' => (new AdminProductController())->destroyProduct(),
   'chi-tiet-san-pham' => (new AdminProductController())->detailProduct(),
   'form-them-san-pham' => (new AdminProductController())->formAddProduct(),
-  'them-san-pham' => (new AdminProductController())->insertProduct(),
+  'them-san-pham' => (new AdminProductController())->createProduct(),
   'form-sua-san-pham' => (new AdminProductController())->formEditProduct(),
   'sua-san-pham' => (new AdminProductController())->editProduct()
+  // router order
+  ,
+  'don-hang' => (new AdminOrderController())->listOrder()
 };

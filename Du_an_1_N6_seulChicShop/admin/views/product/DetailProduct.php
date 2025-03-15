@@ -12,7 +12,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
+            <div class="">
                 <div class="d-flex justify-content-between">
                     <h1>Xem chi tiết sản phẩm</h1>
                     <a href="<?= BASE_URL_ADMIN . '?act=san-pham' ?>" class="btn btn-secondary">Quay lại</a>
@@ -55,7 +55,7 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Sản phẩm</th>
+                                        <th>Khách hàng</th>
                                         <th>Nội dung</th>
                                         <th>Ngày bình luận</th>
                                         <th>Trạng thái</th>

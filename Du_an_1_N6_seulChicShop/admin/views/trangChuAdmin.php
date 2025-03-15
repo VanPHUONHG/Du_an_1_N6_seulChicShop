@@ -47,7 +47,7 @@
                                                 </div>
                                                 <div class="flex-shrink-0">
                                                     <h5 class="text-success fs-14 mb-0">
-                                                        <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +16.24
+                                                        <i class="ri-arrow-right-up-line fs-13 align-middle"></i>+50.24
                                                         %
                                                     </h5>
                                                 </div>
@@ -56,7 +56,7 @@
                                             <div class="d-flex align-items-end justify-content-between mt-4">
                                                 <div>
                                                     <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>
-                                                            <?= number_format($tongThuNhap, 0, '.', '.') ?>
+                                                            <?= number_format($totalOrder, 0, '.', '.') ?>
                                                         </span>VNĐ </h4>
                                                 </div>
                                             </div>
@@ -75,7 +75,7 @@
                                                 </div>
                                                 <div class="flex-shrink-0">
                                                     <h5 class="text-success fs-14 mb-0">
-                                                        <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +16.24
+                                                        <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +20.24
                                                         %
                                                     </h5>
                                                 </div>
@@ -111,7 +111,7 @@
                                                 </div>
                                                 <div class="flex-shrink-0">
                                                     <h5 class="text-success fs-14 mb-0">
-                                                        <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +16.24
+                                                        <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +50.24
                                                         %
                                                     </h5>
                                                 </div>

@@ -1,6 +1,6 @@
 <footer class="main-footer">
   <div class="float-right d-none d-sm-block">
-    BY-<b>NHÓM 6</b>
+    BY-<b>NHÓM 4</b>
   </div>
   <strong>WEBSITE BÁN ĐỒ LƯU NIỆM &copy; THỜI TRANG TRANG <a href="https://adminlte.io">SHOP 4 CON CỪU</a>.</strong>
 </footer>
@@ -11,9 +11,6 @@
 </aside>
 <!-- /.control-sidebar -->
 </div>
-<!-- ionicon -->
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <!-- ./wrapper -->
 
 <!-- jQuery -->
@@ -33,8 +30,6 @@
 <script src="./assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="./assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="./assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 <!-- AdminLTE App -->
 <script src="./assets/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->

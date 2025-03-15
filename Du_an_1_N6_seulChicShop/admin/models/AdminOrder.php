@@ -9,7 +9,7 @@ class AdminOrder
     public function totalPriceOrder()
     {
         try {
-            $sql = "SELECT SUM(tong_tien) AS tong_thu_nhap FROM don_hangs WHERE trang_thai_id = 9";
+            $sql = "SELECT SUM(tong_tien) AS tong_thu_nhap FROM don_hangs WHERE trang_thai_id = 7";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC)['tong_thu_nhap'] ?? 0;
@@ -31,6 +31,7 @@ class AdminOrder
             echo "Lỗi Truy Vấn:" . $e->getMessage();
         }
     }
+
     public function getAllDetailBestSellingProducts()
     {
         try {

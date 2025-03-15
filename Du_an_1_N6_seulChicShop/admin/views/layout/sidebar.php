@@ -25,10 +25,10 @@
                with font-awesome or any other icon font library -->
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN . '?act=/' ?>" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-              Dashboard
+              Thống kê
             </p>
           </a>
         </li>
@@ -36,21 +36,78 @@
         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN . '?act=danh-muc' ?>" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
-            <p>
-              Danh Mục Sản Phẩm
-            </p>
+            <p>Quản lý danh mục</p>
           </a>
         </li>
 
         <li class="nav-item">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
           <a href="<?= BASE_URL_ADMIN . '?act=san-pham' ?>" class="nav-link">
-            <i class="nav-icon fa-solid fa-shirt"></i>
-            <p>Sản Phẩm</p>
+            <i class="nav-icon fas fa-cube"></i>
+            <p>Quản lý sản phẩm</p>
           </a>
         </li>
 
-      </ul>
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN . '?act=don-hang' ?>" class="nav-link">
+            <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <p>Quản lý đơn hàng</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN . '?act=quan-ly-binh-luan' ?>" class="nav-link">
+            <i class="nav-icon fas fa-comments"></i>
+            <p>Quản lý bình luận</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN . '?act=banner' ?>" class="nav-link">
+            <i class="nav-icon fas fa-images"></i>
+            <p>Quản lý banner</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN . '?act=tin-tuc' ?>" class="nav-link">
+            <i class="nav-icon fas fa-newspaper"></i>
+            <p>Quản lý tin tức</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN . '?act=lien-he' ?>" class="nav-link">
+            <i class="nav-icon fas fa-id-badge"></i>
+            <p>Quản lý liên hệ</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-user"></i>
+            <p style="color: white;">Quản Lý Người Dùng</p>
+            <i class="fas fa-angle-left"></i>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= BASE_URL_ADMIN . '/?act=list-tai-khoan-quan-tri' ?>" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p style="color: white;">Tài khoản quản trị viên</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= BASE_URL_ADMIN . '/?act=list-tai-khoan-khach-hang' ?>" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p style="color: white;">Tài khoản khách hàng</p>
+              </a>
+            </li>
+            <!-- <li class="nav-item">
+                <a href="<?= BASE_URL_ADMIN . '/?act=form-sua-thong-tin-ca-nhan-quan-tri' ?>" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p style="color: white;">Tài khoản cá nhân</p>
+                </a>
+              </li> -->
+          </ul>
     </nav>
     <!-- /.sidebar-menu -->
   </div>
