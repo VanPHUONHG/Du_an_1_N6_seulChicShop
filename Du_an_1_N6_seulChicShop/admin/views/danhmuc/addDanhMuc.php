@@ -16,8 +16,9 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="d-flex justify-content-between">
                     <h1>Quản Lý Danh Mục Sản Phẩm</h1>
+                    <a href="<?= BASE_URL_ADMIN . "?act=danh-muc" ?>" class="btn btn-secondary">Quay lại</a>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -39,9 +40,9 @@
                                 <div class="form-group">
                                     <label>Tên Danh Mục</label>
                                     <input type="texr" class="form-control" name="ten_danh_muc" placeholder="nhập tên danh mục">
-                                    <?php if(isset($errors['ten_danh_muc'])) {?>
+                                    <?php if (isset($errors['ten_danh_muc'])) { ?>
                                         <p class="text-danger"> <?= $errors['ten_danh_muc'] ?>
-                                   <?php } ?>
+                                        <?php } ?>
                                 </div>
 
                                 <div class="form-group">

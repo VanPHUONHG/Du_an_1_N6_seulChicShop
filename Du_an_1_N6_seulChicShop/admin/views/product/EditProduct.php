@@ -13,12 +13,11 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-11">
+                <div class="d-flex justify-content-between">
                     <h1>Sửa thông tin sản phẩm: <?= $Product['ten_san_pham'] ?></h1>
-                </div>
-                <div class="col-sm-1">
                     <a href="<?= BASE_URL_ADMIN . '?act=san-pham' ?>" class="btn btn-secondary">Quay lại</a>
                 </div>
+
             </div>
         </div><!-- /.container-fluid -->
     </section>
