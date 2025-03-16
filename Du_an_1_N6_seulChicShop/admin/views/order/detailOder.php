@@ -6,8 +6,8 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="d-flex justify-content-between mb-2">
-                <div class="">
-                    <h1>Quản lý đơn hàng</h1>
+                <div class="col-sm-10">
+                    <h1>Quản lý đơn hàng <?= $donHang['ma_don_hang'] ?></h1>
                 </div>
                 <div class="">
                     <a href="<?= BASE_URL_ADMIN . '?act=don-hang' ?>" class="btn btn-secondary">Quay lại</a>
@@ -18,6 +18,23 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
+                    
+                    <div class="col-sm-5 mb-3">
+                    <form action="" method="post">
+                        <select name="" id="" class="form-group">
+                            <?php foreach ($listTrangThaiOder as $key => $trangThai):  ?>
+                                <option
+                                <?=  $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected':'' ?> 
+                                <?=  $trangThai['id'] < $donHang['trang_thai_id'] ? 'disabled':'' ?> 
+                                
+                                    value="<?= $trangThai['id']; ?>">
+                                    <?= $trangThai['ten_trang_thai']; ?> </option>
+
+                            <?php endforeach ?>
+                        </select>
+                    </form>
+                </div>
+                    
                         <?php
                         if ($donHang['trang_thai_id'] == 1) {
                             $colorAlerst = 'primary';
@@ -53,12 +70,10 @@
                             <div class="row invoice-info">
                                 <div class="col-sm-4 invoice-col">
                                     Thông tin người đặt
-                                    <address>
-                                        <strong><?= $donHang['ten_tai_khoan'] ?></strong><br>
-                                        795 Folsom Ave, Suite 600<br>
-                                        San Francisco, CA 94107<br>
-                                        Phone: (804) 123-5432<br>
-                                        Email: info@almasaeedstudio.com
+                                    <address><br />
+                                        <strong>Tên: <?= $donHang['ten_tai_khoan'] ?></strong><br>
+                                        Email: <?= $donHang['email'] ?><br>
+                                        SDT: <?= $donHang['so_dien_thoai'] ?><br>
                                     </address>
                                 </div>
                                 <!-- /.col -->
@@ -78,7 +93,7 @@
                                         <strong>MDH:<?= $donHang['ma_don_hang'] ?></strong><br>
                                         Tổng tiền: <?= $donHang['tong_tien'] ?> <br>
                                         Ghi chú: <?= $donHang['ghi_chu'] ?><br>
-                                        Thanh toán: <br>
+                                        Thanh toán: <?= $donHang['ten_phuong_thuc'] ?> <br>
                                     </address>
                                 </div>
                                 <!-- /.col -->
@@ -99,14 +114,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($sanPhamDonHang as $key =>$sanPham): ?>
+                                            <?php $tong_tien = 0; ?>
+                                            <?php foreach ($sanPhamDonHang as $key => $sanPham): ?>
+
                                                 <tr>
                                                     <td><?= $key + 1 ?></td>
-                                                    <td><?= $sanPham['san_pham_id'] ?></td>
+                                                    <td><?= $sanPham['ten_san_pham'] ?></td>
                                                     <td><?= $sanPham['don_gia'] ?></td>
                                                     <td><?= $sanPham['so_luong'] ?></td>
                                                     <td><?= $sanPham['thanh_tien'] ?></td>
                                                 </tr>
+                                                <?php $tong_tien += $sanPham['thanh_tien']; ?>
+
                                             <?php endforeach ?>
                                         </tbody>
                                     </table>
@@ -116,61 +135,34 @@
                             <!-- /.row -->
 
                             <div class="row">
-                                <!-- accepted payments column -->
-                                <div class="col-6">
-                                    <p class="lead">Payment Methods:</p>
-                                    <img src="../../dist/img/credit/visa.png" alt="Visa">
-                                    <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                                    <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                                    <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
 
-                                    <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                                        plugg
-                                        dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                                    </p>
-                                </div>
                                 <!-- /.col -->
                                 <div class="col-6">
-                                    <p class="lead">Amount Due 2/22/2014</p>
-
+                                    <strong class="text-danger" style="font-size: 25px;">Order Date: <?= formatDate(($donHang['ngay_dat'])) ?></strong>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tr>
                                                 <th style="width:50%">Subtotal:</th>
-                                                <td>$250.30</td>
+                                                <td><?= number_format($tong_tien) ?> VND</td>
                                             </tr>
                                             <tr>
-                                                <th>Tax (9.3%)</th>
-                                                <td>$10.34</td>
+                                                <th>Shipping Fee:</th>
+                                                <td><?= number_format(20000) ?> VND</td>
                                             </tr>
                                             <tr>
-                                                <th>Shipping:</th>
-                                                <td>$5.80</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Total:</th>
-                                                <td>$265.24</td>
+                                                <th>Pay:</th>
+                                                <td><?= number_format($tong_tien + 20000) ?> VND</td>
                                             </tr>
                                         </table>
                                     </div>
+
                                 </div>
                                 <!-- /.col -->
                             </div>
                             <!-- /.row -->
 
                             <!-- this row will not appear when printing -->
-                            <div class="row no-print">
-                                <div class="col-12">
-                                    <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                                    <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                                        Payment
-                                    </button>
-                                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                        <i class="fas fa-download"></i> Generate PDF
-                                    </button>
-                                </div>
-                            </div>
+
                         </div>
                         <!-- /.invoice -->
                     </div><!-- /.col -->
