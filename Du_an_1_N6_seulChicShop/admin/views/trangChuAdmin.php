@@ -86,7 +86,7 @@
                                                     <?php
                                                     $TotalUser = 0;
                                                     foreach ($listUser as $user):
-                                                        if (($user['trang_thai'] == 1) && ($user['chuc_vu_id'] == 2)) {
+                                                        if (($user['trang_thai_don_hang_id'] == 7) && ($user['chuc_vu_id'] == 2)) {
                                                             $TotalUser++;
                                                         }
                                                     endforeach;

@@ -55,25 +55,12 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . '?act=quan-ly-binh-luan' ?>" class="nav-link">
-            <i class="nav-icon fas fa-comments"></i>
-            <p>Quản lý bình luận</p>
-          </a>
-        </li>
-
-        <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN . '?act=banner' ?>" class="nav-link">
             <i class="nav-icon fas fa-images"></i>
-            <p>Quản lý banner</p>
+            <p>Quản lý hình ảnh</p>
           </a>
         </li>
 
-        <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . '?act=tin-tuc' ?>" class="nav-link">
-            <i class="nav-icon fas fa-newspaper"></i>
-            <p>Quản lý tin tức</p>
-          </a>
-        </li>
 
         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN . '?act=lien-he' ?>" class="nav-link">
@@ -85,28 +72,22 @@
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
-            <p style="color: white;">Quản Lý Người Dùng</p>
+            <p>Quản Lý Người Dùng</p>
             <i class="fas fa-angle-left"></i>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="<?= BASE_URL_ADMIN . '/?act=list-tai-khoan-quan-tri' ?>" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
-                <p style="color: white;">Tài khoản quản trị viên</p>
+                <p>Tài khoản quản trị viên</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?= BASE_URL_ADMIN . '/?act=list-tai-khoan-khach-hang' ?>" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
-                <p style="color: white;">Tài khoản khách hàng</p>
+                <p>Tài khoản khách hàng</p>
               </a>
             </li>
-            <!-- <li class="nav-item">
-                <a href="<?= BASE_URL_ADMIN . '/?act=form-sua-thong-tin-ca-nhan-quan-tri' ?>" class="nav-link">
-                  <i class="nav-icon fas fa-user"></i>
-                  <p style="color: white;">Tài khoản cá nhân</p>
-                </a>
-              </li> -->
           </ul>
     </nav>
     <!-- /.sidebar-menu -->

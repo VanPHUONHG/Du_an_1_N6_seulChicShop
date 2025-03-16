@@ -8,7 +8,6 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1>Quản lý đơn hàng</h1>
-                    <a href="<?= BASE_URL_ADMIN . '?act='  ?>"></a>
                 </div>
             </div>
     </section>
