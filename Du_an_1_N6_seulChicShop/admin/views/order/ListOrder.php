@@ -8,6 +8,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1>Quản lý đơn hàng</h1>
+                    <a href="<?= BASE_URL_ADMIN . '?act='  ?>"></a>
                 </div>
             </div>
     </section>
@@ -44,7 +45,7 @@
                                             <td><?= $order['tong_tien'] ?></td>
                                             <td><?= $order['ten_trang_thai'] ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-don-hang&id_don_hang=' . $order['id'] ?>"><button class="btn btn-primary">Chi tiết Đơn Hàng </button></a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-don-hang&id_don_hang=' . $order['id'] ?>"><button class="btn btn-warning">Chi tiết Đơn Hàng </button></a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>

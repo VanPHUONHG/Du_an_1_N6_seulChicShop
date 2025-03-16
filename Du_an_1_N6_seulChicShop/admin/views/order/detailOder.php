@@ -5,9 +5,12 @@
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
+            <div class="d-flex justify-content-between mb-2">
+                <div class="">
                     <h1>Quản lý đơn hàng</h1>
+                </div>
+                <div class="">
+                    <a href="<?= BASE_URL_ADMIN . '?act=don-hang' ?>" class="btn btn-secondary">Quay lại</a>
                 </div>
             </div>
         </div>
@@ -39,9 +42,9 @@
                                     <h4>
                                         <i class="fas fa-cube"></i> SEUL CHIC SHOP.NHOM 6
                                         <small class="float-right">Date:
-                                        <?= 
-                                          formatDate(($donHang['ngay_dat']));
-                                        ?></small>
+                                            <?=
+                                            formatDate(($donHang['ngay_dat']));
+                                            ?></small>
                                     </h4>
                                 </div>
                                 <!-- /.col -->
@@ -51,7 +54,7 @@
                                 <div class="col-sm-4 invoice-col">
                                     Thông tin người đặt
                                     <address>
-                                        <strong><?= $donHang['ten_tai_khoan'] ?></strong><br>
+                                        <strong><?= $donHang['ten_nguoi_nhan'] ?></strong><br>
                                         795 Folsom Ave, Suite 600<br>
                                         San Francisco, CA 94107<br>
                                         Phone: (804) 123-5432<br>
