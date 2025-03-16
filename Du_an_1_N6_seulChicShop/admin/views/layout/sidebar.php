@@ -2,7 +2,7 @@
   <!-- Brand Logo -->
   <a href="<?= BASE_URL ?>" class="brand-link text-center">
     <!-- <img srcalt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-    <span class="brand-text font-weight-light">SHOP 4 CON CỪU</span>
+    <span class="brand-text font-weight-light">SEUL CHIC SHOP </span>
   </a>
 
   <!-- Sidebar -->

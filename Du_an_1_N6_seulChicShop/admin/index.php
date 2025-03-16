@@ -36,8 +36,13 @@ match ($act) {
   'form-them-san-pham' => (new AdminProductController())->formAddProduct(),
   'them-san-pham' => (new AdminProductController())->createProduct(),
   'form-sua-san-pham' => (new AdminProductController())->formEditProduct(),
-  'sua-san-pham' => (new AdminProductController())->editProduct()
+  'sua-san-pham' => (new AdminProductController())->editProduct(),
+  
+  
   // router order
-  ,
-  'don-hang' => (new AdminOrderController())->listOrder()
+  'don-hang' => (new AdminOrderController())->listOrder(),
+  'form-sua-don-hang' => (new AdminOrderController())->formEditOrder(),
+  'sua-don-hang' => (new AdminOrderController())->possEditOrder(),
+  'xoa-don-hang' => (new AdminOrderController())->deleteOrder(),
+  'chi-tiet-don-hang' => (new AdminOrderController())->detailOrder()
 };

@@ -62,4 +62,40 @@ class AdminOrder
             echo "Lỗi Truy Vấn:" . $e->getMessage();
         }
     }
+    
+    
+    public function getDetailDonHang($id) {
+        try{
+          $sql = 'SELECT don_hangs.*, trang_thai_don_hangs.ten_trang_thai 
+           FROM don_hangs
+           INNER JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id 
+           WHERE don_hangs.id = :id ';
+         $stmt =$this ->conn->prepare($sql);
+         $stmt->execute([':id'=>$id]);
+         
+         return $stmt->fetch();
+
+        }catch(Exception $e){
+         echo "lỗi".$e->getMessage();
+        }
+    }
+    
+    public function getListDonHang($id) {
+        try{
+          $sql = 'SELECT don_hangs.*, trang_thai_don_hangs.ten_trang_thai, tai_khoans.ten_tai_khoan,tai_khoans.email,  tai_khoans.so_dien_thoai 
+           FROM don_hangs
+           INNER JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id 
+           INNER JOIN tai_khoans ON don_hangs.tai_khoan_id = tai_khoans.id 
+           
+           WHERE don_hangs.id = :id ';
+           
+         $stmt =$this ->conn->prepare($sql);
+         $stmt->execute([':id'=>$id]);
+         
+         return $stmt->fetch();
+
+        }catch(Exception $e){
+         echo "lỗi".$e->getMessage();
+        }
+    }
 }

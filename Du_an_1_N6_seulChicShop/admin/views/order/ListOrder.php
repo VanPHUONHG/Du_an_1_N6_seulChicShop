@@ -44,7 +44,7 @@
                                             <td><?= $order['tong_tien'] ?></td>
                                             <td><?= $order['ten_trang_thai'] ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . $order['id'] ?>"><button class="btn btn-primary">Chi tiết Đơn Hàng </button></a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-don-hang&id_don_hang=' . $order['id'] ?>"><button class="btn btn-primary">Chi tiết Đơn Hàng </button></a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>
