@@ -48,9 +48,9 @@
                                             <td><?= $user['so_dien_thoai'] ?></td>
                                             <td><?= $user['ngay_tao'] ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-tai-khoan-admin&id_tai_khoan=' . $user['id'] ?>"><button class="btn btn-warning"><i class="far fa-eye"></i></button></a>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=sua-tai-khoan-admin&id_tai_khoan=' . $user['id'] ?>"><button class="btn btn-primary"><i class="fas fa-edit"></i><!-- Icon Sửa --></button></a>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=xoa-tai-khoan-admin&id_tai_khoan=' . $user['id'] ?>"><button class="btn btn-danger"><i class="fas fa-trash"></i> <!-- Icon xóa --></button></a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>"><button class="btn btn-warning"><i class="far fa-eye"></i></button></a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=sua-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>"><button class="btn btn-primary"><i class="fas fa-edit"></i><!-- Icon Sửa --></button></a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=xoa-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>"><button class="btn btn-danger"><i class="fas fa-trash"></i> <!-- Icon xóa --></button></a>
 
                                             </td>
                                         </tr>

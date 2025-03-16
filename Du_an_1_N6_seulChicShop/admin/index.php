@@ -49,4 +49,5 @@ match ($act) {
 
   // router user admin
   'list-tai-khoan-quan-tri' => (new AdminUserController())->listUserAdmin(),
+  'chi-tiet-tai-khoan-admin' => (new AdminUserController())->detailUserAdmin(),
 };

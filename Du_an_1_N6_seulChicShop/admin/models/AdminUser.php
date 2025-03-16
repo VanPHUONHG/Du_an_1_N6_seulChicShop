@@ -31,4 +31,16 @@ class AdminUser
             echo "Lỗi Truy Vấn:" . $e->getMessage();
         }
     }
+    public function getAdminUserById($id)
+    {
+        try {
+            $sql = "SELECT * FROM tai_khoans WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch();
+        } catch (\Throwable $th) {
+            echo "Lỗi Truy Vấn:" . $th->getMessage();
+        }
+    }
 }
