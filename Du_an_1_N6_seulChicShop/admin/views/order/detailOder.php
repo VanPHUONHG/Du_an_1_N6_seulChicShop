@@ -39,9 +39,9 @@
                                     <h4>
                                         <i class="fas fa-cube"></i> SEUL CHIC SHOP.NHOM 6
                                         <small class="float-right">Date:
-                                        <?= 
-                                          formatDate(($donHang['ngay_dat']));
-                                        ?></small>
+                                            <?=
+                                            formatDate(($donHang['ngay_dat']));
+                                            ?></small>
                                     </h4>
                                 </div>
                                 <!-- /.col -->
@@ -51,31 +51,30 @@
                                 <div class="col-sm-4 invoice-col">
                                     Thông tin người đặt
                                     <address>
-                                        <strong><?= $donHang['ten_tai_khoan'] ?></strong><br>
-                                        795 Folsom Ave, Suite 600<br>
-                                        San Francisco, CA 94107<br>
-                                        Phone: (804) 123-5432<br>
-                                        Email: info@almasaeedstudio.com
+                                        <strong></strong><br>
+                                        Email: <br>
+                                        SĐT:
                                     </address>
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
-                                    To
-                                    <address>
-                                        <strong>John Doe</strong><br>
-                                        795 Folsom Ave, Suite 600<br>
-                                        San Francisco, CA 94107<br>
-                                        Phone: (555) 539-1037<br>
-                                        Email: john.doe@example.com
+                                    Thông tin người nhận
+                                    <address><br />
+                                        <strong>Tên:<?= $donHang['ten_nguoi_nhan'] ?></strong><br>
+                                        Email: <?= $donHang['email_nguoi_nhan'] ?> <br>
+                                        SDT: <?= $donHang['sdt_nguoi_nhan'] ?><br>
+                                        Địa Chỉ: <?= $donHang['dia_chi_nguoi_nhan'] ?><br>
                                     </address>
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
-                                    <b>Invoice #007612</b><br>
-                                    <br>
-                                    <b>Order ID:</b> 4F3S8J<br>
-                                    <b>Payment Due:</b> 2/22/2014<br>
-                                    <b>Account:</b> 968-34567
+                                    Thông tin
+                                    <address><br />
+                                        <strong>MDH:<?= $donHang['ma_don_hang'] ?></strong><br>
+                                        Tổng tiền: <?= $donHang['tong_tien'] ?> <br>
+                                        Ghi chú: <?= $donHang['ghi_chu'] ?><br>
+                                        Thanh toán: <br>
+                                    </address>
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -87,42 +86,23 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Qty</th>
-                                                <th>Product</th>
-                                                <th>Serial #</th>
-                                                <th>Description</th>
-                                                <th>Subtotal</th>
+                                                <th>#</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Đơn giá</th>
+                                                <th>Số lượng</th>
+                                                <th>Thành tiền</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Call of Duty</td>
-                                                <td>455-981-221</td>
-                                                <td>El snort testosterone trophy driving gloves handsome</td>
-                                                <td>$64.50</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Need for Speed IV</td>
-                                                <td>247-925-726</td>
-                                                <td>Wes Anderson umami biodiesel</td>
-                                                <td>$50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Monsters DVD</td>
-                                                <td>735-845-642</td>
-                                                <td>Terry Richardson helvetica tousled street art master</td>
-                                                <td>$10.70</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Grown Ups Blue Ray</td>
-                                                <td>422-568-642</td>
-                                                <td>Tousled lomo letterpress</td>
-                                                <td>$25.99</td>
-                                            </tr>
+                                            <?php foreach ($sanPhamDonHang as $key =>$sanPham): ?>
+                                                <tr>
+                                                    <td><?= $key + 1 ?></td>
+                                                    <td><?= $sanPham['san_pham_id'] ?></td>
+                                                    <td><?= $sanPham['don_gia'] ?></td>
+                                                    <td><?= $sanPham['so_luong'] ?></td>
+                                                    <td><?= $sanPham['thanh_tien'] ?></td>
+                                                </tr>
+                                            <?php endforeach ?>
                                         </tbody>
                                     </table>
                                 </div>
