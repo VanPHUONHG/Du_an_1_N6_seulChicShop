@@ -9,6 +9,7 @@ require_once './controllers/AdminDashboardController.php';
 require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminProductController.php';
 require_once './controllers/AdminOrderController.php';
+require_once './controllers/AdminUserController.php';
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminProduct.php';
@@ -37,12 +38,15 @@ match ($act) {
   'them-san-pham' => (new AdminProductController())->createProduct(),
   'form-sua-san-pham' => (new AdminProductController())->formEditProduct(),
   'sua-san-pham' => (new AdminProductController())->editProduct(),
-  
-  
+
+
   // router order
   'don-hang' => (new AdminOrderController())->listOrder(),
   'form-sua-don-hang' => (new AdminOrderController())->formEditOrder(),
   'sua-don-hang' => (new AdminOrderController())->possEditOrder(),
   'xoa-don-hang' => (new AdminOrderController())->deleteOrder(),
-  'chi-tiet-don-hang' => (new AdminOrderController())->detailOrder()
+  'chi-tiet-don-hang' => (new AdminOrderController())->detailOrder(),
+
+  // router user admin
+  'list-tai-khoan-quan-tri' => (new AdminUserController())->listUserAdmin(),
 };

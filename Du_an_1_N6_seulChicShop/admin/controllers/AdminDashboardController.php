@@ -16,7 +16,7 @@ class AdminDashboardController
     public function trangchu()
     {
         $listAllOrder = $this->ModelAdminOrder->getAllOrder();
-        $listUser = $this->ModelAdminUser->getAllUser();
+        $listUser = $this->ModelAdminUser->getUserOrder();
         $totalOrder = $this->ModelAdminOrder->totalPriceOrder();
         $listDetailOrder = $this->ModelAdminOrder->getAllDetailBestSellingProducts();
         require_once './views/trangChuAdmin.php';
