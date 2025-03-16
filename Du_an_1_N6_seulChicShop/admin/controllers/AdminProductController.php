@@ -40,9 +40,9 @@ class AdminProductController
     }
     public function formAddProduct()
     {
+        deleteSessionError();
         $listCategory = $this->ModelAdminDanhMuc->getAllDanhMuc();
         require_once './views/product/AddProduct.php';
-        deleteSessionError();
     }
     public function createProduct()
     {
@@ -103,7 +103,8 @@ class AdminProductController
                 exit();
             } else {
                 $_SESSION['flash'] = true;
-                header("Location: " . BASE_URL_ADMIN . '?act=form-them-san-pham');
+                require_once './views/product/AddProduct.php';
+
                 exit();
             }
         }

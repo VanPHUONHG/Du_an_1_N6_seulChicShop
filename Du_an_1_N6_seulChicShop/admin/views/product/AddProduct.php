@@ -79,7 +79,7 @@
                                     <label>Danh mục</label>
                                     <select class="form-control" name="danh_muc_id">
                                         <option selected disabled>Chọn danh mục sản phẩm</option>
-                                        <?php foreach ($listDanhMuc as $danhMuc) : ?>
+                                        <?php foreach ($listCategory as $danhMuc) : ?>
                                             <option value="<?= $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></option>
                                         <?php endforeach; ?>
                                     </select>

@@ -15,10 +15,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between">
+                <div class="">
                     <h1>Quản Lý Danh Mục Sản Phẩm</h1>
-                    <a href="<?= BASE_URL_ADMIN . "?act=danh-muc" ?>" class="btn btn-secondary">Quay lại</a>
+
+                </div>
+                <div class="d-flex justify-content-between">
+                    <a href="<?= BASE_URL_ADMIN . "?act=danh-muc" ?>" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Quay lại</a>
                 </div>
             </div>
         </div><!-- /.container-fluid -->

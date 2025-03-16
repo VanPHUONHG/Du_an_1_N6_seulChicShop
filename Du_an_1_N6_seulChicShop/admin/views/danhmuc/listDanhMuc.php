@@ -52,16 +52,16 @@
                                             <td><?= $danhMuc['ten_danh_muc'] ?></td>
                                             <td><?= $danhMuc['mo_ta'] ?></td>
                                             <td>
-    <a href="<?= BASE_URL_ADMIN . '?act=form-sua-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>" class="btn btn-warning icon-button">
-        <i class="fas fa-edit"></i> <!-- Icon sửa -->
-    </a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=form-sua-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>" class="btn btn-warning icon-button">
+                                                    <i class="fas fa-edit"></i> <!-- Icon sửa -->
+                                                </a>
 
-    <a href="<?= BASE_URL_ADMIN . '?act=xoa-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>" 
-       onclick="return confirm('Bạn có chắc muốn xóa không?')" 
-       class="btn btn-danger icon-button">
-        <i class="fas fa-trash"></i> <!-- Icon xóa -->
-    </a>
-</td>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=xoa-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>"
+                                                    onclick="return confirm('Bạn có chắc muốn xóa không?')"
+                                                    class="btn btn-danger icon-button">
+                                                    <i class="fas fa-trash"></i> <!-- Icon xóa -->
+                                                </a>
+                                            </td>
 
                                         </tr>
                                     <?php endforeach ?>
