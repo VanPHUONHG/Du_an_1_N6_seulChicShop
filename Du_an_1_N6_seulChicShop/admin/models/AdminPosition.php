@@ -7,7 +7,7 @@ class AdminPosition
     {
         $this->conn = connectDB();
     }
-    public function getAllPosition()
+    public function getPosition()
     {
         try {
             $sql = "SELECT * FROM chuc_vus WHERE ten_chuc_vu = 'admin'";

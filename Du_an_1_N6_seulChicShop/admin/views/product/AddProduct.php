@@ -25,7 +25,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card card-primary">
+                    <div class="card card-success">
                         <div class="card-header">
                             <h3 class="card-title">Thêm sản phẩm</h3>
                         </div>
@@ -110,7 +110,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary" fdprocessedid="6mz4gp">Thêm sản phẩm</button>
+                        <button type="submit" class="btn btn-success" fdprocessedid="6mz4gp">Thêm sản phẩm</button>
                     </div>
                     </form>
                 </div>

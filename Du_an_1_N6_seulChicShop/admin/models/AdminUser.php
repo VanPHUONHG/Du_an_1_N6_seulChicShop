@@ -77,4 +77,24 @@ class AdminUser
             echo "Lỗi Truy Vấn: " . $e->getMessage();
         }
     }
+    public function editUserAdmin($ten_tai_khoan, $email, $mat_khau, $anh_dai_dien, $so_dien_thoai, $ngay_sua)
+    {
+        try {
+            $ngay_sua = date('Y-m-d H:i:s');
+            $sql = "UPDATE tai_khoans 
+            SET ten_tai_khoan = :ten_tai_khoan, email = :email, mat_khau = :mat_khau, anh_dai_dien = :anh_dai_dien, so_dien_thoai = :so_dien_thoai, ngay_sua = :ngay_sua WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':ten_tai_khoan', $ten_tai_khoan);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':mat_khau', $mat_khau);
+            $stmt->bindParam(':anh_dai_dien', $anh_dai_dien);
+            $stmt->bindParam(':so_dien_thoai', $so_dien_thoai);
+            $stmt->bindParam(':ngay_sua', $ngay_sua);
+
+            $stmt->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi Truy Vấn: " . $e->getMessage();
+        }
+    }
 }

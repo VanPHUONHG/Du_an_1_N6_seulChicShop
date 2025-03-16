@@ -18,7 +18,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="<?= BASE_URL_ADMIN . '?act=form-them-tai-khoan-admin'  ?>" class="btn btn-success"><i class="fas fa-add"></i>Thêm Tài Khoản</a>
+                            <a href="<?= BASE_URL_ADMIN . '?act=form-them-tai-khoan-admin'  ?>" class="btn btn-success"><i class="fas fa-plus"></i>Thêm Tài Khoản</a>
                         </div>
                         <div class="card-body">
                             <table id="example1" class="table table-busered table-striped">
@@ -27,10 +27,10 @@
                                         <th>STT</th>
                                         <th>Tên Tài Khoản</th>
                                         <th>Email</th>
-                                        <th>Mật Khẩu</th>
                                         <th>Ảnh Đại Diện</th>
                                         <th>Số điện Thoại</th>
                                         <th>Ngày tạo</th>
+                                        <th>Ngày cập nhật</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
@@ -41,7 +41,6 @@
                                             <td><?= $key + 1 ?></td>
                                             <td><?= $user['ten_tai_khoan'] ?></td>
                                             <td><?= $user['email'] ?></td>
-                                            <td><?= $user['mat_khau'] ?></td>
                                             <td>
                                                 <img src="<?= BASE_URL . $user['anh_dai_dien'] ?>" style="width:100px" alt=""
                                                     onerror="this.onerror=null; this.src='https://tse2.mm.bing.net/th?id=OIP.DAwq4ufTfSCkcq3O8q_6AgHaHa&pid=Api&P=0&h=180'">
@@ -49,9 +48,10 @@
 
                                             <td><?= $user['so_dien_thoai'] ?></td>
                                             <td><?= $user['ngay_tao'] ?></td>
+                                            <td><?= $user['ngay_sua'] ?></td>
                                             <td>
                                                 <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>"><button class="btn btn-warning"><i class="far fa-eye"></i></button></a>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=sua-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>"><button class="btn btn-primary"><i class="fas fa-edit"></i><!-- Icon Sửa --></button></a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=form-sua-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>"><button class="btn btn-primary"><i class="fas fa-edit"></i><!-- Icon Sửa --></button></a>
                                                 <a href="<?= BASE_URL_ADMIN . '?act=xoa-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>" onclick="return confirm('Bạn có chắc chắn xóa không')"><button class="btn btn-danger"><i class="fas fa-trash"></i> <!-- Icon xóa --></button></a>
 
                                             </td>

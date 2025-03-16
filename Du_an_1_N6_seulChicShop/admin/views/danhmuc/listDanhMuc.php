@@ -31,7 +31,7 @@
                     <div class="card">
                         <div class="card-header">
                             <a href="<?= BASE_URL_ADMIN . '?act=form-them-danh-muc' ?>">
-                                <button class="btn btn-success"><i class="fas fa-add"></i> Thêm danh mục</button>
+                                <button class="btn btn-success"><i class="fas fa-plus"></i>Thêm danh mục</button>
                             </a>
                         </div>
                         <!-- /.card-header -->

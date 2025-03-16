@@ -28,7 +28,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card card-success">
+                    <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Sửa Tài Khoản Admin</h3>
                         </div>
@@ -38,14 +38,14 @@
                             <div class="card-body row">
                                 <div class="form-group col-12">
                                     <label>Tên Tài Khoản</label>
-                                    <input type="text" class="form-control" name="ten_tai_khoan" placeholder="Nhập tên tài khoản">
+                                    <input type="text" class="form-control" name="ten_tai_khoan" placeholder="Nhập tên tài khoản" value="<?= $user['ten_tai_khoan'] ?>">
                                     <?php if (isset($_SESSION['error']['ten_tai_khoan'])) { ?>
                                         <p class="text-danger"><?= $_SESSION['error']['ten_tai_khoan'] ?></p>
                                     <?php  } ?>
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" name="email" placeholder="Nhập email">
+                                    <input type="email" class="form-control" name="email" placeholder="Nhập email" value="<?= $user['email'] ?>">
                                     <?php if (isset($_SESSION['error']['email'])) { ?>
                                         <p class="text-danger"><?= $_SESSION['error']['email'] ?></p>
                                     <?php  } ?>
@@ -66,27 +66,16 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Số điện thoại</label>
-                                    <input type="number" class="form-control" name="so_dien_thoai" placeholder="Nhập số diện thoại">
+                                    <input type="number" class="form-control" name="so_dien_thoai" placeholder="Nhập số diện thoại" value="<?= $user['so_dien_thoai'] ?>">
                                     <?php if (isset($_SESSION['error']['so_dien_thoai'])) { ?>
                                         <p class="text-danger"><?= $_SESSION['error']['so_dien_thoai'] ?></p>
-                                    <?php  } ?>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label>Chức Vụ</label>
-                                    <select class="form-control" name="chuc_vu_id">
-                                        <?php foreach ($listPosition as $listPosition) : ?>
-                                            <option value="<?= $listPosition['id'] ?>"><?= $listPosition['ten_chuc_vu'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <?php if (isset($_SESSION['error']['chuc_vu_id'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['chuc_vu_id'] ?></p>
                                     <?php  } ?>
                                 </div>
                             </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success" fdprocessedid="6mz4gp">Thêm User</button>
+                        <button type="submit" class="btn btn-primary" fdprocessedid="6mz4gp">Thêm User</button>
                     </div>
                     </form>
                 </div>
