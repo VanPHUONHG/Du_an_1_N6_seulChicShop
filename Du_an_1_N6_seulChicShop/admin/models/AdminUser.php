@@ -31,12 +31,12 @@ class AdminUser
             echo "Lỗi Truy Vấn:" . $e->getMessage();
         }
     }
-    public function getAdminUserById($id)
+    public function getAdminUserById($id_tai_khoan_admin)
     {
         try {
             $sql = "SELECT * FROM tai_khoans WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':id', $id_tai_khoan_admin);
             $stmt->execute();
             return $stmt->fetch();
         } catch (\Throwable $th) {
@@ -77,21 +77,29 @@ class AdminUser
             echo "Lỗi Truy Vấn: " . $e->getMessage();
         }
     }
-    public function editUserAdmin($ten_tai_khoan, $email, $mat_khau, $anh_dai_dien, $so_dien_thoai, $ngay_sua)
+    public function editUserAdmin($id_tai_khoan_admin, $ten_tai_khoan, $email, $mat_khau, $anh_dai_dien, $so_dien_thoai, $ngay_sua)
     {
         try {
             $ngay_sua = date('Y-m-d H:i:s');
-            $sql = "UPDATE tai_khoans 
-            SET ten_tai_khoan = :ten_tai_khoan, email = :email, mat_khau = :mat_khau, anh_dai_dien = :anh_dai_dien, so_dien_thoai = :so_dien_thoai, ngay_sua = :ngay_sua WHERE id = :id";
+            $sql = "UPDATE tai_khoans SET
+                ten_tai_khoan = :ten_tai_khoan,
+                email = :email,
+                mat_khau = :mat_khau,
+                anh_dai_dien = :anh_dai_dien,
+                so_dien_thoai = :so_dien_thoai,
+                ngay_sua = :ngay_sua
+                WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':ten_tai_khoan', $ten_tai_khoan);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':mat_khau', $mat_khau);
-            $stmt->bindParam(':anh_dai_dien', $anh_dai_dien);
-            $stmt->bindParam(':so_dien_thoai', $so_dien_thoai);
-            $stmt->bindParam(':ngay_sua', $ngay_sua);
 
-            $stmt->execute();
+            $stmt->execute([
+                ':ten_tai_khoan' => $ten_tai_khoan,
+                ':email' => $email,
+                ':mat_khau' => $mat_khau,
+                ':anh_dai_dien' => $anh_dai_dien,
+                ':so_dien_thoai' => $so_dien_thoai,
+                ':ngay_sua' => $ngay_sua,
+                ':id' => $id_tai_khoan_admin
+            ]);
             return true;
         } catch (Exception $e) {
             echo "Lỗi Truy Vấn: " . $e->getMessage();

@@ -80,7 +80,7 @@ class AdminUserController
             } else {
                 $_SESSION['error'] = $errors;
                 $_SESSION['flash'] = true;
-                $listPosition = $this->ModelPosition->getAllPosition();
+                $listPosition = $this->ModelPosition->getPosition();
                 require_once './views/user/admin/AddUserAdmin.php';
                 exit();
             }
@@ -88,18 +88,23 @@ class AdminUserController
     }
     public function formEditUserAdmin()
     {
-        $id = $_GET['id_tai_khoan_admin'];
-        $user = $this->ModelAdminUser->getAdminUserById($id);
+        $id_tai_khoan_admin = $_GET['id_tai_khoan_admin'];
+        $user = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
         require_once './views/user/admin/EditUserAdmin.php';
     }
     public function editUserAdmin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // get id
+            $id_tai_khoan_admin = $_GET['id_tai_khoan_admin'];
+            // get data
+            $userOld = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
+            $anh_dai_dien_old = $userOld['anh_dai_dien'] ?? '';
             $ngay_sua = date('Y-m-d H:i:s');
-            $ten_tai_khoan = $_POST['ten_tai_khoan'];
-            $email = $_POST['email'];
-            $mat_khau = $_POST['mat_khau'];
-            $so_dien_thoai = $_POST['so_dien_thoai'];
+            $ten_tai_khoan = $_POST['ten_tai_khoan'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $mat_khau = $_POST['mat_khau'] ?? '';
+            $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
             $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
             $errors = [];
 
@@ -115,37 +120,35 @@ class AdminUserController
             if (empty($so_dien_thoai)) {
                 $errors['so_dien_thoai'] = 'Vui nhập số diện thoại';
             }
-            if (empty($_FILES['anh_dai_dien']['name'])) {
-                $errors['anh_dai_dien'] = 'Vui lòng chọn ảnh đại diện';
-            }
 
             $_SESSION['error'] = $errors;
             if (isset($anh_dai_dien) && $anh_dai_dien['error'] == UPLOAD_ERR_OK) {
                 //upload ảnhh
-                $new_file = uploadFile($anh_dai_dien, './uploads/');
-                if (!empty($old_file)) {
-                    deleteFile($old_file);
+                $anh_dai_dien_new = uploadFile($anh_dai_dien, './uploads/');
+                if (!empty($anh_dai_dien_old)) {
+                    deleteFile($anh_dai_dien_old);
                 }
+            } else {
+                // khong upload ảnh
+                $anh_dai_dien_new = $anh_dai_dien_old;
             }
-            // else {
-            //     // khong upload ảnh
-            //     $new_file = $old_file;
-            // }
-            // // 
+            // 
             if (empty($errors)) {
                 $this->ModelAdminUser->editUserAdmin(
+                    $id_tai_khoan_admin,
                     $ten_tai_khoan,
                     $email,
                     $mat_khau,
-                    $new_file,
+                    $anh_dai_dien_new,
                     $so_dien_thoai,
-                    $ngay_sua,
+                    $ngay_sua
                 );
                 header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-quan-tri');
                 exit();
             } else {
                 $_SESSION['error'] = $errors;
-                require_once './views/user/admin/EditUserAdmin.php';
+                $user = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
+                header("Location: " . BASE_URL_ADMIN . '?act=form-sua-tai-khoan-admin&id_tai_khoan_admin=' . $id_tai_khoan_admin);
             }
         }
     }

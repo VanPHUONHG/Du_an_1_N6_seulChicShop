@@ -30,7 +30,7 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Sửa Tài Khoản Admin</h3>
+                            <h3 class="card-title">Sửa Tài Khoản Admin:<?= $user['ten_tai_khoan'] ?></h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Mật Khẩu</label>
-                                    <input type="password" class="form-control" name="mat_khau" placeholder="Nhập mật khẩu">
+                                    <input type="password" class="form-control" name="mat_khau" placeholder="Nhập mật khẩu" value="<?= $user['mat_khau'] ?>">
                                     <?php if (isset($_SESSION['error']['mat_khau'])) { ?>
                                         <p class="text-danger"><?= $_SESSION['error']['mat_khau'] ?></p>
                                     <?php  } ?>
@@ -75,7 +75,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary" fdprocessedid="6mz4gp">Thêm User</button>
+                        <button type="submit" class="btn btn-primary" fdprocessedid="6mz4gp">Sửa User</button>
                     </div>
                     </form>
                 </div>

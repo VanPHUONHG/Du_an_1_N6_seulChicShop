@@ -50,7 +50,7 @@ class AdminProductController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
             $gia_san_pham = $_POST['gia_san_pham'] ?? '';
-            $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? '';
+            $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? null;
             $so_luong = $_POST['so_luong'] ?? '';
             $ngay_nhap = $_POST['ngay_nhap'] ?? '';
             $danh_muc_id = $_POST['danh_muc_id'] ?? '';
@@ -65,9 +65,6 @@ class AdminProductController
             }
             if (empty($gia_san_pham)) {
                 $errors['gia_san_pham'] = 'Giá sản phẩm không được để trống';
-            }
-            if (empty($gia_khuyen_mai)) {
-                $errors['gia_khuyen_mai'] = 'Giá khuyến mãi sản phẩm không được để trống';
             }
             if (empty($so_luong)) {
                 $errors['so_luong'] = 'Số lượng sản phẩm không được để trống';
@@ -102,6 +99,7 @@ class AdminProductController
                 header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
                 exit();
             } else {
+                $listCategory = $this->ModelAdminDanhMuc->getAllDanhMuc();
                 $_SESSION['flash'] = true;
                 require_once './views/product/AddProduct.php';
 
@@ -115,7 +113,13 @@ class AdminProductController
         $id = $_GET['id_san_pham'];
         $Product = $this->ModelAdminProduct->getProductById($id);
         $listCategory = $this->ModelAdminDanhMuc->getAllDanhMuc();
-        require_once './views/product/EditProduct.php';
+        if ($Product) {
+            require_once './views/product/editProduct.php';
+            deleteSessionError();
+        } else {
+            header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
+            exit();
+        }
     }
     public function editProduct()
     {
@@ -141,9 +145,7 @@ class AdminProductController
             if (empty($gia_san_pham)) {
                 $errors['gia_san_pham'] = 'giá sản phẩm không được để trống';
             }
-            if (empty($gia_khuyen_mai)) {
-                $errors['gia_khuyen_mai'] = 'giá khuyến mãi sản phẩm không được để trống';
-            }
+
             if (empty($so_luong)) {
                 $errors['so_luong'] = 'số lượng sản phẩm không được để trống';
             }
