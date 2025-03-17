@@ -12,12 +12,12 @@ class AdminDashboardController
         $this->ModelAdminOrder = new AdminOrder();
         //     $this->modelBinhLuan = new AdminBinhLuan();
     }
-
     public function trangchu()
     {
+        
+        $totalOrder = $this->ModelAdminOrder->totalPriceOrder();
         $listAllOrder = $this->ModelAdminOrder->getAllOrder();
         $listUser = $this->ModelAdminUser->getUserOrder();
-        $totalOrder = $this->ModelAdminOrder->totalPriceOrder();
         $listDetailOrder = $this->ModelAdminOrder->getAllDetailBestSellingProducts();
         require_once './views/trangChuAdmin.php';
     }
