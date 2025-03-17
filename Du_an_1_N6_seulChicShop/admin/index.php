@@ -44,7 +44,6 @@ match ($act) {
   'don-hang' => (new AdminOrderController())->listOrder(),
   'form-sua-don-hang' => (new AdminOrderController())->formEditOrder(),
   'sua-don-hang' => (new AdminOrderController())->possEditOrder(),
-  'xoa-don-hang' => (new AdminOrderController())->deleteOrder(),
   'chi-tiet-don-hang' => (new AdminOrderController())->detailOrder(),
 
   // router user admin
