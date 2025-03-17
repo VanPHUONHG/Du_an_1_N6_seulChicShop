@@ -63,7 +63,7 @@
                                     Thanh toán: <?= $donHang['ten_phuong_thuc'] ?>
                                 </address>
                             </div>
-                        </div><br/><br/>
+                        </div><br /><br />
 
                         <div class="row">
                             <div class="col-12">
@@ -85,9 +85,14 @@
                                                 <tr class="<?= $index % 2 == 0 ? 'bg-gray-50' : 'bg-white' ?>">
                                                     <td class="border px-4 py-2"><?= $index + 1 ?></td>
                                                     <td class="border px-4 py-2"><?= $sanPham['ten_san_pham'] ?></td>
-                                                    <td class="border px-4 py-2 text-right"><?= number_format($sanPham['don_gia']) ?> VND</td>
-                                                    <td class="border px-4 py-2 text-center"><?= $sanPham['so_luong'] ?></td>
-                                                    <td class="border px-4 py-2 text-right"><?= number_format($sanPham['don_gia'] * $sanPham['so_luong']) ?> VND</td>
+                                                    <td class="border px-4 py-2 text-right">
+                                                        <?= number_format($sanPham['don_gia']) ?> VND
+                                                    </td>
+                                                    <td class="border px-4 py-2 text-center"><?= $sanPham['so_luong'] ?>
+                                                    </td>
+                                                    <td class="border px-4 py-2 text-right">
+                                                        <?= number_format($sanPham['don_gia'] * $sanPham['so_luong']) ?> VND
+                                                    </td>
                                                 </tr>
                                                 <?php $tong_tien += $sanPham['don_gia'] * $sanPham['so_luong']; ?>
                                             <?php endforeach; ?>
@@ -95,7 +100,9 @@
                                     </table>
                                 </div>
 
-                                <h4 class="text-lg font-bold text-right mt-4">Tổng tiền: <?= number_format($tong_tien) ?> VND</h4>
+                                <h4 class="text-lg font-bold text-right mt-4">Tổng tiền:
+                                    <?= number_format($tong_tien) ?> VND
+                                </h4>
                             </div>
                         </div>
 

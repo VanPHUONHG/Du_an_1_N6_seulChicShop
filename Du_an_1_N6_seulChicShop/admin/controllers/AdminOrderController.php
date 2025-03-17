@@ -35,13 +35,13 @@ class AdminOrderController
     public function formEditOrder()
     {
         $id = $_GET['id_don_hang'] ?? null;
-        
+
         $donHang = $this->ModelAdminOrder->getDetailDonHang($id);
         // var_dump($id);die();
-        $listTrangThaiOrder = $this->ModelAdminOrder->getAllTrangThaiOder();
-        
+        $listTrangThaiDonHang = $this->ModelAdminOrder->getAllTrangThaiOder();
+
         $sanPhamDonHang = $this->ModelAdminOrder->getListDonHang($id);
-        
+
 
         if ($donHang) {
             require_once './views/order/editOrder.php';
@@ -65,12 +65,12 @@ class AdminOrderController
             if (empty($trang_thai_id)) {
                 $errors['trang_thai_id'] = 'Trạng thái không được bỏ trống';
             }
-            
+
             $_SESSION['errors'] = $errors;
 
             if (empty($errors)) {
                 $this->ModelAdminOrder->updateOrder($don_hang_id, $trang_thai_id);
-                header('Location: ' . BASE_URL_ADMIN . '?act=quan-ly-don-hang');
+                header('Location: ' . BASE_URL_ADMIN . '?act=don-hang');
                 exit();
             } else {
                 header('Location: ' . BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . $don_hang_id);
