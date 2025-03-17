@@ -30,11 +30,12 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Sửa Tài Khoản Admin:<?= $user['ten_tai_khoan'] ?></h3>
+                            <h3 class="card-title">Sửa Tài Khoản Admin: <?= $user['ten_tai_khoan'] ?></h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form action="<?= BASE_URL_ADMIN . '?act=sua-tai-khoan-admin' ?>" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="id_tai_khoan_admin" value="<?= $user['id'] ?>">
                             <div class="card-body row">
                                 <div class="form-group col-12">
                                     <label>Tên Tài Khoản</label>
@@ -52,7 +53,10 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Ảnh Đại Diện</label>
-                                    <input type="file" class="form-control" name="anh_dai_dien" placeholder="Thêm ảnh đại diện">
+                                    <input type="file" class="form-control" name="anh_dai_dien">
+                                    <?php if (!empty($user['anh_dai_dien'])) { ?>
+                                        <img src="<?= BASE_URL . $user['anh_dai_dien'] ?>" alt="Current avatar" style="max-width: 100px; margin-top: 10px;">
+                                    <?php } ?>
                                     <?php if (isset($_SESSION['error']['anh_dai_dien'])) { ?>
                                         <p class="text-danger"><?= $_SESSION['error']['anh_dai_dien'] ?></p>
                                     <?php  } ?>
@@ -72,22 +76,21 @@
                                     <?php  } ?>
                                 </div>
                             </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                            </div>
+                        </form>
                     </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary" fdprocessedid="6mz4gp">Sửa User</button>
-                    </div>
-                    </form>
+                    <!-- /.card -->
                 </div>
-                <!-- /.card -->
+                <!-- /.col -->
             </div>
-            <!-- /.col -->
+            <!-- /.row -->
         </div>
-        <!-- /.row -->
-</div>
-<!-- /.container-fluid -->
-</section>
-<!-- /.content -->
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 <!-- Footer -->
@@ -100,7 +103,6 @@
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
-            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         $('#example2').DataTable({
             "paging": true,

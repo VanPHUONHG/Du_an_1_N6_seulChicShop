@@ -10,12 +10,14 @@ require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminProductController.php';
 require_once './controllers/AdminOrderController.php';
 require_once './controllers/AdminUserController.php';
+require_once './controllers/AdminContactController.php';
 // require_once './controllers/AdminPositionController.php';
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminProduct.php';
 require_once './models/AdminOrder.php';
 require_once './models/AdminUser.php';
+require_once './models/AdminContact.php';
 require_once './models/AdminPosition.php';
 
 // Route
@@ -56,8 +58,12 @@ match ($act) {
   'form-them-tai-khoan-admin' => (new AdminUserController())->formAddUserAdmin(),
   'them-tai-khoan-admin' => (new AdminUserController())->insertUserAdmin(),
   'form-sua-tai-khoan-admin' => (new AdminUserController())->formEditUserAdmin(),
-  'sua-tai-khoan-admin' => (new AdminUserController())->editUserAdmin(),
+  'sua-tai-khoan-admin' => (new AdminUserController())->updateUserAdmin(),
   // router user client
   'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
-  'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->detailUserClient(),
+  'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->listUserClientById(),
+  // router contact
+  'lien-he' => (new AdminContactController())->listContact(),
+  'form-chinh-sua-lien-he' => (new AdminContactController())->formEditContact(),
+  'xu-ly-lien-he' => (new AdminContactController())->editStatusContact(),
 };

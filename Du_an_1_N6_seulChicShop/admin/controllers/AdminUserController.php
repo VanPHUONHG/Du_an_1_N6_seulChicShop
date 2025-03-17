@@ -92,15 +92,12 @@ class AdminUserController
         $user = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
         require_once './views/user/admin/EditUserAdmin.php';
     }
-    public function editUserAdmin()
+    public function updateUserAdmin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // get id
-            $id_tai_khoan_admin = $_GET['id_tai_khoan_admin'];
-            // get data
+            $id_tai_khoan_admin = $_POST['id_tai_khoan_admin'] ?? '';
             $userOld = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
-            $anh_dai_dien_old = $userOld['anh_dai_dien'] ?? '';
-            $ngay_sua = date('Y-m-d H:i:s');
+            $old_file = $userOld['anh_dai_dien'];
             $ten_tai_khoan = $_POST['ten_tai_khoan'] ?? '';
             $email = $_POST['email'] ?? '';
             $mat_khau = $_POST['mat_khau'] ?? '';
@@ -118,47 +115,51 @@ class AdminUserController
                 $errors['mat_khau'] = 'Vui lòng nhập mật khẩu';
             }
             if (empty($so_dien_thoai)) {
-                $errors['so_dien_thoai'] = 'Vui nhập số diện thoại';
+                $errors['so_dien_thoai'] = 'Vui lòng nhập số điện thoại';
             }
 
             $_SESSION['error'] = $errors;
+
             if (isset($anh_dai_dien) && $anh_dai_dien['error'] == UPLOAD_ERR_OK) {
-                //upload ảnhh
-                $anh_dai_dien_new = uploadFile($anh_dai_dien, './uploads/');
-                if (!empty($anh_dai_dien_old)) {
-                    deleteFile($anh_dai_dien_old);
+                $new_file = uploadFile($anh_dai_dien, './uploads/');
+                if (!empty($old_file)) {
+                    deleteFile($old_file);
                 }
             } else {
-                // khong upload ảnh
-                $anh_dai_dien_new = $anh_dai_dien_old;
+                $new_file = $old_file;
             }
-            // 
+
             if (empty($errors)) {
-                $this->ModelAdminUser->editUserAdmin(
+                $result = $this->ModelAdminUser->editUserAdmin(
                     $id_tai_khoan_admin,
                     $ten_tai_khoan,
                     $email,
                     $mat_khau,
-                    $anh_dai_dien_new,
+                    $new_file,
                     $so_dien_thoai
-
                 );
-                header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-quan-tri');
-                exit();
-            } else {
-                $_SESSION['error'] = $errors;
-                $user = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
-                header("Location: " . BASE_URL_ADMIN . '?act=form-sua-tai-khoan-admin&id_tai_khoan_admin=' . $id_tai_khoan_admin);
+
+                if ($result) {
+                    header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-quan-tri');
+                    exit();
+                }
             }
+
+            $user = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
+            $_SESSION['flash'] = true;
+            require_once './views/user/admin/EditUserAdmin.php';
         }
     }
-    public function listUserClient(){
-        $listUserClient = $this->ModelAdminUser->getUserClient() ;
+
+    public function listUserClient()
+    {
+        $listUserClient = $this->ModelAdminUser->getUserClient();
         require_once './views/user/client/ListUserClient.php';
     }
-    public function listUserClientById($id){
+    public function listUserClientById($id)
+    {
         $id = $_GET['id'];
-        $user=$this->ModelAdminUser->getUserClentById($id);
+        $user = $this->ModelAdminUser->getUserClentById($id);
         require_once './views/client/DetailUserClient .php';
     }
 }
