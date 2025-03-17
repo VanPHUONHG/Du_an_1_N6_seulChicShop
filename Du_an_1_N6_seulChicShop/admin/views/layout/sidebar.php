@@ -77,13 +77,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= BASE_URL_ADMIN . '/?act=list-tai-khoan-quan-tri' ?>" class="nav-link">
+              <a href="<?= BASE_URL_ADMIN . '/?act=tai-khoan-quan-tri' ?>" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
                 <p>Tài khoản quản trị viên</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= BASE_URL_ADMIN . '/?act=list-tai-khoan-khach-hang' ?>" class="nav-link">
+              <a href="<?= BASE_URL_ADMIN . '/?act=tai-khoan-khach-hang' ?>" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
                 <p>Tài khoản khách hàng</p>
               </a>

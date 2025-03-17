@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Tài Khoản Admin</h1>
+                    <h1>Tài Khoản Client</h1>
                 </div>
             </div>
     </section>
@@ -17,9 +17,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <a href="<?= BASE_URL_ADMIN . '?act=form-them-tai-khoan-admin'  ?>" class="btn btn-success"><i class="fas fa-plus"></i>Thêm Tài Khoản</a>
-                        </div>
                         <div class="card-body">
                             <table id="example1" class="table table-busered table-striped">
                                 <thead>
@@ -34,7 +31,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($listUser as $key => $user): ?>
+                                    <?php foreach ($listUserClient as $key => $user): ?>
 
                                         <tr>
                                             <td><?= $key + 1 ?></td>
@@ -49,9 +46,6 @@
                                             <td><?= $user['ngay_tao'] ?></td>
                                             <td>
                                                 <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>"><button class="btn btn-warning"><i class="far fa-eye"></i></button></a>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=form-sua-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>"><button class="btn btn-primary"><i class="fas fa-edit"></i><!-- Icon Sửa --></button></a>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=xoa-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>" onclick="return confirm('Bạn có chắc chắn xóa không')"><button class="btn btn-danger"><i class="fas fa-trash"></i> <!-- Icon xóa --></button></a>
-
                                             </td>
                                         </tr>
                                     <?php endforeach ?>
