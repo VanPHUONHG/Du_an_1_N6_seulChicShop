@@ -27,7 +27,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="<?= BASE_URL_ADMIN . '?act=form-them-san-pham'  ?>" class="btn btn-success">Thêm sản phẩm</a>
+                            <a href="<?= BASE_URL_ADMIN . '?act=form-them-san-pham'  ?>" class="btn btn-success"><i class="fas fa-plus"></i>Thêm sản phẩm</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

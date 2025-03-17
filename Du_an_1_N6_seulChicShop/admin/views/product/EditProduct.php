@@ -12,7 +12,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
+            <div class="">
                 <div class="d-flex justify-content-between">
                     <h1>Sửa thông tin sản phẩm: <?= $Product['ten_san_pham'] ?></h1>
                     <a href="<?= BASE_URL_ADMIN . '?act=san-pham' ?>" class="btn btn-secondary">Quay lại</a>
@@ -32,7 +32,7 @@
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                <i class="fas fa-minus"></i>
+
                             </button>
                         </div>
                     </div>
