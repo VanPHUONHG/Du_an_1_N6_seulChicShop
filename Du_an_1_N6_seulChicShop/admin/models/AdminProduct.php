@@ -69,19 +69,24 @@ class AdminProduct
 
             $stmt = $this->conn->prepare($sql);
 
-            $stmt->execute([
-                ':ten_san_pham' => $ten_san_pham,
-                ':gia_san_pham' => $gia_san_pham,
-                ':gia_khuyen_mai' => $gia_khuyen_mai,
-                ':so_luong' => $so_luong,
-                ':ngay_nhap' => $ngay_nhap,
-                ':danh_muc_id' => $danh_muc_id,
-                ':trang_thai' => $trang_thai,
-                ':mo_ta' => $mo_ta,
-                ':hinh_anh' => $hinh_anh,
-            ]);
+            $stmt->bindParam(':ten_san_pham', $ten_san_pham);
+            $stmt->bindParam(':gia_san_pham', $gia_san_pham);
 
-            return $this->conn->lastInsertId();
+            if ($gia_khuyen_mai === '' || is_null($gia_khuyen_mai)) {
+                $stmt->bindValue(':gia_khuyen_mai', null, PDO::PARAM_NULL);
+            } else {
+                $stmt->bindParam(':gia_khuyen_mai', $gia_khuyen_mai);
+            }
+
+            $stmt->bindParam(':so_luong', $so_luong);
+            $stmt->bindParam(':ngay_nhap', $ngay_nhap);
+            $stmt->bindParam(':danh_muc_id', $danh_muc_id);
+            $stmt->bindParam(':trang_thai', $trang_thai);
+            $stmt->bindParam(':mo_ta', $mo_ta);
+            $stmt->bindParam(':hinh_anh', $hinh_anh);
+
+            $stmt->execute();
+            return true;
         } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
         }
