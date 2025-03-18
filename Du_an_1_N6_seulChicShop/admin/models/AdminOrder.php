@@ -107,7 +107,6 @@ class AdminOrder
             echo "lỗi" . $e->getMessage();
         }
     }
-
   
 
     public function getListDonHang($id)
