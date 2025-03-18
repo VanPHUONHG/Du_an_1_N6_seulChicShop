@@ -11,7 +11,7 @@ require_once './controllers/AdminProductController.php';
 require_once './controllers/AdminOrderController.php';
 require_once './controllers/AdminUserController.php';
 require_once './controllers/AdminContactController.php';
-require_once './controllers/AdminImageController.php';
+require_once './controllers/AdminBannerController.php';
 // require_once './controllers/AdminPositionController.php';
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
@@ -20,7 +20,7 @@ require_once './models/AdminOrder.php';
 require_once './models/AdminUser.php';
 require_once './models/AdminContact.php';
 require_once './models/AdminPosition.php';
-require_once './models/AdminImage.php';
+require_once './models/AdminBanner.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -59,21 +59,31 @@ match ($act) {
   'form-them-tai-khoan-admin' => (new AdminUserController())->formAddUserAdmin(),
   'them-tai-khoan-admin' => (new AdminUserController())->insertUserAdmin(),
   'form-sua-tai-khoan-admin' => (new AdminUserController())->formEditUserAdmin(),
-<<<<<<< HEAD
+
   'sua-tai-khoan-admin' => (new AdminUserController())->editUserAdmin(),
   // router user client
   'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
   'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->detailUserClient(),
-=======
+
   'sua-tai-khoan-admin' => (new AdminUserController())->updateUserAdmin(),
+
   // router user client
   'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
   'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->listUserClientById(),
+
   // router contact
   'lien-he' => (new AdminContactController())->listContact(),
   'form-chinh-sua-lien-he' => (new AdminContactController())->formEditContact(),
   'xu-ly-lien-he' => (new AdminContactController())->editStatusContact(),
+
+  // router banner admin
+  'danh-sach-banner' => (new AdminBannerController())->listBanner(),
+  'chi-tiet-banner' => (new AdminBannerController())->detailBanner(),
+  'xoa-banner' => (new AdminBannerController())->destroyBanner(),
+  'form-them-banner' => (new AdminBannerController())->formAddBanner(),
+  'them-banner' => (new AdminBannerController())->insertBanner(),
+  'form-sua-banner' => (new AdminBannerController())->formEditBanner(),
+  'cap-nhat-banner' => (new AdminBannerController())->updateBanner(),
+
   // router image admin
-  'danh-sach-anh' => (new AdminImageController())->listImage(),
->>>>>>> 500e98e4e06732f41f41b8241d86eab61d636fb8
 };

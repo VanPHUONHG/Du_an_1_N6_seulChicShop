@@ -92,13 +92,9 @@ class AdminUserController
         $user = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
         require_once './views/user/admin/EditUserAdmin.php';
     }
-<<<<<<< HEAD
-    public function editUserAdmin()
-    {   
-=======
+
     public function updateUserAdmin()
     {
->>>>>>> 500e98e4e06732f41f41b8241d86eab61d636fb8
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id_tai_khoan_admin = $_POST['id_tai_khoan_admin'] ?? '';
             $userOld = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
@@ -135,17 +131,16 @@ class AdminUserController
             }
 
             if (empty($errors)) {
-<<<<<<< HEAD
-                
+
                 $this->ModelAdminUser->editUserAdmin(
-=======
+
                 $result = $this->ModelAdminUser->editUserAdmin(
->>>>>>> 500e98e4e06732f41f41b8241d86eab61d636fb8
+
                     $id_tai_khoan_admin,
                     $ten_tai_khoan,
                     $email,
                     $mat_khau,
-<<<<<<< HEAD
+
                     $anh_dai_dien_new,
                     $so_dien_thoai);
                 header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-quan-tri');
@@ -153,7 +148,7 @@ class AdminUserController
             } else {
                 $_SESSION['flash'] = true;
                 header("Location:" .BASE_URL_ADMIN. '?act=tai-khoan-quan-tri'.$id_tai_khoan_admin);
-=======
+
                     $new_file,
                     $so_dien_thoai
                 );
@@ -162,7 +157,7 @@ class AdminUserController
                     header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-quan-tri');
                     exit();
                 }
->>>>>>> 500e98e4e06732f41f41b8241d86eab61d636fb8
+
             }
 
             $user = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
@@ -170,7 +165,7 @@ class AdminUserController
             require_once './views/user/admin/EditUserAdmin.php';
         }
     }
-<<<<<<< HEAD
+
     public function listUserClient(){
         $listUserClient = $this->ModelAdminUser->getUserClient() ;
         require_once './views/user/client/ListUserClient.php';
@@ -178,7 +173,7 @@ class AdminUserController
     public function listUserClientById($id){
         $id = $_GET['id'];
         $user=$this->ModelAdminUser->getUserClentById($id);
-=======
+
 
     public function listUserClient()
     {
@@ -189,7 +184,9 @@ class AdminUserController
     {
         $id = $_GET['id'];
         $user = $this->ModelAdminUser->getUserClentById($id);
->>>>>>> 500e98e4e06732f41f41b8241d86eab61d636fb8
+
+        require_once './views/client/DetailUserClient.php';
+
         require_once './views/client/DetailUserClient .php';
     }
 }
