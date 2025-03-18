@@ -140,7 +140,7 @@ class AdminUser
             $sql = 'SELECT * FROM tai_khoans 
             WHERE id = :id';
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
+            $stmt->execute([$id]);
             return $stmt->fetch();
         } catch (Exception $e) {
             echo '' . $e->getMessage();
