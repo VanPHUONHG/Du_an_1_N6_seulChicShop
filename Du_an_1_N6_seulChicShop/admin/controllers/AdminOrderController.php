@@ -17,15 +17,8 @@ class AdminOrderController
     public function detailOrder()
     {
         $don_hang_id = $_GET['id_don_hang'];
-        // var_dump($don_hang_id);die();
-
-        //lay thông tin đơn hàng ở bảng don_hangs
         $donHang = $this->ModelAdminOrder->getDetailDonHang($don_hang_id);
-        //    var_dump($donHang);die();
-
-        //    //lay danh sach san pham da dat cua don hang oq  trang chi_tiet_don_hangs
         $sanPhamDonHang = $this->ModelAdminOrder->getListDonHang($don_hang_id);
-        //    var_dump($sanPhamDonHang); die();
 
         $listTrangThaiOder = $this->ModelAdminOrder->getAllTrangThaiOder();
         require_once './views/order/detailOder.php';
