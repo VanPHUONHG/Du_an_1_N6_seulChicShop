@@ -10,13 +10,17 @@ require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminProductController.php';
 require_once './controllers/AdminOrderController.php';
 require_once './controllers/AdminUserController.php';
+require_once './controllers/AdminContactController.php';
+require_once './controllers/AdminImageController.php';
 // require_once './controllers/AdminPositionController.php';
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminProduct.php';
 require_once './models/AdminOrder.php';
 require_once './models/AdminUser.php';
+require_once './models/AdminContact.php';
 require_once './models/AdminPosition.php';
+require_once './models/AdminImage.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -46,7 +50,6 @@ match ($act) {
   'don-hang' => (new AdminOrderController())->listOrder(),
   'form-sua-don-hang' => (new AdminOrderController())->formEditOrder(),
   'sua-don-hang' => (new AdminOrderController())->possEditOrder(),
-  'xoa-don-hang' => (new AdminOrderController())->deleteOrder(),
   'chi-tiet-don-hang' => (new AdminOrderController())->detailOrder(),
 
   // router user admin
@@ -60,4 +63,14 @@ match ($act) {
   // router user client
   'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
   'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->detailUserClient(),
+  'sua-tai-khoan-admin' => (new AdminUserController())->updateUserAdmin(),
+  // router user client
+  'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
+  'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->listUserClientById(),
+  // router contact
+  'lien-he' => (new AdminContactController())->listContact(),
+  'form-chinh-sua-lien-he' => (new AdminContactController())->formEditContact(),
+  'xu-ly-lien-he' => (new AdminContactController())->editStatusContact(),
+  // router image admin
+  'danh-sach-anh' => (new AdminImageController())->listImage(),
 };

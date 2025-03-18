@@ -79,33 +79,52 @@
                                                 <th class="border px-4 py-2 text-right">Thành Tiền</th>
                                             </tr>
                                         </thead>
+
                                         <tbody>
                                             <?php $tong_tien = 0; ?>
                                             <?php foreach ($sanPhamDonHang as $index => $sanPham): ?>
                                                 <tr class="<?= $index % 2 == 0 ? 'bg-gray-50' : 'bg-white' ?>">
                                                     <td class="border px-4 py-2"><?= $index + 1 ?></td>
                                                     <td class="border px-4 py-2"><?= $sanPham['ten_san_pham'] ?></td>
-                                                    <td class="border px-4 py-2 text-right">
-                                                        <?= number_format($sanPham['don_gia']) ?> VND
-                                                    </td>
-                                                    <td class="border px-4 py-2 text-center"><?= $sanPham['so_luong'] ?>
-                                                    </td>
-                                                    <td class="border px-4 py-2 text-right">
-                                                        <?= number_format($sanPham['don_gia'] * $sanPham['so_luong']) ?> VND
-                                                    </td>
+                                                    <td class="border px-4 py-2 text-right"><?= number_format($sanPham['don_gia']) ?> VND</td>
+                                                    <td class="border px-4 py-2 text-center"><?= $sanPham['so_luong'] ?></td>
+                                                    <td class="border px-4 py-2 text-right"><?= number_format($sanPham['don_gia'] * $sanPham['so_luong']) ?> VND</td>
                                                 </tr>
                                                 <?php $tong_tien += $sanPham['don_gia'] * $sanPham['so_luong']; ?>
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>
-
-                                <h4 class="text-lg font-bold text-right mt-4">Tổng tiền:
-                                    <?= number_format($tong_tien) ?> VND
-                                </h4>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Sửa trạng thái đơn hàng</h4>
+                                <form action="<?= BASE_URL_ADMIN . '?act=sua-don-hang' ?>" method="POST">
+                                    <input type="hidden" name="don_hang_id" value="<?= $donHang['id'] ?>">
+                                    <div>
+                                    
+                                        <div class="form-group">
+                                            <select id="inputStatus" name="trang_thai_id" class="form-control custom-select">
+                                                <?php foreach ($listTrangThaiDonHang as $trangThai) : ?>
+                                                    <?php if ($trangThai['id'] >= $donHang['trang_thai_id'] && !in_array($donHang['trang_thai_id'], [9, 10, 11])) : ?>
+                                                        <option
+                                                            <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?>
+                                                            value="<?= $trangThai['id'] ?>">
+                                                            <?= $trangThai['ten_trang_thai'] ?>
+                                                        </option>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
