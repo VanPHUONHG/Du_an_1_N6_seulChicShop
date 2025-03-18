@@ -92,6 +92,7 @@ class AdminUserController
         $user = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
         require_once './views/user/admin/EditUserAdmin.php';
     }
+
     public function updateUserAdmin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -130,11 +131,24 @@ class AdminUserController
             }
 
             if (empty($errors)) {
+
+                $this->ModelAdminUser->editUserAdmin(
+
                 $result = $this->ModelAdminUser->editUserAdmin(
+
                     $id_tai_khoan_admin,
                     $ten_tai_khoan,
                     $email,
                     $mat_khau,
+
+                    $anh_dai_dien_new,
+                    $so_dien_thoai);
+                header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-quan-tri');
+                exit();
+            } else {
+                $_SESSION['flash'] = true;
+                header("Location:" .BASE_URL_ADMIN. '?act=tai-khoan-quan-tri'.$id_tai_khoan_admin);
+
                     $new_file,
                     $so_dien_thoai
                 );
@@ -143,6 +157,7 @@ class AdminUserController
                     header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-quan-tri');
                     exit();
                 }
+
             }
 
             $user = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
@@ -150,6 +165,15 @@ class AdminUserController
             require_once './views/user/admin/EditUserAdmin.php';
         }
     }
+
+    public function listUserClient(){
+        $listUserClient = $this->ModelAdminUser->getUserClient() ;
+        require_once './views/user/client/ListUserClient.php';
+    }
+    public function listUserClientById($id){
+        $id = $_GET['id'];
+        $user=$this->ModelAdminUser->getUserClentById($id);
+
 
     public function listUserClient()
     {
@@ -160,6 +184,9 @@ class AdminUserController
     {
         $id = $_GET['id'];
         $user = $this->ModelAdminUser->getUserClentById($id);
+
         require_once './views/client/DetailUserClient.php';
+
+        require_once './views/client/DetailUserClient .php';
     }
 }
