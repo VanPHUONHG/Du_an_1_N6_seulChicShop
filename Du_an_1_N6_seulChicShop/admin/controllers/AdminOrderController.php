@@ -20,7 +20,7 @@ class AdminOrderController
         $donHang = $this->ModelAdminOrder->getDetailDonHang($don_hang_id);
         $sanPhamDonHang = $this->ModelAdminOrder->getListDonHang($don_hang_id);
 
-        $listTrangThaiOder = $this->ModelAdminOrder->getAllTrangThaiOder();
+        $listTrangThaiDonHang = $this->ModelAdminOrder->getAllTrangThaiOder();
         require_once './views/order/detailOder.php';
     }
 
