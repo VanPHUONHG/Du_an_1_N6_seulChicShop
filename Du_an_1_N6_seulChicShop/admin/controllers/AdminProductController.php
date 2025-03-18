@@ -123,6 +123,7 @@ class AdminProductController
     }
     public function editProduct()
     {
+        
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $san_pham_id = $_POST['san_pham_id'] ?? '';
 

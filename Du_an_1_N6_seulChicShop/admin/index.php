@@ -59,6 +59,12 @@ match ($act) {
   'form-them-tai-khoan-admin' => (new AdminUserController())->formAddUserAdmin(),
   'them-tai-khoan-admin' => (new AdminUserController())->insertUserAdmin(),
   'form-sua-tai-khoan-admin' => (new AdminUserController())->formEditUserAdmin(),
+<<<<<<< HEAD
+  'sua-tai-khoan-admin' => (new AdminUserController())->editUserAdmin(),
+  // router user client
+  'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
+  'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->detailUserClient(),
+=======
   'sua-tai-khoan-admin' => (new AdminUserController())->updateUserAdmin(),
   // router user client
   'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
@@ -69,4 +75,5 @@ match ($act) {
   'xu-ly-lien-he' => (new AdminContactController())->editStatusContact(),
   // router image admin
   'danh-sach-anh' => (new AdminImageController())->listImage(),
+>>>>>>> 500e98e4e06732f41f41b8241d86eab61d636fb8
 };
