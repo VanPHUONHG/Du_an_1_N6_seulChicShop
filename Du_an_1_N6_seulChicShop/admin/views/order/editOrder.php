@@ -97,7 +97,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-12">
                                 <h4>Sửa trạng thái đơn hàng</h4>
@@ -108,14 +107,13 @@
                                         <div class="form-group">
                                             <select id="inputStatus" name="trang_thai_id" class="form-control custom-select">
                                                 <?php foreach ($listTrangThaiDonHang as $trangThai) : ?>
-                                                    <option
-                                                        <?php if ($donHang['trang_thai_id'] > $trangThai['id'] || in_array($donHang['trang_thai_id'], [9, 10, 11])) {
-                                                            echo 'disabled';
-                                                        } ?>
-                                                        <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?>
-                                                        value="<?= $trangThai['id'] ?>">
-                                                        <?= $trangThai['ten_trang_thai'] ?>
-                                                    </option>
+                                                    <?php if ($trangThai['id'] >= $donHang['trang_thai_id'] && !in_array($donHang['trang_thai_id'], [9, 10, 11])) : ?>
+                                                        <option
+                                                            <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?>
+                                                            value="<?= $trangThai['id'] ?>">
+                                                            <?= $trangThai['ten_trang_thai'] ?>
+                                                        </option>
+                                                    <?php endif; ?>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
