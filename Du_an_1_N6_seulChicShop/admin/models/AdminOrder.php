@@ -17,21 +17,7 @@ class AdminOrder
             echo "Lỗi Truy Vấn:" . $e->getMessage();
         }
     }
-    public function getAllOrder()
-    {
-        try {
-            $sql = "SELECT don_hangs.*,trang_thai_don_hangs.ten_trang_thai
-            FROM don_hangs
-            INNER JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
-            ORDER BY don_hangs.id";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll();
-        } catch (Exception $e) {
-            echo "Lỗi Truy Vấn:" . $e->getMessage();
-        }
-    }
-
+    
     public function getAllDetailBestSellingProducts()
     {
         try {
@@ -62,7 +48,38 @@ class AdminOrder
             echo "Lỗi Truy Vấn:" . $e->getMessage();
         }
     }
+    public function getAllOrder()
+    {
+        try {
+            $sql = "SELECT don_hangs.*,trang_thai_don_hangs.ten_trang_thai
+            FROM don_hangs
+            INNER JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
+            ORDER BY don_hangs.id DESC";
+            
+            $stmt = $this->conn->prepare($sql);
+            
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi Truy Vấn:" . $e->getMessage();
+        }
+    }
 
+   
+    public function getAllTrangThaiOder()
+    {
+        try {
+            $sql = "SELECT * FROM trang_thai_don_hangs";
+            
+            $stmt = $this->conn->prepare($sql);
+            
+            $stmt->execute();
+            
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi Truy Vấn:" . $e->getMessage();
+        }
+    }
 
     public function getDetailDonHang($id)
     {
@@ -79,10 +96,10 @@ class AdminOrder
            INNER JOIN tai_khoans ON don_hangs.tai_khoan_id = tai_khoans.id 
            
            INNER JOIN phuong_thuc_thanh_toans ON don_hangs.phuong_thuc_thanh_toan_id = phuong_thuc_thanh_toans.id 
-           
-           
            WHERE don_hangs.id = :id ';
+           
             $stmt = $this->conn->prepare($sql);
+            
             $stmt->execute([':id' => $id]);
 
             return $stmt->fetch();
@@ -90,6 +107,8 @@ class AdminOrder
             echo "lỗi" . $e->getMessage();
         }
     }
+
+  
 
     public function getListDonHang($id)
     {
@@ -103,6 +122,7 @@ class AdminOrder
            WHERE chi_tiet_don_hangs.don_hang_id = :id ';
 
             $stmt = $this->conn->prepare($sql);
+            
             $stmt->execute([':id' => $id]);
 
             return $stmt->fetchAll();
@@ -110,16 +130,23 @@ class AdminOrder
             echo "lỗi" . $e->getMessage();
         }
     }
-    
-    public function getAllTrangThaiOder()
+
+    public function updateOrder($id, $trang_thai_id)
     {
         try {
-            $sql = "SELECT * FROM trang_thai_don_hangs";
+            $sql = "UPDATE don_hangs SET trang_thai_id = :trang_thai_id WHERE id=:id";
+
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll();
+            //    var_dump($stmt);die;
+            $stmt->execute([
+                ':trang_thai_id' => $trang_thai_id,
+                ':id' => $id
+
+            ]);
+
+            return true;
         } catch (Exception $e) {
-            echo "Lỗi Truy Vấn:" . $e->getMessage();
+            echo "lỗi" . $e->getMessage();
         }
     }
 }

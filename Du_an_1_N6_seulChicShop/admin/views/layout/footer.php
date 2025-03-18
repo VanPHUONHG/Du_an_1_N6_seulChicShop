@@ -1,8 +1,8 @@
 <footer class="main-footer">
   <div class="float-right d-none d-sm-block">
-    BY-<b>NHÓM 4</b>
+    BY-<b>NHÓM 6</b>
   </div>
-  <strong>WEBSITE BÁN ĐỒ LƯU NIỆM &copy; THỜI TRANG TRANG <a href="https://adminlte.io">SHOP 4 CON CỪU</a>.</strong>
+  <strong>WEBSITE BÁN ĐỒ LƯU NIỆM &copy; THỜI TRANG TRANG <a href="https://adminlte.io">SEULCHIC SHOP</a>.</strong>
 </footer>
 
 <!-- Control Sidebar -->

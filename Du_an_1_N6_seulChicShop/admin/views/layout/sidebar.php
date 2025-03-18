@@ -55,7 +55,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . '?act=banner' ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN . '?act=danh-sach-anh' ?>" class="nav-link">
             <i class="nav-icon fas fa-images"></i>
             <p>Quản lý hình ảnh</p>
           </a>
