@@ -85,27 +85,16 @@ class AdminUser
                 email = :email,
                 mat_khau = :mat_khau, 
                 anh_dai_dien = :anh_dai_dien,
-<<<<<<< HEAD
-                so_dien_thoai = :so_dien_thoai,
-                WHERE id = :id";
-            $stmt = $this->conn->prepare($sql);
-=======
                 so_dien_thoai = :so_dien_thoai
                 WHERE id = :id";
 
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id', $id_tai_khoan_admin);
->>>>>>> 500e98e4e06732f41f41b8241d86eab61d636fb8
             $stmt->bindParam(':ten_tai_khoan', $ten_tai_khoan);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':mat_khau', $mat_khau);
             $stmt->bindParam(':anh_dai_dien', $anh_dai_dien);
             $stmt->bindParam(':so_dien_thoai', $so_dien_thoai);
-<<<<<<< HEAD
-            $stmt->bindParam(':id', $id_tai_khoan_admin);
-            $stmt->execute();
-            return true;
-=======
 
             $result = $stmt->execute();
 
@@ -116,7 +105,6 @@ class AdminUser
                 error_log("Database error: " . print_r($errorInfo, true));
                 return false;
             }
->>>>>>> 500e98e4e06732f41f41b8241d86eab61d636fb8
         } catch (Exception $e) {
             error_log("Exception in editUserAdmin: " . $e->getMessage());
             return false;
@@ -146,27 +134,5 @@ class AdminUser
             echo '' . $e->getMessage();
         }
     }
-    public function getUserClient()
-    {
-        try {
-            $sql = "SELECT * FROM tai_khoans WHERE chuc_vu_id = 2";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll();
-        } catch (Exception $e) {
-            echo "Lỗi Truy Vấn:" . $e->getMessage();
-        }
-    }
-    public function getUserClentById($id)
-    {
-        try {
-            $sql = 'SELECT * FROM tai_khoans 
-            WHERE id = :id';
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetch();
-        } catch (Exception $e) {
-            echo '' . $e->getMessage();
-        }
-    }
+
 }

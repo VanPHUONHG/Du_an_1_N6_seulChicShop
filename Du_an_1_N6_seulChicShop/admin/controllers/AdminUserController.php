@@ -38,11 +38,11 @@ class AdminUserController
     public function insertUserAdmin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $ten_tai_khoan = $_POST['ten_tai_khoan'];
-            $email = $_POST['email'];
-            $mat_khau = $_POST['mat_khau'];
-            $so_dien_thoai = $_POST['so_dien_thoai'];
-            $chuc_vu_id = $_POST['chuc_vu_id'];
+            $ten_tai_khoan = $_POST['ten_tai_khoan'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $mat_khau = $_POST['mat_khau'] ?? '';
+            $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
+            $chuc_vu_id = $_POST['chuc_vu_id'] ?? '';
             $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
             $file_thumb = uploadFile($anh_dai_dien, folderUpload: './uploads/');
             $errors = [];
@@ -73,7 +73,7 @@ class AdminUserController
                     $mat_khau,
                     $file_thumb,
                     $so_dien_thoai,
-                    $chuc_vu_id
+                    $chuc_vu_id,
                 );
                 header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-quan-tri');
                 exit();
@@ -92,20 +92,20 @@ class AdminUserController
         $user = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
         require_once './views/user/admin/EditUserAdmin.php';
     }
-
     public function updateUserAdmin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id_tai_khoan_admin = $_POST['id_tai_khoan_admin'] ?? '';
             $userOld = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
             $old_file = $userOld['anh_dai_dien'];
+
             $ten_tai_khoan = $_POST['ten_tai_khoan'] ?? '';
             $email = $_POST['email'] ?? '';
             $mat_khau = $_POST['mat_khau'] ?? '';
             $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
             $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
-            $errors = [];
 
+            $errors = [];
             if (empty($ten_tai_khoan)) {
                 $errors['ten_tai_khoan'] = 'Vui lòng nhập tên tài khoản';
             }
@@ -131,49 +131,23 @@ class AdminUserController
             }
 
             if (empty($errors)) {
-
                 $this->ModelAdminUser->editUserAdmin(
-
-                $result = $this->ModelAdminUser->editUserAdmin(
-
                     $id_tai_khoan_admin,
                     $ten_tai_khoan,
                     $email,
                     $mat_khau,
-
-                    $anh_dai_dien_new,
-                    $so_dien_thoai);
+                    $new_file,
+                    $so_dien_thoai
+                );
                 header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-quan-tri');
                 exit();
             } else {
                 $_SESSION['flash'] = true;
-                header("Location:" .BASE_URL_ADMIN. '?act=tai-khoan-quan-tri'.$id_tai_khoan_admin);
-
-                    $new_file,
-                    $so_dien_thoai
-                );
-
-                if ($result) {
-                    header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-quan-tri');
-                    exit();
-                }
-
+                header("Location: " . BASE_URL_ADMIN . '?act=form-sua-tai-khoan-admin&id_tai_khoan_admin=' . $id_tai_khoan_admin);
+                exit();
             }
-
-            $user = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
-            $_SESSION['flash'] = true;
-            require_once './views/user/admin/EditUserAdmin.php';
         }
     }
-
-    public function listUserClient(){
-        $listUserClient = $this->ModelAdminUser->getUserClient() ;
-        require_once './views/user/client/ListUserClient.php';
-    }
-    public function listUserClientById($id){
-        $id = $_GET['id'];
-        $user=$this->ModelAdminUser->getUserClentById($id);
-
 
     public function listUserClient()
     {
@@ -185,8 +159,5 @@ class AdminUserController
         $id = $_GET['id'];
         $user = $this->ModelAdminUser->getUserClentById($id);
 
-        require_once './views/client/DetailUserClient.php';
-
-        require_once './views/client/DetailUserClient .php';
     }
 }

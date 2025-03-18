@@ -59,12 +59,6 @@ match ($act) {
   'form-them-tai-khoan-admin' => (new AdminUserController())->formAddUserAdmin(),
   'them-tai-khoan-admin' => (new AdminUserController())->insertUserAdmin(),
   'form-sua-tai-khoan-admin' => (new AdminUserController())->formEditUserAdmin(),
-
-  'sua-tai-khoan-admin' => (new AdminUserController())->editUserAdmin(),
-  // router user client
-  'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
-  'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->detailUserClient(),
-
   'sua-tai-khoan-admin' => (new AdminUserController())->updateUserAdmin(),
 
   // router user client
@@ -84,6 +78,4 @@ match ($act) {
   'them-banner' => (new AdminBannerController())->insertBanner(),
   'form-sua-banner' => (new AdminBannerController())->formEditBanner(),
   'cap-nhat-banner' => (new AdminBannerController())->updateBanner(),
-
-  // router image admin
 };
