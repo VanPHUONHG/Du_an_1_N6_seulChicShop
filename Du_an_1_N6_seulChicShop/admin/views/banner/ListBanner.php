@@ -30,7 +30,7 @@
                         <div class="card-body">
                             <div class="col-sm-6 ">
                                 <!-- Add banner button -->
-                                <a href="<?= BASE_URL_ADMIN ?>?act=them-banner" class="btn btn-success">
+                                <a href="<?= BASE_URL_ADMIN ?>?act=form-them-banner" class="btn btn-success">
                                     <i class="fas fa-plus"></i> Thêm Banner
                                 </a>
                             </div>
@@ -42,6 +42,7 @@
                                         <th>Tiêu đề</th>
                                         <th>Hình ảnh</th>
                                         <th>Trạng thái</th>
+                                        <th>Ngày tạo</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
@@ -59,15 +60,18 @@
                                                     alt=""
                                                     onerror="this.src='https://cdn.khamphadanang.vn/wp-content/uploads/2022/12/cua-hang-ban-do-luu-niem-da-nang-15.jpg%22'">
                                             </td>
+
                                             <!-- Banner status -->
                                             <td><?= $banner['trang_thai'] == 1 ? 'Hiện' : 'Ẩn' ?></td>
+                                            <!-- Banner created date -->
+                                            <td><?= $banner['ngay_tao'] ?></td>
                                             <!-- Action buttons -->
                                             <td>
                                                 <a
                                                     href="<?= BASE_URL_ADMIN . '?act=chi-tiet-banner&id=' . $banner['id'] ?>">
                                                     <button class="btn btn-warning"><i class="far fa-eye"></i></button>
                                                 </a>
-                                                <a href="<?= BASE_URL_ADMIN ?>?act=sua-banner&id=<?= $banner['id'] ?>">
+                                                <a href="<?= BASE_URL_ADMIN ?>?act=form-sua-banner&id=<?= $banner['id'] ?>">
                                                     <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
                                                 </a>
                                                 <a href="<?= BASE_URL_ADMIN ?>?act=xoa-banner&id=<?= $banner['id'] ?>"

@@ -42,14 +42,13 @@ class AdminBanner
             echo "Lỗi Truy Vấn: " . $e->getMessage();
         }
     }
-    public function addBanner($id, $tieu_de, $hinh_anh_url, $mo_ta, $trang_thai, $ngay_tao)
+    public function addBanner($tieu_de, $hinh_anh_url, $mo_ta, $trang_thai, $ngay_tao)
     {
         try {
             $ngay_tao = date('Y-m-d H:i:s');
-            $sql = "INSERT INTO banners(id,tieu_de,hinh_anh_url,mo_ta,trang_thai,ngay_tao) 
-            VALUES(:id,:tieu_de,:hinh_anh_url,:mo_ta,:trang_thai,:ngay_tao)";
+            $sql = "INSERT INTO banners(tieu_de, hinh_anh_url, mo_ta, trang_thai, ngay_tao) 
+            VALUES(:tieu_de, :hinh_anh_url, :mo_ta, :trang_thai, :ngay_tao)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id', $id);
             $stmt->bindParam(':tieu_de', $tieu_de);
             $stmt->bindParam(':hinh_anh_url', $hinh_anh_url);
             $stmt->bindParam(':mo_ta', $mo_ta);
@@ -59,6 +58,7 @@ class AdminBanner
             return true;
         } catch (Exception $e) {
             echo "Lỗi Truy Vấn: " . $e->getMessage();
+            return false;
         }
     }
     public function editBanner($id, $tieu_de, $hinh_anh_url, $mo_ta, $trang_thai)

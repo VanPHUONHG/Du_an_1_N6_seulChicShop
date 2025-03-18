@@ -72,9 +72,9 @@ match ($act) {
   // router banner admin
   'danh-sach-banner' => (new AdminBannerController())->listBanner(),
   'chi-tiet-banner' => (new AdminBannerController())->detailBanner(),
-  'xoa-banner' => (new AdminBannerController())->deleteBanner(),
+  'xoa-banner' => (new AdminBannerController())->destroyBanner(),
   'form-them-banner' => (new AdminBannerController())->formAddBanner(),
-  'them-banner' => (new AdminBannerController())->addBanner(),
+  'them-banner' => (new AdminBannerController())->insertBanner(),
   'form-sua-banner' => (new AdminBannerController())->formEditBanner(),
-  'sua-banner' => (new AdminBannerController())->editBanner(),
+  'cap-nhat-banner' => (new AdminBannerController())->updateBanner(),
 };
