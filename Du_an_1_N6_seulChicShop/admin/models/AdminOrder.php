@@ -17,7 +17,7 @@ class AdminOrder
             echo "Lỗi Truy Vấn:" . $e->getMessage();
         }
     }
-    
+
     public function getAllDetailBestSellingProducts()
     {
         try {
@@ -55,9 +55,9 @@ class AdminOrder
             FROM don_hangs
             INNER JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
             ORDER BY don_hangs.id DESC";
-            
+
             $stmt = $this->conn->prepare($sql);
-            
+
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (Exception $e) {
@@ -65,16 +65,16 @@ class AdminOrder
         }
     }
 
-   
+
     public function getAllTrangThaiOder()
     {
         try {
             $sql = "SELECT * FROM trang_thai_don_hangs";
-            
+
             $stmt = $this->conn->prepare($sql);
-            
+
             $stmt->execute();
-            
+
             return $stmt->fetchAll();
         } catch (Exception $e) {
             echo "Lỗi Truy Vấn:" . $e->getMessage();
@@ -97,9 +97,9 @@ class AdminOrder
            
            INNER JOIN phuong_thuc_thanh_toans ON don_hangs.phuong_thuc_thanh_toan_id = phuong_thuc_thanh_toans.id 
            WHERE don_hangs.id = :id ';
-           
+
             $stmt = $this->conn->prepare($sql);
-            
+
             $stmt->execute([':id' => $id]);
 
             return $stmt->fetch();
@@ -108,7 +108,7 @@ class AdminOrder
         }
     }
 
-  
+
 
     public function getListDonHang($id)
     {
@@ -122,7 +122,7 @@ class AdminOrder
            WHERE chi_tiet_don_hangs.don_hang_id = :id ';
 
             $stmt = $this->conn->prepare($sql);
-            
+
             $stmt->execute([':id' => $id]);
 
             return $stmt->fetchAll();

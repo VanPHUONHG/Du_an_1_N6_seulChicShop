@@ -86,7 +86,7 @@
                                                     <?php
                                                     $TotalUser = 0;
                                                     foreach ($listUser as $user):
-                                                        if (($user['trang_thai_don_hang_id'] == 7) && ($user['chuc_vu_id'] == 2)) {
+                                                        if (($user['trang_thai'] == 2) && ($user['chuc_vu_id'] == 2)) {
                                                             $TotalUser++;
                                                         }
                                                     endforeach;
@@ -151,13 +151,15 @@
                                             $maxProducts = 5;
                                             $count = 0;
                                             foreach ($listDetailOrder as $sanPham) {
-                                                if ($count >= $maxProducts) break;
-                                            ?>
+                                                if ($count >= $maxProducts)
+                                                    break;
+                                                ?>
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex align-items-center">
                                                             <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                                <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="" width="100px" />
+                                                                <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt=""
+                                                                    width="100px" />
                                                             </div>
                                                             <div>
                                                                 <h5 class="fs-14 my-1"><a
@@ -171,8 +173,9 @@
                                                     </td>
                                                     <td>
                                                         <h5 class="fs-14 my-1 fw-normal">
-                                                            <?= number_format($sanPham['gia_khuyen_mai'], 0, ',', '.') == 0 ?  number_format($sanPham['gia_san_pham'], 0, ',', '.') :  number_format($sanPham['gia_khuyen_mai'], 0, ',', '.') ?>
-                                                            VNĐ</h5>
+                                                            <?= number_format($sanPham['gia_khuyen_mai'], 0, ',', '.') == 0 ? number_format($sanPham['gia_san_pham'], 0, ',', '.') : number_format($sanPham['gia_khuyen_mai'], 0, ',', '.') ?>
+                                                            VNĐ
+                                                        </h5>
                                                         <span class="text-muted">Giá</span>
                                                     </td>
                                                     <td>
@@ -185,7 +188,7 @@
                                                         <span class="text-muted">Số lượng</span>
                                                     </td>
                                                 </tr>
-                                            <?php
+                                                <?php
                                                 $count++;
                                             } ?>
                                         </tbody>

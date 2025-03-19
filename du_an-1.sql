@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th3 18, 2025 lúc 09:24 AM
+-- Thời gian đã tạo: Th3 19, 2025 lúc 08:47 AM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.1.10
 
@@ -41,11 +41,10 @@ CREATE TABLE `banners` (
 --
 
 INSERT INTO `banners` (`id`, `tieu_de`, `hinh_anh_url`, `mo_ta`, `trang_thai`, `ngay_tao`) VALUES
-(1, 'Khuyến mãi Tết', 'images/banner_tet.jpg', 'Mừng xuân - Giảm giá cực lớn', 1, '2025-03-18 12:13:01'),
+(1, 'Khuyến mãi Tết', 'Array', 'Mừng xuân - Giảm giá cực lớn', 2, '2025-03-18 12:13:01'),
 (2, 'Giảm giá cuối tuần', 'images/banner_weekend.jpg', 'Sale 30% toàn bộ sản phẩm cuối tuần', 1, '2025-03-18 12:13:01'),
 (3, 'Miễn phí vận chuyển', 'images/banner_ship.jpg', 'Freeship toàn quốc cho đơn trên 500k', 1, '2025-03-18 12:13:01'),
-(4, 'Mở bán sản phẩm mới', 'images/banner_newproduct.jpg', 'Khám phá sản phẩm mới ra mắt', 1, '2025-03-18 12:13:01'),
-(5, 'Tặng voucher 100k', 'images/banner_voucher.jpg', 'Đăng ký nhận ưu đãi ngay hôm nay', 1, '2025-03-18 12:13:01');
+(7, 'bannner 444555', './uploads/1742317422banner2.jpg', 'banner ẩn', 2, '2025-03-18 17:03:42');
 
 -- --------------------------------------------------------
 
@@ -176,8 +175,8 @@ CREATE TABLE `don_hangs` (
 --
 
 INSERT INTO `don_hangs` (`id`, `ma_don_hang`, `tai_khoan_id`, `ten_nguoi_nhan`, `email_nguoi_nhan`, `sdt_nguoi_nhan`, `dia_chi_nguoi_nhan`, `tong_tien`, `ngay_dat`, `ghi_chu`, `phuong_thuc_thanh_toan_id`, `trang_thai_id`) VALUES
-(7, '2333', 20, 'Quyền', 'qyte@dmsada.com', '0454564564', 'hà nội', 545646, '2025-03-17', 'sdadaada', 2, 1),
-(8, '2333', 20, 'Quyền', 'qyte@dmsada.com', '0454564564', 'hà nội', 545646, '2025-03-17', 'sdadaada', 2, 5);
+(7, '2333', 20, 'Quyền', 'qyte@dmsada.com', '0454564564', 'hà nội', 545646, '2025-03-17', 'sdadaada', 2, 9),
+(8, '2333', 20, 'Quyền', 'qyte@dmsada.com', '0454564564', 'hà nội', 545646, '2025-03-17', 'sdadaada', 2, 7);
 
 -- --------------------------------------------------------
 
@@ -237,7 +236,7 @@ CREATE TABLE `lien_hes` (
 
 INSERT INTO `lien_hes` (`id`, `ho_ten`, `email`, `so_dien_thoai`, `tieu_de`, `trang_thai`, `noi_dung`, `thoi_gian_gui`, `tai_khoan_id`) VALUES
 (7, 'Nguyễn Văn A', 'vana@example.com', '0912345678', 'Hỏi về sản phẩm', 1, 'Sản phẩm này còn hàng không?', '2025-03-18 01:33:01', 15),
-(8, 'Trần Thị B', 'thib@example.com', '0987654321', 'Góp ý dịch vụ', 0, 'Tôi muốn góp ý về dịch vụ giao hàng.', '2025-03-18 01:33:01', 20),
+(8, 'Trần Thị B', 'thib@example.com', '0987654321', 'Góp ý dịch vụ', 1, 'Tôi muốn góp ý về dịch vụ giao hàng.', '2025-03-18 01:33:01', 20),
 (9, 'Lê Văn C', 'levan@example.com', '454546464654', 'Báo lỗi website', 0, 'Khi đăng nhập bị lỗi 500.', '2025-03-18 01:33:01', 21);
 
 -- --------------------------------------------------------
@@ -287,7 +286,7 @@ CREATE TABLE `san_phams` (
 --
 
 INSERT INTO `san_phams` (`id`, `ten_san_pham`, `gia_san_pham`, `gia_khuyen_mai`, `hinh_anh`, `so_luong`, `luot_xem`, `ngay_nhap`, `mo_ta`, `danh_muc_id`, `trang_thai`) VALUES
-(3, 'Quần Bò Dior Nữ', 20000000, 10000000, 'Chất liệu nhập khẩu, mặc thoải mái', 15, 30, '2025-03-11', '', 2, 1),
+(3, 'Quần Bò Dior Nữ 4', 20000000, 10000000, 'Chất liệu nhập khẩu, mặc thoải mái', 15, 30, '2025-03-11', '', 2, 1),
 (5, 'Sản Phẩm 1', 20203, 190000, './uploads/1741972885bun-trộn-thập-cẩm-recipe-main-photo.jpg', 20, 0, '2025-03-16', 'san pham 1', 3, 1),
 (6, 'Sản Phẩm 1', 2323323, 444444, './uploads/1742027145110-hinh-anh-tra-sua-dep-ngon-mat-nhin-ma-phat-them-919-1.jpg', 44, 0, '2025-03-14', '44444', 2, 1),
 (8, 'Sản Phẩm 1', 232323, 33333, './uploads/1742029397bun-trộn-thập-cẩm-recipe-main-photo.jpg', 22, 0, '2025-03-13', '111', 2, 1),
@@ -307,7 +306,7 @@ CREATE TABLE `tai_khoans` (
   `mat_khau` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `so_dien_thoai` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `chuc_vu_id` int DEFAULT NULL,
-  `trang_thai_don_hang_id` int DEFAULT NULL,
+  `trang_thai` int DEFAULT NULL,
   `ngay_tao` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -315,13 +314,13 @@ CREATE TABLE `tai_khoans` (
 -- Đang đổ dữ liệu cho bảng `tai_khoans`
 --
 
-INSERT INTO `tai_khoans` (`id`, `ten_tai_khoan`, `email`, `anh_dai_dien`, `mat_khau`, `so_dien_thoai`, `chuc_vu_id`, `trang_thai_don_hang_id`, `ngay_tao`) VALUES
-(15, 'Tai khoan', 'taikhoan2@gmail.com', '', 'Taikhoan4', '0111035444', 2, 7, '2025-03-15 07:30:47'),
-(19, 'Tai khoan4343', 'taikhoa2n2@gmail.com', './uploads/1742235659bab64cc4b981d7e377f93768236ffdfa.jpg', 'Taikhoaen4', '011103544444', 1, 7, '2025-03-15 07:30:47'),
-(20, 'Quyen2002', 'quyenthe15052002@gmail.com', './uploads/1742151395logo1.jpg', 'Quyen2002', '0354669980', 1, NULL, '2025-03-16 11:56:35'),
-(21, 'Quyen200233', 'thithu1@gmail.com', './uploads/1742152737food2.jpg', 'quyen2002@', '45454564', 1, NULL, '2025-03-16 12:18:57'),
-(23, 'QuyenThế', 'ewrwrw@gmail.com', './uploads/1742196722food2.jpg', 'ueqyqyequ', '89321819384', 1, NULL, '2025-03-17 00:32:02'),
-(24, 'Quyen2002', 'quyen@gmail.com', './uploads/1742232048Yellow Creative Noodle Food Promotion Banner .jpg', 'qeqeqqr', '4252523352', 1, NULL, '2025-03-17 10:20:48');
+INSERT INTO `tai_khoans` (`id`, `ten_tai_khoan`, `email`, `anh_dai_dien`, `mat_khau`, `so_dien_thoai`, `chuc_vu_id`, `trang_thai`, `ngay_tao`) VALUES
+(15, 'Tai khoan', 'taikhoan2@gmail.com', '', 'Taikhoan4', '0111035444', 2, 1, '2025-03-15 07:30:47'),
+(20, 'Quyen2002433333', 'quyenthe15052002@gmail.com', './uploads/1742151395logo1.jpg', 'Quyen2002', '0354669980', 1, 2, '2025-03-16 11:56:35'),
+(21, 'Quyen200233', 'thithu1@gmail.com', './uploads/1742152737food2.jpg', 'quyen2002@', '45454564443', 1, 1, '2025-03-16 12:18:57'),
+(23, 'QuyenThế', 'ewrwrw@gmail.com', './uploads/1742196722food2.jpg', 'ueqyqyequ', '89321819384', 2, 2, '2025-03-17 00:32:02'),
+(24, 'Quyen20023333', 'quyen@gmail.com', './uploads/1742232048Yellow Creative Noodle Food Promotion Banner .jpg', 'qeqeqqr', '4252523352', 1, 1, '2025-03-17 10:20:48'),
+(25, 'Tai khoan3333', 'admin@gmail.com', './uploads/1742315850banner2.jpg', 'Quyen2002@', '0111035', 1, 2, '2025-03-18 09:37:30');
 
 -- --------------------------------------------------------
 
@@ -441,7 +440,7 @@ ALTER TABLE `tai_khoans`
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `so_dien_thoai` (`so_dien_thoai`),
   ADD KEY `chuc_vu_id` (`chuc_vu_id`),
-  ADD KEY `fk_tai_khoans_trang_thai_don_hang` (`trang_thai_don_hang_id`);
+  ADD KEY `fk_tai_khoans_trang_thai_don_hang` (`trang_thai`);
 
 --
 -- Chỉ mục cho bảng `trang_thai_don_hangs`
@@ -457,7 +456,7 @@ ALTER TABLE `trang_thai_don_hangs`
 -- AUTO_INCREMENT cho bảng `banners`
 --
 ALTER TABLE `banners`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `binh_luans`
@@ -529,7 +528,7 @@ ALTER TABLE `san_phams`
 -- AUTO_INCREMENT cho bảng `tai_khoans`
 --
 ALTER TABLE `tai_khoans`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `trang_thai_don_hangs`
@@ -593,7 +592,6 @@ ALTER TABLE `san_phams`
 -- Các ràng buộc cho bảng `tai_khoans`
 --
 ALTER TABLE `tai_khoans`
-  ADD CONSTRAINT `fk_tai_khoans_trang_thai_don_hang` FOREIGN KEY (`trang_thai_don_hang_id`) REFERENCES `trang_thai_don_hangs` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `tai_khoans_ibfk_1` FOREIGN KEY (`chuc_vu_id`) REFERENCES `chuc_vus` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
