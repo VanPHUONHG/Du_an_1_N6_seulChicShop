@@ -1,30 +1,36 @@
 <?php
-
-require_once './models/sanPham.php'; // Đảm bảo đã load model
-
-class HomeController {
-    public $modelsanPham;
-
-    public function __construct() {
-        $this->modelsanPham = new sanPham();
+class HomeController
+{
+    public function index()
+    {
+        require_once './views/index.php';
     }
-
-    public function home() {
-        return "Đây là trang chủ.";
+    public function listProduct()
+    {
+        require_once './views/listProduct.php';
     }
-
-    public function trangChu() {
-        return "Đây là trang chủ của tôi.";
+    public function contact()
+    {
+        require_once './views/Contact.php';
     }
-
-    public function danhSachSanPham() {
-        $listProduct = $this->modelsanPham->getAllProduct();
-        // Chuyển danh sách sản phẩm thành chuỗi HTML
-        $html = "<ul>";
-        foreach ($listProduct as $product) {
-            $html .= "<li>" . htmlspecialchars($product['ten_san_pham']) . "</li>";
-        }
-        $html .= "</ul>";
-        return $html;
+    public function about()
+    {
+        require_once './views/About.php';
+    }
+    public function singleProduct()
+    {
+        require_once './views/SingleProduct.php';
+    }
+    public function blog()
+    {
+        require_once './views/Blog.php';
+    }
+    public function blogDetail()
+    {
+        require_once './views/BlogDetail.php';
+    }
+    public function cart()
+    {
+        require_once './views/Cart.php';
     }
 }

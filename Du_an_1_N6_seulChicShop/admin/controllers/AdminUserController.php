@@ -158,6 +158,7 @@ class AdminUserController
     {
         $id = $_GET['id'];
         $user = $this->ModelAdminUser->getUserClentById($id);
+        require_once './views/user/client/DetailUserClient.php';
 
     }
 }

@@ -135,5 +135,4 @@ class AdminUser
             echo '' . $e->getMessage();
         }
     }
-
 }
