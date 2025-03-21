@@ -45,7 +45,7 @@
                                             <td><?= $user['so_dien_thoai'] ?></td>
                                             <td><?= $user['ngay_tao'] ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>"><button class="btn btn-warning"><i class="far fa-eye"></i></button></a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-tai-khoan-khach-hang&id_tai_khoan_client=' . $user['id'] ?>"><button class="btn btn-warning"><i class="far fa-eye"></i></button></a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>
