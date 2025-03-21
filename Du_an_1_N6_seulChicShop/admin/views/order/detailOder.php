@@ -20,9 +20,9 @@
                 $statusColor = 'danger';
                 if ($donHang['trang_thai_id'] == 1) {
                     $statusColor = 'primary';
-                } elseif ($donHang['trang_thai_id'] >= 2 && $donHang['trang_thai_id'] <= 9) {
+                } elseif ($donHang['trang_thai_id'] >= 2 && $donHang['trang_thai_id'] <= 5) {
                     $statusColor = 'warning';
-                } elseif ($donHang['trang_thai_id'] == 10) {
+                } elseif ($donHang['trang_thai_id'] == 5) {
                     $statusColor = 'success';
                 }
                 ?>

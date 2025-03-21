@@ -20,9 +20,9 @@
                 $statusColor = 'danger';
                 if ($donHang['trang_thai_id'] == 1) {
                     $statusColor = 'primary';
-                } elseif ($donHang['trang_thai_id'] >= 2 && $donHang['trang_thai_id'] <= 9) {
+                } elseif ($donHang['trang_thai_id'] >= 2 && $donHang['trang_thai_id'] <= 5) {
                     $statusColor = 'warning';
-                } elseif ($donHang['trang_thai_id'] == 10) {
+                } elseif ($donHang['trang_thai_id'] == 5) {
                     $statusColor = 'success';
                 }
                 ?>
@@ -106,16 +106,37 @@
                                     
                                         <div class="form-group">
                                             <select id="inputStatus" name="trang_thai_id" class="form-control custom-select">
-                                                <?php foreach ($listTrangThaiDonHang as $trangThai) : ?>
-                                                    <?php if ($trangThai['id'] >= $donHang['trang_thai_id'] && !in_array($donHang['trang_thai_id'], [9, 10, 11])) : ?>
+                                            
+                                                <?php 
+                                                foreach ($listTrangThaiDonHang as $trangThai) {
+                                                 if($donHang['trang_thai_id'] == 1){
+                                                    $trangThai = array_diff($trangThai, [3,4,5,7]);
+                                                 }else if($donHang['trang_thai_id'] == 2){
+                                                    $trangThai = array_diff($trangThai, [1,4,5,7]);
+                                                 }else if($donHang['trang_thai_id'] == 3){
+                                                    $trangThai = array_diff($trangThai, [1,2,5,7]);
+                                                 }else if($donHang['trang_thai_id'] == 4){
+                                                    $trangThai = array_diff($trangThai, [1,2,3,6]);
+                                                 }else if($donHang['trang_thai_id'] == 5){
+                                                    $trangThai = array_diff($trangThai, [1,2,3,4,6]);
+                                                 }else if($donHang['trang_thai_id'] == 6){
+                                                    $trangThai = array_diff($trangThai, [1,2,3,4,5,7]);
+                                                 }else if($donHang['trang_thai_id'] == 7){
+                                                    $trangThai = array_diff($trangThai, [1,2,3,4,5,6]);
+                                                 }
+                                                ?>
+                                                
+                                                
+                                                    <?php if ($trangThai['id'] >= $donHang['trang_thai_id'] || in_array($donHang['trang_thai_id'], [])) : ?>
                                                         <option
                                                             <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?>
                                                             value="<?= $trangThai['id'] ?>">
                                                             <?= $trangThai['ten_trang_thai'] ?>
                                                         </option>
                                                     <?php endif; ?>
-                                                <?php endforeach; ?>
+                                                <?php } ?>
                                             </select>
+
                                         </div>
                                         <br>
                                         <div class="form-group">
