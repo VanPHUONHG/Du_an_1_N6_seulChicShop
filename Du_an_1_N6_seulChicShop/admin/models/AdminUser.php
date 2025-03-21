@@ -9,7 +9,8 @@ class AdminUser
     public function getUserOrder()
     {
         try {
-            $sql = "SELECT * FROM tai_khoans";
+            $sql = "SELECT * FROM tai_khoans
+            WHERE trang_thai = 2";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -134,5 +135,4 @@ class AdminUser
             echo '' . $e->getMessage();
         }
     }
-
 }
