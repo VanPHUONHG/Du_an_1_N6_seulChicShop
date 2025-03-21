@@ -123,13 +123,14 @@ class AdminUser
             echo "Lỗi Truy Vấn:" . $e->getMessage();
         }
     }
-    public function getUserClentById($id)
+    public function getUserClentById($id_tai_khoan_client)
     {
         try {
             $sql = 'SELECT * FROM tai_khoans 
             WHERE id = :id';
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$id]);
+            $stmt->bindParam(':id', $id_tai_khoan_client);
+            $stmt->execute();
             return $stmt->fetch();
         } catch (Exception $e) {
             echo '' . $e->getMessage();

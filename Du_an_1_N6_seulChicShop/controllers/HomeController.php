@@ -3,16 +3,16 @@ class HomeController
 {
     public function index()
     {
-        require_once './views/index.php';
+        require_once './views/Home.php';
     }
     public function listProduct()
     {
         require_once './views/listProduct.php';
     }
-    public function contact()
-    {
-        require_once './views/Contact.php';
-    }
+    // public function contact()
+    // {
+    //     require_once './views/Contact.php';
+    // }
     public function about()
     {
         require_once './views/About.php';

@@ -6,10 +6,11 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 
 // Require toàn bộ file Controllers
 require_once './controllers/HomeController.php';
+require_once './controllers/ClientContactController.php';
 
 // Require toàn bộ file Models
-require_once './models/Student.php';
 require_once './models/sanPham.php';
+require_once './models/ClientContact.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -19,7 +20,9 @@ $response = match ($act) {
 
     '/' => (new HomeController())->index(), // Trang chủ
     'danh-sach-san-pham' => (new HomeController())->listProduct(), // Base_URL/?act=danh-sach-san-pham
-    'lien-he' => (new HomeController())->contact(), // Base_URL/?act=lien-he
+    // lien he
+    'lien-he' => (new ClientContactController())->listContact(), // Base_URL/?act=lien-he
+    'them-lien-he' => (new ClientContactController())->addContact(), // Base_URL/?act=them-lien-he
     'gioi-thieu' => (new HomeController())->about(), // Base_URL/?act=gioi-thieu
     'chi-tiet-san-pham' => (new HomeController())->singleProduct(), // Base_URL/?act=chi-tiet-san-pham
     'bai-viet' => (new HomeController())->blog(), // Base_URL/?act=bai-viet

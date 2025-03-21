@@ -68,4 +68,13 @@ class AdminContactController
         header('Location: ' . BASE_URL_ADMIN . '?act=lien-he');
         exit();
     }
+    public function destroyContact()
+    {
+        $id = $_GET['id'];
+        $contact = $this->ModelAdminContact->deleteContact($id);
+        if($contact){
+            header('Location: ' . BASE_URL_ADMIN . '?act=lien-he');
+            exit();
+        }
+    }
 }
