@@ -420,6 +420,20 @@
         })
     });
 </script>
+<!-- sub menu  -->
+<script>
+    document.querySelector('.submenu').addEventListener('click', function () {
+        this.querySelector('.submenu-content').style.display = this.querySelector('.submenu-content').style.display === 'none' ? 'block' : 'none';
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.submenu')) {
+            document.querySelector('.submenu-content').style.display = 'none';
+        }
+    });
+</script>
+
+
 <!--===============================================================================================-->
 <script src="assets/js/main.js"></script>
 

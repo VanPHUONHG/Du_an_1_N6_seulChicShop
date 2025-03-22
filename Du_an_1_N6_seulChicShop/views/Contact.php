@@ -28,7 +28,7 @@
                     <div class="m-b-20 bor8 how-pos4-parent">
                         <input class="p-l-62 p-r-30 cl2 plh3 size-116 stext-111" type="text" name="ho_ten"
                             placeholder="Họ Và Tên" required>
-                        <img class="how-pos4 pointer-none" src="assets/images/icons/icon-email.png" alt="ICON">
+                        <i class="how-pos4 pointer-none fas fa-user"></i>
                     </div>
                     <div class="m-b-20 bor8 how-pos4-parent">
                         <input class="p-l-62 p-r-30 cl2 plh3 size-116 stext-111" type="text" name="email"
@@ -38,12 +38,12 @@
                     <div class="m-b-20 bor8 how-pos4-parent">
                         <input class="p-l-62 p-r-30 cl2 plh3 size-116 stext-111" type="text" name="so_dien_thoai"
                             placeholder="Số diện thoại" required>
-                        <img class="how-pos4 pointer-none" src="assets/images/icons/icon-email.png" alt="ICON">
+                        <i class="how-pos4 pointer-none fas fa-phone"></i>
                     </div>
                     <div class="m-b-20 bor8 how-pos4-parent">
                         <input class="p-l-62 p-r-30 cl2 plh3 size-116 stext-111" type="text" name="tieu_de"
                             placeholder="Tiêu đề" required>
-                        <img class="how-pos4 pointer-none" src="assets/images/icons/icon-email.png" alt="ICON">
+                        <i class="how-pos4 pointer-none fas fa-heading"></i>
                     </div>
 
                     <div class="m-b-30 bor8">
@@ -53,7 +53,8 @@
                     <input type="hidden" name="trang_thai" value="0">
                     <input type="hidden" name="tai_khoan_id" value="20">
 
-                    <button type="submit" class="flex-c-m p-lr-15 bg3 bor1 cl0 hov-btn3 pointer size-121 stext-101 trans-04">
+                    <button type="submit"
+                        class="flex-c-m p-lr-15 bg3 bor1 cl0 hov-btn3 pointer size-121 stext-101 trans-04">
                         Gửi liên hệ
                     </button>
                 </form>
@@ -116,7 +117,12 @@
 <!-- Map -->
 <div class="map">
     <div class="size-303" id="google_map" data-map-x="40.691446" data-map-y="-73.886787"
-        data-pin="assets/images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
+        data-pin="assets/images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14895.455803504903!2d105.73388883199723!3d21.038128992796025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313455e940879933%3A0xcf10b34e9f1a03df!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1sen!2s!4v1742630448976!5m2!1sen!2s"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
 </div>
 
 
