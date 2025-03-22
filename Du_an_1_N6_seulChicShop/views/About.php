@@ -10,7 +10,7 @@
 <!-- Title page -->
 <section class="bg-img1 p-lr-15 p-tb-92 txt-center" style="background-image: url('assets/images/bg-01.jpg');">
     <h2 class="cl0 ltext-105 txt-center">
-        About
+        VỀ CHÚNG TÔI
     </h2>
 </section>
 
@@ -22,32 +22,31 @@
             <div class="col-lg-8 col-md-7">
                 <div class="p-r-0-md p-r-15-lg p-r-85 p-t-7">
                     <h3 class="p-b-16 cl2 mtext-111">
-                        Our Story
+                        LỊCH SỬ HÌNH THÀNH
                     </h3>
 
                     <p class="p-b-26 cl6 stext-113">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat consequat enim, non
-                        auctor massa ultrices non. Morbi sed odio massa. Quisque at vehicula tellus, sed tincidunt
-                        augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                        Maecenas varius egestas diam, eu sodales metus scelerisque congue. Pellentesque habitant morbi
-                        tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas gravida justo eu arcu
-                        egestas convallis. Nullam eu erat bibendum, tempus ipsum eget, dictum enim. Donec non neque ut
-                        enim dapibus tincidunt vitae nec augue. Suspendisse potenti. Proin ut est diam. Donec
-                        condimentum euismod tortor, eget facilisis diam faucibus et. Morbi a tempor elit.
+                        SEULCHIC SHOP được thành lập từ niềm đam mê với văn hóa bán đồ Handmade và mong muốn mang đến cho mọi người những sản phẩm không chỉ đẹp mắt mà còn mang giá trị tinh thần.
+                        Khởi đầu là một gian hàng nhỏ chuyên bán đồ lưu niệm handmade, chúng tôi từng bước mở rộng và phát triển thêm dòng sản phẩm thời trang phong cách Hàn, đáp ứng nhu cầu ngày càng đa dạng của khách hàng.
+                        Với phương châm "Tận tâm từ từng chi tiết nhỏ", SEULCHIC SHOP không ngừng đổi mới để tạo ra một không gian mua sắm tràn đầy cảm hứng – nơi bạn không chỉ tìm thấy những món đồ yêu thích, mà còn cảm nhận được sự đồng điệu trong phong cách sống.
                     </p>
 
                     <p class="p-b-26 cl6 stext-113">
-                        Donec gravida lorem elit, quis condimentum ex semper sit amet. Fusce eget ligula magna. Aliquam
-                        aliquam imperdiet sodales. Ut fringilla turpis in vehicula vehicula. Pellentesque congue ac orci
-                        ut gravida. Aliquam erat volutpat. Donec iaculis lectus a arcu facilisis, eu sodales lectus
-                        sagittis. Etiam pellentesque, magna vel dictum rutrum, neque justo eleifend elit, vel tincidunt
-                        erat arcu ut sem. Sed rutrum, turpis ut commodo efficitur, quam velit convallis ipsum, et
-                        maximus enim ligula ac ligula.
+                        ✨ Sản phẩm đa dạng, phong cách độc đáo:
+                        Từ quần áo thời trang hiện đại, nhẹ nhàng đến đồ lưu niệm dễ thương, ý nghĩa, chúng tôi luôn cập nhật xu hướng mới nhất để mang đến cho bạn những trải nghiệm mua sắm thú vị và chất lượng.
+
+                        🎁 Quà tặng và kỷ niệm – nhỏ xinh nhưng đầy ý nghĩa:
+                        Bạn muốn tìm một món quà tặng bạn bè, người thân hoặc lưu giữ khoảnh khắc đáng nhớ? SEULCHIC SHOP có rất nhiều lựa chọn sáng tạo, mang đậm dấu ấn riêng để bạn dễ dàng trao gửi tình cảm.
+
+                        👗 Thời trang – tự tin là chính mình:
+                        Dù bạn yêu phong cách ngọt ngào, nữ tính, hay năng động, cá tính, SEULCHIC SHOP đều có những mẫu trang phục phù hợp với cá tính và gu thẩm mỹ của bạn.
+
+                        🛍️ Mua sắm dễ dàng – Dịch vụ tận tâm:
+                        Chúng tôi không chỉ cung cấp sản phẩm mà còn mang đến trải nghiệm mua sắm tận tâm, với chính sách đổi trả linh hoạt, tư vấn nhiệt tình và hỗ trợ giao hàng toàn quốc.
                     </p>
 
                     <p class="p-b-26 cl6 stext-113">
-                        Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us
-                        on (+1) 96 716 6879
+                        Số 1, Trịnh Văn Bô, Nam Từ Liem, Hà Nội (+84) 96 716 6879
                     </p>
                 </div>
             </div>
@@ -65,29 +64,27 @@
             <div class="col-lg-8 col-md-7 order-md-2 p-b-30">
                 <div class="p-l-0-md p-l-15-lg p-l-85 p-t-7">
                     <h3 class="p-b-16 cl2 mtext-111">
-                        Our Mission
+                        Nhiệm vụ của SEULCHIC SHOP
                     </h3>
 
                     <p class="p-b-26 cl6 stext-113">
-                        Mauris non lacinia magna. Sed nec lobortis dolor. Vestibulum rhoncus dignissim risus, sed
-                        consectetur erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
-                        turpis egestas. Nullam maximus mauris sit amet odio convallis, in pharetra magna gravida.
-                        Praesent sed nunc fermentum mi molestie tempor. Morbi vitae viverra odio. Pellentesque ac velit
-                        egestas, luctus arcu non, laoreet mauris. Sed in ipsum tempor, consequat odio in, porttitor
-                        ante. Ut mauris ligula, volutpat in sodales in, porta non odio. Pellentesque tempor urna vitae
-                        mi vestibulum, nec venenatis nulla lobortis. Proin at gravida ante. Mauris auctor purus at lacus
-                        maximus euismod. Pellentesque vulputate massa ut nisl hendrerit, eget elementum libero iaculis.
+                        Sứ mệnh của SEULCHIC SHOP là mang đến những sản phẩm thời trang và quà tặng handmade chất lượng, 
+                        độc đáo với giá cả hợp lý. Chúng tôi luôn nỗ lực để tạo ra những trải nghiệm mua sắm tuyệt vời 
+                        nhất cho khách hàng, từ việc lựa chọn nguyên liệu, thiết kế sản phẩm đến dịch vụ chăm sóc khách 
+                        hàng. SEULCHIC SHOP cam kết đồng hành cùng phong cách thời trang của bạn, mang đến niềm vui và 
+                        sự hài lòng trong từng sản phẩm. Chúng tôi tin rằng mỗi món đồ không chỉ là một sản phẩm đơn 
+                        thuần mà còn là cách bạn thể hiện cá tính và phong cách sống của mình. Với tinh thần không ngừng 
+                        đổi mới và sáng tạo, SEULCHIC SHOP sẽ tiếp tục phát triển để trở thành điểm đến tin cậy cho 
+                        những người yêu thích thời trang và đồ handmade tại Việt Nam.
                     </p>
 
                     <div class="m-t-22 p-b-9 p-l-29 bor16">
                         <p class="p-b-11 p-r-40 cl6 stext-114">
-                            Creativity is just connecting things. When you ask creative people how they did something,
-                            they feel a little guilty because they didn't really do it, they just saw something. It
-                            seemed obvious to them after a while.
+                            Hãy ghé thăm chúng tôi và tìm thấy điều gì đó thật đặc biệt cho riêng bạn!
                         </p>
 
                         <span class="cl8 stext-111">
-                            - Steve Job's
+                            - SEULCHIC SHOP
                         </span>
                     </div>
                 </div>

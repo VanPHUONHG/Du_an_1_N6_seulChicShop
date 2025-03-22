@@ -58,6 +58,10 @@
                                             <td>
                                                 <a href="<?= BASE_URL_ADMIN ?>?act=form-chinh-sua-lien-he&id=<?= $contact['id'] ?>"
                                                     class="btn btn-success"><i class="fas fa-edit"></i> Sửa Trạng Thái</a>
+                                                <?php if ($contact['trang_thai'] == 1) { ?>
+                                                    <a href="<?= BASE_URL_ADMIN ?>?act=xoa-lien-he&id=<?= $contact['id'] ?>"
+                                                        class="btn btn-danger"><i class="fas fa-trash"></i> Xóa</a>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
