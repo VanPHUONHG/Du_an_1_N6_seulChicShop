@@ -69,6 +69,7 @@ match ($act) {
   'lien-he' => (new AdminContactController())->listContact(),
   'form-chinh-sua-lien-he' => (new AdminContactController())->formEditContact(),
   'xu-ly-lien-he' => (new AdminContactController())->editStatusContact(),
+  'xoa-lien-he' => (new AdminContactController())->destroyContact(),
 
   // router banner admin
   'danh-sach-banner' => (new AdminBannerController())->listBanner(),
