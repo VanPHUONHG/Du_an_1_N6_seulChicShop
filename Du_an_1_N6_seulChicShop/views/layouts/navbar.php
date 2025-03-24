@@ -53,23 +53,43 @@
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
                     </div>
-
+                    <!-- Button login -->
                     <div class="flex-c-m h-full p-lr-19">
-                        <div class="p-lr-11 cl2 hov-cl1 icon-header-item js-show-sidebar trans-04">
-                            <i class="zmdi zmdi-menu"></i>
+                        <div class="flex-c-m h-full ">
+                            <?php if (isset($_SESSION['user_client'])): ?>
+                                <span class="cl0 text-dark stext-107"><?= $_SESSION['user_client'] ?></span>
+                            <?php endif; ?>
                         </div>
-                    </div>
-
-                    <div class="flex-c-m h-full p-lr-19">
                         <div class="submenu" style="position: relative;">
-                            <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
-                                <i class="zmdi zmdi-account"></i>
-                            </a>
+                            <?php if (isset($_SESSION['user_client'])): ?>
+                                <?php
+                                $user = (new ClientUser())->getAccountByNameUser($_SESSION['user_client']);
+                                if ($user && isset($user['anh_dai_dien'])): ?>
+                                    <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
+                                        <img src="<?= $user['anh_dai_dien'] ?>"
+                                            alt="avatar"
+                                            class="rounded-circle"
+                                            style="width: 25px; height: 25px;">
+                                    </a>
+                                <?php else: ?>
+                                    <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
+                                        <i class="zmdi zmdi-account"></i>
+                                    </a>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
+                                    <i class="zmdi zmdi-account"></i>
+                                </a>
+                            <?php endif; ?>
                             <div class="submenu-content"
-                                style="display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 120px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100;">
+                                style="display: none; position: absolute; right: 0; background: #fff;  box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100;">
                                 <?php if (isset($_SESSION['user_client'])): ?>
                                     <li style="list-style: none; padding: 8px 16px;">
-                                        <span style="color: #333;">Welcome, <?= $_SESSION['user_client'] ?></span>
+                                        <span style="color: #333;">Xin chào, <?= $_SESSION['user_client'] ?></span>
+                                    </li>
+                                    <li style="list-style: none; padding: 8px 16px;">
+                                        <a href="<?= BASE_URL . "?act=quan-ly-tai-khoan" ?>"
+                                            style="color: #333; text-decoration: none;">Account Manage</a>
                                     </li>
                                     <li style="list-style: none; padding: 8px 16px;">
                                         <a href="<?= BASE_URL . "?act=dang-xuat" ?>"
@@ -87,6 +107,12 @@
                                 <?php endif; ?>
                             </div>
 
+                        </div>
+                    </div>
+
+                    <div class="flex-c-m h-full p-lr-19">
+                        <div class="p-lr-11 cl2 hov-cl1 icon-header-item js-show-sidebar trans-04">
+                            <i class="zmdi zmdi-menu"></i>
                         </div>
                     </div>
                 </div>
@@ -159,6 +185,9 @@
             <?php if (isset($_SESSION['user_client'])): ?>
                 <li>
                     <span>Welcome, <?= $_SESSION['user_client'] ?></span>
+                </li>
+                <li>
+                    <a href="<?= BASE_URL . "?act=quan-ly-tai-khoan" ?>">Account Manage</a>
                 </li>
                 <li>
                     <a href="<?= BASE_URL . "?act=dang-xuat" ?>">Sign Out</a>

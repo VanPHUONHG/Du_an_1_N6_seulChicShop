@@ -66,8 +66,7 @@ include_once 'views/layouts/navbar.php';
                     </div>
                 </div>
                 <div class="floating-label">
-                    <input placeholder="Ảnh đại diện" type="file" name="anh_dai_dien" id="anh_dai_dien" accept="image/*"
-                        required>
+                    <input placeholder="Ảnh đại diện" type="file" name="anh_dai_dien" id="anh_dai_dien" accept="image/*">
                     <label for="anh_dai_dien">Ảnh đại diện:</label>
                     <div class="icon">
                         <svg enable-background="new 0 0 100 100" version="1.1" viewBox="0 0 100 100"

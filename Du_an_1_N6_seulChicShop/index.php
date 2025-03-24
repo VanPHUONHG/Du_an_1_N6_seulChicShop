@@ -13,12 +13,14 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 // Require toàn bộ file Controllers
 require_once './controllers/ClientHomeController.php';
 require_once './controllers/ClientContactController.php';
+require_once './controllers/ClientCartController.php';
+require_once './controllers/ClientPayController.php';
 
 // Require toàn bộ file Models
-require_once './models/sanPham.php';
+require_once './models/ClientProduct.php';
 require_once './models/ClientContact.php';
 require_once './models/ClientUser.php';
-
+require_once './models/ClientPay.php';
 // Route
 $act = $_GET['act'] ?? '/';
 
@@ -42,6 +44,13 @@ $response = match ($act) {
     'dang-ky' => (new ClientHomeController())->signUp(), // Base_URL/?act=dang-ky
     'check-dang-ky' => (new ClientHomeController())->insertUserClient(), // Base_URL/?act=check-dang-ky
     'dang-xuat' => (new ClientHomeController())->signOut(), // Base_URL/?act=dang-xuat
+    'quan-ly-tai-khoan' => (new ClientHomeController())->editUser(), // Base_URL/?act=quan-ly-tai-khoan
+    'cap-nhat-tai-khoan' => (new ClientHomeController())->updateUser(), // Base_URL/?act=cap-nhat-tai-khoan
+
+    // Cart
+    'them-san-pham-gio-hang' => (new ClientCartController())->addProductCart(), // Base_URL/?act=them-san-pham-gio-hang
+    // Pay
+    'thanh-toan' => (new ClientPayController())->listPay(), // Base_URL/?act=thanh-toan
     default => '404 - Trang không tồn tại'
 };
 

@@ -9,6 +9,9 @@ class ClientCart
         $this->conn = connectDB();
     }
     public function getAllProductCart(){
-            $sql = 
+            // $sql = 
+    }
+    public function addProductCart(){
+        
     }
 }

@@ -44,6 +44,7 @@ class ClientHomeController
         deleteSessionError();
         exit();
     }
+    // kiem tra dang nhap
     public function checkSignIn()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -65,10 +66,12 @@ class ClientHomeController
             }
         }
     }
+    // Chuyen sang trang dang ky
     public function signUp()
     {
         require_once './views/auth/SignUp.php';
     }
+    // Dang ky tai khoan
     public function insertUserClient()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -136,11 +139,61 @@ class ClientHomeController
             }
         }
     }
+    // Dang xuat tai khoan
     public function signOut()
     {
         unset($_SESSION['user_client']);
         header('Location: ' . BASE_URL);
         exit();
     }
+    // Chuyen sang trang sua tai khoan
+    public function editUser()
+    {
+        $ten_tai_khoan = $_SESSION['user_client'];
+        $user = $this->ModelClientUser->getAccountByNameUser($ten_tai_khoan);
+        require_once './views/auth/Account Manage.php';
+    }
+    // Chinh sua tai khoan
+    public function updateUser()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+            $ten_tai_khoan = $_POST['ten_tai_khoan'];
+            // Lấy ảnh cũ để phục vụ cho sửa ảnh
+            $old_file = $this->ModelClientUser->getAccountByNameUser($ten_tai_khoan);
+            $email = $_POST['email'];
+            $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
+            $so_dien_thoai = $_POST['so_dien_thoai'];
+            $mat_khau = $_POST['mat_khau'];
+
+            $errors = [];
+            // Validate
+            if (empty($email)) {
+                $errors['email'] = 'Vui lòng nhập email';
+            }
+            if (empty($so_dien_thoai)) {
+                $errors['so_dien_thoai'] = 'Vui lòng nhập số điện thoại';
+            }
+            if (empty($mat_khau)) {
+                $errors['mat_khau'] = 'Vui lòng nhập mật khẩu';
+            }
+            
+            if ($anh_dai_dien && $anh_dai_dien['error'] === UPLOAD_ERR_OK) {
+                deleteFile($old_file);
+                $file_thumb = uploadFile($anh_dai_dien, folderUpload: './uploads/');
+            } else {
+                $file_thumb = $old_file;
+            }
+            if (empty($errors)) {
+                $this->ModelClientUser->updateUser($ten_tai_khoan, $email, $file_thumb, $so_dien_thoai, $mat_khau);
+                header('Location: ' . BASE_URL );
+                exit();
+            } else {
+                $_SESSION['errors'] = $errors;
+                $_SESSION['flash'] = true;
+                header('Location: ' . BASE_URL . '?act=quan-ly-tai-khoan');
+                exit();
+            }
+        }
+    }
 }

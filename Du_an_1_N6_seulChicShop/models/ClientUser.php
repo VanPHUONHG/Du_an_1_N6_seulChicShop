@@ -9,7 +9,7 @@ class ClientUser
     public function postSignIn($ten_tai_khoan, $mat_khau)
     {
         try {
-            // Validate input parameters
+            // Validate input dang nhap
             if (empty($ten_tai_khoan) || empty($mat_khau)) {
                 return "Vui lòng nhập đầy đủ thông tin";
             }
@@ -38,11 +38,10 @@ class ClientUser
                 return "Tài khoản đã bị khóa";
             }
 
-            // Login successful
+            // Dang nhap thanh cong
             $_SESSION['tai_khoan_id'] = $user['id'];
             $_SESSION['user_client'] = $user;
             return $user['ten_tai_khoan'];
-
         } catch (PDOException $e) {
             error_log("Login error: " . $e->getMessage());
             return "Có lỗi xảy ra, vui lòng thử lại sau";
@@ -51,12 +50,12 @@ class ClientUser
     public function addUserClient($ten_tai_khoan, $email, $mat_khau, $anh_dai_dien, $so_dien_thoai, $chuc_vu_id, $trang_thai)
     {
         try {
-            // Validate input parameters
+            // Validate input dang ky
             if (empty($ten_tai_khoan) || empty($email) || empty($mat_khau) || empty($so_dien_thoai)) {
                 return "Vui lòng nhập đầy đủ thông tin";
             }
 
-            // Check if username already exists
+            // kiem tra ten tai khoan da ton tai chua
             $check_sql = "SELECT COUNT(*) FROM tai_khoans WHERE ten_tai_khoan = :ten_tai_khoan";
             $check_stmt = $this->conn->prepare($check_sql);
             $check_stmt->execute([':ten_tai_khoan' => $ten_tai_khoan]);
@@ -64,7 +63,7 @@ class ClientUser
                 return "Tên tài khoản đã tồn tại";
             }
 
-            // Check if email already exists
+            // kiem tra email da ton tai chua
             $check_sql = "SELECT COUNT(*) FROM tai_khoans WHERE email = :email";
             $check_stmt = $this->conn->prepare($check_sql);
             $check_stmt->execute([':email' => $email]);
@@ -74,7 +73,7 @@ class ClientUser
 
             $ngay_tao = date('Y-m-d H:i:s');
 
-            // Add anh_dai_dien to SQL query if provided
+            // them anh dai dien vao database
             if (!empty($anh_dai_dien)) {
                 $sql = "INSERT INTO tai_khoans(ten_tai_khoan, email, mat_khau, anh_dai_dien, so_dien_thoai, ngay_tao, chuc_vu_id, trang_thai) 
                     VALUES(:ten_tai_khoan, :email, :mat_khau, :anh_dai_dien, :so_dien_thoai, :ngay_tao, :chuc_vu_id, :trang_thai)";
@@ -103,10 +102,42 @@ class ClientUser
                 return true;
             }
             return "Không thể thêm người dùng";
-
         } catch (PDOException $e) {
             error_log("Add user error: " . $e->getMessage());
             return "Có lỗi xảy ra, vui lòng thử lại sau";
+        }
+    }
+    public function getAccountByNameUser($ten_tai_khoan)
+    {
+        try {
+            $sql = "SELECT * FROM tai_khoans WHERE ten_tai_khoan = :ten_tai_khoan";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':ten_tai_khoan' => $ten_tai_khoan]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+    public function updateUser($ten_tai_khoan, $email, $anh_dai_dien, $so_dien_thoai, $mat_khau)
+    {
+        try {
+            $sql = 'UPDATE tai_khoans SET 
+            email = :email,
+            anh_dai_dien = :anh_dai_dien,
+            so_dien_thoai = :so_dien_thoai,
+            mat_khau = :mat_khau 
+            WHERE ten_tai_khoan = :ten_tai_khoan';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':email' => $email,
+                ':anh_dai_dien' => $anh_dai_dien,
+                ':so_dien_thoai' => $so_dien_thoai,
+                ':mat_khau' => $mat_khau,
+                ':ten_tai_khoan' => $ten_tai_khoan
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo "Lỗi: " . $e->getMessage();
         }
     }
 }
