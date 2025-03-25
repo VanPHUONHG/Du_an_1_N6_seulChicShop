@@ -3,6 +3,8 @@
 
 <!-- NAVBAR -->
 <?php include_once './views/layouts/navbar.php'; ?>
+<!-- Mini Cart -->
+<?php include_once './views/layouts/miniCart.php'; ?>
 
 <div class="m-t-23 p-b-140 bg0">
     <div class="container">

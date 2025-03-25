@@ -4,6 +4,9 @@
 <!-- Navbar -->
 <?php include './views/layouts/navbar.php'; ?>
 
+<!-- Mini Cart -->
+<?php include './views/layouts/miniCart.php'; ?>
+
 
 <!-- Title page -->
 <section class="bg-img1 p-lr-15 p-tb-92 txt-center" style="background-image: url('assets/images/bg-01.jpg');">

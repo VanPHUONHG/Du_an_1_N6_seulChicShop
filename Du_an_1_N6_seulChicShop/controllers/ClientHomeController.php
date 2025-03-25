@@ -22,9 +22,9 @@ class ClientHomeController
     {
         require_once './views/About.php';
     }
-    public function singleProduct()
+    public function detailProduct()
     {
-        require_once './views/SingleProduct.php';
+        require_once './views/DetailProduct.php';
     }
     public function blog()
     {
