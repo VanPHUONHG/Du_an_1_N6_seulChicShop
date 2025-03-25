@@ -154,10 +154,10 @@ class AdminUserController
         $listUserClient = $this->ModelAdminUser->getUserClient();
         require_once './views/user/client/ListUserClient.php';
     }
-    public function listUserClientById($id)
+    public function listUserClientById()
     {
-        $id = $_GET['id'];
-        $user = $this->ModelAdminUser->getUserClentById($id);
+        $id_tai_khoan_client = $_GET['id_tai_khoan_client'];
+        $userClient = $this->ModelAdminUser->getUserClentById($id_tai_khoan_client);
         require_once './views/user/client/DetailUserClient.php';
 
     }

@@ -36,6 +36,9 @@
                         <li>
                             <a href="<?= BASE_URL . "?act=lien-he" ?>">Contact</a>
                         </li>
+                        <li>
+                        <a href="<?=BASE_URL.'?act=lich-su-mua-hang'?>">Oder</a>
+                        </li>
                     </ul>
                 </div>
 
