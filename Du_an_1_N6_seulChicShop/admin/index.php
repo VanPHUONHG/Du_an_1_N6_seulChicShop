@@ -1,8 +1,10 @@
 <?php
-
+session_start();
 // Require file Common
 require_once '../commons/env.php'; // Khai báo biến môi trường
 require_once '../commons/function.php'; // Hàm hỗ trợ
+
+
 
 // Require toàn bộ file Controllers
 require_once './controllers/AdminDashboardController.php';
@@ -24,6 +26,10 @@ require_once './models/AdminBanner.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
+
+// if($act !=='check-login-Admin' && $act !=='check-logout-Admin'){
+//   // checkLogin();
+// }
 
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
@@ -64,6 +70,14 @@ match ($act) {
   // router user client
   'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
   'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->listUserClientById(),
+  'xoa-tai-khoan-khach-hang' => (new AdminUserController())->destroyUserClient(),
+  'form-sua-tai-khoan-khach-hang' => (new AdminUserController())->formEditUserClient(),
+  'sua-tai-khoan-khach-hang' => (new AdminUserController())->updateUserClient(),
+  'form-them-tai-khoan-khach-hang' => (new AdminUserController())->formAddUserClient(),
+  'them-tai-khoan-khach-hang' => (new AdminUserController())->insertUserClient(),
+
+  // router quản lý tài khoản cá nhân
+
 
   // router contact
   'lien-he' => (new AdminContactController())->listContact(),

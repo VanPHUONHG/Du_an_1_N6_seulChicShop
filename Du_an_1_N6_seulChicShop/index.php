@@ -1,8 +1,12 @@
 <?php
-
+// session_start();
 // Require file Common
 require_once './commons/env.php'; // Khai báo biến môi trường
 require_once './commons/function.php'; // Hàm hỗ trợ
+
+
+
+// checkLoginAdmin
 
 // Require toàn bộ file Controllers
 require_once './controllers/HomeController.php';
@@ -13,6 +17,8 @@ require_once './models/sanPham.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
+
+
 
 // Kiểm tra act và trả về nội dung phù hợp
 $response = match ($act) {

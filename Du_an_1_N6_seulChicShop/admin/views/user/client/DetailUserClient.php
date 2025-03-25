@@ -10,7 +10,7 @@
                     <h1>Tài Khoản Admin</h1>
                 </div>
                 <div class="">
-                    <a href="<?= BASE_URL_ADMIN . '?act=tai-khoan-quan-tri'  ?>" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Quay Lại</a>
+                    <a href="<?= BASE_URL_ADMIN . '?act=tai-khoan-khach-hang'  ?>" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Quay Lại</a>
                 </div>
             </div>
     </section>
