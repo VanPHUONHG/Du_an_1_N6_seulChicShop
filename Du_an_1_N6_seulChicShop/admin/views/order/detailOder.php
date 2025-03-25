@@ -50,14 +50,14 @@
                                     Tên: <?= $donHang['ten_nguoi_nhan'] ?><br />
                                     Email: <?= $donHang['email_nguoi_nhan'] ?><br />
                                     SĐT: <?= $donHang['sdt_nguoi_nhan'] ?><br />
-                                    Địa chỉ: <?= $donHang['dia_chi_nguoi_nhan'] ?>
+                                    Địa chỉ: <?= $donHang['dia_chi_cu_the'].', '.$donHang['xa_phuong'].', '.$donHang['huyen_quan'].', '.$donHang['tinh_thanhpho'] ?>
                                 </address>
                             </div>
 
                             <div class="col-sm-4 invoice-col">
                                 <strong>Thông tin đơn hàng:</strong>
                                 <address>
-                                    MDH: <?= $donHang['ma_don_hang'] ?><br />
+                                    Mã đơn hàng: <?= $donHang['ma_don_hang'] ?><br />
                                     Tổng tiền: <?= number_format($donHang['tong_tien']) ?><br />
                                     Ghi chú: <?= $donHang['ghi_chu'] ?><br />
                                     Thanh toán: <?= $donHang['ten_phuong_thuc'] ?>
