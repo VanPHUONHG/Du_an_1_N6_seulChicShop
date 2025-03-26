@@ -10,7 +10,7 @@
                     <h1>Chi Tiết Tài Khoản</h1>
                 </div>
                 <div class="">
-                    <a href="<?= BASE_URL_ADMIN . '?act=tai-khoan-client'  ?>" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Quay Lại</a>
+                    <a href="<?= BASE_URL_ADMIN . '?act=tai-khoan-khach-hang'  ?>" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Quay Lại</a>
                 </div>
             </div>
         </div>
