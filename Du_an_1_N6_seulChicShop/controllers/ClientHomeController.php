@@ -14,10 +14,7 @@ class ClientHomeController
     {
         require_once './views/listProduct.php';
     }
-    // public function contact()
-    // {
-    //     require_once './views/Contact.php';
-    // }
+    
     public function about()
     {
         require_once './views/About.php';
