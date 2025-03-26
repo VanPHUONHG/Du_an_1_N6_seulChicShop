@@ -81,13 +81,6 @@ class ClientHomeController
             $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
             $chuc_vu_id = 2; // Set default role as client
             $trang_thai = 1; // Set default status as active
-            $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
-            $thong_bao = '';
-            $file_thumb = null;
-
-            if ($anh_dai_dien && $anh_dai_dien['error'] === UPLOAD_ERR_OK) {
-                $file_thumb = uploadFile($anh_dai_dien, folderUpload: './uploads/');
-            }
 
             $errors = [];
 
@@ -113,7 +106,6 @@ class ClientHomeController
                         $ten_tai_khoan,
                         $email,
                         $mat_khau,
-                        $file_thumb,
                         $so_dien_thoai,
                         $chuc_vu_id,
                         $trang_thai
