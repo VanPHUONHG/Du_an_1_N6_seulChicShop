@@ -66,8 +66,11 @@
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
                     </div>
+<<<<<<< HEAD
                     <?php endif; ?>
                     
+=======
+>>>>>>> 41a3a12 (update oder)
                     <!-- Button login -->
                     <div class="flex-c-m h-full p-lr-19">
                         <div class="flex-c-m h-full ">

@@ -4,6 +4,7 @@ class ClientCart
 {
     public $conn;
 
+<<<<<<< HEAD
     public function __construct(){
         $this->conn = connectDB();
     }
@@ -85,5 +86,16 @@ class ClientCart
             echo "Lỗi: " . $e->getMessage();
             return false;
         }
+=======
+    // construc
+    public function __construct(){
+        $this->conn = connectDB();
+    }
+    public function getAllProductCart(){
+            // $sql = 
+    }
+    public function addProductCart(){
+        
+>>>>>>> 41a3a12 (update oder)
     }
 }

@@ -46,7 +46,11 @@
 <!-- Shopping Cart -->
 <form class="p-b-85 p-t-75 bg0" method="POST" action="<?= BASE_URL ?>?act=cap-nhat-so-luong" enctype="multipart/form-data">
     <div class="container">
+<<<<<<< HEAD
         <h2 class="cl2 mtext-105 text-center p-b-30">Your Shopping Cart</h2>
+=======
+        <h2 class="cl2 mtext-105 text-center p-b-30">Giỏ hàng của bạn</h2>
+>>>>>>> 41a3a12 (update oder)
         <div class="row">
             <div class="col-lg-10 col-xl-7 m-b-50 m-lr-auto">
                 <div class="m-l-25 m-lr-0-xl m-r--38">
@@ -116,11 +120,22 @@
                     </div>
 
                     <div class="flex-sb-m flex-w p-b-15 p-lr-15-sm p-lr-40 p-t-18 bor15">
+<<<<<<< HEAD
                         <?php if (!empty($detailCart)) : ?>
                         <div class="size-209 p-t-1">
                             <span class="mtext-110 cl2">
                                 Total: $<?= number_format($totalCart, 2) ?>
                             </span>
+=======
+                        <div class="flex-m flex-w m-r-20 m-tb-5">
+                            <input class="m-r-10 m-tb-5 p-lr-20 bor13 cl2 plh4 size-117 stext-104" type="text"
+                                name="coupon" placeholder="Coupon Code">
+
+                            <button type="button"
+                                class="flex-c-m m-tb-5 p-lr-15 bg8 bor13 cl2 hov-btn3 pointer size-118 stext-101 trans-04">
+                                Apply coupon
+                            </button>
+>>>>>>> 41a3a12 (update oder)
                         </div>
                         <?php endif; ?>
                         
@@ -131,16 +146,28 @@
                                 Update Cart
                             </button>
 
+<<<<<<< HEAD
+=======
+                        <div class="flex-w m-tb-10">
+                            <button type="button" 
+                                class="flex-c-m m-r-10 p-lr-15 bg8 bor13 cl2 hov-btn3 pointer size-119 stext-101 trans-04">
+                                Update Cart
+                            </button>
+
+>>>>>>> 41a3a12 (update oder)
                             <a href="<?= BASE_URL ?>?act=thanh-toan" 
                                 class="flex-c-m p-lr-15 bg3 bor14 cl0 hov-btn3 pointer size-119 stext-101 trans-04">
                                 Checkout
                             </a>
+<<<<<<< HEAD
                             <?php else : ?>
                             <a href="<?= BASE_URL ?>?act=danh-sach-san-pham" 
                                 class="flex-c-m p-lr-15 bg3 bor14 cl0 hov-btn3 pointer size-119 stext-101 trans-04">
                                 Continue Shopping
                             </a>
                             <?php endif; ?>
+=======
+>>>>>>> 41a3a12 (update oder)
                         </div>
                     </div>
                 </div>

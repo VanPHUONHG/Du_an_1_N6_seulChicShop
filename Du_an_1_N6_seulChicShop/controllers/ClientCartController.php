@@ -11,6 +11,7 @@ class ClientCartController
     public function addProductCart(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if(isset($_SESSION['user_client'])){
+<<<<<<< HEAD
                 $user = $this->ModelClientUser->getAccountByNameUser($_SESSION['user_client']);
                 $cart = $this->ModelClientCart->getCartFromUser($user['id']);
                 if(!$cart){
@@ -108,4 +109,20 @@ class ClientCartController
             exit;
         }
     }
+=======
+                // Lấy tài khoản bằng tên tài khoản
+                $user = $this->ModelClientUser->getAccountByNameUser($_SESSION['user_client']);
+                // Lấy giỏ hàng bằng id tài khoản
+                $cart = $this->ModelClientCart->getCartByUserId($user['id']);
+            }else{
+
+            }
+            $san_pham_id = $_POST['san_pham_id'];   
+            $so_luong = $_POST['so_luong'];
+            // Lấy dữ liệu
+        }
+    }
+    
+    
+>>>>>>> 41a3a12 (update oder)
 }
