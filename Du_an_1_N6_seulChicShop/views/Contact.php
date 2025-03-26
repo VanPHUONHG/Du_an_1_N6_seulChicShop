@@ -52,7 +52,7 @@
                         </span>
 
                         <p class="p-t-18 cl6 size-213 stext-115">
-                            Coza Store Center 8th floor, 379 Hudson St, New York, NY 10018 US
+                        2PQW+6JJ Tòa nhà FPT Polytechnic., Cổng số 2, 13 P. Trịnh Văn Bô, Xuân Phương, Nam Từ Liêm, Hà Nội 100000
                         </p>
                     </div>
                 </div>
@@ -68,7 +68,8 @@
                         </span>
 
                         <p class="p-t-18 cl1 size-213 stext-115">
-                            +1 800 1236879
+                            <a href="tel:0345678910">0345678910</a>
+                           
                         </p>
                     </div>
                 </div>
@@ -84,7 +85,7 @@
                         </span>
 
                         <p class="p-t-18 cl1 size-213 stext-115">
-                            contact@example.com
+                            pro1014@gmail.com
                         </p>
                     </div>
                 </div>

@@ -15,6 +15,10 @@ require_once './controllers/HomeController.php';
 require_once './models/Student.php';
 require_once './models/sanPham.php';
 
+// giỏ hàng
+require_once './models/GioHang.php';
+
+
 // Route
 $act = $_GET['act'] ?? '/';
 
@@ -32,6 +36,15 @@ $response = match ($act) {
     'chi-tiet-bai-viet' => (new HomeController())->blogDetail(), // Base_URL/?act=chi-tiet-bai-viet
     'gio-hang' => (new HomeController())->cart(), // Base_URL/?act=gio-hang
 // default => '404 - Trang không tồn tại'
+
+     //route giỏ hàng
+     'them-gio-hang' =>  (new HomeController())->addGioHang(),
+     'gio-hang'  =>  (new HomeController())->gioHang(),
+     'thanh-toan'  =>  (new HomeController())->thanhToan(),
+     'xu-ly-thanh-toan'  =>  (new HomeController())->postThanhToan(),
+ 
+
+
 };
 
 // Hiển thị nội dung
