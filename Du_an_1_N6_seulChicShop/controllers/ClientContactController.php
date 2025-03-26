@@ -27,7 +27,7 @@ class ClientContactController
             $tai_khoan_id = $_SESSION['tai_khoan_id'] ?? '';
             $error = [];
             $thong_bao = '';
-            
+
             $_SESSION['error'] = $error;
             if (empty($error)) {
                 $this->ModelClientContact->addContact(
@@ -42,7 +42,7 @@ class ClientContactController
                 );
                 $thong_bao = 'Gửi liên hệ thành công';
                 header('Location: ' . BASE_URL . '?act=lien-he');
-            }else{
+            } else {
                 // $thong_bao = 'Gửi liên hệ thất bại';
                 $_SESSION['error'] = $error;
                 require_once 'views/Contact.php';

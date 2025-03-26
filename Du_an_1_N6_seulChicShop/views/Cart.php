@@ -23,6 +23,7 @@
 <!-- Shoping Cart -->
 <form class="p-b-85 p-t-75 bg0">
     <div class="container">
+        <h2 class="cl2 mtext-105 text-center p-b-30">Giỏ hàng của bạn</h2>
         <div class="row">
             <div class="col-lg-10 col-xl-7 m-b-50 m-lr-auto">
                 <div class="m-l-25 m-lr-0-xl m-r--38">
@@ -93,105 +94,24 @@
                             <input class="m-r-10 m-tb-5 p-lr-20 bor13 cl2 plh4 size-117 stext-104" type="text"
                                 name="coupon" placeholder="Coupon Code">
 
-                            <div
+                            <button type="button"
                                 class="flex-c-m m-tb-5 p-lr-15 bg8 bor13 cl2 hov-btn3 pointer size-118 stext-101 trans-04">
                                 Apply coupon
-                            </div>
+                            </button>
                         </div>
 
-                        <div
-                            class="flex-c-m m-tb-10 p-lr-15 bg8 bor13 cl2 hov-btn3 pointer size-119 stext-101 trans-04">
-                            Update Cart
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <div class="flex-w m-tb-10">
+                            <button type="button" 
+                                class="flex-c-m m-r-10 p-lr-15 bg8 bor13 cl2 hov-btn3 pointer size-119 stext-101 trans-04">
+                                Update Cart
+                            </button>
 
-            <div class="col-lg-7 col-sm-10 col-xl-5 m-b-50 m-lr-auto">
-                <div class="m-l-63 m-lr-0-xl m-r-40 p-b-40 p-lr-15-sm p-lr-40 p-t-30 bor10">
-                    <h4 class="p-b-30 cl2 mtext-109">
-                        Cart Totals
-                    </h4>
-
-                    <div class="flex-t flex-w p-b-13 bor12">
-                        <div class="size-208">
-                            <span class="cl2 stext-110">
-                                Subtotal:
-                            </span>
-                        </div>
-
-                        <div class="size-209">
-                            <span class="cl2 mtext-110">
-                                $79.65
-                            </span>
+                            <a href="<?= BASE_URL ?>?act=thanh-toan" 
+                                class="flex-c-m p-lr-15 bg3 bor14 cl0 hov-btn3 pointer size-119 stext-101 trans-04">
+                                Checkout
+                            </a>
                         </div>
                     </div>
-
-                    <div class="flex-t flex-w p-b-30 p-t-15 bor12">
-                        <div class="w-full-ssm size-208">
-                            <span class="cl2 stext-110">
-                                Shipping:
-                            </span>
-                        </div>
-
-                        <div class="p-r-0-sm p-r-18 w-full-ssm size-209">
-                            <p class="p-t-2 cl6 stext-111">
-                                There are no shipping methods available. Please double check your address, or contact us
-                                if you need any help.
-                            </p>
-
-                            <div class="p-t-15">
-                                <span class="cl8 stext-112">
-                                    Calculate Shipping
-                                </span>
-
-                                <div class="m-b-12 m-t-9 bg0 bor8 rs1-select2 rs2-select2">
-                                    <select class="js-select2" name="time">
-                                        <option>Select a country...</option>
-                                        <option>USA</option>
-                                        <option>UK</option>
-                                    </select>
-                                    <div class="dropDownSelect2"></div>
-                                </div>
-
-                                <div class="m-b-12 bg0 bor8">
-                                    <input class="p-lr-15 cl8 plh3 size-111 stext-111" type="text" name="state"
-                                        placeholder="State /  country">
-                                </div>
-
-                                <div class="m-b-22 bg0 bor8">
-                                    <input class="p-lr-15 cl8 plh3 size-111 stext-111" type="text" name="postcode"
-                                        placeholder="Postcode / Zip">
-                                </div>
-
-                                <div class="flex-w">
-                                    <div
-                                        class="flex-c-m p-lr-15 bg8 bor13 cl2 hov-btn3 pointer size-115 stext-101 trans-04">
-                                        Update Totals
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex-t flex-w p-b-33 p-t-27">
-                        <div class="size-208">
-                            <span class="cl2 mtext-101">
-                                Total:
-                            </span>
-                        </div>
-
-                        <div class="p-t-1 size-209">
-                            <span class="cl2 mtext-110">
-                                $79.65
-                            </span>
-                        </div>
-                    </div>
-
-                    <button class="flex-c-m p-lr-15 bg3 bor14 cl0 hov-btn3 pointer size-116 stext-101 trans-04">
-                        Proceed to Checkout
-                    </button>
                 </div>
             </div>
         </div>
