@@ -6,8 +6,9 @@
             <nav class="p-l-45 limiter-menu-desktop">
 
                 <!-- Logo desktop -->
-                <a href="#" class="logo">
-                    <img src="assets/images/icons/logo-01.png" alt="IMG-LOGO">
+                <a href="<?= BASE_URL ?>" class="logo">
+                    <h2 style="color: #ff0000;">SEULCHIC</h2>
+                    <h2 style="color: #000000;">SHOP</h2>
                 </a>
 
                 <!-- Menu desktop -->
@@ -139,7 +140,10 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.html"><img src="assets/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+            <a href="<?= BASE_URL ?>" style="text-decoration: none;">
+                <span style="color: #ff0000;">SEULCHIC</span>
+                <span style="color: #000000;">SHOP</span>
+            </a>
         </div>
 
         <!-- Icon header -->

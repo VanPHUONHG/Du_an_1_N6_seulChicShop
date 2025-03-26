@@ -18,7 +18,7 @@
             Men
             <i class="m-l-9 m-r-10 fa fa-angle-right" aria-hidden="true"></i>
         </a>
-
+        <!-- Tên sản phẩm -->
         <span class="cl4 stext-109">
             Lightweight Jacket
         </span>
@@ -76,14 +76,19 @@
 
             <div class="col-lg-5 col-md-6 p-b-30">
                 <div class="p-lr-0-lg p-r-50 p-t-5">
+                    <!-- Tên sản phẩm -->   
                     <h4 class="p-b-14 cl2 js-name-detail mtext-105">
                         Lightweight Jacket
                     </h4>
-
+                    <!-- Giá -->
                     <span class="cl2 mtext-106">
                         $58.79
                     </span>
-
+                    <!-- Giá khuyến mại -->
+                    <span class="cl2 mtext-106">
+                        $58.79
+                    </span>
+                    <!-- Mô tả -->
                     <p class="p-t-23 cl3 stext-102">
                         Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare
                         feugiat.
