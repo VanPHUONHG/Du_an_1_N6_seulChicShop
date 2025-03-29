@@ -19,9 +19,15 @@ class ClientHomeController
     {
         require_once './views/About.php';
     }
+
     public function detailProduct()
     {
         require_once './views/DetailProduct.php';
+    }
+    public function singleProduct()
+    {
+        require_once './views/SingleProduct.php';
+
     }
     public function blog()
     {
