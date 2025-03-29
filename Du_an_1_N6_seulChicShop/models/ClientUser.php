@@ -107,6 +107,23 @@ class ClientUser
             return "Có lỗi xảy ra, vui lòng thử lại sau";
         }
     }
+    
+     // Thay Đổi thông tin cá nhân
+    // public function getUserformEmail($email)
+    // {
+    //     try {
+    //         // Sử dụng prepared statement với dấu :email
+    //         $sql = 'SELECT * FROM tai_khoans WHERE email = :email';
+    //         $stmt = $this->conn->prepare($sql);
+    //         // Thực thi câu lệnh và truyền tham số
+    //         $stmt->execute([':email' => $email]);
+    //         // Sử dụng fetch() để lấy một bản ghi duy nhất
+    //         return $stmt->fetch();
+    //     } catch (Exception $e) {
+    //         echo "Lỗi Truy Vấn: " . $e->getMessage();
+    //     }
+    // }
+    
     public function getAccountByNameUser($ten_tai_khoan)
     {
         try {

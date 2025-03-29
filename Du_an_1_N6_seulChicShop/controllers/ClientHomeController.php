@@ -22,15 +22,15 @@ class ClientHomeController
     {
         require_once './views/About.php';
     }
-<<<<<<< HEAD
+
     public function detailProduct()
     {
         require_once './views/DetailProduct.php';
-=======
+    }
     public function singleProduct()
     {
         require_once './views/SingleProduct.php';
->>>>>>> 41a3a12 (update oder)
+
     }
     public function blog()
     {

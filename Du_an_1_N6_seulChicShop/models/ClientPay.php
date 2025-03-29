@@ -4,7 +4,6 @@ class ClientPay{
     public function __construct(){
         $this->conn = connectDB();
     }
-<<<<<<< HEAD
     public function getPayMethod(){
         try{
             $sql = "SELECT * FROM phuong_thuc_thanh_toans";
@@ -42,6 +41,4 @@ class ClientPay{
             return false;
         }
     }
-=======
->>>>>>> 41a3a12 (update oder)
 }

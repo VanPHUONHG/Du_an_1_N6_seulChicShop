@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 class ClientPayController
 {
     public $ModelClientPay;
@@ -114,16 +113,5 @@ class ClientPayController
             header('Location: ' . BASE_URL . '?act=thanh-toan');
             exit;
         }
-=======
-class ClientPayController{
-    public $ModelClientPay;
-    public function __construct(){
-        $this->ModelClientPay = new ClientPay();
-    }
-
-    // hien thi trang thanh toan
-    public function listPay(){
-        include_once './views/Pay.php';
->>>>>>> 41a3a12 (update oder)
     }
 }
