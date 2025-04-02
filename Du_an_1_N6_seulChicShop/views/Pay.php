@@ -11,7 +11,7 @@
 $totalCart = 0;
 if (!empty($detailCart)) {
     foreach ($detailCart as $item) {
-        $price = $item['gia_khuyen_mai'] > 0 ? $item['gia_khuyen_mai'] : $item['gia_san_pham'];
+        $price = $item['gia_san_pham_khuyen_mai'] > 0 ? $item['gia_san_pham_khuyen_mai'] : $item['gia_san_pham'];
         $totalItem = $price * $item['so_luong'];
         $totalCart += $totalItem;
     }
@@ -20,18 +20,34 @@ if (!empty($detailCart)) {
     echo '<div class="container text-center my-4"><a href="' . BASE_URL . '?act=danh-sach-san-pham" class="btn btn-primary">Tiếp tục mua sắm</a></div>';
     exit();
 }
+
+// Generate random order code
+$ma_don_hang = 'DH' . date('YmdHis') . rand(100,999);
 ?>
+
 <!-- Content -->
 <div class="col-lg-10 col-sm-10 col-xl-10 m-b-50 m-lr-auto">
     <!-- Hiển thị thông báo lỗi nếu có -->
-    <?php if(isset($_SESSION['error_message'])): ?>
+    <?php if(isset($_SESSION['error'])): ?>
         <div class="alert alert-danger mb-4">
-            <?= $_SESSION['error_message']; ?>
-            <?php unset($_SESSION['error_message']); ?>
+            <?= $_SESSION['error']; ?>
+            <?php unset($_SESSION['error']); ?>
+        </div>
+    <?php endif; ?>
+
+    <!-- Hiển thị thông báo thành công nếu có -->
+    <?php if(isset($_SESSION['success'])): ?>
+        <div class="alert alert-success mb-4">
+            <?= $_SESSION['success']; ?>
+            <?php unset($_SESSION['success']); ?>
         </div>
     <?php endif; ?>
     
-    <form action="<?=BASE_URL.'?act=dat-hang' ?>" method="POST" class="m-l-63 m-lr-0-xl m-r-40 p-b-40 p-lr-15-sm p-lr-40 p-t-30 bor10">
+    <form action="<?=BASE_URL.'?act=dat-hang' ?>" method="POST" class="m-l-63 m-lr-0-xl m-r-40 p-b-40 p-lr-15-sm p-lr-40 p-t-30 bor10" onsubmit="return validateForm()">
+        <input type="hidden" name="ma_don_hang" value="<?= $ma_don_hang ?>">
+        <input type="hidden" name="tai_khoan_id" value="<?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '' ?>">
+        <input type="hidden" name="ngay_dat" value="<?= date('Y-m-d H:i:s') ?>">
+
         <h4 class="p-b-30 text-center cl2 mtext-109">
             Page Checkout
         </h4>
@@ -124,7 +140,7 @@ if (!empty($detailCart)) {
                                 placeholder="Nhập ghi chú đơn hàng"></textarea>
                         </div>
                     </div>
-                    <input type="hidden" name="trang_thai_id" value="1">
+                    <input type="hidden" name="trang_thai_don_hang_id" value="1">
                     <div class="m-b-12">
                         <label for="phuong_thuc_thanh_toan" class="cl2 stext-110 m-b-6">Phương thức thanh toán</label>
                         <div class="bg0 bor8">
@@ -163,6 +179,59 @@ if (!empty($detailCart)) {
                 </select>
             </div>
         </div>
+        
+        
+        <!-- Chi tiết đơn hàng -->
+        <div class="p-b-30 bor12 m-tb-20">
+            <h5 class="cl2 stext-110 p-b-15">Chi tiết đơn hàng</h5> 
+            <div class="wrap-table-shopping-cart">
+                <table class="table-shopping-cart w-100">
+                    <thead>
+                        <tr class="table_head">
+                            <th class="column-1 text-center" style="width: 10%">Sản phẩm</th>
+                            <th class="column-2" style="width: 35%">Tên sản phẩm</th>
+                            <th class="column-3 text-right" style="width: 15%">Giá</th>
+                            <th class="column-4 text-center" style="width: 10%">Màu sắc</th>
+                            <th class="column-5 text-center" style="width: 10%">Kích thước</th>
+                            <th class="column-6 text-center" style="width: 10%">Số lượng</th>
+                            <th class="column-7 text-right" style="width: 10%">Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        if (!empty($detailCart)) : 
+                            foreach ($detailCart as $item) : 
+                                $price = $item['gia_san_pham_khuyen_mai'] > 0 ? $item['gia_san_pham_khuyen_mai'] : $item['gia_san_pham'];
+                                $totalItem = $price * $item['so_luong'];
+                        ?>
+                        <tr class="table_row">
+                            <td class="column-1 text-center">
+                                <div class="how-itemcart1">
+                                    <img src="<?= BASE_URL . $item['hinh_anh'] ?>" alt="<?= $item['ten_san_pham'] ?>" style="width: 60px; height: 60px; object-fit: cover;">
+                                </div>
+                                <!-- Thêm hidden inputs để lưu thông tin sản phẩm -->
+                                <input type="hidden" name="san_pham_id[]" value="<?= $item['san_pham_id'] ?>">
+                                <input type="hidden" name="bien_the_san_pham_id[]" value="<?= $item['bien_the_san_pham_id'] ?>">
+                            </td>
+                            
+                            <td class="column-2"><?= $item['ten_san_pham'] ?></td>
+                            <td class="column-3 text-right"><?= number_format($price).' '.'đ' ?></td>
+                            <td class="column-4 text-center"><?= $item['mau_sac'] ?></td>
+                            <td class="column-5 text-center"><?= $item['kich_thuoc'] ?></td>
+                            <td class="column-6 text-center"><?= $item['so_luong'] ?></td>
+                            <input type="hidden" name="so_luong[]" value="<?= $item['so_luong'] ?>">
+                            <td class="column-7 text-right"><?= number_format($totalItem).' '.'đ' ?></td>
+                            <input type="hidden" name="thanh_tien[]" value="<?= $totalItem ?>">
+                        </tr>
+                        <?php 
+                            endforeach; 
+                        endif; 
+                        ?>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div class="flex-t flex-w p-b-33 p-t-27">
             <div class="size-208">
                 <span class="cl2 mtext-101">
@@ -175,8 +244,7 @@ if (!empty($detailCart)) {
                 </span>
                 <input type="hidden" name="tong_tien" value="<?= $totalCart + 30000 ?>" id="tong-tien-input">
             </div>
-        </div>
-
+        </div>                           
         <button type="submit" class="flex-c-m p-lr-15 bg3 bor14 cl0 hov-btn3 pointer size-116 stext-101 trans-04">
             Checkout
         </button>
@@ -201,6 +269,7 @@ if (!empty($detailCart)) {
     var Parameter = {
         url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
         method: "GET",
+        credentials: 'include',
         responseType: "application/json",
     };
     var promise = axios(Parameter);
@@ -273,6 +342,28 @@ if (!empty($detailCart)) {
         let finalTotal = totalCart + shippingCost;
         totalCheckout.textContent = finalTotal.toLocaleString() + "đ";
         tongTienInput.value = finalTotal;
+    }
+
+    // Validate form before submission
+    function validateForm() {
+        var phoneNumber = document.getElementById("sdt_nguoi_nhan").value;
+        var email = document.getElementById("email_nguoi_nhan").value;
+        
+        // Validate phone number (10 digits)
+        var phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(phoneNumber)) {
+            alert("Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số.");
+            return false;
+        }
+        
+        // Validate email
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Email không hợp lệ.");
+            return false;
+        }
+        
+        return true;
     }
 </script>
 

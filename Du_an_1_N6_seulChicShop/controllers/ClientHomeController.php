@@ -2,32 +2,25 @@
 class ClientHomeController
 {
     public $ModelClientUser;
+    public $ModelClientProduct;
     public function __construct()
     {
         $this->ModelClientUser = new ClientUser();
+        $this->ModelClientProduct = new ClientProduct();
     }
     public function index()
     {
         require_once './views/Home.php';
     }
-    public function listProduct()
-    {
-        require_once './views/listProduct.php';
-    }
-    
     public function about()
     {
         require_once './views/About.php';
     }
 
+
     public function detailProduct()
     {
         require_once './views/DetailProduct.php';
-    }
-    public function singleProduct()
-    {
-        require_once './views/SingleProduct.php';
-
     }
     public function blog()
     {

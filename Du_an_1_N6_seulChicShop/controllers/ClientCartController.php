@@ -10,37 +10,50 @@ class ClientCartController
     }
     public function addProductCart(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if(isset($_SESSION['user_client'])){
-                $user = $this->ModelClientUser->getAccountByNameUser($_SESSION['user_client']);
-                $cart = $this->ModelClientCart->getCartFromUser($user['id']);
-                if(!$cart){
-                    $cartId = $this->ModelClientCart->addCart($user['id']);
-                    $cart = ['id' => $cartId];
-                    $detailCart = $this->ModelClientCart->getDetailCart($cart['id']);
-                }else{
-                    $detailCart = $this->ModelClientCart->getDetailCart($cart['id']);
-                }
-                $san_pham_id = $_POST['san_pham_id'];
-                $so_luong = $_POST['so_luong'];
-                $checkProduct=false;
-                foreach($detailCart as $item){
-                    if($item['san_pham_id'] == $san_pham_id){
-                        $newQuantity = $item['so_luong'] + $so_luong;
-                        $this->ModelClientCart->updateQuantity($item['id'], $san_pham_id, $newQuantity);
-                        $checkProduct=true;
-                        break;
-                    }
-                }
-                if(!$checkProduct){
-                    $this->ModelClientCart->addDetailCart($cart['id'], $san_pham_id, $so_luong);
-                }
-                header('Location: ' . BASE_URL . '?act=gio-hang');
-                exit;
-            } else {
-                $_SESSION['error_message'] = "Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.";
+            // Check if user is logged in
+            if(!isset($_SESSION['user_client'])){
+                $_SESSION['error'] = "Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.";
                 header('Location: ' . BASE_URL . '?act=dang-nhap');
                 exit;
             }
+
+            // Get user and cart info
+            $user = $this->ModelClientUser->getAccountByNameUser($_SESSION['user_client']);
+            $cart = $this->ModelClientCart->getCartFromUser($user['id']);
+
+            // Create new cart if user doesn't have one
+            if(!$cart){
+                $cartId = $this->ModelClientCart->addCart($user['id']);
+                $cart = ['id' => $cartId];
+                $detailCart = [];
+            } else {
+                $detailCart = $this->ModelClientCart->getDetailCart($cart['id']);
+            }
+
+            // Get product details from POST
+            $san_pham_id = $_POST['san_pham_id'];
+            $so_luong = $_POST['so_luong'];
+            $bien_the_san_pham_id = isset($_POST['bien_the_san_pham_id']) ? $_POST['bien_the_san_pham_id'] : null;
+
+            // Check if product already exists in cart
+            $productExists = false;
+            foreach($detailCart as $item){
+                if($item['san_pham_id'] == $san_pham_id && $item['bien_the_san_pham_id'] == $bien_the_san_pham_id){
+                    // Update quantity if product exists
+                    $newQuantity = $item['so_luong'] + $so_luong;
+                    $this->ModelClientCart->updateQuantity($item['id'], $san_pham_id, $newQuantity);
+                    $productExists = true;
+                    break;
+                }
+            }
+
+            // Add new product if it doesn't exist
+            if(!$productExists){
+                $this->ModelClientCart->addDetailCart($cart['id'], $san_pham_id, $bien_the_san_pham_id, $so_luong);
+            }
+
+            header('Location: ' . BASE_URL . '?act=gio-hang');
+            exit;
         }
     }
     public function updateQuantity(){
@@ -93,9 +106,6 @@ class ClientCartController
             exit;
         }
     }
-    
-   
-    
     public function deleteDetailCart(){
         if(isset($_SESSION['user_client'])){
             $id = $_GET['id'];

@@ -18,9 +18,9 @@
             <div class="row">
                 <?php
                 $statusColor = 'danger';
-                if ($donHang['trang_thai_id'] == 1) {
+                if ($donHang['trang_thai_don_hang_id'] == 1) {
                     $statusColor = 'primary';
-                } elseif ($donHang['trang_thai_id'] >= 2 && $donHang['trang_thai_id'] <= 5) {
+                } elseif ($donHang['trang_thai_don_hang_id'] >= 2 && $donHang['trang_thai_don_hang_id'] <= 5) {
                     $statusColor = 'warning';
                 } elseif ($donHang['trang_thai_id'] == 5) {
                     $statusColor = 'success';
@@ -86,15 +86,15 @@
                                                     <td class="border px-4 py-2"><?= $index + 1 ?></td>
                                                     <td class="border px-4 py-2"><?= $sanPham['ten_san_pham'] ?></td>
                                                     <td class="border px-4 py-2 text-right">
-                                                        <?= number_format($sanPham['don_gia']) ?> VND
+                                                        <?= number_format($sanPham['thanh_tien']) ?> VND
                                                     </td>
                                                     <td class="border px-4 py-2 text-center"><?= $sanPham['so_luong'] ?>
                                                     </td>
                                                     <td class="border px-4 py-2 text-right">
-                                                        <?= number_format($sanPham['don_gia'] * $sanPham['so_luong']) ?> VND
+                                                        <?= number_format($sanPham['thanh_tien']) ?> VND
                                                     </td>
                                                 </tr>
-                                                <?php $tong_tien += $sanPham['don_gia'] * $sanPham['so_luong']; ?>
+                                                <?php $tong_tien += $sanPham['thanh_tien']; ?>
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
