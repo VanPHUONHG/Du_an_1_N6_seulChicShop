@@ -39,6 +39,17 @@ class AdminContact
             return false;
         }
     }
+    public function deleteContact($id){
+        try{
+            $sql = "DELETE FROM lien_hes WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            return $stmt->execute();
+        }catch(Exception $e){
+            echo "Lỗi Truy Vấn: " . $e->getMessage();
+            return false;
+        }
+    }
     public function updateContactStatus($contactId, $status)
     {
         try {
