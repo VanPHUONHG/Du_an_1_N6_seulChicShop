@@ -55,15 +55,11 @@ $response = match ($act) {
     'cap-nhat-so-luong' => (new ClientCartController())->updateQuantity(),
     'them-san-pham-gio-hang' => (new ClientCartController())->addProductCart(),
     'xoa-san-pham-gio-hang' => (new ClientCartController())->deleteDetailCart(),
-
-    // Cart
     'them-san-pham-gio-hang' => (new ClientCartController())->addProductCart(), // Base_URL/?act=them-san-pham-gio-hang
     // Pay
 
     'thanh-toan' => (new ClientPayController())->listPay(), // Base_URL/?act=thanh-toan
     'dat-hang' => (new ClientPayController())->addOrderAndDetailOder(), // Base_URL/?act=dat-hang
-    default => '404 - Trang không tồn tại'
-
 
     // Thanh toán
     // 'thanh-toan' => (new HomeController())->thanhToan(),
