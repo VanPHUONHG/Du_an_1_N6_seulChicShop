@@ -2,12 +2,6 @@
 // session_start(); 
 session_start();
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-error_reporting(E_ALL); 
-ini_set('display_errors', 1);
 // Require file Common
 require_once './commons/env.php'; // Khai báo biến môi trường
 require_once './commons/function.php'; // Hàm hỗ trợ
@@ -17,6 +11,11 @@ require_once './controllers/ClientHomeController.php';
 require_once './controllers/ClientContactController.php';
 require_once './controllers/ClientCartController.php';
 require_once './controllers/ClientPayController.php';
+
+require_once './controllers/ClientProductController.php';
+
+require_once './controllers/ClientOderController.php';
+
 
 // Require toàn bộ file Models
 require_once './models/ClientProduct.php';
@@ -60,9 +59,20 @@ $response = match ($act) {
     // Cart
     'them-san-pham-gio-hang' => (new ClientCartController())->addProductCart(), // Base_URL/?act=them-san-pham-gio-hang
     // Pay
+
     'thanh-toan' => (new ClientPayController())->listPay(), // Base_URL/?act=thanh-toan
-    'dat-hang' => (new ClientPayController())->addOder(), // Base_URL/?act=dat-hang
+    'dat-hang' => (new ClientPayController())->addOrderAndDetailOder(), // Base_URL/?act=dat-hang
     default => '404 - Trang không tồn tại'
+
+
+    // Thanh toán
+    // 'thanh-toan' => (new HomeController())->thanhToan(),
+    'xu-ly-thanh-toan' => (new ClientOderController())->postThanhToan(),
+    'lich-su-mua-hang' => (new ClientOderController())->lichSuMuaHang(),
+    'chi-tiet-mua-hang' => (new ClientOderController())->chiTietDonHang(),
+    'huy-don-hang' => (new ClientOderController())->huyDonHang(),
+    default => '404 - Trang không tồn tại',
+
 };
 
 // Hiển thị nội dung

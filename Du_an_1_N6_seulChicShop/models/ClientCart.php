@@ -34,7 +34,12 @@ class ClientCart
         }
     }
 
+<<<<<<< HEAD
     public function addCart($id){
+=======
+    public function addCart($id)
+    {
+>>>>>>> b53d565e2661bd94c3eb83ee5f18bb11b75d58f1
         try {
             $sql = "INSERT INTO gio_hangs (tai_khoan_id) VALUES (:id)";
             $stmt = $this->conn->prepare($sql);
@@ -70,6 +75,7 @@ class ClientCart
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
+<<<<<<< HEAD
         } catch(PDOException $e) {
             echo "Lỗi: " . $e->getMessage();
         }
@@ -78,6 +84,21 @@ class ClientCart
     public function addDetailCart($gio_hang_id, $san_pham_id, $so_luong){
         try{
             $sql = "INSERT INTO chi_tiet_gio_hangs (gio_hang_id, san_pham_id, so_luong) VALUES (:gio_hang_id, :san_pham_id, :so_luong)";
+=======
+        } catch (PDOException $e) {
+
+            error_log("Database error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function addDetailCart($gio_hang_id, $san_pham_id, $bien_the_san_pham_id, $so_luong)
+    {
+        try {
+            $sql = "INSERT INTO chi_tiet_gio_hangs (gio_hang_id, san_pham_id, bien_the_san_pham_id, so_luong) 
+            VALUES (:gio_hang_id, :san_pham_id, :bien_the_san_pham_id, :so_luong)";
+
+>>>>>>> b53d565e2661bd94c3eb83ee5f18bb11b75d58f1
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':gio_hang_id', $gio_hang_id);
             $stmt->bindParam(':san_pham_id', $san_pham_id);
@@ -106,6 +127,10 @@ class ClientCart
             return false;
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b53d565e2661bd94c3eb83ee5f18bb11b75d58f1
 
     public function clearCart($cart_id)
     {
@@ -122,3 +147,7 @@ class ClientCart
         return $stmt->execute();
     }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b53d565e2661bd94c3eb83ee5f18bb11b75d58f1
