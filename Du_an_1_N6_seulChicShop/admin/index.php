@@ -44,7 +44,11 @@ match ($act) {
   'them-san-pham' => (new AdminProductController())->createProduct(),
   'form-sua-san-pham' => (new AdminProductController())->formEditProduct(),
   'sua-san-pham' => (new AdminProductController())->editProduct(),
-
+  'form-them-bien-the-san-pham' => (new AdminProductController())->formAddVariantProduct(),
+  'them-bien-the-san-pham' => (new AdminProductController())->createVariantProduct(),
+  'xoa-bien-the' => (new AdminProductController())->destroyProductVariant(),
+  'form-sua-bien-the' => (new AdminProductController())->formEditVariantProduct(),
+  'sua-bien-the' => (new AdminProductController())->editVariantProduct(),
 
   // router order
   'don-hang' => (new AdminOrderController())->listOrder(),

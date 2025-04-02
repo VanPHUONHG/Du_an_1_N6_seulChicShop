@@ -173,7 +173,11 @@
                                                     </td>
                                                     <td>
                                                         <h5 class="fs-14 my-1 fw-normal">
-                                                            <?= number_format($sanPham['gia_khuyen_mai'], 0, ',', '.') == 0 ? number_format($sanPham['gia_san_pham'], 0, ',', '.') : number_format($sanPham['gia_khuyen_mai'], 0, ',', '.') ?>
+                                                            <?php if ($sanPham['gia']): ?>
+                                                                <?= number_format($sanPham['gia_khuyen_mai'] ? $sanPham['gia_khuyen_mai'] : $sanPham['gia'], 0, ',', '.') ?>
+                                                            <?php else: ?>
+                                                                <?= number_format($sanPham['gia_san_pham_khuyen_mai'] ? $sanPham['gia_san_pham_khuyen_mai'] : $sanPham['gia_san_pham'], 0, ',', '.') ?>
+                                                            <?php endif; ?>
                                                             VNĐ
                                                         </h5>
                                                         <span class="text-muted">Giá</span>

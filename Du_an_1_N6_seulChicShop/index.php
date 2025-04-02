@@ -1,6 +1,9 @@
 <?php
+// session_start(); 
 session_start();
 
+error_reporting(E_ALL); 
+ini_set('display_errors', 1);
 // Require file Common
 require_once './commons/env.php'; // Khai báo biến môi trường
 require_once './commons/function.php'; // Hàm hỗ trợ
@@ -10,6 +13,7 @@ require_once './controllers/ClientHomeController.php';
 require_once './controllers/ClientContactController.php';
 require_once './controllers/ClientCartController.php';
 require_once './controllers/ClientPayController.php';
+require_once './controllers/ClientProductController.php';
 
 // Require toàn bộ file Models
 require_once './models/ClientProduct.php';
@@ -24,12 +28,12 @@ $act = $_GET['act'] ?? '/';
 $response = match ($act) {
 
     '/' => (new ClientHomeController())->index(), // Trang chủ
-    'danh-sach-san-pham' => (new ClientHomeController())->listProduct(), // Base_URL/?act=danh-sach-san-pham
+    'danh-sach-san-pham' => (new ClientProductController())->listProduct(), // Base_URL/?act=danh-sach-san-pham
     // lien he
     'lien-he' => (new ClientContactController())->listContact(), // Base_URL/?act=lien-he
     'them-lien-he' => (new ClientContactController())->addContact(), // Base_URL/?act=them-lien-he
     'gioi-thieu' => (new ClientHomeController())->about(), // Base_URL/?act=gioi-thieu
-    'chi-tiet-san-pham' => (new ClientHomeController())->detailProduct(), // Base_URL/?act=chi-tiet-san-pham
+    'chi-tiet-san-pham' => (new ClientProductController())->detailProduct(), // Base_URL/?act=chi-tiet-san-pham
     'bai-viet' => (new ClientHomeController())->blog(), // Base_URL/?act=bai-viet
     'chi-tiet-bai-viet' => (new ClientHomeController())->blogDetail(), // Base_URL/?act=chi-tiet-bai-viet
     // Auth
@@ -47,7 +51,7 @@ $response = match ($act) {
     'xoa-san-pham-gio-hang' => (new ClientCartController())->deleteDetailCart(), // Base_URL/?act=xoa-san-pham-gio-hang// Base_URL/?act=xoa-gio-hang
     // Pay
     'thanh-toan' => (new ClientPayController())->listPay(), // Base_URL/?act=thanh-toan
-    'dat-hang' => (new ClientPayController())->addOder(), // Base_URL/?act=dat-hang
+    'dat-hang' => (new ClientPayController())->addOrderAndDetailOder(), // Base_URL/?act=dat-hang
     default => '404 - Trang không tồn tại'
 };
 

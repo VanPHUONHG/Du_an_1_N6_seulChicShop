@@ -18,11 +18,11 @@
             <div class="row">
                 <?php
                 $statusColor = 'danger';
-                if ($donHang['trang_thai_id'] == 1) {
+                if ($donHang['trang_thai_don_hang_id'] == 1) {
                     $statusColor = 'primary';
-                } elseif ($donHang['trang_thai_id'] >= 2 && $donHang['trang_thai_id'] <= 5) {
+                } elseif ($donHang['trang_thai_don_hang_id'] >= 2 && $donHang['trang_thai_don_hang_id'] <= 5) {
                     $statusColor = 'warning';
-                } elseif ($donHang['trang_thai_id'] == 5) {
+                } elseif ($donHang['trang_thai_don_hang_id'] == 5) {
                     $statusColor = 'success';
                 }
                 ?>
@@ -86,11 +86,11 @@
                                                 <tr class="<?= $index % 2 == 0 ? 'bg-gray-50' : 'bg-white' ?>">
                                                     <td class="border px-4 py-2"><?= $index + 1 ?></td>
                                                     <td class="border px-4 py-2"><?= $sanPham['ten_san_pham'] ?></td>
-                                                    <td class="border px-4 py-2 text-right"><?= number_format($sanPham['don_gia']) ?> VND</td>
+                                                    <td class="border px-4 py-2 text-right"><?= number_format($sanPham['thanh_tien']) ?> VND</td>
                                                     <td class="border px-4 py-2 text-center"><?= $sanPham['so_luong'] ?></td>
-                                                    <td class="border px-4 py-2 text-right"><?= number_format($sanPham['don_gia'] * $sanPham['so_luong']) ?> VND</td>
+                                                    <td class="border px-4 py-2 text-right"><?= number_format($sanPham['thanh_tien']) ?> VND</td>
                                                 </tr>
-                                                <?php $tong_tien += $sanPham['don_gia'] * $sanPham['so_luong']; ?>
+                                                <?php $tong_tien += $sanPham['thanh_tien']; ?>
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
@@ -109,27 +109,27 @@
                                             
                                                 <?php 
                                                 foreach ($listTrangThaiDonHang as $trangThai) {
-                                                 if($donHang['trang_thai_id'] == 1){
+                                                 if($donHang['trang_thai_don_hang_id'] == 1){
                                                     $trangThai = array_diff($trangThai, [3,4,5,7]);
-                                                 }else if($donHang['trang_thai_id'] == 2){
+                                                 }else if($donHang['trang_thai_don_hang_id'] == 2){
                                                     $trangThai = array_diff($trangThai, [1,4,5,7]);
-                                                 }else if($donHang['trang_thai_id'] == 3){
+                                                 }else if($donHang['trang_thai_don_hang_id'] == 3){
                                                     $trangThai = array_diff($trangThai, [1,2,5,7]);
-                                                 }else if($donHang['trang_thai_id'] == 4){
+                                                 }else if($donHang['trang_thai_don_hang_id'] == 4){
                                                     $trangThai = array_diff($trangThai, [1,2,3,6]);
-                                                 }else if($donHang['trang_thai_id'] == 5){
+                                                 }else if($donHang['trang_thai_don_hang_id'] == 5){
                                                     $trangThai = array_diff($trangThai, [1,2,3,4,6]);
-                                                 }else if($donHang['trang_thai_id'] == 6){
+                                                 }else if($donHang['trang_thai_don_hang_id'] == 6){
                                                     $trangThai = array_diff($trangThai, [1,2,3,4,5,7]);
-                                                 }else if($donHang['trang_thai_id'] == 7){
+                                                 }else if($donHang['trang_thai_don_hang_id'] == 7){
                                                     $trangThai = array_diff($trangThai, [1,2,3,4,5,6]);
                                                  }
                                                 ?>
                                                 
                                                 
-                                                    <?php if ($trangThai['id'] >= $donHang['trang_thai_id'] || in_array($donHang['trang_thai_id'], [])) : ?>
+                                                    <?php if ($trangThai['id'] >= $donHang['trang_thai_don_hang_id'] || in_array($donHang['trang_thai_don_hang_id'], [])) : ?>
                                                         <option
-                                                            <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?>
+                                                            <?= $trangThai['id'] == $donHang['trang_thai_don_hang_id'] ? 'selected' : '' ?>
                                                             value="<?= $trangThai['id'] ?>">
                                                             <?= $trangThai['ten_trang_thai'] ?>
                                                         </option>
