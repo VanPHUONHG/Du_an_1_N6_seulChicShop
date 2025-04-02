@@ -34,8 +34,7 @@ class ClientCart
         }
     }
 
-    public function addCart($id)
-    {
+    public function addCart($id){
         try {
             $sql = "INSERT INTO gio_hangs (tai_khoan_id) VALUES (:id)";
             $stmt = $this->conn->prepare($sql);
@@ -71,17 +70,14 @@ class ClientCart
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log("Database error: " . $e->getMessage());
-            return false;
+        } catch(PDOException $e) {
+            echo "Lỗi: " . $e->getMessage();
         }
     }
 
-    public function addDetailCart($gio_hang_id, $san_pham_id, $bien_the_san_pham_id, $so_luong)
-    {
-        try {
-            $sql = "INSERT INTO chi_tiet_gio_hangs (gio_hang_id, san_pham_id, bien_the_san_pham_id, so_luong) 
-            VALUES (:gio_hang_id, :san_pham_id, :bien_the_san_pham_id, :so_luong)";
+    public function addDetailCart($gio_hang_id, $san_pham_id, $so_luong){
+        try{
+            $sql = "INSERT INTO chi_tiet_gio_hangs (gio_hang_id, san_pham_id, so_luong) VALUES (:gio_hang_id, :san_pham_id, :so_luong)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':gio_hang_id', $gio_hang_id);
             $stmt->bindParam(':san_pham_id', $san_pham_id);
