@@ -36,12 +36,12 @@ $act = $_GET['act'] ?? '/';
 $response = match ($act) {
 
     '/' => (new ClientHomeController())->index(), // Trang chủ
-    'danh-sach-san-pham' => (new ClientHomeController())->listProduct(), // Base_URL/?act=danh-sach-san-pham
+    'danh-sach-san-pham' => (new ClientProductController())->listProduct(), // Base_URL/?act=danh-sach-san-pham
     // lien he
     'lien-he' => (new ClientContactController())->listContact(), // Base_URL/?act=lien-he
     'them-lien-he' => (new ClientContactController())->addContact(), // Base_URL/?act=them-lien-he
     'gioi-thieu' => (new ClientHomeController())->about(), // Base_URL/?act=gioi-thieu
-    'chi-tiet-san-pham' => (new ClientHomeController())->detailProduct(), // Base_URL/?act=chi-tiet-san-pham
+    'chi-tiet-san-pham' => (new ClientProductController())->detailProduct(), // Base_URL/?act=chi-tiet-san-pham
     'bai-viet' => (new ClientHomeController())->blog(), // Base_URL/?act=bai-viet
     'chi-tiet-bai-viet' => (new ClientHomeController())->blogDetail(), // Base_URL/?act=chi-tiet-bai-viet
     // Auth
