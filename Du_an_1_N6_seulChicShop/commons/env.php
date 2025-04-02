@@ -12,7 +12,7 @@ define('BASE_URL_ADMIN', 'http://localhost/Du_an_1_N6/Du_an_1_N6_seulChicShop/ad
 
 
 
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'localhost'); 
 define('DB_PORT', 3306);
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');

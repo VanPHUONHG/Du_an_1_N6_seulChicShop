@@ -50,7 +50,7 @@
                     if ($currentPage != 'dang-nhap' && $currentPage != 'dang-ky' && isset($_SESSION['user_client'])):
                     ?>
                     <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                        <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04"
+                        <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04 t"
                             id="cart-icon-desktop"
                             data-notify="<?php 
                             $itemCount = 0;
@@ -59,7 +59,9 @@
                                 $cart = (new ClientCart())->getCartFromUser($user['id']);
                                 if ($cart) {
                                     $detailCart = (new ClientCart())->getDetailCart($cart['id']);
-                                    $itemCount = count($detailCart);
+                                    foreach($detailCart as $item) {
+                                        $itemCount++;
+                                    }
                                 }
                             }
                             echo $itemCount;
