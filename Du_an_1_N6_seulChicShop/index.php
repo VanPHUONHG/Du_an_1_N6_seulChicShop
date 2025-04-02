@@ -2,6 +2,8 @@
 // session_start(); 
 session_start();
 
+error_reporting(E_ALL); 
+ini_set('display_errors', 1);
 // Require file Common
 require_once './commons/env.php'; // Khai báo biến môi trường
 require_once './commons/function.php'; // Hàm hỗ trợ
@@ -11,6 +13,7 @@ require_once './controllers/ClientHomeController.php';
 require_once './controllers/ClientContactController.php';
 require_once './controllers/ClientCartController.php';
 require_once './controllers/ClientPayController.php';
+require_once './controllers/ClientProductController.php';
 
 require_once './controllers/ClientProductController.php';
 
