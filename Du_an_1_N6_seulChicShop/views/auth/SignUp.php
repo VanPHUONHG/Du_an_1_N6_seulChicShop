@@ -25,11 +25,6 @@ include_once 'views/layouts/navbar.php';
                 </svg>
             </div>
             <form action="<?= BASE_URL . "?act=check-dang-ky" ?>" method="post" class="log-in" autocomplete="off">
-                <?php
-                if (isset($_GET['success']) && $_GET['success'] == 1) {
-                    echo '<div class="alert alert-success" role="alert">Đăng ký thành công! Vui lòng đăng nhập.</div>';
-                }
-                ?>
                 <h4>Chúng Tôi là <span>SEULCHIC SHOP</span></h4>
                 <p>Chào mừng bạn đến với trang web của chúng tôi. Đăng ký tài khoản mới:</p>
                 <div class="floating-label">
@@ -62,19 +57,6 @@ include_once 'views/layouts/navbar.php';
                                     d="m17.5 977c-1.3 0-2.4 1.1-2.4 2.4v45.9c0 1.3 1.1 2.4 2.4 2.4h64.9c1.3 0 2.4-1.1 2.4-2.4v-45.9c0-1.3-1.1-2.4-2.4-2.4h-64.9zm2.4 4.8h60.2v1.2l-30.1 22-30.1-22v-1.2zm0 7l28.7 21c0.8 0.6 2 0.6 2.8 0l28.7-21v34.1h-60.2v-34.1z" />
                             </g>
                             <rect class="st0" width="100" height="100" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="floating-label">
-                    <input placeholder="Ảnh đại diện" type="file" name="anh_dai_dien" id="anh_dai_dien" accept="image/*">
-                    <label for="anh_dai_dien">Ảnh đại diện:</label>
-                    <div class="icon">
-                        <svg enable-background="new 0 0 100 100" version="1.1" viewBox="0 0 100 100"
-                            xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M50 40.23c7.27 0 13.18-5.91 13.18-13.18S57.27 13.87 50 13.87s-13.18 5.91-13.18 13.18S42.73 40.23 50 40.23zM50 17.87c5.06 0 9.18 4.12 9.18 9.18s-4.12 9.18-9.18 9.18-9.18-4.12-9.18-9.18S44.94 17.87 50 17.87z" />
-                            <path
-                                d="M50 44.23c-14.89 0-27 12.11-27 27v15h54v-15C77 56.34 64.89 44.23 50 44.23zM73 82.23H27v-11c0-12.68 10.32-23 23-23s23 10.32 23 23V82.23z" />
                         </svg>
                     </div>
                 </div>

@@ -6,8 +6,9 @@
             <nav class="p-l-45 limiter-menu-desktop">
 
                 <!-- Logo desktop -->
-                <a href="#" class="logo">
-                    <img src="assets/images/icons/logo-01.png" alt="IMG-LOGO">
+                <a href="<?= BASE_URL ?>" class="logo">
+                    <h2 style="color: #ff0000;">SEULCHIC</h2>
+                    <h2 style="color: #000000;">SHOP</h2>
                 </a>
 
                 <!-- Menu desktop -->
@@ -50,23 +51,26 @@
                     $currentPage = isset($_GET['act']) ? $_GET['act'] : '';
                     if ($currentPage != 'dang-nhap' && $currentPage != 'dang-ky' && isset($_SESSION['user_client'])):
                     ?>
-                        <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                            <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04"
-                                id="cart-icon-desktop"
-                                data-notify="<?php
-                                                $itemCount = 0;
-                                                if (isset($_SESSION['user_client'])) {
-                                                    $user = (new ClientUser())->getAccountByNameUser($_SESSION['user_client']);
-                                                    $cart = (new ClientCart())->getCartFromUser($user['id']);
-                                                    if ($cart) {
-                                                        $detailCart = (new ClientCart())->getDetailCart($cart['id']);
-                                                        $itemCount = count($detailCart);
-                                                    }
-                                                }
-                                                echo $itemCount;
-                                                ?>">
-                                <i class="zmdi zmdi-shopping-cart"></i>
-                            </div>
+
+                    <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
+                        <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04 t"
+                            id="cart-icon-desktop"
+                            data-notify="<?php 
+                            $itemCount = 0;
+                            if (isset($_SESSION['user_client'])) {
+                                $user = (new ClientUser())->getAccountByNameUser($_SESSION['user_client']);
+                                $cart = (new ClientCart())->getCartFromUser($user['id']);
+                                if ($cart) {
+                                    $detailCart = (new ClientCart())->getDetailCart($cart['id']);
+                                    foreach($detailCart as $item) {
+                                        $itemCount++;
+                                    }
+                                }
+                            }
+                            echo $itemCount;
+                            ?>">
+                            <i class="zmdi zmdi-shopping-cart"></i>
+
                         </div>
 
                     <?php endif; ?>
@@ -147,7 +151,10 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.html"><img src="assets/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+            <a href="<?= BASE_URL ?>" style="text-decoration: none;">
+                <span style="color: #ff0000;">SEULCHIC</span>
+                <span style="color: #000000;">SHOP</span>
+            </a>
         </div>
 
         <!-- Icon header -->

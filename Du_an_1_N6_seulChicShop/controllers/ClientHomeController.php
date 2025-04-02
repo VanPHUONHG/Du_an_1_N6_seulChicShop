@@ -2,35 +2,25 @@
 class ClientHomeController
 {
     public $ModelClientUser;
+    public $ModelClientProduct;
     public function __construct()
     {
         $this->ModelClientUser = new ClientUser();
+        $this->ModelClientProduct = new ClientProduct();
     }
     public function index()
     {
         require_once './views/Home.php';
     }
-    public function listProduct()
-    {
-        require_once './views/listProduct.php';
-    }
-    // public function contact()
-    // {
-    //     require_once './views/Contact.php';
-    // }
     public function about()
     {
         require_once './views/About.php';
     }
 
+
     public function detailProduct()
     {
         require_once './views/DetailProduct.php';
-    }
-    public function singleProduct()
-    {
-        require_once './views/SingleProduct.php';
-
     }
     public function blog()
     {
@@ -87,13 +77,6 @@ class ClientHomeController
             $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
             $chuc_vu_id = 2; // Set default role as client
             $trang_thai = 1; // Set default status as active
-            $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
-            $thong_bao = '';
-            $file_thumb = null;
-
-            if ($anh_dai_dien && $anh_dai_dien['error'] === UPLOAD_ERR_OK) {
-                $file_thumb = uploadFile($anh_dai_dien, folderUpload: './uploads/');
-            }
 
             $errors = [];
 
@@ -119,7 +102,6 @@ class ClientHomeController
                         $ten_tai_khoan,
                         $email,
                         $mat_khau,
-                        $file_thumb,
                         $so_dien_thoai,
                         $chuc_vu_id,
                         $trang_thai
