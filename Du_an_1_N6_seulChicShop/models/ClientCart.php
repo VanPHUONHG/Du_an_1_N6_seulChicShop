@@ -72,6 +72,7 @@ class ClientCart
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
+
             error_log("Database error: " . $e->getMessage());
             return false;
         }
@@ -82,6 +83,7 @@ class ClientCart
         try {
             $sql = "INSERT INTO chi_tiet_gio_hangs (gio_hang_id, san_pham_id, bien_the_san_pham_id, so_luong) 
             VALUES (:gio_hang_id, :san_pham_id, :bien_the_san_pham_id, :so_luong)";
+
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':gio_hang_id', $gio_hang_id);
             $stmt->bindParam(':san_pham_id', $san_pham_id);
@@ -111,6 +113,7 @@ class ClientCart
         }
     }
 
+
     public function clearCart($cart_id)
     {
         // Xóa các chi tiết giỏ hàng trước
@@ -126,3 +129,4 @@ class ClientCart
         return $stmt->execute();
     }
 }
+

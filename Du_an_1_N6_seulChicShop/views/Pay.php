@@ -248,7 +248,6 @@ $ma_don_hang = 'DH' . date('YmdHis') . rand(100,999);
         <button type="submit" class="flex-c-m p-lr-15 bg3 bor14 cl0 hov-btn3 pointer size-116 stext-101 trans-04">
             Checkout
         </button>
-
     </form>
 </div>
 
