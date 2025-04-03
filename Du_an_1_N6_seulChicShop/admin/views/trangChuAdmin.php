@@ -178,9 +178,20 @@
                                                         </div>
                                                     </td>
                                                     <td>
+<<<<<<< HEAD
                                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                                                             <span><?= number_format($sanPham['gia_san_pham'] ?? 0, 0, '.', '.') ?></span> VNĐ
                                                         </h4>
+=======
+                                                        <h5 class="fs-14 my-1 fw-normal">
+                                                            <?php if ($sanPham['gia']): ?>
+                                                                <?= number_format($sanPham['gia_khuyen_mai'] ? $sanPham['gia_khuyen_mai'] : $sanPham['gia'], 0, ',', '.') ?>
+                                                            <?php else: ?>
+                                                                <?= number_format($sanPham['gia_san_pham_khuyen_mai'] ? $sanPham['gia_san_pham_khuyen_mai'] : $sanPham['gia_san_pham'], 0, ',', '.') ?>
+                                                            <?php endif; ?>
+                                                            VNĐ
+                                                        </h5>
+>>>>>>> b53d565e2661bd94c3eb83ee5f18bb11b75d58f1
                                                         <span class="text-muted">Giá</span>
                                                     </td>
                                                     <td>
