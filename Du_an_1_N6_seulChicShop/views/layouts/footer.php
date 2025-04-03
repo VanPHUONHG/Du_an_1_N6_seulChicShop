@@ -10,27 +10,22 @@
                 <ul>
                     <li class="p-b-10">
                         <a href="#" class="cl7 hov-cl1 stext-107 trans-04">
-                            Women
+                        Đồ thu đông
                         </a>
                     </li>
 
                     <li class="p-b-10">
                         <a href="#" class="cl7 hov-cl1 stext-107 trans-04">
-                            Men
+                        Cốc bình
                         </a>
                     </li>
 
                     <li class="p-b-10">
                         <a href="#" class="cl7 hov-cl1 stext-107 trans-04">
-                            Shoes
+                        Đồ xuân hè
                         </a>
                     </li>
 
-                    <li class="p-b-10">
-                        <a href="#" class="cl7 hov-cl1 stext-107 trans-04">
-                            Watches
-                        </a>
-                    </li>
                 </ul>
             </div>
 
@@ -77,16 +72,20 @@
                 </p>
 
                 <div class="p-t-27">
-                    <a href="#" class="m-r-16 cl7 fs-18 hov-cl1 trans-04">
-                        <i class="fa fa-facebook"></i>
+                    <a href="https://www.facebook.com/profile.php?id=100094307696248" class="m-r-16 cl7 fs-18 hov-cl1 trans-04">
+                        <i class="fab fa-facebook-f"></i>
                     </a>
 
                     <a href="#" class="m-r-16 cl7 fs-18 hov-cl1 trans-04">
-                        <i class="fa fa-instagram"></i>
+                        <i class="fab fa-instagram"></i>
                     </a>
 
                     <a href="#" class="m-r-16 cl7 fs-18 hov-cl1 trans-04">
-                        <i class="fa fa-pinterest-p"></i>
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                    
+                    <a href="#" class="m-r-16 cl7 fs-18 hov-cl1 trans-04">
+                        <i class="fa-solid fa-z"></i>
                     </a>
                 </div>
             </div>
@@ -139,9 +138,10 @@
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 Copyright &copy;
                 <script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i
-                    class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                    target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com"
-                    target="_blank">ThemeWagon</a>
+                    class="fa fa-heart-o" aria-hidden="true"></i> Tran Tien Dat & Dang Quang Quyen 
+                    & Nguyen Van Phương <a href="https://colorlib.com"
+                    target="_blank">Colorlib</a> &amp; distributed by <a href="http://localhost/Du_an_1_N6/Du_an_1_N6_seulChicShop/"
+                    target="_blank">SeulChicShop</a>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
             </p>
