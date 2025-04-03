@@ -64,7 +64,6 @@ $response = match ($act) {
 
     'thanh-toan' => (new ClientPayController())->listPay(), // Base_URL/?act=thanh-toan
     'dat-hang' => (new ClientPayController())->addOrderAndDetailOder(), // Base_URL/?act=dat-hang
-    default => '404 - Trang không tồn tại'
 
 
     // Thanh toán

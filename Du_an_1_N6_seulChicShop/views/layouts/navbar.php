@@ -251,7 +251,7 @@
                 <button class="flex-c-m trans-04">
                     <i class="zmdi zmdi-search"></i>
                 </button>
-                <input class="plh3" type="text" name="search" placeholder="Search...">
+                <input class="plh3" type="text" name="search" placeholder="Nhập tên sản phẩm bạn cần tìm...">
             </form>
         </div>
     </div>

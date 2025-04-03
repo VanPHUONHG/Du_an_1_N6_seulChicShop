@@ -55,8 +55,14 @@
 
                                             <div class="d-flex align-items-end justify-content-between mt-4">
                                                 <div>
+                                                    <?php
+                                                    $totalIncome = 0;
+                                                    foreach ($listDetailOrder as $order) {
+                                                        $totalIncome += $order['gia_san_pham'] * $order['tong_so_luong'];
+                                                    }
+                                                    ?>
                                                     <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>
-                                                            <?= number_format($totalOrder, 0, '.', '.') ?>
+                                                            <?= number_format($totalIncome, 0, '.', '.') ?>
                                                         </span>VNĐ </h4>
                                                 </div>
                                             </div>
@@ -153,7 +159,7 @@
                                             foreach ($listDetailOrder as $sanPham) {
                                                 if ($count >= $maxProducts)
                                                     break;
-                                                ?>
+                                            ?>
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex align-items-center">
@@ -172,6 +178,11 @@
                                                         </div>
                                                     </td>
                                                     <td>
+<<<<<<< HEAD
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                                            <span><?= number_format($sanPham['gia_san_pham'] ?? 0, 0, '.', '.') ?></span> VNĐ
+                                                        </h4>
+=======
                                                         <h5 class="fs-14 my-1 fw-normal">
                                                             <?php if ($sanPham['gia']): ?>
                                                                 <?= number_format($sanPham['gia_khuyen_mai'] ? $sanPham['gia_khuyen_mai'] : $sanPham['gia'], 0, ',', '.') ?>
@@ -180,6 +191,7 @@
                                                             <?php endif; ?>
                                                             VNĐ
                                                         </h5>
+>>>>>>> b53d565e2661bd94c3eb83ee5f18bb11b75d58f1
                                                         <span class="text-muted">Giá</span>
                                                     </td>
                                                     <td>
@@ -192,7 +204,7 @@
                                                         <span class="text-muted">Số lượng</span>
                                                     </td>
                                                 </tr>
-                                                <?php
+                                            <?php
                                                 $count++;
                                             } ?>
                                         </tbody>
