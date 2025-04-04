@@ -32,15 +32,27 @@ require_once './models/AdminPosts.php';
 $act = $_GET['act'] ?? '/';
 
 match ($act) {
-    '/' => (new AdminDashboardController())->trangChu(),
-
-    // router danh muc
-    'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
-    'form-them-danh-muc' => (new AdminDanhMucController())->formAddDanhMuc(),
-    'them-danh-muc' => (new AdminDanhMucController())->possAddDanhMuc(),
-    'form-sua-danh-muc' => (new AdminDanhMucController())->formEditDanhMuc(),
-    'sua-danh-muc' => (new AdminDanhMucController())->postEditDanhMuc(),
-    'xoa-danh-muc' => (new AdminDanhMucController())->deleteDanhMuc(),
+  '/' => (new AdminDashboardController())->trangChu(),
+  //router danh muc
+  'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
+  'form-them-danh-muc' => (new AdminDanhMucController())->formAddDanhMuc(),
+  'them-danh-muc' => (new AdminDanhMucController())->possAddDanhMuc(),
+  'form-sua-danh-muc' => (new AdminDanhMucController())->formEditDanhMuc(),
+  'sua-danh-muc' => (new AdminDanhMucController())->postEditDanhMuc(),
+  'xoa-danh-muc' => (new AdminDanhMucController())->deleteDanhMuc(),
+  //router san pham
+  'san-pham' => (new AdminProductController())->listProduct(),
+  'xoa-san-pham' => (new AdminProductController())->destroyProduct(),
+  'chi-tiet-san-pham' => (new AdminProductController())->detailProduct(),
+  'form-them-san-pham' => (new AdminProductController())->formAddProduct(),
+  'them-san-pham' => (new AdminProductController())->createProduct(),
+  'form-sua-san-pham' => (new AdminProductController())->formEditProduct(),
+  'sua-san-pham' => (new AdminProductController())->editProduct(),
+  'form-them-bien-the-san-pham' => (new AdminProductController())->formAddVariantProduct(),
+  'them-bien-the-san-pham' => (new AdminProductController())->createVariantProduct(),
+  'xoa-bien-the' => (new AdminProductController())->destroyProductVariant(),
+  'form-sua-bien-the' => (new AdminProductController())->formEditVariantProduct(),
+  'sua-bien-the' => (new AdminProductController())->editVariantProduct(),
 
     // router san pham
     'san-pham' => (new AdminProductController())->listProduct(),

@@ -6,8 +6,9 @@
             <nav class="p-l-45 limiter-menu-desktop">
 
                 <!-- Logo desktop -->
-                <a href="#" class="logo">
-                    <img src="assets/images/icons/logo-01.png" alt="IMG-LOGO">
+                <a href="<?= BASE_URL ?>" class="logo">
+                    <h2 style="color: #ff0000;">SEULCHIC</h2>
+                    <h2 style="color: #000000;">SHOP</h2>
                 </a>
 
                 <!-- Menu desktop -->
@@ -19,7 +20,7 @@
 
                         <li class="label1" data-label1="hot">
                             <a href="<?= BASE_URL . "?act=danh-sach-san-pham" ?>">Shop</a>
-                        </li>   
+                        </li>
 
                         <li>
                             <a href="<?= BASE_URL . "?act=bai-viet" ?>">Blog</a>
@@ -32,6 +33,8 @@
                         <li>
                             <a href="<?= BASE_URL . "?act=lien-he" ?>">Contact</a>
                         </li>
+
+
                     </ul>
                 </div>
 
@@ -43,13 +46,14 @@
                         </div>
                     </div>
 
-                    <?php 
+                    <?php
                     // Kiểm tra nếu không phải trang đăng ký hoặc đăng nhập thì hiển thị giỏ hàng
                     $currentPage = isset($_GET['act']) ? $_GET['act'] : '';
                     if ($currentPage != 'dang-nhap' && $currentPage != 'dang-ky' && isset($_SESSION['user_client'])):
                     ?>
+
                     <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                        <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04"
+                        <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04 t"
                             id="cart-icon-desktop"
                             data-notify="<?php 
                             $itemCount = 0;
@@ -58,16 +62,19 @@
                                 $cart = (new ClientCart())->getCartFromUser($user['id']);
                                 if ($cart) {
                                     $detailCart = (new ClientCart())->getDetailCart($cart['id']);
-                                    $itemCount = count($detailCart);
+                                    foreach($detailCart as $item) {
+                                        $itemCount++;
+                                    }
                                 }
                             }
                             echo $itemCount;
                             ?>">
                             <i class="zmdi zmdi-shopping-cart"></i>
+
                         </div>
-                    </div>
+
                     <?php endif; ?>
-                    
+
                     <!-- Button login -->
                     <div class="flex-c-m h-full p-lr-19">
                         <div class="flex-c-m h-full ">
@@ -110,6 +117,11 @@
                                         <a href="<?= BASE_URL . "?act=dang-xuat" ?>"
                                             style="color: #333; text-decoration: none;">Sign Out</a>
                                     </li>
+
+                                    <li style="list-style: none; padding: 8px 16px;">
+                                        <a href="<?= BASE_URL . "?act=lich-su-mua-hang" ?>">Order</a>
+                                    </li>
+                                    
                                 <?php else: ?>
                                     <li style="list-style: none; padding: 8px 16px;">
                                         <a href="<?= BASE_URL . "?act=dang-nhap" ?>"
@@ -139,7 +151,10 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.html"><img src="assets/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+            <a href="<?= BASE_URL ?>" style="text-decoration: none;">
+                <span style="color: #ff0000;">SEULCHIC</span>
+                <span style="color: #000000;">SHOP</span>
+            </a>
         </div>
 
         <!-- Icon header -->
@@ -150,17 +165,17 @@
                 </div>
             </div>
 
-            <?php 
+            <?php
             // Kiểm tra nếu không phải trang đăng ký hoặc đăng nhập và người dùng đã đăng nhập thì hiển thị giỏ hàng
             if ($currentPage != 'dang-nhap' && $currentPage != 'dang-ky' && isset($_SESSION['user_client'])):
             ?>
-            <div class="flex-c-m h-full p-lr-10 bor5">
-                <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04"
-                    id="cart-icon-mobile"
-                    data-notify="<?= $itemCount ?>">
-                    <i class="zmdi zmdi-shopping-cart"></i>
+                <div class="flex-c-m h-full p-lr-10 bor5">
+                    <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04"
+                        id="cart-icon-mobile"
+                        data-notify="<?= $itemCount ?>">
+                        <i class="zmdi zmdi-shopping-cart"></i>
+                    </div>
                 </div>
-            </div>
             <?php endif; ?>
         </div>
 
@@ -213,6 +228,7 @@
                 <li>
                     <a href="<?= BASE_URL . "?act=dang-xuat" ?>">Sign Out</a>
                 </li>
+
             <?php else: ?>
                 <li>
                     <a href="<?= BASE_URL . "?act=dang-nhap" ?>">Sign In</a>
@@ -235,7 +251,7 @@
                 <button class="flex-c-m trans-04">
                     <i class="zmdi zmdi-search"></i>
                 </button>
-                <input class="plh3" type="text" name="search" placeholder="Search...">
+                <input class="plh3" type="text" name="search" placeholder="Nhập tên sản phẩm bạn cần tìm...">
             </form>
         </div>
     </div>
@@ -289,6 +305,8 @@
                         Help & FAQs
                     </a>
                 </li>
+
+
             </ul>
 
             <div class="p-tb-30 w-full sidebar-gallery">
@@ -370,119 +388,119 @@
 
 <!-- JavaScript to update cart count -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Function to update cart count
-    function updateCartCount(count) {
-        const cartIconDesktop = document.getElementById('cart-icon-desktop');
-        const cartIconMobile = document.getElementById('cart-icon-mobile');
-        
-        if (cartIconDesktop) {
-            cartIconDesktop.setAttribute('data-notify', count);
-        }
-        
-        if (cartIconMobile) {
-            cartIconMobile.setAttribute('data-notify', count);
-        }
-    }
-    
-    // Listen for custom event when item is added to cart
-    document.addEventListener('cartUpdated', function(e) {
-        if (e.detail && e.detail.count !== undefined) {
-            updateCartCount(e.detail.count);
-        }
-    });
-    
-    // Example of how to trigger the event when adding to cart
-    // This should be called in your add-to-cart functionality
-    function addToCart() {
-        // Your add to cart logic
-        
-        // Then dispatch the event with the new count
-        const currentCount = parseInt(document.getElementById('cart-icon-desktop')?.getAttribute('data-notify') || '0');
-        const newCount = currentCount + 1;
-        
-        document.dispatchEvent(new CustomEvent('cartUpdated', {
-            detail: {
-                count: newCount
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to update cart count
+        function updateCartCount(count) {
+            const cartIconDesktop = document.getElementById('cart-icon-desktop');
+            const cartIconMobile = document.getElementById('cart-icon-mobile');
+
+            if (cartIconDesktop) {
+                cartIconDesktop.setAttribute('data-notify', count);
             }
-        }));
-    }
-    
-    // Expose the function globally if needed
-    window.updateCartCount = updateCartCount;
-    
-    // Hiệu ứng chuyển màu menu khi chuyển trang
-    function setActiveMenuItem() {
-        // Lấy URL hiện tại
-        const currentUrl = window.location.href;
-        const urlParams = new URLSearchParams(window.location.search);
-        const currentPage = urlParams.get('act') || 'home';
-        
-        // Xóa class active-menu từ tất cả các menu items
-        const menuItems = document.querySelectorAll('.main-menu > li');
-        menuItems.forEach(item => {
-            item.classList.remove('active-menu');
+
+            if (cartIconMobile) {
+                cartIconMobile.setAttribute('data-notify', count);
+            }
+        }
+
+        // Listen for custom event when item is added to cart
+        document.addEventListener('cartUpdated', function(e) {
+            if (e.detail && e.detail.count !== undefined) {
+                updateCartCount(e.detail.count);
+            }
         });
-        
-        // Thêm class active-menu vào menu item tương ứng với trang hiện tại
-        menuItems.forEach(item => {
-            const link = item.querySelector('a');
-            if (link) {
-                const href = link.getAttribute('href');
-                
-                // Kiểm tra trang hiện tại và gán active-menu
-                if (currentPage === 'home' && href === '<?= BASE_URL ?>') {
-                    item.classList.add('active-menu');
-                } else if (currentPage === 'danh-sach-san-pham' && href.includes('danh-sach-san-pham')) {
-                    item.classList.add('active-menu');
-                } else if (currentPage === 'gio-hang' && href.includes('gio-hang')) {
-                    item.classList.add('active-menu');
-                } else if (currentPage === 'bai-viet' && href.includes('bai-viet')) {
-                    item.classList.add('active-menu');
-                } else if (currentPage === 'gioi-thieu' && href.includes('gioi-thieu')) {
-                    item.classList.add('active-menu');
-                } else if (currentPage === 'lien-he' && href.includes('lien-he')) {
-                    item.classList.add('active-menu');
+
+        // Example of how to trigger the event when adding to cart
+        // This should be called in your add-to-cart functionality
+        function addToCart() {
+            // Your add to cart logic
+
+            // Then dispatch the event with the new count
+            const currentCount = parseInt(document.getElementById('cart-icon-desktop')?.getAttribute('data-notify') || '0');
+            const newCount = currentCount + 1;
+
+            document.dispatchEvent(new CustomEvent('cartUpdated', {
+                detail: {
+                    count: newCount
                 }
-            }
-        });
-        
-        // Cũng áp dụng cho menu mobile
-        const mobileMenuItems = document.querySelectorAll('.main-menu-m > li');
-        mobileMenuItems.forEach(item => {
-            const link = item.querySelector('a');
-            if (link) {
-                const href = link.getAttribute('href');
-                
-                if (currentPage === 'home' && href === '<?= BASE_URL ?>') {
-                    link.classList.add('active-color');
-                } else if (currentPage === 'danh-sach-san-pham' && href.includes('danh-sach-san-pham')) {
-                    link.classList.add('active-color');
-                } else if (currentPage === 'gio-hang' && href.includes('gio-hang')) {
-                    link.classList.add('active-color');
-                } else if (currentPage === 'bai-viet' && href.includes('bai-viet')) {
-                    link.classList.add('active-color');
-                } else if (currentPage === 'gioi-thieu' && href.includes('gioi-thieu')) {
-                    link.classList.add('active-color');
-                } else if (currentPage === 'lien-he' && href.includes('lien-he')) {
-                    link.classList.add('active-color');
+            }));
+        }
+
+        // Expose the function globally if needed
+        window.updateCartCount = updateCartCount;
+
+        // Hiệu ứng chuyển màu menu khi chuyển trang
+        function setActiveMenuItem() {
+            // Lấy URL hiện tại
+            const currentUrl = window.location.href;
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentPage = urlParams.get('act') || 'home';
+
+            // Xóa class active-menu từ tất cả các menu items
+            const menuItems = document.querySelectorAll('.main-menu > li');
+            menuItems.forEach(item => {
+                item.classList.remove('active-menu');
+            });
+
+            // Thêm class active-menu vào menu item tương ứng với trang hiện tại
+            menuItems.forEach(item => {
+                const link = item.querySelector('a');
+                if (link) {
+                    const href = link.getAttribute('href');
+
+                    // Kiểm tra trang hiện tại và gán active-menu
+                    if (currentPage === 'home' && href === '<?= BASE_URL ?>') {
+                        item.classList.add('active-menu');
+                    } else if (currentPage === 'danh-sach-san-pham' && href.includes('danh-sach-san-pham')) {
+                        item.classList.add('active-menu');
+                    } else if (currentPage === 'gio-hang' && href.includes('gio-hang')) {
+                        item.classList.add('active-menu');
+                    } else if (currentPage === 'bai-viet' && href.includes('bai-viet')) {
+                        item.classList.add('active-menu');
+                    } else if (currentPage === 'gioi-thieu' && href.includes('gioi-thieu')) {
+                        item.classList.add('active-menu');
+                    } else if (currentPage === 'lien-he' && href.includes('lien-he')) {
+                        item.classList.add('active-menu');
+                    }
                 }
-            }
-        });
-    }
-    
-    // Thêm CSS cho active-color
-    const style = document.createElement('style');
-    style.textContent = `
+            });
+
+            // Cũng áp dụng cho menu mobile
+            const mobileMenuItems = document.querySelectorAll('.main-menu-m > li');
+            mobileMenuItems.forEach(item => {
+                const link = item.querySelector('a');
+                if (link) {
+                    const href = link.getAttribute('href');
+
+                    if (currentPage === 'home' && href === '<?= BASE_URL ?>') {
+                        link.classList.add('active-color');
+                    } else if (currentPage === 'danh-sach-san-pham' && href.includes('danh-sach-san-pham')) {
+                        link.classList.add('active-color');
+                    } else if (currentPage === 'gio-hang' && href.includes('gio-hang')) {
+                        link.classList.add('active-color');
+                    } else if (currentPage === 'bai-viet' && href.includes('bai-viet')) {
+                        link.classList.add('active-color');
+                    } else if (currentPage === 'gioi-thieu' && href.includes('gioi-thieu')) {
+                        link.classList.add('active-color');
+                    } else if (currentPage === 'lien-he' && href.includes('lien-he')) {
+                        link.classList.add('active-color');
+                    }
+                }
+            });
+        }
+
+        // Thêm CSS cho active-color
+        const style = document.createElement('style');
+        style.textContent = `
         .active-color {
             color: #6c7ae0 !important;
         }
     `;
-    document.head.appendChild(style);
-    
-    // Gọi hàm khi trang được tải
-    setActiveMenuItem();
-});
+        document.head.appendChild(style);
+
+        // Gọi hàm khi trang được tải
+        setActiveMenuItem();
+    });
 </script>
 
 <!-- Cart -->

@@ -33,98 +33,125 @@
                         <!-- form start -->
                         <form action="<?= BASE_URL_ADMIN . '?act=them-san-pham' ?>" method="POST" enctype="multipart/form-data">
                             <div class="card-body row">
-                                <div class="form-group col-12">
-                                    <label>Tên sản phẩm</label>
-                                    <input type="text" class="form-control" name="ten_san_pham" placeholder="Nhập tên sản phẩm">
-                                    <?php if (isset($_SESSION['error']['ten_san_pham'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['ten_san_pham'] ?></p>
-                                    <?php  } ?>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label>Giá tiền</label>
-                                    <input type="number" class="form-control" name="gia_san_pham" placeholder="Nhập giá sản phẩm">
-                                    <?php if (isset($_SESSION['error']['gia_san_pham'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['gia_san_pham'] ?></p>
-                                    <?php  } ?>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label>Giá khuyến mãi</label>
-                                    <input type="number" class="form-control" name="gia_khuyen_mai" placeholder="Nhập giá khuyến mãi">
-                                    <?php if (isset($_SESSION['error']['gia_khuyen_mai'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['gia_khuyen_mai'] ?></p>
-                                    <?php  } ?>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label>Hình ảnh</label>
-                                    <input type="file" class="form-control" name="hinh_anh">
-                                    <?php if (isset($_SESSION['error']['hinh_anh'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['hinh_anh'] ?></p>
-                                    <?php  } ?>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label>Số lượng</label>
-                                    <input type="number" class="form-control" name="so_luong" placeholder="Nhập số lượng">
-                                    <?php if (isset($_SESSION['error']['so_luong'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['so_luong'] ?></p>
-                                    <?php  } ?>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label>Ngày nhập</label>
-                                    <input type="date" class="form-control" name="ngay_nhap">
-                                    <?php if (isset($_SESSION['error']['ngay_nhap'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['ngay_nhap'] ?></p>
-                                    <?php  } ?>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label>Danh mục</label>
-                                    <select class="form-control" name="danh_muc_id">
-                                        <option selected disabled>Chọn danh mục sản phẩm</option>
-                                        <?php foreach ($listCategory as $danhMuc) : ?>
-                                            <option value="<?= $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <?php if (isset($_SESSION['error']['danh_muc_id'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['danh_muc_id'] ?></p>
-                                    <?php  } ?>
-                                </div>
-
-                                <div class="form-group col-6">
-                                    <label>Trạng thái</label>
-                                    <select class="form-control" name="trang_thai">
-                                        <option selected disabled>Chọn trạng thái</option>
-                                        <option value="1">Còn hàng</option>
-                                        <option value="2">Hết hàng</option>
-                                    </select>
-                                    <?php if (isset($_SESSION['error']['trang_thai'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['trang_thai'] ?></p>
-                                    <?php  } ?>
-                                </div>
-
-
-                                <div class="form-group col-12">
-                                    <label for="mo_ta">Mô tả</label>
-                                    <textarea id="mo_ta" class="form-control" name="mo_ta" placeholder="Nhập mô tả"></textarea>
+                                <!-- Thông tin sản phẩm chính -->
+                                <div class="col-md-12">
+                                    <h4>Thông tin sản phẩm chính</h4>
+                                    <div class="form-group">
+                                        <label>Tên sản phẩm</label>
+                                        <input type="text" class="form-control" name="ten_san_pham" placeholder="Nhập tên sản phẩm">
+                                        <?php if (isset($_SESSION['error']['ten_san_pham'])) { ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['ten_san_pham'] ?></p>
+                                        <?php  } ?>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>Giá tiền</label>
+                                            <input type="number" class="form-control" name="gia_san_pham" placeholder="Nhập giá sản phẩm">
+                                            <?php if (isset($_SESSION['error']['gia_san_pham'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['error']['gia_san_pham'] ?></p>
+                                            <?php  } ?>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label>Giá khuyến mãi</label>
+                                            <input type="number" class="form-control" name="gia_khuyen_mai" placeholder="Nhập giá khuyến mãi">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>Hình ảnh</label>
+                                            <input type="file" class="form-control" name="hinh_anh">
+                                            <?php if (isset($_SESSION['error']['hinh_anh'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['error']['hinh_anh'] ?></p>
+                                            <?php  } ?>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label>Số lượng</label>
+                                            <input type="number" class="form-control" name="so_luong" placeholder="Nhập số lượng">
+                                            <?php if (isset($_SESSION['error']['so_luong'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['error']['so_luong'] ?></p>
+                                            <?php  } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>Danh mục</label>
+                                            <select class="form-control" name="danh_muc_id">
+                                                <option selected disabled>Chọn danh mục sản phẩm</option>
+                                                <?php foreach ($listCategory as $danhMuc) : ?>
+                                                    <option value="<?= $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <?php if (isset($_SESSION['error']['danh_muc_id'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['error']['danh_muc_id'] ?></p>
+                                            <?php  } ?>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Trạng thái</label>
+                                        <select class="form-control" name="trang_thai">
+                                            <option value="1">Còn hàng</option>
+                                            <option value="2">Hết hàng</option>
+                                        </select>
+                                        <?php if (isset($_SESSION['error']['trang_thai'])) { ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['trang_thai'] ?></p>
+                                        <?php  } ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mo_ta">Mô tả</label>
+                                        <textarea id="mo_ta" class="form-control" name="mo_ta" placeholder="Nhập mô tả"></textarea>
+                                    </div>
                                 </div>
 
+                                <!-- Biến thể sản phẩm -->
+                                <div class="col-md-12 mt-4">
+                                    <h4>Biến thể sản phẩm</h4>
+                                    <div id="variants-container">
+                                        <div class="variant-item border p-3 mb-3">
+                                            <div class="row">
+                                                <div class="form-group col-3">
+                                                    <label>Màu sắc</label>
+                                                    <input type="text" class="form-control" name="variant_name" placeholder="Nhập màu sắc">
+                                                </div>
+                                                <div class="form-group col-3">
+                                                    <label>Kích thước</label>
+                                                    <input type="text" class="form-control" name="variant_size" placeholder="Nhập kích thước">
+                                                </div>
+                                                <div class="form-group col-2">
+                                                    <label>Giá</label>
+                                                    <input type="number" class="form-control" name="variant_price" placeholder="Nhập giá">
+                                                </div>
+                                                <div class="form-group col-2">
+                                                    <label>Số lượng</label>
+                                                    <input type="number" class="form-control" name="variant_quantity" placeholder="Nhập số lượng">
+                                                </div>
+                                                <div class="form-group col-2">
+                                                    <label>Hình ảnh</label>
+                                                    <input type="file" class="form-control" name="variant_image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-info" id="add-variant">Thêm biến thể</button>
+                                </div>
                             </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Thêm sản phẩm</button>
+                            </div>
+                        </form>
                     </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-success" fdprocessedid="6mz4gp">Thêm sản phẩm</button>
-                    </div>
-                    </form>
+                    <!-- /.card -->
                 </div>
-                <!-- /.card -->
+                <!-- /.col -->
             </div>
-            <!-- /.col -->
+            <!-- /.row -->
         </div>
-        <!-- /.row -->
-</div>
-<!-- /.container-fluid -->
-</section>
-<!-- /.content -->
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
 <!-- Footer -->
 <?php include './views/layout/footer.php'; ?>
 <!-- End Footer -->
@@ -135,8 +162,8 @@
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
-            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        
         $('#example2').DataTable({
             "paging": true,
             "lengthChange": false,
@@ -146,8 +173,44 @@
             "autoWidth": false,
             "responsive": true,
         });
+
+        // Xử lý thêm biến thể
+        $('#add-variant').click(function() {
+            var variantHtml = `
+                <div class="variant-item border p-3 mb-3">
+                    <div class="row">
+                        <div class="form-group col-3">
+                            <label>Màu sắc</label>
+                            <input type="text" class="form-control" name="variant_names[]" placeholder="Nhập màu sắc">
+                        </div>
+                        <div class="form-group col-3">
+                            <label>Kích thước</label>
+                            <input type="text" class="form-control" name="variant_sizes[]" placeholder="Nhập kích thước">
+                        </div>
+                        <div class="form-group col-2">
+                            <label>Giá</label>
+                            <input type="number" class="form-control" name="variant_prices[]" placeholder="Nhập giá">
+                        </div>
+                        <div class="form-group col-2">
+                            <label>Số lượng</label>
+                            <input type="number" class="form-control" name="variant_quantities[]" placeholder="Nhập số lượng">
+                        </div>
+                        <div class="form-group col-2">
+                            <label>Hình ảnh</label>
+                            <input type="file" class="form-control" name="variant_images[]">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-danger remove-variant mt-2">Xóa biến thể</button>
+                </div>
+            `;
+            $('#variants-container').append(variantHtml);
+        });
+
+        // Xử lý xóa biến thể
+        $(document).on('click', '.remove-variant', function() {
+            $(this).closest('.variant-item').remove();
+        });
     });
 </script>
 </body>
-
 </html>

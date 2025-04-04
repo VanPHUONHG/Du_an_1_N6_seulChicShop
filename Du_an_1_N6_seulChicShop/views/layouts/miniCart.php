@@ -27,7 +27,7 @@
             <ul class="w-full header-cart-wrapitem">
                 <?php 
                     foreach ($miniCartItems as $item) : 
-                        $price = $item['gia_khuyen_mai'] > 0 ? $item['gia_khuyen_mai'] : $item['gia_san_pham'];
+                        $price = $item['gia_san_pham_khuyen_mai'] > 0 ? $item['gia_san_pham_khuyen_mai'] : $item['gia_san_pham'];
                         $totalItem = $price * $item['so_luong'];
                         $totalMiniCart += $totalItem;
                 ?>
