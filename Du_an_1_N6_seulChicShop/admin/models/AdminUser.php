@@ -21,7 +21,7 @@ class AdminUser
             echo "Lỗi Truy Vấn:" . $e->getMessage();
         }
     }
-    public function getAllAdminUser()
+    public function getAllAdminUser() // lấy danh sách id
     {
         try {
             $sql = "SELECT * FROM tai_khoans WHERE chuc_vu_id = 1";
@@ -32,7 +32,7 @@ class AdminUser
             echo "Lỗi Truy Vấn:" . $e->getMessage();
         }
     }
-    public function getAdminUserById($id_tai_khoan_admin)
+    public function getAdminUserById($id_tai_khoan_admin) // lấy danh sách id
     {
         try {
             $sql = "SELECT * FROM tai_khoans WHERE id = :id";
@@ -44,7 +44,7 @@ class AdminUser
             echo "Lỗi Truy Vấn:" . $th->getMessage();
         }
     }
-    public function deleteUserAdmin($id)
+    public function deleteUserAdmin($id) // xóa
     {
         try {
             $sql = "DELETE FROM tai_khoans WHERE id = :id";
@@ -56,7 +56,7 @@ class AdminUser
             echo "Lỗi Truy Vấn:" . $e->getMessage();
         }
     }
-    public function addUserAdmin($ten_tai_khoan, $email, $mat_khau, $anh_dai_dien, $so_dien_thoai, $chuc_vu_id)
+    public function addUserAdmin($ten_tai_khoan, $email, $mat_khau, $anh_dai_dien, $so_dien_thoai, $chuc_vu_id) // thêm
     {
         try {
             $ngay_tao = date('Y-m-d H:i:s'); //
@@ -136,4 +136,73 @@ class AdminUser
             echo '' . $e->getMessage();
         }
     }
+    
+    public function deleteUserClient($id)
+    {
+        try {
+            $sql = "DELETE FROM tai_khoans WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi Truy Vấn:" . $e->getMessage();
+        }
+    }
+    public function addUserClient($ten_tai_khoan, $email, $mat_khau, $anh_dai_dien, $so_dien_thoai, $chuc_vu_id)
+    {
+        try {
+            $ngay_tao = date('Y-m-d H:i:s'); //
+
+            $sql = "INSERT INTO tai_khoans(ten_tai_khoan, email, mat_khau, anh_dai_dien, so_dien_thoai, ngay_tao, chuc_vu_id) 
+                VALUES(:ten_tai_khoan, :email, :mat_khau, :anh_dai_dien, :so_dien_thoai, :ngay_tao, :chuc_vu_id)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':ten_tai_khoan', $ten_tai_khoan);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':mat_khau', $mat_khau);
+            $stmt->bindParam(':anh_dai_dien', $anh_dai_dien);
+            $stmt->bindParam(':so_dien_thoai', $so_dien_thoai);
+            $stmt->bindParam(':ngay_tao', $ngay_tao);
+            $stmt->bindParam(':chuc_vu_id', $chuc_vu_id);
+
+            $stmt->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi Truy Vấn: " . $e->getMessage();
+        }
+    }
+    public function editUserClient($id_tai_khoan_client, $ten_tai_khoan, $email, $mat_khau, $anh_dai_dien, $so_dien_thoai)
+    {
+        try {
+            $sql = "UPDATE tai_khoans SET 
+                ten_tai_khoan = :ten_tai_khoan,
+                email = :email,
+                mat_khau = :mat_khau, 
+                anh_dai_dien = :anh_dai_dien,
+                so_dien_thoai = :so_dien_thoai
+                WHERE id = :id";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id_tai_khoan_client);
+            $stmt->bindParam(':ten_tai_khoan', $ten_tai_khoan);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':mat_khau', $mat_khau);
+            $stmt->bindParam(':anh_dai_dien', $anh_dai_dien);
+            $stmt->bindParam(':so_dien_thoai', $so_dien_thoai);
+
+            $result = $stmt->execute();
+
+            if ($result) {
+                return true;
+            } else {
+                $errorInfo = $stmt->errorInfo();
+                error_log("Database error: " . print_r($errorInfo, true));
+                return false;
+            }
+        } catch (Exception $e) {
+            error_log("Exception in editUserAdmin: " . $e->getMessage());
+            return false;
+        }
+    }
+
 }

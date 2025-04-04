@@ -79,3 +79,10 @@ function formatDate($date)
 {
     return date('d-m-Y', strtotime($date));
 }
+function checkLoginAdmin(){
+    if(!sset($_SESSION['user_admin'])){
+        header("Location: ". BASE_URL_ADMIN. '?ACT=LOGIN-ADMIN');
+    }
+}
+
+// debug
