@@ -54,6 +54,13 @@ $response = match ($act) {
     // Pay
     'thanh-toan' => (new ClientPayController())->listPay(), // Base_URL/?act=thanh-toan
     'dat-hang' => (new ClientPayController())->addOder(), // Base_URL/?act=dat-hang
+
+    // bài viết
+    'bai-viet' => (new ClientPostsController())->listPosts(), // Base_URL/?act=bai-viet
+    // 'gioi-thieu' => (new ClientHomeController())->about(), // Base_URL/?act=gioi-thieu
+    // 'chi-tiet-san-pham' => (new ClientHomeController())->detailProduct(), // Base_URL/?act=chi-tiet-san-pham
+    // 'chi-tiet-bai-viet' => (new ClientHomeController())->blogDetail(), // Base_URL/?act=chi-tiet-bai-viet
+
     default => '404 - Trang không tồn tại'
 };
 
