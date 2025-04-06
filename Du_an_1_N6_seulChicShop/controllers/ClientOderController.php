@@ -32,7 +32,7 @@ class ClientOderController
             $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'];
 
             $ngay_dat = date('Y-m-d');
-            $trang_thai_id = 1;
+            $trang_thai_don_hang_id = 1;
 
             $user = $this->ModelClientUser->getAccountByNameUser(['user_clinet']);
             $tai_khoan_id = $user['id'];
@@ -50,7 +50,7 @@ class ClientOderController
                 $phuong_thuc_thanh_toan_id,
                 $ngay_dat,
                 $ma_don_hang,
-                $trang_thai_id
+                $trang_thai_don_hang_id
             );
 
             //lay thong tin gio hang cua nguoi dung
@@ -92,7 +92,7 @@ class ClientOderController
                 // sau khi them phai tien hanh xoa san pham trong gio hang
                 $this->ModelClientCart->deleteDetailCart($gioHang['id']);
 
-                $this->ModelClientCart->deleteCart($tai_khoan_id);
+                $this->ModelClientCart->clearCart($tai_khoan_id);
 
                 header("Location: " . BASE_URL . '?act=lich-su-mua-hang');
                 exit();
@@ -215,24 +215,11 @@ class ClientOderController
             $user = $this->ModelClientUser->getAccountByNameUser($_SESSION['user_client']);
             $tai_khoan_id = $user['id'];
 
-            //lay id don truyen tu URL
+            //lay id don truyen tu URL  
             $donHangId = $_GET['id'];
 
             //kiem tra don hang
             $donHang = $this->ModelClientOrder->getDonHangById($donHangId);
-
-            // if (!$donHang) {
-            //     echo "Đơn hàng không tồn tại hoặc đã bị xóa.";
-            //     exit;
-            // }
-
-            // if ($donHang['tai_khoan_id'] != $tai_khoan_id) {
-            //     echo "Bạn không có quyền hủy đơn hàng này";
-            //     exit;
-            // }
-
-
-            //huy đơn hàng
             $this->ModelClientOrder->updateTrangThaiDonHang($donHangId, 6);
             header("Location: " . BASE_URL . '?act=lich-su-mua-hang');
             exit();

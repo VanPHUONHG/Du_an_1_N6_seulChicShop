@@ -4,10 +4,12 @@ class AdminProductController
 {
     public $ModelAdminProduct;
     public $ModelAdminDanhMuc;
+    public $ModelAdminComment;
     public function __construct()
     {
         $this->ModelAdminProduct = new AdminProduct();
         $this->ModelAdminDanhMuc = new AdminDanhMuc();
+        $this->ModelAdminComment = new AdminComment();
     }
 
     public function listProduct()
@@ -29,7 +31,7 @@ class AdminProductController
     public function detailProduct()
     {
         $id = $_GET['id_san_pham'];
-        $listComment = $this->ModelAdminProduct->getCommentFromProduct($id);
+        $listComment = $this->ModelAdminComment->getCommentFromProduct($id);
         $Product = $this->ModelAdminProduct->getProductById($id);
         require_once './views/product/DetailProduct.php';
     }

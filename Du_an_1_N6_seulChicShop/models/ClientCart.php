@@ -71,10 +71,9 @@ class ClientCart
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
 
-            error_log("Database error: " . $e->getMessage());
-            return false;
+        } catch(PDOException $e) {
+            echo "Lỗi: " . $e->getMessage();
         }
     }
 
@@ -113,7 +112,6 @@ class ClientCart
         }
     }
 
-
     public function clearCart($cart_id)
     {
         // Xóa các chi tiết giỏ hàng trước
@@ -129,4 +127,3 @@ class ClientCart
         return $stmt->execute();
     }
 }
-

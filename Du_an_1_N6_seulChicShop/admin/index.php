@@ -13,9 +13,10 @@ require_once './controllers/AdminOrderController.php';
 require_once './controllers/AdminUserController.php';
 require_once './controllers/AdminContactController.php';
 require_once './controllers/AdminBannerController.php';
+require_once './controllers/AdminCommentController.php';
+// require_once './controllers/AdminPositionController.php';
 require_once './controllers/AdminKhuyenMaiController.php'; // Đã sửa tên class
 require_once './controllers/AdminPostsController.php';
-
 
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
@@ -25,6 +26,7 @@ require_once './models/AdminUser.php';
 require_once './models/AdminContact.php';
 require_once './models/AdminPosition.php';
 require_once './models/AdminBanner.php';
+require_once './models/AdminComment.php';
 require_once './models/AdminKhuyenMai.php';
 require_once './models/AdminPosts.php';
 
@@ -53,74 +55,68 @@ match ($act) {
   'xoa-bien-the' => (new AdminProductController())->destroyProductVariant(),
   'form-sua-bien-the' => (new AdminProductController())->formEditVariantProduct(),
   'sua-bien-the' => (new AdminProductController())->editVariantProduct(),
+  // router order
+  'don-hang' => (new AdminOrderController())->listOrder(),
+  'form-sua-don-hang' => (new AdminOrderController())->formEditOrder(),
+  'sua-don-hang' => (new AdminOrderController())->possEditOrder(),
+  'chi-tiet-don-hang' => (new AdminOrderController())->detailOrder(),
 
-    // router san pham
-    'san-pham' => (new AdminProductController())->listProduct(),
-    'xoa-san-pham' => (new AdminProductController())->destroyProduct(),
-    'chi-tiet-san-pham' => (new AdminProductController())->detailProduct(),
-    'form-them-san-pham' => (new AdminProductController())->formAddProduct(),
-    'them-san-pham' => (new AdminProductController())->createProduct(),
-    'form-sua-san-pham' => (new AdminProductController())->formEditProduct(),
-    'sua-san-pham' => (new AdminProductController())->editProduct(),
+  // router user admin
+  'tai-khoan-quan-tri' => (new AdminUserController())->listUserAdmin(),
+  'chi-tiet-tai-khoan-admin' => (new AdminUserController())->detailUserAdmin(),
+  'xoa-tai-khoan-admin' => (new AdminUserController())->destroyUserAdmin(),
+  'form-them-tai-khoan-admin' => (new AdminUserController())->formAddUserAdmin(),
+  'them-tai-khoan-admin' => (new AdminUserController())->insertUserAdmin(),
+  'form-sua-tai-khoan-admin' => (new AdminUserController())->formEditUserAdmin(),
+  'sua-tai-khoan-admin' => (new AdminUserController())->updateUserAdmin(),
 
-    // router order
-    'don-hang' => (new AdminOrderController())->listOrder(),
-    'form-sua-don-hang' => (new AdminOrderController())->formEditOrder(),
-    'sua-don-hang' => (new AdminOrderController())->possEditOrder(),
-    'chi-tiet-don-hang' => (new AdminOrderController())->detailOrder(),
+  // router user client
+  'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
+  'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->listUserClientById(),
+  'xoa-tai-khoan-khach-hang' => (new AdminUserController())->destroyUserClient(),
+  'form-sua-tai-khoan-khach-hang' => (new AdminUserController())->formEditUserClient(),
+  'sua-tai-khoan-khach-hang' => (new AdminUserController())->updateUserClient(),
+  'form-them-tai-khoan-khach-hang' => (new AdminUserController())->formAddUserClient(),
+  'them-tai-khoan-khach-hang' => (new AdminUserController())->insertUserClient(),
 
-    // router user admin
-    'tai-khoan-quan-tri' => (new AdminUserController())->listUserAdmin(),
-    'chi-tiet-tai-khoan-admin' => (new AdminUserController())->detailUserAdmin(),
-    'xoa-tai-khoan-admin' => (new AdminUserController())->destroyUserAdmin(),
-    'form-them-tai-khoan-admin' => (new AdminUserController())->formAddUserAdmin(),
-    'them-tai-khoan-admin' => (new AdminUserController())->insertUserAdmin(),
-    'form-sua-tai-khoan-admin' => (new AdminUserController())->formEditUserAdmin(),
-    'sua-tai-khoan-admin' => (new AdminUserController())->updateUserAdmin(),
+  'binh-luan' => (new AdminCommentController())->listComment(),
+  'xoa-binh-luan' => (new AdminCommentController())->deleteComment(),
+  'form-sua-binh-luan' => (new AdminCommentController())->editComment(),
+  'cap-nhat-binh-luan' => (new AdminCommentController())->updateCommentStatus(),
+  // router contact
+  'lien-he' => (new AdminContactController())->listContact(),
+  'form-chinh-sua-lien-he' => (new AdminContactController())->formEditContact(),
+  'xu-ly-lien-he' => (new AdminContactController())->editStatusContact(),
+  'xoa-lien-he' => (new AdminContactController())->destroyContact(),
 
-    // router user client
-    'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
-    'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->listUserClientById(),
-    'xoa-tai-khoan-khach-hang' => (new AdminUserController())->destroyUserClient(),
-    'form-sua-tai-khoan-khach-hang' => (new AdminUserController())->formEditUserClient(),
-    'sua-tai-khoan-khach-hang' => (new AdminUserController())->updateUserClient(),
-    'form-them-tai-khoan-khach-hang' => (new AdminUserController())->formAddUserClient(),
-    'them-tai-khoan-khach-hang' => (new AdminUserController())->insertUserClient(),
+  // router banner admin
+  'danh-sach-banner' => (new AdminBannerController())->listBanner(),
+  'chi-tiet-banner' => (new AdminBannerController())->detailBanner(),
+  'xoa-banner' => (new AdminBannerController())->destroyBanner(),
+  'form-them-banner' => (new AdminBannerController())->formAddBanner(),
+  'them-banner' => (new AdminBannerController())->insertBanner(),
+  'form-sua-banner' => (new AdminBannerController())->formEditBanner(),
+  'cap-nhat-banner' => (new AdminBannerController())->updateBanner(),
 
-    // router contact
-    'lien-he' => (new AdminContactController())->listContact(),
-    'form-chinh-sua-lien-he' => (new AdminContactController())->formEditContact(),
-    'xu-ly-lien-he' => (new AdminContactController())->editStatusContact(),
-    'xoa-lien-he' => (new AdminContactController())->destroyContact(),
+  // router khuyến mại admin
+  'danh-sach-khuyenMai' => (new AdminKhuyenMaiController())->listKhuyenMai(),
+  'chi-tiet-khuyenMai' => (new AdminKhuyenMaiController())->detailKhuyenMai(),
+  'xoa-khuyenMai' => (new AdminKhuyenMaiController())->destroyKhuyenMai(),
+  'form-them-khuyenMai' => (new AdminKhuyenMaiController())->formAddKhuyenMai(),
+  'them-khuyenMai' => (new AdminKhuyenMaiController())->insertKhuyenMai(),
+  'form-sua-khuyenMai' => (new AdminKhuyenMaiController())->formEditKhuyenMai(),
+  'cap-nhat-khuyenMai' => (new AdminKhuyenMaiController())->updateKhuyenMai(),
 
-    // router banner admin
-    'danh-sach-banner' => (new AdminBannerController())->listBanner(),
-    'chi-tiet-banner' => (new AdminBannerController())->detailBanner(),
-    'xoa-banner' => (new AdminBannerController())->destroyBanner(),
-    'form-them-banner' => (new AdminBannerController())->formAddBanner(),
-    'them-banner' => (new AdminBannerController())->insertBanner(),
-    'form-sua-banner' => (new AdminBannerController())->formEditBanner(),
-    'cap-nhat-banner' => (new AdminBannerController())->updateBanner(),
+  // router Bài viết admin
+  'danh-sach-Posts' => (new AdminPostsController())->listPosts(),
+  'chi-tiet-Posts' => (new AdminPostsController())->detailPosts(),
+  'xoa-Posts' => (new AdminPostsController())->destroyPosts(),
+  'form-them-Posts' => (new AdminPostsController())->formAddPosts(),
+  'them-Posts' => (new AdminPostsController())->insertPosts(),
+  'form-sua-Posts' => (new AdminPostsController())->formEditPosts(),
+  'cap-nhat-Posts' => (new AdminPostsController())->updatePosts(),
+  'sua-Posts' => (new AdminPostsController())->updatePosts(),
 
-    // router khuyến mại admin
-    'danh-sach-khuyenMai' => (new AdminKhuyenMaiController())->listKhuyenMai(),
-    'chi-tiet-khuyenMai' => (new AdminKhuyenMaiController())->detailKhuyenMai(),
-    'xoa-khuyenMai' => (new AdminKhuyenMaiController())->destroyKhuyenMai(),
-    'form-them-khuyenMai' => (new AdminKhuyenMaiController())->formAddKhuyenMai(),
-    'them-khuyenMai' => (new AdminKhuyenMaiController())->insertKhuyenMai(),
-    'form-sua-khuyenMai' => (new AdminKhuyenMaiController())->formEditKhuyenMai(),
-    'cap-nhat-khuyenMai' => (new AdminKhuyenMaiController())->updateKhuyenMai(),
-
-    // router Bài viết admin
-    'danh-sach-Posts' => (new AdminPostsController())->listPosts(),
-    'chi-tiet-Posts' => (new AdminPostsController())->detailPosts(),
-    'xoa-Posts' => (new AdminPostsController())->destroyPosts(),
-    'form-them-Posts' => (new AdminPostsController())->formAddPosts(),
-    'them-Posts' => (new AdminPostsController())->insertPosts(),
-    'form-sua-Posts' => (new AdminPostsController())->formEditPosts(),
-    'cap-nhat-Posts' => (new AdminPostsController())->updatePosts(),
-    'sua-Posts' => (new AdminPostsController())->updatePosts(),
-
-    // Trường hợp mặc định nếu không khớp với bất kỳ route nào
-    default => die("Lỗi: Hành động không hợp lệ!"),
+  // Trường hợp mặc định nếu không khớp với bất kỳ route nào
+  default => die("Lỗi: Hành động không hợp lệ!"),
 };
