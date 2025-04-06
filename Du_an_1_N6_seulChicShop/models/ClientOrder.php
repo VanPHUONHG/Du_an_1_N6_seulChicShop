@@ -150,12 +150,19 @@ class ClientOrder
             $sql = "SELECT 
                         chi_tiet_don_hangs.*,
                         san_phams.ten_san_pham,
-                        san_phams.hinh_anh
+                        san_phams.hinh_anh,
+                        COALESCE(san_phams.hinh_anh, hinh_anh_san_phams.hinh_anh_bien_the) as hinh_anh,
+                        bien_the_san_phams.kich_thuoc,
+                        bien_the_san_phams.mau_sac
                     FROM 
                         chi_tiet_don_hangs 
                     JOIN
                         san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
-                    WHERE chi_tiet_don_hangs.don_hang_id =:don_hang_id";
+                    LEFT JOIN
+                        bien_the_san_phams ON chi_tiet_don_hangs.bien_the_san_pham_id = bien_the_san_phams.id
+                    LEFT JOIN
+                        hinh_anh_san_phams ON san_phams.id = hinh_anh_san_phams.san_pham_id
+                    WHERE chi_tiet_don_hangs.don_hang_id = :don_hang_id";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -166,6 +173,7 @@ class ClientOrder
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             echo "Lỗi" . $e->getMessage();
+            return false;
         }
     }
 }

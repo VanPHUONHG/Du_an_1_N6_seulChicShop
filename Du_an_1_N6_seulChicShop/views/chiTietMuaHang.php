@@ -43,7 +43,7 @@ if (!isset($donHang)) {
         </a>
 
         <span class="cl4 stext-109">
-            Order Details
+            Chi tiết đơn hàng
         </span>
     </div>
 </div>
@@ -73,43 +73,75 @@ if (!isset($donHang)) {
 
                 <!-- Chi tiết sản phẩm -->
                 <div class="p-4">
-                    <h3 class="font-semibold mb-2">Chi tiết sản phẩm</h3>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full border border-gray-300">
+                    <h3 class="font-semibold mb-4">Chi tiết sản phẩm</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
                             <thead>
-                                <tr class="bg-blue-600 text-white">
-                                    <th class="py-2 px-4 border">Tên sản phẩm</th>
-                                    <th class="py-2 px-4 border">Số lượng</th>
-                                    <th class="py-2 px-4 border">Đơn giá</th>
-                                    <th class="py-2 px-4 border">Thành tiền</th>
+                                <tr class="bg-primary text-white">
+                                    <th class="text-center align-middle">Hình ảnh</th>
+                                    <th class="text-center align-middle">Tên sản phẩm</th>
+                                    <th class="text-center align-middle">Biến thể</th>
+                                    <th class="text-center align-middle">Số lượng</th>
+                                    <th class="text-center align-middle">Đơn giá</th>
+                                    <th class="text-center align-middle">Thành tiền</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if(isset($chiTietDonHang) && is_array($chiTietDonHang)): ?>
                                 <?php foreach ($chiTietDonHang as $item): ?>
-                                <tr class="hover:bg-gray-100">
-                                    <td class="py-2 px-4 border"><?= isset($item['ten_san_pham']) ? $item['ten_san_pham'] : '' ?></td>
-                                    <td class="py-2 px-4 border text-center"><?= isset($item['so_luong']) ? $item['so_luong'] : '' ?></td>
-                                    <td class="py-2 px-4 border text-right"><?= isset($item['don_gia']) ? formatPrice($item['don_gia']) : '' ?> VND</td>
-                                    <td class="py-2 px-4 border text-right"><?= isset($item['thanh_tien']) ? formatPrice($item['thanh_tien']) : '' ?> VND</td>
+                                <tr>
+                                    <td class="text-center align-middle" style="width: 100px">
+                                        <img src="<?= isset($item['hinh_anh']) ? $item['hinh_anh'] : 'assets/images/no-image.png' ?>" 
+                                             alt="<?= isset($item['ten_san_pham']) ? $item['ten_san_pham'] : '' ?>"
+                                             class="img-fluid" style="max-width: 80px">
+                                    </td>
+                                    <td class="align-middle"><?= isset($item['ten_san_pham']) ? $item['ten_san_pham'] : '' ?></td>
+                                    <td class="text-center align-middle">
+                                        <?= isset($item['mau_sac']) ? $item['mau_sac'] : '' ?>
+                                        <?= (isset($item['mau_sac']) && isset($item['kich_thuoc'])) ? ' - ' : '' ?>
+                                        <?= isset($item['kich_thuoc']) ? $item['kich_thuoc'] : '' ?>
+                                    </td>
+                                    <td class="text-center align-middle"><?= isset($item['so_luong']) ? $item['so_luong'] : '' ?></td>
+                                    <td class="text-right align-middle"><?= isset($item['don_gia']) ? formatPrice($item['don_gia']) : '' ?> VND</td>
+                                    <td class="text-right align-middle"><?= isset($item['thanh_tien']) ? formatPrice($item['thanh_tien']) : '' ?> VND</td>
                                 </tr>
                                 <?php endforeach; ?>
                                 <?php endif; ?>
                             </tbody>
                             <tfoot>
-                                <tr class="bg-gray-50">
-                                    <td colspan="3" class="py-2 px-4 border text-right font-semibold">Tổng tiền:</td>
-                                    <td class="py-2 px-4 border text-right font-semibold"><?= isset($donHang['tong_tien']) ? formatPrice($donHang['tong_tien']) : '' ?> VND</td>
+                                <tr class="bg-light">
+                                    <td colspan="5" class="text-right font-weight-bold">Tổng tiền:</td>
+                                    <td class="text-right font-weight-bold"><?= isset($donHang['tong_tien']) ? formatPrice($donHang['tong_tien']) : '' ?> VND</td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-sm-6">
+                                <p><strong>Mã đơn hàng:</strong> #<?= isset($donHang['ma_don_hang']) ? $donHang['ma_don_hang'] : '' ?></p>
+                                <p><strong>Người nhận:</strong> <?= isset($donHang['ten_nguoi_nhan']) ? $donHang['ten_nguoi_nhan'] : '' ?></p>
+                                <p><strong>Email:</strong> <?= isset($donHang['email_nguoi_nhan']) ? $donHang['email_nguoi_nhan'] : '' ?></p>
+                                <p><strong>Số điện thoại:</strong> <?= isset($donHang['sdt_nguoi_nhan']) ? $donHang['sdt_nguoi_nhan'] : '' ?></p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p><strong>Địa chỉ:</strong>
+                                    <?php
+                                    $diaChi = array_filter([
+                                        $donHang['tinh_thanhpho'] ?? '',
+                                        $donHang['huyen_quan'] ?? '',
+                                        $donHang['xa_phuong'] ?? '',
+                                        $donHang['dia_chi_cu_the'] ?? ''
+                                    ]);
 
+                    echo implode(', ', $diaChi); 
+                ?></p>
+                </div>
                 <!-- Nút thao tác -->
                 <div class="p-4 text-center">
                     <a href="<?= BASE_URL ?>?act=lich-su-mua-hang" class="btn btn-primary">Quay lại</a>
-                    <?php if (isset($donHang['trang_thai_don_hang_id']) && $donHang['trang_thai_don_hang_id'] === 1): ?>
+                    <?php if (isset($donHang['trang_thai_don_hang_id']) && $donHang['trang_thai_don_hang_id'] == 1): ?>
                     <a href="<?= BASE_URL ?>?act=huy-don-hang&id=<?= isset($donHang['id']) ? $donHang['id'] : '' ?>" 
                        class="btn btn-danger"
                        onclick="return confirm('Bạn xác nhận huỷ đơn hàng?')">
@@ -120,7 +152,7 @@ if (!isset($donHang)) {
             </div>
         </div>
     </div>
-</form>
+</div>
 
 <!-- Footer -->
 <?php include './views/layouts/footer.php'; ?>

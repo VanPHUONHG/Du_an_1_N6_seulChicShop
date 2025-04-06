@@ -17,6 +17,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                    <a href="<?= BASE_URL_ADMIN . '?act=form-them-tai-khoan-khach-hang'  ?>" class="btn btn-success"><i class="fas fa-plus"></i>Thêm Tài Khoản</a>
                         <div class="card-body">
                             <table id="example1" class="table table-busered table-striped">
                                 <thead>
@@ -45,7 +46,7 @@
                                             <td><?= $user['so_dien_thoai'] ?></td>
                                             <td><?= $user['ngay_tao'] ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-tai-khoan-khach-hang&id_tai_khoan_client=' . $user['id'] ?>"><button class="btn btn-warning"><i class="far fa-eye"></i></button></a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>"><button class="btn btn-warning"><i class="far fa-eye"></i></button></a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>

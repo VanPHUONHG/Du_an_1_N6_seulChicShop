@@ -8,6 +8,10 @@ ini_set('display_errors', 1);
 require_once './commons/env.php'; // Khai báo biến môi trường
 require_once './commons/function.php'; // Hàm hỗ trợ
 
+
+
+// checkLoginAdmin
+
 // Require toàn bộ file Controllers
 require_once './controllers/ClientHomeController.php';
 require_once './controllers/ClientContactController.php';
@@ -31,6 +35,8 @@ require_once './models/ClientCart.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
+
+
 
 // Kiểm tra act và trả về nội dung phù hợp
 $response = match ($act) {

@@ -20,18 +20,18 @@
 <section class="section-slide">
     <div class="wrap-slick1 rs1-slick1">
         <div class="slick1">
-            <div class="item-slick1" style="background-image: url(assets/images/slide-03.jpg);">
+            <div class="item-slick1" style="background-image: url(assets/image_da1/banner4.webp);">
                 <div class="container h-full">
-                    <div class="flex-col-l-m h-full p-t-100 p-b-30">
-                        <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
-                            <span class="ltext-202 cl2 respon2">
-                                Men Collection 2018
+                    <div class="flex-col-l-m h-full p-b-30 p-t-100">
+                        <div class="animated layer-slick1 visible-false text-white" data-appear="fadeInDown" data-delay="0">
+                            <span class="ltext-202 respon2">
+                                SEULCHICSHOP
                             </span>
                         </div>
 
-                        <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
-                            <h2 class="ltext-104 cl2 p-t-19 p-b-43 respon1">
-                                New arrivals
+                        <div class="animated layer-slick1 visible-false text-white" data-appear="fadeInUp" data-delay="800">
+                            <h2 class="p-b-43 p-t-19 ltext-104 respon1">
+                                Nâng Tầm Phong Cách
                             </h2>
                         </div>
 
@@ -45,18 +45,18 @@
                 </div>
             </div>
 
-            <div class="item-slick1" style="background-image: url(assets/images/slide-02.jpg);">
+            <div class="item-slick1" style="background-image: url(assets/image_da1/banner5.webp);">
                 <div class="container h-full">
-                    <div class="flex-col-l-m h-full p-t-100 p-b-30">
-                        <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
-                            <span class="ltext-202 cl2 respon2">
-                                Men New-Season
+                    <div class="flex-col-l-m h-full p-b-30 p-t-100">
+                        <div class="animated layer-slick1 visible-false text-white" data-appear="fadeInDown" data-delay="0">
+                            <span class="ltext-202 respon2">
+                                Elegance comes from the details
                             </span>
                         </div>
 
-                        <div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
-                            <h2 class="ltext-104 cl2 p-t-19 p-b-43 respon1">
-                                Jackets & Coats
+                        <div class="animated layer-slick1 visible-false text-white" data-appear="fadeInUp" data-delay="800">
+                            <h2 class="p-b-43 p-t-19 ltext-104 respon1">
+                                Every piece has its own signature.
                             </h2>
                         </div>
 
@@ -70,7 +70,7 @@
                 </div>
             </div>
 
-            <div class="item-slick1" style="background-image: url(assets/images/slide-04.jpg);">
+            <div class="item-slick1" style="background-image: url(assets/image_da1/baner_coc2.jpg);">
                 <div class="container h-full">
                     <div class="flex-col-l-m h-full p-t-100 p-b-30">
                         <div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
@@ -99,18 +99,21 @@
 </section>
 
 
+<br><br>
+
+
 <!-- Banner -->
-<div class="sec-banner bg0">
-    <div class="flex-w flex-c-m">
-        <div class="size-202 m-lr-auto respon4">
+<div class="flex-c-m flex-w container">
+    <div class="row justify-content-center">
+        <div class="col-md-4 p-3">
             <!-- Block1 -->
             <div class="block1 wrap-pic-w">
-                <img src="assets/images/banner-04.jpg" alt="IMG-BANNER">
+                <img src="assets/image_da1/HodiMixiKhoa1.webp" alt="IMG-BANNER" style="width: 100%; height: 500px; object-fit: cover;">
 
-                <a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                <a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                     <div class="block1-txt-child1 flex-col-l">
                         <span class="block1-name ltext-102 trans-04 p-b-8">
-                            Áo thun
+                            Áo Khoác
                         </span>
 
                         <span class="block1-info stext-102 trans-04">
@@ -127,15 +130,15 @@
             </div>
         </div>
 
-        <div class="size-202 m-lr-auto respon4">
+        <div class="col-md-4 p-3">
             <!-- Block1 -->
             <div class="block1 wrap-pic-w">
-                <img src="assets/images/banner-05.jpg" alt="IMG-BANNER">
+                <img src="assets/image_da1/Boni4.webp" alt="IMG-BANNER" style="width: 100%; height: 500px; object-fit: cover;">
 
-                <a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                <a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                     <div class="block1-txt-child1 flex-col-l">
                         <span class="block1-name ltext-102 trans-04 p-b-8">
-                            Áo khoác
+                            Áo Thun
                         </span>
 
                         <span class="block1-info stext-102 trans-04">
@@ -152,12 +155,12 @@
             </div>
         </div>
 
-        <div class="size-202 m-lr-auto respon4">
+        <div class="col-md-4 p-3">
             <!-- Block1 -->
             <div class="block1 wrap-pic-w">
-                <img src="assets/images/banner-06.jpg" alt="IMG-BANNER">
+                <img src="assets/image_da1/coc_snecker2.webp" alt="IMG-BANNER" style="width: 100%; height: 500px; object-fit: cover;">
 
-                <a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                <a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                     <div class="block1-txt-child1 flex-col-l">
                         <span class="block1-name ltext-102 trans-04 p-b-8">
                             Đồ lưu niệm
@@ -196,7 +199,7 @@
                 <li class="nav-item p-b-10">
                     <a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab">Best Seller</a>
                 </li>
-
+                
                 <li class="nav-item p-b-10">
                     <a class="nav-link" data-toggle="tab" href="#sale" role="tab">Sale</a>
                 </li>
@@ -208,121 +211,15 @@
 
             <!-- Tab panes -->
             <div class="tab-content p-t-50">
-                <!-- - -->
+                <!-- Best Seller -->
                 <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
-                    <!-- Slide2 -->
                     <div class="wrap-slick2">
                         <div class="slick2">
                             <?php foreach ($productBestSeller as $product): ?>
-                                <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                                    <!-- Block2 -->
-                                    <div class="block2">
-                                        <div class="block2-pic hov-img0">
-                                            <img src="<?= $product['hinh_anh'] ?>" alt="IMG-PRODUCT">
-                                        </div>
-
-                                        <div class="block2-txt flex-w flex-t p-t-14">
-                                            <div class="block2-txt-child1 flex-col-l ">
-                                                <a href="?act=product-detail&id=<?= $product['id'] ?>"
-                                                    class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                    <?= $product['ten_san_pham'] ?>
-                                                </a>
-                                                <span class="cl3 stext-105">
-                                                    <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
-                                                        <span
-                                                            class="text-decoration-line-through"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
-                                                        <span
-                                                            class="text-danger"><?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?></span>
-                                                    <?php else: ?>
-                                                        <?= number_format($product['gia_san_pham']) . 'đ' ?>
-                                                    <?php endif; ?>
-                                                </span>
-                                            </div>
-
-                                            <div class="block2-txt-child2 flex-r p-t-3">
-                                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                    <img class="icon-heart1 dis-block trans-04"
-                                                        src="assets/images/icons/icon-heart-01.png" alt="ICON">
-                                                    <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                                        src="assets/images/icons/icon-heart-02.png" alt="ICON">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- - -->
-                <div class="tab-pane fade" id="featured" role="tabpanel">
-                    <!-- Featured Products -->
-                    <section class="bg0 p-t-23 p-b-140">
-                        <div class="container">
-                            <div class="p-b-10">
-                                <h3 class="ltext-103 cl5">
-                                    Featured Products
-                                </h3>
-                            </div>
-
-                            <div class="flex-w flex-sb-m p-b-52">
-                                <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-                                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
-                                        data-filter="*">
-                                        All Products
-                                    </button>
-                                    <?php foreach ($categories as $category): ?>
-                                        <a href="<?= BASE_URL . '?act=danh-sach-san-pham&id_danh_muc=' . $category['id'] ?>"
-                                            class="m-r-32 m-tb-5 bor3 cl6 hov1 <?= isset($_GET['id_danh_muc']) && $_GET['id_danh_muc'] == $category['id'] ? 'how-active1' : '' ?> stext-106 trans-04">
-                                            <?= $category['ten_danh_muc'] ?>
-                                        </a>
-                                    <?php endforeach; ?>
-                                </div>
-
-                                <div class="flex-w flex-c-m m-tb-10">
-
-                                    <div
-                                        class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-                                        <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-                                        Search
-                                    </div>
-                                </div>
-
-                                <!-- Search product -->
-                                <div class="dis-none panel-search w-full p-t-10 p-b-15">
-                                    <div class="bor8 dis-flex p-l-15">
-                                        <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-                                            <i class="zmdi zmdi-search"></i>
-                                        </button>
-
-                                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text"
-                                            name="search-product" placeholder="Search">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!-- Load more -->
-                            <div class="flex-c-m flex-w w-full p-t-45">
-                                <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-                                    Load More
-                                </a>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-
-                <!-- - -->
-                <div class="tab-pane fade" id="sale" role="tabpanel">
-                    <!-- Slide2 -->
-                    <div class="wrap-slick2">
-                        <div class="slick2">
-                            <?php foreach($productSelling as $product): ?>
                             <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                                <!-- Block2 -->
                                 <div class="block2">
                                     <div class="block2-pic hov-img0">
-                                        <img src="<?= BASE_URL  . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>">
+                                        <img src="<?= $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>">
                                         <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>" 
                                            class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                             Quick View
@@ -338,7 +235,7 @@
 
                                             <span class="stext-105 cl3">
                                                 <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
-                                                    <span class="text-decoration-line-through" style="text-decoration: line-through;"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
+                                                    <span class="text-decoration-line-through"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
                                                     <span class="text-danger"><?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?></span>
                                                 <?php else: ?>
                                                     <?= number_format($product['gia_san_pham']) . 'đ' ?>
@@ -362,34 +259,31 @@
                     </div>
                 </div>
 
-                <!-- - -->
-                <div class="tab-pane fade" id="top-rate" role="tabpanel">
-                    <!-- Slide2 -->
+                <!-- Sale -->
+                <div class="tab-pane fade" id="sale" role="tabpanel">
                     <div class="wrap-slick2">
                         <div class="slick2">
-                            <?php foreach($productTopRating as $product): ?>
+                            <?php foreach($productSelling as $product): ?>
                             <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                                <!-- Block2 -->
                                 <div class="block2">
                                     <div class="block2-pic hov-img0">
-                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="IMG-PRODUCT">
-
+                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>">
                                         <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
-                                            class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                             Quick View
                                         </a>
                                     </div>
 
                                     <div class="block2-txt flex-w flex-t p-t-14">
-                                        <div class="block2-txt-child1 flex-col-l ">
-                                            <a href="product-detail.html"
-                                                class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                        <div class="block2-txt-child1 flex-col-l">
+                                            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
+                                               class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                                 <?= $product['ten_san_pham'] ?>
                                             </a>
 
                                             <span class="stext-105 cl3">
                                                 <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
-                                                    <span class="text-decoration-line-through" style="text-decoration: line-through;"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
+                                                    <span class="text-decoration-line-through"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
                                                     <span class="text-danger"><?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?></span>
                                                 <?php else: ?>
                                                     <?= number_format($product['gia_san_pham']) . 'đ' ?>
@@ -400,9 +294,57 @@
                                         <div class="block2-txt-child2 flex-r p-t-3">
                                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
                                                 <img class="icon-heart1 dis-block trans-04"
-                                                    src="assets/images/icons/icon-heart-01.png" alt="ICON">
+                                                     src="assets/images/icons/icon-heart-01.png" alt="ICON">
                                                 <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                                    src="assets/images/icons/icon-heart-02.png" alt="ICON">
+                                                     src="assets/images/icons/icon-heart-02.png" alt="ICON">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Rate -->
+                <div class="tab-pane fade" id="top-rate" role="tabpanel">
+                    <div class="wrap-slick2">
+                        <div class="slick2">
+                            <?php foreach($productTopRating as $product): ?>
+                            <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+                                <div class="block2">
+                                    <div class="block2-pic hov-img0">
+                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>">
+                                        <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
+                                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                            Quick View
+                                        </a>
+                                    </div>
+
+                                    <div class="block2-txt flex-w flex-t p-t-14">
+                                        <div class="block2-txt-child1 flex-col-l">
+                                            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
+                                               class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                                <?= $product['ten_san_pham'] ?>
+                                            </a>
+
+                                            <span class="stext-105 cl3">
+                                                <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
+                                                    <span class="text-decoration-line-through"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
+                                                    <span class="text-danger"><?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?></span>
+                                                <?php else: ?>
+                                                    <?= number_format($product['gia_san_pham']) . 'đ' ?>
+                                                <?php endif; ?>
+                                            </span>
+                                        </div>
+
+                                        <div class="block2-txt-child2 flex-r p-t-3">
+                                            <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                                <img class="icon-heart1 dis-block trans-04"
+                                                     src="assets/images/icons/icon-heart-01.png" alt="ICON">
+                                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                                     src="assets/images/icons/icon-heart-02.png" alt="ICON">
                                             </a>
                                         </div>
                                     </div>
@@ -416,7 +358,6 @@
         </div>
     </div>
 </section>
-
 
 <!-- Blog -->
 <section class="sec-blog bg0 p-t-60 p-b-90">
@@ -439,35 +380,23 @@
                     <div class="p-t-15">
                         <div class="stext-107 flex-w p-b-14">
                             <span class="m-r-3">
-                                <span class="cl4">
-                                    By
-                                </span>
-
-                                <span class="cl5">
-                                    Nancy Ward
-                                </span>
+                                <span class="cl4">By</span>
+                                <span class="cl5">Nancy Ward</span>
                             </span>
-
                             <span>
-                                <span class="cl4">
-                                    on
-                                </span>
-
-                                <span class="cl5">
-                                    July 22, 2017
-                                </span>
+                                <span class="cl4">on</span>
+                                <span class="cl5">July 22, 2017</span>
                             </span>
                         </div>
 
                         <h4 class="p-b-12">
-                            <a href="blog-detail.html" class="mtext-101 cl2 hov-cl1 trans-04">
+                            <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>" class="mtext-101 cl2 hov-cl1 trans-04">
                                 8 Inspiring Ways to Wear Dresses in the Winter
                             </a>
                         </h4>
 
                         <p class="stext-108 cl6">
-                            Duis ut velit gravida nibh bibendum commodo. Suspendisse pellentesque mattis augue id
-                            euismod. Interdum et male-suada fames
+                            Duis ut velit gravida nibh bibendum commodo. Suspendisse pellentesque mattis augue id euismod. Interdum et male-suada fames
                         </p>
                     </div>
                 </div>
@@ -484,35 +413,23 @@
                     <div class="p-t-15">
                         <div class="stext-107 flex-w p-b-14">
                             <span class="m-r-3">
-                                <span class="cl4">
-                                    By
-                                </span>
-
-                                <span class="cl5">
-                                    Nancy Ward
-                                </span>
+                                <span class="cl4">By</span>
+                                <span class="cl5">Nancy Ward</span>
                             </span>
-
                             <span>
-                                <span class="cl4">
-                                    on
-                                </span>
-
-                                <span class="cl5">
-                                    July 18, 2017
-                                </span>
+                                <span class="cl4">on</span>
+                                <span class="cl5">July 18, 2017</span>
                             </span>
                         </div>
 
                         <h4 class="p-b-12">
-                            <a href="blog-detail.html" class="mtext-101 cl2 hov-cl1 trans-04">
+                            <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>" class="mtext-101 cl2 hov-cl1 trans-04">
                                 The Great Big List of Men's Gifts for the Holidays
                             </a>
                         </h4>
 
                         <p class="stext-108 cl6">
-                            Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla
-                            in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
+                            Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
                         </p>
                     </div>
                 </div>
@@ -529,35 +446,23 @@
                     <div class="p-t-15">
                         <div class="stext-107 flex-w p-b-14">
                             <span class="m-r-3">
-                                <span class="cl4">
-                                    By
-                                </span>
-
-                                <span class="cl5">
-                                    Nancy Ward
-                                </span>
+                                <span class="cl4">By</span>
+                                <span class="cl5">Nancy Ward</span>
                             </span>
-
                             <span>
-                                <span class="cl4">
-                                    on
-                                </span>
-
-                                <span class="cl5">
-                                    July 2, 2017
-                                </span>
+                                <span class="cl4">on</span>
+                                <span class="cl5">July 2, 2017</span>
                             </span>
                         </div>
 
                         <h4 class="p-b-12">
-                            <a href="blog-detail.html" class="mtext-101 cl2 hov-cl1 trans-04">
+                            <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>" class="mtext-101 cl2 hov-cl1 trans-04">
                                 5 Winter-to-Spring Fashion Trends to Try Now
                             </a>
                         </h4>
 
                         <p class="stext-108 cl6">
-                            Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed
-                            hendrerit ligula porttitor. Fusce sit amet maximus nunc
+                            Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed hendrerit ligula porttitor. Fusce sit amet maximus nunc
                         </p>
                     </div>
                 </div>
@@ -581,7 +486,11 @@
     <div class="overlay-modal1 js-hide-modal1"></div>
 
     <div class="container">
-        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg js-show-modal1">
+        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+            <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                <img src="assets/images/icons/icon-close.png" alt="CLOSE">
+            </button>
+
             <div class="row">
                 <div class="col-md-6 col-lg-7 p-b-30">
                     <div class="p-l-25 p-r-30 p-lr-0-lg">
@@ -594,8 +503,8 @@
                                     <div class="wrap-pic-w pos-relative">
                                         <img src="assets/images/product-detail-01.jpg" alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                            href="assets/images/product-detail-01.jpg">
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" 
+                                           href="assets/images/product-detail-01.jpg">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
@@ -605,8 +514,8 @@
                                     <div class="wrap-pic-w pos-relative">
                                         <img src="assets/images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                            href="assets/images/product-detail-02.jpg">
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" 
+                                           href="assets/images/product-detail-02.jpg">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
@@ -616,8 +525,8 @@
                                     <div class="wrap-pic-w pos-relative">
                                         <img src="assets/images/product-detail-03.jpg" alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                            href="assets/images/product-detail-03.jpg">
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" 
+                                           href="assets/images/product-detail-03.jpg">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
@@ -626,7 +535,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="col-md-6 col-lg-5 p-b-30">
                     <div class="p-r-50 p-t-5 p-lr-0-lg">
                         <h4 class="mtext-105 cl2 js-name-detail p-b-14">
@@ -638,16 +547,15 @@
                         </span>
 
                         <p class="stext-102 cl3 p-t-23">
-                            Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare
-                            feugiat.
+                            Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
                         </p>
-
-                        <!--  -->
+                        
                         <div class="p-t-33">
                             <div class="flex-w flex-r-m p-b-10">
                                 <div class="size-203 flex-c-m respon6">
                                     Size
                                 </div>
+
                                 <div class="size-204 respon6-next">
                                     <div class="rs1-select2 bor8 bg0">
                                         <select class="js-select2" name="time">
@@ -656,7 +564,6 @@
                                             <option>Size M</option>
                                             <option>Size L</option>
                                             <option>Size XL</option>
-                                            <option>Size XXL</option>
                                         </select>
                                         <div class="dropDownSelect2"></div>
                                     </div>
@@ -667,6 +574,7 @@
                                 <div class="size-203 flex-c-m respon6">
                                     Color
                                 </div>
+
                                 <div class="size-204 respon6-next">
                                     <div class="rs1-select2 bor8 bg0">
                                         <select class="js-select2" name="time">
@@ -688,44 +596,36 @@
                                             <i class="fs-16 zmdi zmdi-minus"></i>
                                         </div>
 
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                            name="num-product" value="1">
+                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
 
                                         <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                             <i class="fs-16 zmdi zmdi-plus"></i>
                                         </div>
                                     </div>
 
-                                    <button
-                                        class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                         Add to cart
                                     </button>
                                 </div>
-                            </div>
+                            </div>	
                         </div>
 
-                        <!--  -->
                         <div class="flex-w flex-m p-l-100 p-t-40 respon7">
                             <div class="flex-m bor9 p-r-10 m-r-11">
-                                <a href="#"
-                                    class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-                                    data-tooltip="Add to Wishlist">
+                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
                                     <i class="zmdi zmdi-favorite"></i>
                                 </a>
                             </div>
 
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                data-tooltip="Facebook">
+                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
                                 <i class="fa fa-facebook"></i>
                             </a>
 
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                data-tooltip="Twitter">
+                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
                                 <i class="fa fa-twitter"></i>
                             </a>
 
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                data-tooltip="Google Plus">
+                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
                                 <i class="fa fa-google-plus"></i>
                             </a>
                         </div>
@@ -735,7 +635,6 @@
         </div>
     </div>
 </div>
-
 <!--===============================================================================================-->
 <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
