@@ -12,6 +12,7 @@ require_once './controllers/AdminOrderController.php';
 require_once './controllers/AdminUserController.php';
 require_once './controllers/AdminContactController.php';
 require_once './controllers/AdminBannerController.php';
+require_once './controllers/AdminCommentController.php';
 // require_once './controllers/AdminPositionController.php';
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
@@ -21,6 +22,7 @@ require_once './models/AdminUser.php';
 require_once './models/AdminContact.php';
 require_once './models/AdminPosition.php';
 require_once './models/AdminBanner.php';
+require_once './models/AdminComment.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -83,4 +85,9 @@ match ($act) {
   'them-banner' => (new AdminBannerController())->insertBanner(),
   'form-sua-banner' => (new AdminBannerController())->formEditBanner(),
   'cap-nhat-banner' => (new AdminBannerController())->updateBanner(),
+  // router comment
+  'binh-luan' => (new AdminCommentController())->listComment(),
+  'xoa-binh-luan' => (new AdminCommentController())->deleteComment(),
+  'form-sua-binh-luan' => (new AdminCommentController())->editComment(),
+  'cap-nhat-binh-luan' => (new AdminCommentController())->updateCommentStatus(),
 };

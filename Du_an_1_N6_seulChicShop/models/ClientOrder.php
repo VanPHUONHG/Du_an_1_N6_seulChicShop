@@ -10,11 +10,11 @@ class ClientOrder
         $this->conn = connectDB();
     }
 
-    public function addDonHang($tai_khoan_id, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dia_chi_nguoi_nhan, $ghi_chu, $tong_tien, $phuong_thuc_thanh_toan_id, $ngay_dat, $ma_don_hang, $trang_thai_id)
+    public function addDonHang($tai_khoan_id, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dia_chi_nguoi_nhan, $ghi_chu, $tong_tien, $phuong_thuc_thanh_toan_id, $ngay_dat, $ma_don_hang, $trang_thai_don_hang_id)
     {
         try {
-            $sql = 'INSERT INTO don_hangs (tai_khoan_id, ten_nguoi_nhan, email_nguoi_nhan, sdt_nguoi_nhan, dia_chi_nguoi_nhan, ghi_chu, tong_tien, phuong_thuc_thanh_toan_id, ngay_dat, ma_don_hang, trang_thai_id) 
-                    VALUES (:tai_khoan_id, :ten_nguoi_nhan, :email_nguoi_nhan, :sdt_nguoi_nhan, :dia_chi_nguoi_nhan, :ghi_chu, :tong_tien, :phuong_thuc_thanh_toan_id, :ngay_dat, :ma_don_hang, :trang_thai_id)';
+            $sql = 'INSERT INTO don_hangs (tai_khoan_id, ten_nguoi_nhan, email_nguoi_nhan, sdt_nguoi_nhan, dia_chi_nguoi_nhan, ghi_chu, tong_tien, phuong_thuc_thanh_toan_id, ngay_dat, ma_don_hang, trang_thai_don_hang_id) 
+                    VALUES (:tai_khoan_id, :ten_nguoi_nhan, :email_nguoi_nhan, :sdt_nguoi_nhan, :dia_chi_nguoi_nhan, :ghi_chu, :tong_tien, :phuong_thuc_thanh_toan_id, :ngay_dat, :ma_don_hang, :trang_thai_don_hang_id)';
 
             $stmt = $this->conn->prepare($sql);
 
@@ -29,7 +29,7 @@ class ClientOrder
                 ':phuong_thuc_thanh_toan_id' => $phuong_thuc_thanh_toan_id,
                 ':ngay_dat' => $ngay_dat,
                 ':ma_don_hang' => $ma_don_hang,
-                ':trang_thai_id' => $trang_thai_id
+                ':trang_thai_don_hang_id' => $trang_thai_don_hang_id
             ]);
 
             return $this->conn->lastInsertId();
@@ -126,16 +126,16 @@ class ClientOrder
         }
     }
 
-    public function updateTrangThaiDonHang($don_hang_id, $trang_thai_id)
+    public function updateTrangThaiDonHang($don_hang_id, $trang_thai_don_hang_id)
     {
         try {
-            $sql = "UPDATE don_hangs SET trang_thai_id = :trang_thai_id WHERE id =:id";
+            $sql = "UPDATE don_hangs SET trang_thai_don_hang_id = :trang_thai_don_hang_id WHERE id =:id";
 
             $stmt = $this->conn->prepare($sql);
 
             $stmt->execute([
                 ':id' => $don_hang_id,
-                ':trang_thai_id' => $trang_thai_id
+                ':trang_thai_don_hang_id' => $trang_thai_don_hang_id
             ]);
 
             return true;

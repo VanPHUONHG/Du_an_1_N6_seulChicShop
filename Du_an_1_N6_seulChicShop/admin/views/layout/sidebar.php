@@ -46,7 +46,12 @@
             <p>Quản lý sản phẩm</p>
           </a>
         </li>
-
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN . '?act=binh-luan' ?>" class="nav-link">
+            <i class="nav-icon fas fa-comment"></i>
+            <p>Quản lý bình luận</p>
+          </a>
+        </li>
         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN . '?act=don-hang' ?>" class="nav-link">
             <i class="nav-icon fas fa-file-invoice-dollar"></i>

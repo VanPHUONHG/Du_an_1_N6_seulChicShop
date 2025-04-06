@@ -58,7 +58,7 @@ if (!isset($donHang)) {
                 <div class="p-4 border-b">
                     <h3 class="font-semibold mb-2">Thông tin đơn hàng #<?= isset($donHang['ma_don_hang']) ? $donHang['ma_don_hang'] : '' ?></h3>
                     <p>Ngày đặt: <?= isset($donHang['ngay_dat']) ? $donHang['ngay_dat'] : '' ?></p>
-                    <p>Trạng thái: <?= isset($donHang['trang_thai_id']) && isset($trangThaiOrder[$donHang['trang_thai_id']]) ? $trangThaiOrder[$donHang['trang_thai_id']] : '' ?></p>
+                    <p>Trạng thái: <?= isset($donHang['trang_thai_don_hang_id']) && isset($trangThaiOrder[$donHang['trang_thai_don_hang_id']]) ? $trangThaiOrder[$donHang['trang_thai_don_hang_id']] : '' ?></p>
                     <p>Phương thức thanh toán: <?= isset($donHang['phuong_thuc_thanh_toan_id']) && isset($phuongThucThanhToan[$donHang['phuong_thuc_thanh_toan_id']]) ? $phuongThucThanhToan[$donHang['phuong_thuc_thanh_toan_id']] : '' ?></p>
                 </div>
 
@@ -109,7 +109,7 @@ if (!isset($donHang)) {
                 <!-- Nút thao tác -->
                 <div class="p-4 text-center">
                     <a href="<?= BASE_URL ?>?act=lich-su-mua-hang" class="btn btn-primary">Quay lại</a>
-                    <?php if (isset($donHang['trang_thai_id']) && $donHang['trang_thai_id'] === 1): ?>
+                    <?php if (isset($donHang['trang_thai_don_hang_id']) && $donHang['trang_thai_don_hang_id'] === 1): ?>
                     <a href="<?= BASE_URL ?>?act=huy-don-hang&id=<?= isset($donHang['id']) ? $donHang['id'] : '' ?>" 
                        class="btn btn-danger"
                        onclick="return confirm('Bạn xác nhận huỷ đơn hàng?')">

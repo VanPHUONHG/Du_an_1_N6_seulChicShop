@@ -8,29 +8,13 @@
                 </h4>
 
                 <ul>
-                    <li class="p-b-10">
-                        <a href="#" class="cl7 hov-cl1 stext-107 trans-04">
-                            Women
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="cl7 hov-cl1 stext-107 trans-04">
-                            Men
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="cl7 hov-cl1 stext-107 trans-04">
-                            Shoes
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="cl7 hov-cl1 stext-107 trans-04">
-                            Watches
-                        </a>
-                    </li>
+                    <?php foreach ($categories as $category) : ?>
+                        <li class="p-b-10">
+                            <a href="<?= BASE_URL ?>?act=danh-sach-san-pham&id_danh_muc=<?= $category['id'] ?>" class="cl7 hov-cl1 stext-107 trans-04">
+                                <?= $category['ten_danh_muc'] ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
 
@@ -41,26 +25,26 @@
 
                 <ul>
                     <li class="p-b-10">
-                        <a href="#" class="cl7 hov-cl1 stext-107 trans-04">
-                            Track Order
+                        <a href="<?= BASE_URL ?>?act=lien-he" class="cl7 hov-cl1 stext-107 trans-04">
+                            Contact
                         </a>
                     </li>
 
                     <li class="p-b-10">
-                        <a href="#" class="cl7 hov-cl1 stext-107 trans-04">
-                            Returns
+                        <a href="<?= BASE_URL ?>?act=gioi-thieu" class="cl7 hov-cl1 stext-107 trans-04">
+                            About
                         </a>
                     </li>
 
                     <li class="p-b-10">
-                        <a href="#" class="cl7 hov-cl1 stext-107 trans-04">
-                            Shipping
+                        <a href="<?= BASE_URL ?>?act=bai-viet" class="cl7 hov-cl1 stext-107 trans-04">
+                            Blog
                         </a>
                     </li>
 
                     <li class="p-b-10">
-                        <a href="#" class="cl7 hov-cl1 stext-107 trans-04">
-                            FAQs
+                        <a href="<?= BASE_URL ?>?act=san-pham" class="cl7 hov-cl1 stext-107 trans-04">
+                            Shop
                         </a>
                     </li>
                 </ul>
@@ -72,21 +56,21 @@
                 </h4>
 
                 <p class="cl7 size-201 stext-107">
-                    Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on
-                    (+1) 96 716 6879
+                    Any questions? Let us know in store at 1st, Trịnh Văn Bô, Nam Từ Liêm, Hà Nội or call us on
+                    (+84) 96 716 6879
                 </p>
 
                 <div class="p-t-27">
-                    <a href="#" class="m-r-16 cl7 fs-18 hov-cl1 trans-04">
-                        <i class="fa fa-facebook"></i>
+                    <a href="https://www.facebook.com/profile.php?id=1000089898989898989" class="m-r-16 cl7 fs-18 hov-cl1 trans-04">
+                        <i class="fab fa-facebook-f"></i>
                     </a>
 
-                    <a href="#" class="m-r-16 cl7 fs-18 hov-cl1 trans-04">
-                        <i class="fa fa-instagram"></i>
+                    <a href="https://www.instagram.com/profile.php?id=1000089898989898989" class="m-r-16 cl7 fs-18 hov-cl1 trans-04">
+                        <i class="fab fa-instagram"></i>
                     </a>
 
-                    <a href="#" class="m-r-16 cl7 fs-18 hov-cl1 trans-04">
-                        <i class="fa fa-pinterest-p"></i>
+                    <a href="https://www.pinterest.com/profile.php?id=1000089898989898989" class="m-r-16 cl7 fs-18 hov-cl1 trans-04">
+                        <i class="fab fa-pinterest-p"></i>
                     </a>
                 </div>
             </div>
@@ -140,8 +124,8 @@
                 Copyright &copy;
                 <script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i
                     class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                    target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com"
-                    target="_blank">ThemeWagon</a>
+                    target="_blank">Đặng Quang Quyền</a> &amp; distributed by <a href="https://themewagon.com"
+                    target="_blank">Ngyễn Văn Phương and Trần Tiến Đạt</a>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
             </p>
