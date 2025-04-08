@@ -199,7 +199,7 @@
                 <li class="nav-item p-b-10">
                     <a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab">Best Seller</a>
                 </li>
-                
+
                 <li class="nav-item p-b-10">
                     <a class="nav-link" data-toggle="tab" href="#sale" role="tab">Sale</a>
                 </li>
