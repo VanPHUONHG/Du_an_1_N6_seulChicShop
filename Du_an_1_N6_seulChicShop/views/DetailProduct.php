@@ -17,6 +17,7 @@
             class="cl8 hov-cl1 stext-109 trans-04">
             <?php echo $Product['ten_danh_muc'] ?>
             <i class="m-l-9 m-r-10 fa fa-angle-right" aria-hidden="true"></i>
+            
         </a>
 
         <span class="cl4 stext-109">
@@ -101,8 +102,13 @@
                                             <select class="js-select2" name="bien_the_san_pham_id" id="bien_the_san_pham_id">
                                                 <option value="">Choose an option</option>
                                                 <?php foreach ($listVariant as $variant): ?>
-                                                    <option value="<?= $variant['id'] ?>">
-                                                        <?= $variant['kich_thuoc'] . ' - ' . $variant['mau_sac'] ?></option>
+                                                    <?php if ($variant['so_luong'] > 0): ?>
+                                                        <option value="<?= $variant['id'] ?>">
+                                                            <?= $variant['kich_thuoc'] . ' - ' . $variant['mau_sac'] ?> (Còn <?= $variant['so_luong'] ?> sản phẩm)</option>
+                                                    <?php else: ?>
+                                                        <option value="<?= $variant['id'] ?>" disabled>
+                                                            <?= $variant['kich_thuoc'] . ' - ' . $variant['mau_sac'] ?> (Hết hàng)</option>
+                                                    <?php endif; ?>
                                                 <?php endforeach; ?>
                                             </select>
                                             <div class="dropDownSelect2"></div>

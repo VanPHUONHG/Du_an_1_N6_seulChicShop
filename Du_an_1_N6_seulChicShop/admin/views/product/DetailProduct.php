@@ -142,6 +142,7 @@
                                             <th>STT</th>
                                             <th>Khách hàng</th>
                                             <th>Nội dung</th>
+                                            <th>Số sao</th>
                                             <th>Ngày bình luận</th>
                                             <th>Trạng thái</th>
                                             <th>Thao tác</th>
@@ -157,6 +158,17 @@
                                                     </a>
                                                 </td>
                                                 <td><?= nl2br(htmlspecialchars($comment['noi_dung'])) ?></td>
+                                                <td>
+                                                    <?php
+                                                    for ($i = 1; $i <= 5; $i++) {
+                                                        if ($i <= $comment['danh_gia']) {
+                                                            echo '<i class="fas fa-star text-warning"></i>';
+                                                        } else {
+                                                            echo '<i class="far fa-star text-warning"></i>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </td>
                                                 <td><?= date('d/m/Y H:i', strtotime($comment['ngay_dang'])) ?></td>
                                                 <td><span class="badge <?= $comment['trang_thai'] == 1 ? 'badge-success' : 'badge-danger' ?>">
                                                     <?= $comment['trang_thai'] == 1 ? 'Hiển thị' : 'Bị ẩn' ?>
