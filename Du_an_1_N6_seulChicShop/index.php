@@ -77,8 +77,4 @@ $response = match ($act) {
     'chi-tiet-mua-hang' => (new ClientOderController())->chiTietDonHang(),
     'huy-don-hang' => (new ClientOderController())->huyDonHang(),
     default => '404 - Trang không tồn tại',
-
 };
-
-// Hiển thị nội dung
-echo $response;

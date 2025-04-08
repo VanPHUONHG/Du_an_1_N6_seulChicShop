@@ -33,8 +33,6 @@
                         <li>
                             <a href="<?= BASE_URL . "?act=lien-he" ?>">Contact</a>
                         </li>
-
-
                     </ul>
                 </div>
 
