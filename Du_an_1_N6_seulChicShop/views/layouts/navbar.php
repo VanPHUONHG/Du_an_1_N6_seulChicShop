@@ -6,8 +6,9 @@
             <nav class="p-l-45 limiter-menu-desktop">
 
                 <!-- Logo desktop -->
-                <a href="#" class="logo">
-                    <img src="assets/images/icons/logo-01.png" alt="IMG-LOGO">
+                <a href="<?= BASE_URL ?>" class="logo">
+                    <h2 style="color: #ff0000;">SEULCHIC</h2>
+                    <h2 style="color: #000000;">SHOP</h2>
                 </a>
 
                 <!-- Menu desktop -->
@@ -19,7 +20,7 @@
 
                         <li class="label1" data-label1="hot">
                             <a href="<?= BASE_URL . "?act=danh-sach-san-pham" ?>">Shop</a>
-                        </li>   
+                        </li>
 
                         <li>
                             <a href="<?= BASE_URL . "?act=bai-viet" ?>">Blog</a>
@@ -32,9 +33,6 @@
                         <li>
                             <a href="<?= BASE_URL . "?act=lien-he" ?>">Contact</a>
                         </li>
-                        <li>
-                        <a href="<?=BASE_URL.'?act=lich-su-mua-hang'?>">Oder</a>
-                        </li>
                     </ul>
                 </div>
 
@@ -46,94 +44,109 @@
                         </div>
                     </div>
 
-                    <?php 
+                    <?php
                     // Kiểm tra nếu không phải trang đăng ký hoặc đăng nhập thì hiển thị giỏ hàng
                     $currentPage = isset($_GET['act']) ? $_GET['act'] : '';
                     if ($currentPage != 'dang-nhap' && $currentPage != 'dang-ky' && isset($_SESSION['user_client'])):
-                    ?>
-                    <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                        <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04"
-                            id="cart-icon-desktop"
-                            data-notify="<?php 
-                            $itemCount = 0;
-                            if (isset($_SESSION['user_client'])) {
-                                $user = (new ClientUser())->getAccountByNameUser($_SESSION['user_client']);
-                                $cart = (new ClientCart())->getCartFromUser($user['id']);
-                                if ($cart) {
-                                    $detailCart = (new ClientCart())->getDetailCart($cart['id']);
-                                    $itemCount = count($detailCart);
+                        ?>
+                        <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
+                            <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04 t"
+                                id="cart-icon-desktop" data-notify="<?php
+                                $itemCount = 0;
+                                if (isset($_SESSION['user_client'])) {
+                                    $user = (new ClientUser())->getAccountByNameUser($_SESSION['user_client']);
+                                    $cart = (new ClientCart())->getCartFromUser($user['id']);
+                                    if ($cart) {
+                                        $detailCart = (new ClientCart())->getDetailCart($cart['id']);
+                                        foreach ($detailCart as $item) {
+                                            $itemCount++;
+                                        }
+                                    }
                                 }
-                            }
-                            echo $itemCount;
-                            ?>">
-                            <i class="zmdi zmdi-shopping-cart"></i>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                    
-                    <!-- Button login -->
-                    <div class="flex-c-m h-full p-lr-19">
-                        <div class="flex-c-m h-full ">
-                            <?php if (isset($_SESSION['user_client'])): ?>
-                                <span class="cl0 text-dark stext-107"><?= $_SESSION['user_client'] ?></span>
-                            <?php endif; ?>
-                        </div>
-                        <div class="submenu" style="position: relative;">
-                            <?php if (isset($_SESSION['user_client'])): ?>
-                                <?php
-                                $user = (new ClientUser())->getAccountByNameUser($_SESSION['user_client']);
-                                if ($user && isset($user['anh_dai_dien'])): ?>
-                                    <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
-                                        <img src="<?= $user['anh_dai_dien'] ?>"
-                                            alt="avatar"
-                                            class="rounded-circle"
-                                            style="width: 25px; height: 25px;">
-                                    </a>
+                                echo $itemCount;
+                                ?>">
+                                <i class="zmdi zmdi-shopping-cart"></i>
+                            </div>
+
+                        <?php endif; ?>
+
+                        <!-- Button login -->
+                        <div class="flex-c-m h-full p-lr-19">
+                            <div class="flex-c-m h-full ">
+                                <?php if (isset($_SESSION['user_client'])): ?>
+                                    <span class="cl0 text-dark stext-107"><?= $_SESSION['user_client'] ?></span>
+                                <?php endif; ?>
+                            </div>
+                            <div class="submenu" style="position: relative;">
+                                <?php if (isset($_SESSION['user_client'])): ?>
+                                    <?php
+                                    $user = (new ClientUser())->getAccountByNameUser($_SESSION['user_client']);
+                                    if ($user && isset($user['anh_dai_dien'])): ?>
+                                        <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
+                                            <img src="<?= $user['anh_dai_dien'] ?>" alt="avatar" class="rounded-circle"
+                                                style="width: 25px; height: 25px;">
+                                        </a>
+                                    <?php else: ?>
+                                        <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
+                                            <i class="zmdi zmdi-account"></i>
+                                        </a>
+                                    <?php endif; ?>
                                 <?php else: ?>
                                     <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
                                         <i class="zmdi zmdi-account"></i>
                                     </a>
                                 <?php endif; ?>
-                            <?php else: ?>
-                                <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
-                                    <i class="zmdi zmdi-account"></i>
-                                </a>
-                            <?php endif; ?>
-                            <div class="submenu-content"
-                                style="display: none; position: absolute; right: 0; background: #fff;  box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100;">
-                                <?php if (isset($_SESSION['user_client'])): ?>
-                                    <li style="list-style: none; padding: 8px 16px;">
-                                        <span style="color: #333;">Xin chào, <?= $_SESSION['user_client'] ?></span>
-                                    </li>
-                                    <li style="list-style: none; padding: 8px 16px;">
-                                        <a href="<?= BASE_URL . "?act=quan-ly-tai-khoan" ?>"
-                                            style="color: #333; text-decoration: none;">Account Manage</a>
-                                    </li>
-                                    <li style="list-style: none; padding: 8px 16px;">
-                                        <a href="<?= BASE_URL . "?act=dang-xuat" ?>"
-                                            style="color: #333; text-decoration: none;">Sign Out</a>
-                                    </li>
-                                <?php else: ?>
-                                    <li style="list-style: none; padding: 8px 16px;">
-                                        <a href="<?= BASE_URL . "?act=dang-nhap" ?>"
-                                            style="color: #333; text-decoration: none;">Sign In</a>
-                                    </li>
-                                    <li style="list-style: none; padding: 8px 16px;">
-                                        <a href="<?= BASE_URL . "?act=dang-ky" ?>"
-                                            style="color: #333; text-decoration: none;">Sign Up</a>
-                                    </li>
-                                <?php endif; ?>
+                                <div class="submenu-content"
+                                    style="display: none; position: absolute; right: 0; background: #fff;  box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100;">
+                                    <?php if (isset($_SESSION['user_client'])): ?>
+                                        <li style="list-style: none; padding: 8px 16px;">
+                                            <span style="color: #333;">Xin chào, <?= $_SESSION['user_client'] ?></span>
+                                        </li>
+                                        <li style="list-style: none; padding: 8px 16px;">
+                                            <a href="<?= BASE_URL . "?act=quan-ly-tai-khoan" ?>"
+                                                style="color: #333; text-decoration: none; transition: all 0.3s;"
+                                                onmouseover="this.style.color='#717fe0'"
+                                                onmouseout="this.style.color='#333'">Account Manage</a>
+                                        </li>
+
+                                        <li style="list-style: none; padding: 8px 16px;">
+                                            <a href="<?= BASE_URL . "?act=lich-su-mua-hang" ?>"
+                                                style="color: #333; text-decoration: none; transition: all 0.3s;"
+                                                onmouseover="this.style.color='#717fe0'"
+                                                onmouseout="this.style.color='#333'">Order</a>
+                                        </li>
+                                        <li style="list-style: none; padding: 8px 16px;">
+                                            <a href="<?= BASE_URL . "?act=dang-xuat" ?>"
+                                                style="color: #333; text-decoration: none; transition: all 0.3s;"
+                                                onmouseover="this.style.color='#717fe0'"
+                                                onmouseout="this.style.color='#333'">Sign Out</a>
+                                        </li>
+
+                                    <?php else: ?>
+                                        <li style="list-style: none; padding: 8px 16px;">
+                                            <a href="<?= BASE_URL . "?act=dang-nhap" ?>"
+                                                style="color: #333; text-decoration: none; transition: all 0.3s;"
+                                                onmouseover="this.style.color='#717fe0'"
+                                                onmouseout="this.style.color='#333'">Sign In</a>
+                                        </li>
+                                        <li style="list-style: none; padding: 8px 16px;">
+                                            <a href="<?= BASE_URL . "?act=dang-ky" ?>"
+                                                style="color: #333; text-decoration: none; transition: all 0.3s;"
+                                                onmouseover="this.style.color='#717fe0'"
+                                                onmouseout="this.style.color='#333'">Sign Up</a>
+                                        </li>
+                                    <?php endif; ?>
+                                </div>
+
                             </div>
+                        </div>
 
+                        <div class="flex-c-m h-full p-lr-19">
+                            <div class="p-lr-11 cl2 hov-cl1 icon-header-item js-show-sidebar trans-04">
+                                <i class="zmdi zmdi-menu"></i>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="flex-c-m h-full p-lr-19">
-                        <div class="p-lr-11 cl2 hov-cl1 icon-header-item js-show-sidebar trans-04">
-                            <i class="zmdi zmdi-menu"></i>
-                        </div>
-                    </div>
-                </div>
             </nav>
         </div>
     </div>
@@ -142,7 +155,10 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.html"><img src="assets/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+            <a href="<?= BASE_URL ?>" style="text-decoration: none;">
+                <span style="color: #ff0000;">SEULCHIC</span>
+                <span style="color: #000000;">SHOP</span>
+            </a>
         </div>
 
         <!-- Icon header -->
@@ -153,17 +169,16 @@
                 </div>
             </div>
 
-            <?php 
+            <?php
             // Kiểm tra nếu không phải trang đăng ký hoặc đăng nhập và người dùng đã đăng nhập thì hiển thị giỏ hàng
             if ($currentPage != 'dang-nhap' && $currentPage != 'dang-ky' && isset($_SESSION['user_client'])):
-            ?>
-            <div class="flex-c-m h-full p-lr-10 bor5">
-                <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04"
-                    id="cart-icon-mobile"
-                    data-notify="<?= $itemCount ?>">
-                    <i class="zmdi zmdi-shopping-cart"></i>
+                ?>
+                <div class="flex-c-m h-full p-lr-10 bor5">
+                    <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04"
+                        id="cart-icon-mobile" data-notify="<?= $itemCount ?>">
+                        <i class="zmdi zmdi-shopping-cart"></i>
+                    </div>
                 </div>
-            </div>
             <?php endif; ?>
         </div>
 
@@ -211,17 +226,36 @@
                     <span>Welcome, <?= $_SESSION['user_client'] ?></span>
                 </li>
                 <li>
-                    <a href="<?= BASE_URL . "?act=quan-ly-tai-khoan" ?>">Account Manage</a>
+                    <a href="<?= BASE_URL . "?act=quan-ly-tai-khoan" ?>"
+                        style="color: #333; text-decoration: none; transition: all 0.3s;"
+                        onmouseover="this.style.color='#717fe0'"
+                        onmouseout="this.style.color='#333'">Account Manage</a>
                 </li>
                 <li>
-                    <a href="<?= BASE_URL . "?act=dang-xuat" ?>">Sign Out</a>
+                    <a href="<?= BASE_URL . "?act=lich-su-mua-hang" ?>"
+                        style="color: #333; text-decoration: none; transition: all 0.3s;"
+                        onmouseover="this.style.color='#717fe0'"
+                        onmouseout="this.style.color='#333'">Order</a>
                 </li>
+                <li>
+                    <a href="<?= BASE_URL . "?act=dang-xuat" ?>"
+                        style="color: #333; text-decoration: none; transition: all 0.3s;"
+                        onmouseover="this.style.color='#717fe0'"
+                        onmouseout="this.style.color='#333'">Sign Out</a>
+                </li>
+
             <?php else: ?>
                 <li>
-                    <a href="<?= BASE_URL . "?act=dang-nhap" ?>">Sign In</a>
+                    <a href="<?= BASE_URL . "?act=dang-nhap" ?>"
+                        style="color: #333; text-decoration: none; transition: all 0.3s;"
+                        onmouseover="this.style.color='#717fe0'"
+                        onmouseout="this.style.color='#333'">Sign In</a>
                 </li>
                 <li>
-                    <a href="<?= BASE_URL . "?act=dang-ky" ?>">Sign Up</a>
+                    <a href="<?= BASE_URL . "?act=dang-ky" ?>"
+                        style="color: #333; text-decoration: none; transition: all 0.3s;"
+                        onmouseover="this.style.color='#717fe0'"
+                        onmouseout="this.style.color='#333'">Sign Up</a>
                 </li>
             <?php endif; ?>
         </ul>
@@ -238,7 +272,7 @@
                 <button class="flex-c-m trans-04">
                     <i class="zmdi zmdi-search"></i>
                 </button>
-                <input class="plh3" type="text" name="search" placeholder="Search...">
+                <input class="plh3" type="text" name="search" placeholder="Nhập tên sản phẩm bạn cần tìm...">
             </form>
         </div>
     </div>
@@ -264,39 +298,42 @@
                 </li>
 
                 <li class="p-b-13">
-                    <a href="#" class="cl2 hov-cl1 stext-102 trans-04">
-                        My Wishlist
+                    <a href="<?= BASE_URL . "?act=danh-sach-san-pham" ?>" class="cl2 hov-cl1 stext-102 trans-04">
+                        Products
                     </a>
                 </li>
 
                 <li class="p-b-13">
-                    <a href="#" class="cl2 hov-cl1 stext-102 trans-04">
+                    <a href="<?= isset($_SESSION['user_client']) ? BASE_URL . '?act=quan-ly-tai-khoan' : BASE_URL . '?act=dang-nhap' ?>"
+                        class="cl2 hov-cl1 stext-102 trans-04">
                         My Account
                     </a>
                 </li>
 
                 <li class="p-b-13">
-                    <a href="#" class="cl2 hov-cl1 stext-102 trans-04">
+                    <a href="<?= BASE_URL . "?act=gio-hang" ?>" class="cl2 hov-cl1 stext-102 trans-04">
                         Track Oder
                     </a>
                 </li>
 
                 <li class="p-b-13">
-                    <a href="#" class="cl2 hov-cl1 stext-102 trans-04">
-                        Refunds
+                    <a href="<?= BASE_URL . "?act=gioi-thieu" ?>" class="cl2 hov-cl1 stext-102 trans-04">
+                        About
                     </a>
                 </li>
 
                 <li class="p-b-13">
-                    <a href="#" class="cl2 hov-cl1 stext-102 trans-04">
-                        Help & FAQs
+                    <a href="<?= BASE_URL . "?act=lien-he" ?>" class="cl2 hov-cl1 stext-102 trans-04">
+                        Contact
                     </a>
                 </li>
+
+
             </ul>
 
             <div class="p-tb-30 w-full sidebar-gallery">
                 <span class="cl5 mtext-101">
-                    @ CozaStore
+                    @ SEULCHIC SHOP
                 </span>
 
                 <div class="flex-sb flex-w p-t-36 gallery-lb">
@@ -362,9 +399,15 @@
                 </span>
 
                 <p class="p-t-27 cl6 stext-108">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur maximus vulputate hendrerit.
-                    Praesent faucibus erat vitae rutrum gravida. Vestibulum tempus mi enim, in molestie sem fermentum
-                    quis.
+                    ✨ Sản phẩm đa dạng, phong cách độc đáo: Từ quần áo thời trang hiện đại, nhẹ nhàng đến đồ lưu niệm dễ
+                    thương, ý nghĩa, chúng tôi luôn cập nhật xu hướng mới nhất để mang đến cho bạn những trải nghiệm mua
+                    sắm thú vị và chất lượng. 🎁 Quà tặng và kỷ niệm – nhỏ xinh nhưng đầy ý nghĩa: Bạn muốn tìm một món
+                    quà tặng bạn bè, người thân hoặc lưu giữ khoảnh khắc đáng nhớ? SEULCHIC SHOP có rất nhiều lựa chọn
+                    sáng tạo, mang đậm dấu ấn riêng để bạn dễ dàng trao gửi tình cảm. 👗 Thời trang – tự tin là chính
+                    mình: Dù bạn yêu phong cách ngọt ngào, nữ tính, hay năng động, cá tính, SEULCHIC SHOP đều có những
+                    mẫu trang phục phù hợp với cá tính và gu thẩm mỹ của bạn. 🛍️ Mua sắm dễ dàng – Dịch vụ tận tâm:
+                    Chúng tôi không chỉ cung cấp sản phẩm mà còn mang đến trải nghiệm mua sắm tận tâm, với chính sách
+                    đổi trả linh hoạt, tư vấn nhiệt tình và hỗ trợ giao hàng toàn quốc.
                 </p>
             </div>
         </div>
@@ -373,119 +416,119 @@
 
 <!-- JavaScript to update cart count -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Function to update cart count
-    function updateCartCount(count) {
-        const cartIconDesktop = document.getElementById('cart-icon-desktop');
-        const cartIconMobile = document.getElementById('cart-icon-mobile');
-        
-        if (cartIconDesktop) {
-            cartIconDesktop.setAttribute('data-notify', count);
-        }
-        
-        if (cartIconMobile) {
-            cartIconMobile.setAttribute('data-notify', count);
-        }
-    }
-    
-    // Listen for custom event when item is added to cart
-    document.addEventListener('cartUpdated', function(e) {
-        if (e.detail && e.detail.count !== undefined) {
-            updateCartCount(e.detail.count);
-        }
-    });
-    
-    // Example of how to trigger the event when adding to cart
-    // This should be called in your add-to-cart functionality
-    function addToCart() {
-        // Your add to cart logic
-        
-        // Then dispatch the event with the new count
-        const currentCount = parseInt(document.getElementById('cart-icon-desktop')?.getAttribute('data-notify') || '0');
-        const newCount = currentCount + 1;
-        
-        document.dispatchEvent(new CustomEvent('cartUpdated', {
-            detail: {
-                count: newCount
+    document.addEventListener('DOMContentLoaded', function () {
+        // Function to update cart count
+        function updateCartCount(count) {
+            const cartIconDesktop = document.getElementById('cart-icon-desktop');
+            const cartIconMobile = document.getElementById('cart-icon-mobile');
+
+            if (cartIconDesktop) {
+                cartIconDesktop.setAttribute('data-notify', count);
             }
-        }));
-    }
-    
-    // Expose the function globally if needed
-    window.updateCartCount = updateCartCount;
-    
-    // Hiệu ứng chuyển màu menu khi chuyển trang
-    function setActiveMenuItem() {
-        // Lấy URL hiện tại
-        const currentUrl = window.location.href;
-        const urlParams = new URLSearchParams(window.location.search);
-        const currentPage = urlParams.get('act') || 'home';
-        
-        // Xóa class active-menu từ tất cả các menu items
-        const menuItems = document.querySelectorAll('.main-menu > li');
-        menuItems.forEach(item => {
-            item.classList.remove('active-menu');
+
+            if (cartIconMobile) {
+                cartIconMobile.setAttribute('data-notify', count);
+            }
+        }
+
+        // Listen for custom event when item is added to cart
+        document.addEventListener('cartUpdated', function (e) {
+            if (e.detail && e.detail.count !== undefined) {
+                updateCartCount(e.detail.count);
+            }
         });
-        
-        // Thêm class active-menu vào menu item tương ứng với trang hiện tại
-        menuItems.forEach(item => {
-            const link = item.querySelector('a');
-            if (link) {
-                const href = link.getAttribute('href');
-                
-                // Kiểm tra trang hiện tại và gán active-menu
-                if (currentPage === 'home' && href === '<?= BASE_URL ?>') {
-                    item.classList.add('active-menu');
-                } else if (currentPage === 'danh-sach-san-pham' && href.includes('danh-sach-san-pham')) {
-                    item.classList.add('active-menu');
-                } else if (currentPage === 'gio-hang' && href.includes('gio-hang')) {
-                    item.classList.add('active-menu');
-                } else if (currentPage === 'bai-viet' && href.includes('bai-viet')) {
-                    item.classList.add('active-menu');
-                } else if (currentPage === 'gioi-thieu' && href.includes('gioi-thieu')) {
-                    item.classList.add('active-menu');
-                } else if (currentPage === 'lien-he' && href.includes('lien-he')) {
-                    item.classList.add('active-menu');
+
+        // Example of how to trigger the event when adding to cart
+        // This should be called in your add-to-cart functionality
+        function addToCart() {
+            // Your add to cart logic
+
+            // Then dispatch the event with the new count
+            const currentCount = parseInt(document.getElementById('cart-icon-desktop')?.getAttribute('data-notify') || '0');
+            const newCount = currentCount + 1;
+
+            document.dispatchEvent(new CustomEvent('cartUpdated', {
+                detail: {
+                    count: newCount
                 }
-            }
-        });
-        
-        // Cũng áp dụng cho menu mobile
-        const mobileMenuItems = document.querySelectorAll('.main-menu-m > li');
-        mobileMenuItems.forEach(item => {
-            const link = item.querySelector('a');
-            if (link) {
-                const href = link.getAttribute('href');
-                
-                if (currentPage === 'home' && href === '<?= BASE_URL ?>') {
-                    link.classList.add('active-color');
-                } else if (currentPage === 'danh-sach-san-pham' && href.includes('danh-sach-san-pham')) {
-                    link.classList.add('active-color');
-                } else if (currentPage === 'gio-hang' && href.includes('gio-hang')) {
-                    link.classList.add('active-color');
-                } else if (currentPage === 'bai-viet' && href.includes('bai-viet')) {
-                    link.classList.add('active-color');
-                } else if (currentPage === 'gioi-thieu' && href.includes('gioi-thieu')) {
-                    link.classList.add('active-color');
-                } else if (currentPage === 'lien-he' && href.includes('lien-he')) {
-                    link.classList.add('active-color');
+            }));
+        }
+
+        // Expose the function globally if needed
+        window.updateCartCount = updateCartCount;
+
+        // Hiệu ứng chuyển màu menu khi chuyển trang
+        function setActiveMenuItem() {
+            // Lấy URL hiện tại
+            const currentUrl = window.location.href;
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentPage = urlParams.get('act') || 'home';
+
+            // Xóa class active-menu từ tất cả các menu items
+            const menuItems = document.querySelectorAll('.main-menu > li');
+            menuItems.forEach(item => {
+                item.classList.remove('active-menu');
+            });
+
+            // Thêm class active-menu vào menu item tương ứng với trang hiện tại
+            menuItems.forEach(item => {
+                const link = item.querySelector('a');
+                if (link) {
+                    const href = link.getAttribute('href');
+
+                    // Kiểm tra trang hiện tại và gán active-menu
+                    if (currentPage === 'home' && href === '<?= BASE_URL ?>') {
+                        item.classList.add('active-menu');
+                    } else if (currentPage === 'danh-sach-san-pham' && href.includes('danh-sach-san-pham')) {
+                        item.classList.add('active-menu');
+                    } else if (currentPage === 'gio-hang' && href.includes('gio-hang')) {
+                        item.classList.add('active-menu');
+                    } else if (currentPage === 'bai-viet' && href.includes('bai-viet')) {
+                        item.classList.add('active-menu');
+                    } else if (currentPage === 'gioi-thieu' && href.includes('gioi-thieu')) {
+                        item.classList.add('active-menu');
+                    } else if (currentPage === 'lien-he' && href.includes('lien-he')) {
+                        item.classList.add('active-menu');
+                    }
                 }
-            }
-        });
-    }
-    
-    // Thêm CSS cho active-color
-    const style = document.createElement('style');
-    style.textContent = `
+            });
+
+            // Cũng áp dụng cho menu mobile
+            const mobileMenuItems = document.querySelectorAll('.main-menu-m > li');
+            mobileMenuItems.forEach(item => {
+                const link = item.querySelector('a');
+                if (link) {
+                    const href = link.getAttribute('href');
+
+                    if (currentPage === 'home' && href === '<?= BASE_URL ?>') {
+                        link.classList.add('active-color');
+                    } else if (currentPage === 'danh-sach-san-pham' && href.includes('danh-sach-san-pham')) {
+                        link.classList.add('active-color');
+                    } else if (currentPage === 'gio-hang' && href.includes('gio-hang')) {
+                        link.classList.add('active-color');
+                    } else if (currentPage === 'bai-viet' && href.includes('bai-viet')) {
+                        link.classList.add('active-color');
+                    } else if (currentPage === 'gioi-thieu' && href.includes('gioi-thieu')) {
+                        link.classList.add('active-color');
+                    } else if (currentPage === 'lien-he' && href.includes('lien-he')) {
+                        link.classList.add('active-color');
+                    }
+                }
+            });
+        }
+
+        // Thêm CSS cho active-color
+        const style = document.createElement('style');
+        style.textContent = `
         .active-color {
             color: #6c7ae0 !important;
         }
     `;
-    document.head.appendChild(style);
-    
-    // Gọi hàm khi trang được tải
-    setActiveMenuItem();
-});
+        document.head.appendChild(style);
+
+        // Gọi hàm khi trang được tải
+        setActiveMenuItem();
+    });
 </script>
 
 <!-- Cart -->

@@ -7,6 +7,22 @@
 <!-- Mini Cart -->
 <?php include './views/layouts/miniCart.php'; ?>
 
+<!-- Hiển thị thông báo lỗi và thành công -->
+<?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])): ?>
+    <div class="alert alert-danger">
+        <?php foreach ($_SESSION['error'] as $error): ?>
+            <p><?= $error ?></p>
+        <?php endforeach; ?>
+    </div>
+    <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['success'])): ?>
+    <div class="alert alert-success">
+        <p><?= $_SESSION['success'] ?></p>
+    </div>
+    <?php unset($_SESSION['success']); ?>
+<?php endif; ?>
 
 <!-- Title page -->
 <section class="bg-img1 p-lr-15 p-tb-92 txt-center" style="background-image: url('assets/images/bg-01.jpg');">
@@ -25,9 +41,6 @@
                     <h4 class="p-b-30 cl2 mtext-105 txt-center">
                         Liên hệ với chúng tôi
                     </h4>
-                    <?php if (isset($_SESSION['thong_bao'])): ?>
-                        <p class="text-success"><?= $_SESSION['thong_bao'] ?></p>
-                    <?php endif; ?>
                     <div class="m-b-20 bor8 how-pos4-parent">
                         <input class="p-l-62 p-r-30 cl2 plh3 size-116 stext-111" type="text" name="ho_ten"
                             placeholder="Họ Và Tên" required>
@@ -54,7 +67,7 @@
                             placeholder="Tin nhắn" required></textarea>
                     </div>
                     <input type="hidden" name="trang_thai" value="0">
-                    <input type="hidden" name="tai_khoan_id" value="20">
+                    <input type="hidden" name="tai_khoan_id" value="<?= $_SESSION['tai_khoan_id'] ?? '' ?>">
 
                     <button type="submit"
                         class="flex-c-m p-lr-15 bg3 bor1 cl0 hov-btn3 pointer size-121 stext-101 trans-04">
@@ -75,7 +88,11 @@
                         </span>
 
                         <p class="p-t-18 cl6 size-213 stext-115">
+<<<<<<< HEAD
+                        2PQW+6JJ Tòa nhà FPT Polytechnic., Cổng số 2, 13 P. Trịnh Văn Bô, Xuân Phương, Nam Từ Liêm, Hà Nội 100000
+=======
                             Số 1, Trịnh Văn Bô, Nam Từ Liêm, Hà Nội
+>>>>>>> 03ac13452c07dcb88f36412834cdff70283adac5
                         </p>
                     </div>
                 </div>
@@ -91,7 +108,12 @@
                         </span>
 
                         <p class="p-t-18 cl1 size-213 stext-115">
+<<<<<<< HEAD
+                            <a href="tel:0345678910">0345678910</a>
+                           
+=======
                             (+84) 96 716 6879
+>>>>>>> 03ac13452c07dcb88f36412834cdff70283adac5
                         </p>
                     </div>
                 </div>
@@ -107,7 +129,11 @@
                         </span>
 
                         <p class="p-t-18 cl1 size-213 stext-115">
+<<<<<<< HEAD
+                            pro1014@gmail.com
+=======
                             seulchicshop@gmail.com
+>>>>>>> 03ac13452c07dcb88f36412834cdff70283adac5
                         </p>
                     </div>
                 </div>

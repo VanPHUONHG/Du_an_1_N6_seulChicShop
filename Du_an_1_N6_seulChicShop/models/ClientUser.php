@@ -47,7 +47,7 @@ class ClientUser
             return "Có lỗi xảy ra, vui lòng thử lại sau";
         }
     }
-    public function addUserClient($ten_tai_khoan, $email, $mat_khau, $anh_dai_dien, $so_dien_thoai, $chuc_vu_id, $trang_thai)
+    public function addUserClient($ten_tai_khoan, $email, $mat_khau, $so_dien_thoai, $chuc_vu_id, $trang_thai)
     {
         try {
             // Validate input dang ky
@@ -73,18 +73,12 @@ class ClientUser
 
             $ngay_tao = date('Y-m-d H:i:s');
 
-            // them anh dai dien vao database
-            if (!empty($anh_dai_dien)) {
-                $sql = "INSERT INTO tai_khoans(ten_tai_khoan, email, mat_khau, anh_dai_dien, so_dien_thoai, ngay_tao, chuc_vu_id, trang_thai) 
-                    VALUES(:ten_tai_khoan, :email, :mat_khau, :anh_dai_dien, :so_dien_thoai, :ngay_tao, :chuc_vu_id, :trang_thai)";
-            } else {
-                $sql = "INSERT INTO tai_khoans(ten_tai_khoan, email, mat_khau, so_dien_thoai, ngay_tao, chuc_vu_id, trang_thai) 
+
+            $sql = "INSERT INTO tai_khoans(ten_tai_khoan, email, mat_khau, so_dien_thoai, ngay_tao, chuc_vu_id, trang_thai) 
                     VALUES(:ten_tai_khoan, :email, :mat_khau, :so_dien_thoai, :ngay_tao, :chuc_vu_id, :trang_thai)";
-            }
 
             $stmt = $this->conn->prepare($sql);
-
-            $params = [
+            $stmt->execute([
                 ':ten_tai_khoan' => $ten_tai_khoan,
                 ':email' => $email,
                 ':mat_khau' => $mat_khau,
@@ -92,21 +86,29 @@ class ClientUser
                 ':ngay_tao' => $ngay_tao,
                 ':chuc_vu_id' => $chuc_vu_id,
                 ':trang_thai' => $trang_thai
-            ];
-
-            if (!empty($anh_dai_dien)) {
-                $params[':anh_dai_dien'] = $anh_dai_dien;
-            }
-
-            if ($stmt->execute($params)) {
-                return true;
-            }
-            return "Không thể thêm người dùng";
+            ]);
+            return true;
         } catch (PDOException $e) {
-            error_log("Add user error: " . $e->getMessage());
-            return "Có lỗi xảy ra, vui lòng thử lại sau";
+            echo 'lỗi' . $e->getMessage();
         }
     }
+    
+     // Thay Đổi thông tin cá nhân
+    // public function getUserformEmail($email)
+    // {
+    //     try {
+    //         // Sử dụng prepared statement với dấu :email
+    //         $sql = 'SELECT * FROM tai_khoans WHERE email = :email';
+    //         $stmt = $this->conn->prepare($sql);
+    //         // Thực thi câu lệnh và truyền tham số
+    //         $stmt->execute([':email' => $email]);
+    //         // Sử dụng fetch() để lấy một bản ghi duy nhất
+    //         return $stmt->fetch();
+    //     } catch (Exception $e) {
+    //         echo "Lỗi Truy Vấn: " . $e->getMessage();
+    //     }
+    // }
+    
     public function getAccountByNameUser($ten_tai_khoan)
     {
         try {

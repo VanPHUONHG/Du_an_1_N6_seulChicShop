@@ -46,7 +46,12 @@
             <p>Quản lý sản phẩm</p>
           </a>
         </li>
-
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN . '?act=binh-luan' ?>" class="nav-link">
+            <i class="nav-icon fas fa-comment"></i>
+            <p>Quản lý bình luận</p>
+          </a>
+        </li>
         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN . '?act=don-hang' ?>" class="nav-link">
             <i class="nav-icon fas fa-file-invoice-dollar"></i>
@@ -68,6 +73,21 @@
             <p>Quản lý liên hệ</p>
           </a>
         </li>
+        
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN . '?act=danh-sach-khuyenMai' ?>" class="nav-link">
+          <i class="fas fa-ticket-alt"></i>
+            <p>Quản lý Khuyến Mại</p>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN . '?act=danh-sach-Posts' ?>" class="nav-link">
+          <i class="fas fa-file-alt"></i>
+            <p>Quản lý Bài Viết</p>
+          </a>
+        </li>
+
 
         <li class="nav-item">
           <a href="#" class="nav-link">

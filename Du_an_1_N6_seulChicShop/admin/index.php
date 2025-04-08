@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 // Require file Common
 require_once '../commons/env.php'; // Khai báo biến môi trường
 require_once '../commons/function.php'; // Hàm hỗ trợ
@@ -12,7 +13,11 @@ require_once './controllers/AdminOrderController.php';
 require_once './controllers/AdminUserController.php';
 require_once './controllers/AdminContactController.php';
 require_once './controllers/AdminBannerController.php';
+require_once './controllers/AdminCommentController.php';
 // require_once './controllers/AdminPositionController.php';
+require_once './controllers/AdminKhuyenMaiController.php'; // Đã sửa tên class
+require_once './controllers/AdminPostsController.php';
+
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminProduct.php';
@@ -21,11 +26,12 @@ require_once './models/AdminUser.php';
 require_once './models/AdminContact.php';
 require_once './models/AdminPosition.php';
 require_once './models/AdminBanner.php';
+require_once './models/AdminComment.php';
+require_once './models/AdminKhuyenMai.php';
+require_once './models/AdminPosts.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
-
-// Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
 match ($act) {
   '/' => (new AdminDashboardController())->trangChu(),
@@ -44,8 +50,11 @@ match ($act) {
   'them-san-pham' => (new AdminProductController())->createProduct(),
   'form-sua-san-pham' => (new AdminProductController())->formEditProduct(),
   'sua-san-pham' => (new AdminProductController())->editProduct(),
-
-
+  'form-them-bien-the-san-pham' => (new AdminProductController())->formAddVariantProduct(),
+  'them-bien-the-san-pham' => (new AdminProductController())->createVariantProduct(),
+  'xoa-bien-the' => (new AdminProductController())->destroyProductVariant(),
+  'form-sua-bien-the' => (new AdminProductController())->formEditVariantProduct(),
+  'sua-bien-the' => (new AdminProductController())->editVariantProduct(),
   // router order
   'don-hang' => (new AdminOrderController())->listOrder(),
   'form-sua-don-hang' => (new AdminOrderController())->formEditOrder(),
@@ -64,7 +73,16 @@ match ($act) {
   // router user client
   'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
   'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->listUserClientById(),
+  'xoa-tai-khoan-khach-hang' => (new AdminUserController())->destroyUserClient(),
+  'form-sua-tai-khoan-khach-hang' => (new AdminUserController())->formEditUserClient(),
+  'sua-tai-khoan-khach-hang' => (new AdminUserController())->updateUserClient(),
+  'form-them-tai-khoan-khach-hang' => (new AdminUserController())->formAddUserClient(),
+  'them-tai-khoan-khach-hang' => (new AdminUserController())->insertUserClient(),
 
+  'binh-luan' => (new AdminCommentController())->listComment(),
+  'xoa-binh-luan' => (new AdminCommentController())->deleteComment(),
+  'form-sua-binh-luan' => (new AdminCommentController())->editComment(),
+  'cap-nhat-binh-luan' => (new AdminCommentController())->updateCommentStatus(),
   // router contact
   'lien-he' => (new AdminContactController())->listContact(),
   'form-chinh-sua-lien-he' => (new AdminContactController())->formEditContact(),
@@ -79,4 +97,26 @@ match ($act) {
   'them-banner' => (new AdminBannerController())->insertBanner(),
   'form-sua-banner' => (new AdminBannerController())->formEditBanner(),
   'cap-nhat-banner' => (new AdminBannerController())->updateBanner(),
+
+  // router khuyến mại admin
+  'danh-sach-khuyenMai' => (new AdminKhuyenMaiController())->listKhuyenMai(),
+  'chi-tiet-khuyenMai' => (new AdminKhuyenMaiController())->detailKhuyenMai(),
+  'xoa-khuyenMai' => (new AdminKhuyenMaiController())->destroyKhuyenMai(),
+  'form-them-khuyenMai' => (new AdminKhuyenMaiController())->formAddKhuyenMai(),
+  'them-khuyenMai' => (new AdminKhuyenMaiController())->insertKhuyenMai(),
+  'form-sua-khuyenMai' => (new AdminKhuyenMaiController())->formEditKhuyenMai(),
+  'cap-nhat-khuyenMai' => (new AdminKhuyenMaiController())->updateKhuyenMai(),
+
+  // router Bài viết admin
+  'danh-sach-Posts' => (new AdminPostsController())->listPosts(),
+  'chi-tiet-Posts' => (new AdminPostsController())->detailPosts(),
+  'xoa-Posts' => (new AdminPostsController())->destroyPosts(),
+  'form-them-Posts' => (new AdminPostsController())->formAddPosts(),
+  'them-Posts' => (new AdminPostsController())->insertPosts(),
+  'form-sua-Posts' => (new AdminPostsController())->formEditPosts(),
+  'cap-nhat-Posts' => (new AdminPostsController())->updatePosts(),
+  'sua-Posts' => (new AdminPostsController())->updatePosts(),
+
+  // Trường hợp mặc định nếu không khớp với bất kỳ route nào
+  default => die("Lỗi: Hành động không hợp lệ!"),
 };

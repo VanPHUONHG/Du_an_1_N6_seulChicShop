@@ -38,6 +38,7 @@
                                         <th>Tên sản phẩm</th>
                                         <th>Ảnh sản phẩm</th>
                                         <th>Giá tiền</th>
+                                        <th>Giá khuyến mãi</th>
                                         <th>Số lượng</th>
                                         <th>Danh mục</th>
                                         <th>Trạng thái</th>
@@ -46,32 +47,33 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($listProduct as $key => $product): ?>
-
                                         <tr>
                                             <td><?= $key + 1 ?></td>
                                             <td><?= $product['ten_san_pham'] ?></td>
                                             <td>
                                                 <img src="<?= BASE_URL . $product['hinh_anh'] ?>" style="width:100px" alt=""
-                                                    onerror="this.onerror=null; this.src='https://tse2.mm.bing.net/th?id=OIP.DAwq4ufTfSCkcq3O8q_6AgHaHa&pid=Api&P=0&h=180'">
+                                                        onerror="this.onerror=null; this.src='https://tse2.mm.bing.net/th?id=OIP.DAwq4ufTfSCkcq3O8q_6AgHaHa&pid=Api&P=0&h=180'">
                                             </td>
-                                            <td><?= $product['gia_san_pham'] ?></td>
+                                            <td><?= isset($product['gia']) ? number_format($product['gia']).'đ' : number_format($product['gia_san_pham']).'đ' ?></td>
+                                            <td><?= isset($product['gia_khuyen_mai']) ? number_format($product['gia_khuyen_mai']).'đ' : number_format($product['gia_san_pham_khuyen_mai']).'đ' ?></td>
                                             <td><?= $product['so_luong'] ?></td>
                                             <td><?= $product['ten_danh_muc'] ?></td>
                                             <td><?= $product['trang_thai'] == 1 ? 'Còn hàng' : 'Hết hàng'; ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-san-pham&id_san_pham=' . $product['id'] ?>">
-                                                    <button class="btn btn-warning"><i class="far fa-eye"></i><!-- Icon xem chi tiết --></button>
+                                                <a href="<?= BASE_URL_ADMIN.'?act=chi-tiet-san-pham&id_san_pham=' . $product['id'] ?>" class="btn btn-warning">
+                                                    <i class="far fa-eye"></i>
                                                 </a>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=form-sua-san-pham&id_san_pham=' . $product['id'] ?>"><button class="btn btn-primary"><i class="fas fa-edit"><!-- Icon sửa --></i></button>
+                                                <a href="<?= BASE_URL_ADMIN.'?act=form-sua-san-pham&id_san_pham='. $product['id'] ?>" class="btn btn-primary">
+                                                    <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=xoa-san-pham&id_san_pham=' . $product['id'] ?>"
-                                                    onclick="return confirm('Bạn có chắc chắn xóa không')"><button class="btn btn-danger"><i class="fas fa-trash"></i> <!-- Icon xóa --></button>
-
+                                                <a href="<?= BASE_URL_ADMIN . '?act=xoa-san-pham&id_san_pham=' . $product['id'] ?>" 
+                                                   onclick="return confirm('Bạn có chắc chắn xóa không')" class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>
                                 </tbody>
-
                             </table>
                         </div>
                         <!-- /.card-body -->
@@ -111,5 +113,4 @@
     });
 </script>
 </body>
-
 </html>

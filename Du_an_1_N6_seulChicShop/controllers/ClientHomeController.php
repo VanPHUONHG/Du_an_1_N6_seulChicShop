@@ -2,29 +2,31 @@
 class ClientHomeController
 {
     public $ModelClientUser;
+    public $ModelClientProduct;
     public function __construct()
     {
         $this->ModelClientUser = new ClientUser();
+        $this->ModelClientProduct = new ClientProduct();
     }
     public function index()
     {
+        $id_danh_muc = $_GET['id_danh_muc'] ?? null;
+        $productBestSeller = $this->ModelClientProduct->getProductBestSeller();
+        $productSelling = $this->ModelClientProduct->getProductSelling();
+        $productTopRating = $this->ModelClientProduct->getProductTopRating();
+        $productNew = $this->ModelClientProduct->getProductNew();
+        $id_danh_muc = $_GET['id_danh_muc'] ?? null;
+        $categories = $this->ModelClientProduct->getCategory();
+        if ($id_danh_muc) {
+            $products = $this->ModelClientProduct->getProductByCategory($id_danh_muc);
+        } else {
+            $products = $this->ModelClientProduct->getAllProduct();
+        }
         require_once './views/Home.php';
     }
-    public function listProduct()
-    {
-        require_once './views/listProduct.php';
-    }
-    // public function contact()
-    // {
-    //     require_once './views/Contact.php';
-    // }
     public function about()
     {
         require_once './views/About.php';
-    }
-    public function detailProduct()
-    {
-        require_once './views/DetailProduct.php';
     }
     public function blog()
     {
@@ -81,13 +83,6 @@ class ClientHomeController
             $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
             $chuc_vu_id = 2; // Set default role as client
             $trang_thai = 1; // Set default status as active
-            $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
-            $thong_bao = '';
-            $file_thumb = null;
-
-            if ($anh_dai_dien && $anh_dai_dien['error'] === UPLOAD_ERR_OK) {
-                $file_thumb = uploadFile($anh_dai_dien, folderUpload: './uploads/');
-            }
 
             $errors = [];
 
@@ -113,7 +108,6 @@ class ClientHomeController
                         $ten_tai_khoan,
                         $email,
                         $mat_khau,
-                        $file_thumb,
                         $so_dien_thoai,
                         $chuc_vu_id,
                         $trang_thai
@@ -177,7 +171,7 @@ class ClientHomeController
             if (empty($mat_khau)) {
                 $errors['mat_khau'] = 'Vui lòng nhập mật khẩu';
             }
-            
+
             if ($anh_dai_dien && $anh_dai_dien['error'] === UPLOAD_ERR_OK) {
                 deleteFile($old_file);
                 $file_thumb = uploadFile($anh_dai_dien, folderUpload: './uploads/');
@@ -186,7 +180,7 @@ class ClientHomeController
             }
             if (empty($errors)) {
                 $this->ModelClientUser->updateUser($ten_tai_khoan, $email, $file_thumb, $so_dien_thoai, $mat_khau);
-                header('Location: ' . BASE_URL );
+                header('Location: ' . BASE_URL);
                 exit();
             } else {
                 $_SESSION['errors'] = $errors;
