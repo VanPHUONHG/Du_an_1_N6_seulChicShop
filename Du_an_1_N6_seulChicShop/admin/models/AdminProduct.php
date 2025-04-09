@@ -110,18 +110,18 @@ class AdminProduct
 
     
 
-    public function insertProduct($ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh)
+    public function insertProduct($ten_san_pham, $gia_san_pham, $gia_san_pham_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh)
     {
         try {
             // Insert main product
             $sql = 'INSERT INTO san_phams (ten_san_pham, gia_san_pham, gia_san_pham_khuyen_mai, so_luong, ngay_nhap, danh_muc_id, trang_thai, mo_ta, hinh_anh)
-                VALUES (:ten_san_pham, :gia_san_pham, :gia_khuyen_mai, :so_luong, :ngay_nhap, :danh_muc_id, :trang_thai, :mo_ta, :hinh_anh)';
+                VALUES (:ten_san_pham, :gia_san_pham, :gia_san_pham_khuyen_mai, :so_luong, :ngay_nhap, :danh_muc_id, :trang_thai, :mo_ta, :hinh_anh)';
 
             $stmt = $this->conn->prepare($sql);
 
             $stmt->bindParam(':ten_san_pham', $ten_san_pham);
             $stmt->bindParam(':gia_san_pham', $gia_san_pham);
-            $stmt->bindParam(':gia_khuyen_mai', $gia_khuyen_mai);
+            $stmt->bindParam(':gia_san_pham_khuyen_mai', $gia_san_pham_khuyen_mai);
             $stmt->bindParam(':so_luong', $so_luong);
             $stmt->bindParam(':ngay_nhap', $ngay_nhap);
             $stmt->bindParam(':danh_muc_id', $danh_muc_id);
@@ -166,13 +166,13 @@ class AdminProduct
         }
     }
 
-    public function updateProduct($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh)
+    public function updateProduct($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_san_pham_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh)
     {
         try {
             $sql = 'UPDATE san_phams SET 
                         ten_san_pham = :ten_san_pham,
                         gia_san_pham = :gia_san_pham,
-                        gia_san_pham_khuyen_mai = :gia_khuyen_mai,
+                        gia_san_pham_khuyen_mai = :gia_san_pham_khuyen_mai,
                         so_luong = :so_luong,
                         ngay_nhap = :ngay_nhap,
                         danh_muc_id = :danh_muc_id,
@@ -186,7 +186,7 @@ class AdminProduct
             $stmt->execute([
                 ':ten_san_pham' => $ten_san_pham,
                 ':gia_san_pham' => $gia_san_pham,
-                ':gia_khuyen_mai' => $gia_khuyen_mai,
+                ':gia_khuyen_mai' => $gia_san_pham_khuyen_mai,
                 ':so_luong' => $so_luong,
                 ':ngay_nhap' => $ngay_nhap,
                 ':danh_muc_id' => $danh_muc_id,
