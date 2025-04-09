@@ -15,19 +15,25 @@ require_once './controllers/ClientHomeController.php';
 require_once './controllers/ClientContactController.php';
 require_once './controllers/ClientCartController.php';
 require_once './controllers/ClientPayController.php';
+require_once './controllers/ClientPostsController.php';
+require_once './controllers/ClientKhuyenMaiController.php';
 
 require_once './controllers/ClientProductController.php';
 
 require_once './controllers/ClientOderController.php';
 
 
+
+
 // Require toàn bộ file Models
 require_once './models/ClientProduct.php';
 require_once './models/ClientContact.php';
 require_once './models/ClientUser.php';
+require_once './models/ClientKhuyenMai.php';
 require_once './models/ClientPay.php';
 
 require_once './models/ClientCart.php';
+require_once './models/ClientPosts.php';
 
 
 // Route
@@ -46,8 +52,7 @@ $response = match ($act) {
     'them-lien-he' => (new ClientContactController())->addContact(), // Base_URL/?act=them-lien-he
     'gioi-thieu' => (new ClientHomeController())->about(), // Base_URL/?act=gioi-thieu
     'chi-tiet-san-pham' => (new ClientProductController())->detailProduct(), // Base_URL/?act=chi-tiet-san-pham
-    'bai-viet' => (new ClientHomeController())->blog(), // Base_URL/?act=bai-viet
-    'chi-tiet-bai-viet' => (new ClientHomeController())->blogDetail(), // Base_URL/?act=chi-tiet-bai-viet
+    
 
     // Auth
     'dang-nhap' => (new ClientHomeController())->signIn(),
@@ -71,6 +76,9 @@ $response = match ($act) {
     'thanh-toan' => (new ClientPayController())->listPay(), // Base_URL/?act=thanh-toan
     'dat-hang' => (new ClientPayController())->addOrderAndDetailOder(), // Base_URL/?act=dat-hang
 
+    // Blog
+    'bai-viet' => (new ClientPostsController())->listPosts(), // Base_URL/?act=bai-viet
+    'chi-tiet-bai-viet' => (new ClientPostsController())->detailPosts(), // Base_URL/?act=chi-tiet-bai-viet
 
     // Thanh toán
     // 'thanh-toan' => (new HomeController())->thanhToan(),
@@ -78,6 +86,12 @@ $response = match ($act) {
     'lich-su-mua-hang' => (new ClientOderController())->lichSuMuaHang(),
     'chi-tiet-mua-hang' => (new ClientOderController())->chiTietDonHang(),
     'huy-don-hang' => (new ClientOderController())->huyDonHang(),
+
+    // khuyến mại
+    'kiem-tra-ma-khuyen-mai' => ['controller' => 'KhuyenMaiController', 'action' => 'kiemTraMaKhuyenMai'],
+   
+
+
     default => '404 - Trang không tồn tại',
 
 };
