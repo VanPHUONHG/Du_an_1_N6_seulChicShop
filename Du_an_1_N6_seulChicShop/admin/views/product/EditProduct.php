@@ -53,7 +53,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="gia_khuyen_mai">Giá khuyến mãi</label>
-                                <input type="number" id="gia_khuyen_mai" name="gia_khuyen_mai" class="form-control" value="<?= $Product['gia_khuyen_mai'] ?>">
+                                <input type="number" id="gia_san_pham_khuyen_mai" name="gia_san_pham_khuyen_mai" class="form-control" value="<?= $Product['gia_khuyen_mai'] ?>">
                             </div>
                             <div class="form-group">
                                 <label for="hinh_anh">Hình ảnh</label>

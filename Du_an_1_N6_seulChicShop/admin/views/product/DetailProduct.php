@@ -171,7 +171,7 @@
                                                 </td>
                                                 <td><?= date('d/m/Y H:i', strtotime($comment['ngay_dang'])) ?></td>
                                                 <td><span class="badge <?= $comment['trang_thai'] == 1 ? 'badge-success' : 'badge-danger' ?>">
-                                                    <?= $comment['trang_thai'] == 1 ? 'Hiển thị' : 'Bị ẩn' ?>
+                                                    <?= $comment['trang_thai'] == 1 ? 'Đã duyệt' : 'Chờ duyệt' ?>
                                                 </span></td>
                                                 <td>
                                                     <a href="<?= BASE_URL_ADMIN . '?act=xoa-binh-luan&id=' . $comment['id'] ?>" 

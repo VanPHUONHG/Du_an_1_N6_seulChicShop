@@ -45,7 +45,7 @@ class AdminProductController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
             $gia_san_pham = $_POST['gia_san_pham'] ?? '';
-            $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? null;
+            $gia_san_pham_khuyen_mai = $_POST['gia_san_pham_khuyen_mai'] ?? null;
             $so_luong = $_POST['so_luong'] ?? '';
             $danh_muc_id = $_POST['danh_muc_id'] ?? '';
             $trang_thai = $_POST['trang_thai'] ?? '';
@@ -69,7 +69,7 @@ class AdminProductController
                 $san_pham_id = $this->ModelAdminProduct->insertProduct(
                     $ten_san_pham,
                     $gia_san_pham,
-                    $gia_khuyen_mai,
+                    $gia_san_pham_khuyen_mai,
                     $so_luong,
                     $ngay_nhap,
                     $danh_muc_id,
@@ -125,7 +125,7 @@ class AdminProductController
             $old_file = $sanPhamOld['hinh_anh']; // Lấy ảnh cũ để phục vụ cho sửa ảnh
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
             $gia_san_pham = $_POST['gia_san_pham'] ?? '';
-            $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? '';
+            $gia_san_pham_khuyen_mai = $_POST['gia_san_pham_khuyen_mai'] ?? '';
             $so_luong = $_POST['so_luong'] ?? '';
             $ngay_nhap = $_POST['ngay_nhap'] ?? '';
             $danh_muc_id = $_POST['danh_muc_id'] ?? '';
@@ -171,7 +171,7 @@ class AdminProductController
                     $san_pham_id,
                     $ten_san_pham,
                     $gia_san_pham,
-                    $gia_khuyen_mai,
+                    $gia_san_pham_khuyen_mai,
                     $so_luong,
                     $ngay_nhap,
                     $danh_muc_id,
