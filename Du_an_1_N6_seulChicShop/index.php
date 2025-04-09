@@ -17,20 +17,23 @@ require_once './controllers/ClientHomeController.php';
 require_once './controllers/ClientContactController.php';
 require_once './controllers/ClientCartController.php';
 require_once './controllers/ClientPayController.php';
+require_once './controllers/ClientPostsController.php';
+require_once './controllers/ClientKhuyenMaiController.php';
 require_once './controllers/ClientProductController.php';
-
-require_once './controllers/ClientProductController.php';
-
 require_once './controllers/ClientOderController.php';
+
+
 
 
 // Require toàn bộ file Models
 require_once './models/ClientProduct.php';
 require_once './models/ClientContact.php';
 require_once './models/ClientUser.php';
+require_once './models/ClientKhuyenMai.php';
 require_once './models/ClientPay.php';
 
 require_once './models/ClientCart.php';
+require_once './models/ClientPosts.php';
 
 
 // Route
@@ -76,5 +79,12 @@ $response = match ($act) {
     'lich-su-mua-hang' => (new ClientOderController())->lichSuMuaHang(),
     'chi-tiet-mua-hang' => (new ClientOderController())->chiTietDonHang(),
     'huy-don-hang' => (new ClientOderController())->huyDonHang(),
+
+    // khuyến mại
+    'kiem-tra-ma-khuyen-mai' => ['controller' => 'KhuyenMaiController', 'action' => 'kiemTraMaKhuyenMai'],
+   
+'bai-viet' => (new ClientPostsController())->listPosts(), // Base_URL/?act=bai-viet
+    'chi-tiet-bai-viet' => (new ClientPostsController())->detailPosts(), // Base_URL/?act=chi-tiet-bai-viet
+
     default => '404 - Trang không tồn tại',
 };

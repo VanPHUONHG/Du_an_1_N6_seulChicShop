@@ -120,8 +120,8 @@ class AdminProduct
             $stmt = $this->conn->prepare($sql);
 
             $stmt->bindParam(':ten_san_pham', $ten_san_pham);
-            $stmt->bindParam(':gia_san_pham', $gia_san_pham);
-            $stmt->bindParam(':gia_san_pham_khuyen_mai', $gia_san_pham_khuyen_mai);
+            $stmt->bindParam(':gia_san_pham', $gia_san_pham, PDO::PARAM_INT);
+            $stmt->bindParam(':gia_san_pham_khuyen_mai', $gia_san_pham_khuyen_mai, PDO::PARAM_INT);
             $stmt->bindParam(':so_luong', $so_luong);
             $stmt->bindParam(':ngay_nhap', $ngay_nhap);
             $stmt->bindParam(':danh_muc_id', $danh_muc_id);

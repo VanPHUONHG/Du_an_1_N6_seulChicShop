@@ -32,7 +32,7 @@
                                         <th>Mô tả</th>
                                         <th>Loại</th>
                                         <th>Giá trị giảm</th>
-                                        <th>Giá trị đơn hàng tối thiểuthiểu</th>
+                                        <th>Giá trị đơn hàng tối thiểu</th>
                                         <th>Số Lượng tối đa</th>
                                         <th>Số lượng đã sử dụng </th>
                                         <th>Ngày bắt đầu</th>
