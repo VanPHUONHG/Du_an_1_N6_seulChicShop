@@ -69,7 +69,7 @@
                                         <td class="py-3 px-4 border border-gray-300"><?= $donHangs['ngay_dat'] ?></td>
                                         <td class="py-3 px-4 border border-gray-300"><?= formatPrice($donHangs['tong_tien']) ?> VND</td>
                                         <td class="py-3 px-4 border border-gray-300"><?= $phuongThucThanhToan[$donHangs['phuong_thuc_thanh_toan_id']] ?></td>
-                                        <td class="py-3 px-4 border border-gray-300"><?= $trangThaiOrder[$donHangs['trang_thai_id']] ?></td>
+                                        <td class="py-3 px-4 border border-gray-300"><?= $trangThaiOrder[$donHangs['trang_thai_don_hang_id']] ?></td>
                                         <td class="py-3 px-4 border border-gray-300">
 
                                             <a href="<?= BASE_URL ?>?act=chi-tiet-mua-hang&id=<?= $donHangs['id'] ?>"
@@ -77,7 +77,7 @@
                                                 Chi tiết đơn hàng
                                             </a>
 
-                                            <?php if ($donHangs['trang_thai_id'] === 1) { ?>
+                                            <?php if ($donHangs['trang_thai_don_hang_id'] === 1) { ?>
                                                 <a href="<?= BASE_URL ?>?act=huy-don-hang&id=<?= $donHangs['id'] ?>"
                                                     class="btn btn-warning"
                                                     onclick="return confirm('Bạn xác nhận huỷ đơn hàng?')">

@@ -10,10 +10,10 @@
     <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="./assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        <img src="./assets/dist/img/aaa.webp" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block text-black">Alexander Pierce</a>
+        <a href="#" class="d-block text-black">SEULCHICSHOP</a>
       </div>
     </div>
 
@@ -46,7 +46,12 @@
             <p>Quản lý sản phẩm</p>
           </a>
         </li>
-
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN . '?act=binh-luan' ?>" class="nav-link">
+            <i class="nav-icon fas fa-comment"></i>
+            <p>Quản lý bình luận</p>
+          </a>
+        </li>
         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN . '?act=don-hang' ?>" class="nav-link">
             <i class="nav-icon fas fa-file-invoice-dollar"></i>

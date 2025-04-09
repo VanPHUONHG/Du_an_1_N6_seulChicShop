@@ -33,8 +33,6 @@
                         <li>
                             <a href="<?= BASE_URL . "?act=lien-he" ?>">Contact</a>
                         </li>
-
-
                     </ul>
                 </div>
 
@@ -50,99 +48,105 @@
                     // Kiểm tra nếu không phải trang đăng ký hoặc đăng nhập thì hiển thị giỏ hàng
                     $currentPage = isset($_GET['act']) ? $_GET['act'] : '';
                     if ($currentPage != 'dang-nhap' && $currentPage != 'dang-ky' && isset($_SESSION['user_client'])):
-                    ?>
-
-                    <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                        <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04 t"
-                            id="cart-icon-desktop"
-                            data-notify="<?php 
-                            $itemCount = 0;
-                            if (isset($_SESSION['user_client'])) {
-                                $user = (new ClientUser())->getAccountByNameUser($_SESSION['user_client']);
-                                $cart = (new ClientCart())->getCartFromUser($user['id']);
-                                if ($cart) {
-                                    $detailCart = (new ClientCart())->getDetailCart($cart['id']);
-                                    foreach($detailCart as $item) {
-                                        $itemCount++;
+                        ?>
+                        <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
+                            <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04 t"
+                                id="cart-icon-desktop" data-notify="<?php
+                                $itemCount = 0;
+                                if (isset($_SESSION['user_client'])) {
+                                    $user = (new ClientUser())->getAccountByNameUser($_SESSION['user_client']);
+                                    $cart = (new ClientCart())->getCartFromUser($user['id']);
+                                    if ($cart) {
+                                        $detailCart = (new ClientCart())->getDetailCart($cart['id']);
+                                        foreach ($detailCart as $item) {
+                                            $itemCount++;
+                                        }
                                     }
                                 }
-                            }
-                            echo $itemCount;
-                            ?>">
-                            <i class="zmdi zmdi-shopping-cart"></i>
+                                echo $itemCount;
+                                ?>">
+                                <i class="zmdi zmdi-shopping-cart"></i>
+                            </div>
 
-                        </div>
+                        <?php endif; ?>
 
-                    <?php endif; ?>
-
-                    <!-- Button login -->
-                    <div class="flex-c-m h-full p-lr-19">
-                        <div class="flex-c-m h-full ">
-                            <?php if (isset($_SESSION['user_client'])): ?>
-                                <span class="cl0 text-dark stext-107"><?= $_SESSION['user_client'] ?></span>
-                            <?php endif; ?>
-                        </div>
-                        <div class="submenu" style="position: relative;">
-                            <?php if (isset($_SESSION['user_client'])): ?>
-                                <?php
-                                $user = (new ClientUser())->getAccountByNameUser($_SESSION['user_client']);
-                                if ($user && isset($user['anh_dai_dien'])): ?>
-                                    <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
-                                        <img src="<?= $user['anh_dai_dien'] ?>"
-                                            alt="avatar"
-                                            class="rounded-circle"
-                                            style="width: 25px; height: 25px;">
-                                    </a>
+                        <!-- Button login -->
+                        <div class="flex-c-m h-full p-lr-19">
+                            <div class="flex-c-m h-full ">
+                                <?php if (isset($_SESSION['user_client'])): ?>
+                                    <span class="cl0 text-dark stext-107"><?= $_SESSION['user_client'] ?></span>
+                                <?php endif; ?>
+                            </div>
+                            <div class="submenu" style="position: relative;">
+                                <?php if (isset($_SESSION['user_client'])): ?>
+                                    <?php
+                                    $user = (new ClientUser())->getAccountByNameUser($_SESSION['user_client']);
+                                    if ($user && isset($user['anh_dai_dien'])): ?>
+                                        <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
+                                            <img src="<?= $user['anh_dai_dien'] ?>" alt="avatar" class="rounded-circle"
+                                                style="width: 25px; height: 25px;">
+                                        </a>
+                                    <?php else: ?>
+                                        <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
+                                            <i class="zmdi zmdi-account"></i>
+                                        </a>
+                                    <?php endif; ?>
                                 <?php else: ?>
                                     <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
                                         <i class="zmdi zmdi-account"></i>
                                     </a>
                                 <?php endif; ?>
-                            <?php else: ?>
-                                <a href="#" class="p-lr-11 cl2 hov-cl1 icon-header-item trans-04">
-                                    <i class="zmdi zmdi-account"></i>
-                                </a>
-                            <?php endif; ?>
-                            <div class="submenu-content"
-                                style="display: none; position: absolute; right: 0; background: #fff;  box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100;">
-                                <?php if (isset($_SESSION['user_client'])): ?>
-                                    <li style="list-style: none; padding: 8px 16px;">
-                                        <span style="color: #333;">Xin chào, <?= $_SESSION['user_client'] ?></span>
-                                    </li>
-                                    <li style="list-style: none; padding: 8px 16px;">
-                                        <a href="<?= BASE_URL . "?act=quan-ly-tai-khoan" ?>"
-                                            style="color: #333; text-decoration: none;">Account Manage</a>
-                                    </li>
-                                    <li style="list-style: none; padding: 8px 16px;">
-                                        <a href="<?= BASE_URL . "?act=dang-xuat" ?>"
-                                            style="color: #333; text-decoration: none;">Sign Out</a>
-                                    </li>
+                                <div class="submenu-content"
+                                    style="display: none; position: absolute; right: 0; background: #fff;  box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100;">
+                                    <?php if (isset($_SESSION['user_client'])): ?>
+                                        <li style="list-style: none; padding: 8px 16px;">
+                                            <span style="color: #333;">Xin chào, <?= $_SESSION['user_client'] ?></span>
+                                        </li>
+                                        <li style="list-style: none; padding: 8px 16px;">
+                                            <a href="<?= BASE_URL . "?act=quan-ly-tai-khoan" ?>"
+                                                style="color: #333; text-decoration: none; transition: all 0.3s;"
+                                                onmouseover="this.style.color='#717fe0'"
+                                                onmouseout="this.style.color='#333'">Account Manage</a>
+                                        </li>
 
-                                    <li style="list-style: none; padding: 8px 16px;">
-                                        <a href="<?= BASE_URL . "?act=lich-su-mua-hang" ?>">Order</a>
-                                    </li>
-                                    
-                                <?php else: ?>
-                                    <li style="list-style: none; padding: 8px 16px;">
-                                        <a href="<?= BASE_URL . "?act=dang-nhap" ?>"
-                                            style="color: #333; text-decoration: none;">Sign In</a>
-                                    </li>
-                                    <li style="list-style: none; padding: 8px 16px;">
-                                        <a href="<?= BASE_URL . "?act=dang-ky" ?>"
-                                            style="color: #333; text-decoration: none;">Sign Up</a>
-                                    </li>
-                                <?php endif; ?>
+                                        <li style="list-style: none; padding: 8px 16px;">
+                                            <a href="<?= BASE_URL . "?act=lich-su-mua-hang" ?>"
+                                                style="color: #333; text-decoration: none; transition: all 0.3s;"
+                                                onmouseover="this.style.color='#717fe0'"
+                                                onmouseout="this.style.color='#333'">Order</a>
+                                        </li>
+                                        <li style="list-style: none; padding: 8px 16px;">
+                                            <a href="<?= BASE_URL . "?act=dang-xuat" ?>"
+                                                style="color: #333; text-decoration: none; transition: all 0.3s;"
+                                                onmouseover="this.style.color='#717fe0'"
+                                                onmouseout="this.style.color='#333'">Sign Out</a>
+                                        </li>
+
+                                    <?php else: ?>
+                                        <li style="list-style: none; padding: 8px 16px;">
+                                            <a href="<?= BASE_URL . "?act=dang-nhap" ?>"
+                                                style="color: #333; text-decoration: none; transition: all 0.3s;"
+                                                onmouseover="this.style.color='#717fe0'"
+                                                onmouseout="this.style.color='#333'">Sign In</a>
+                                        </li>
+                                        <li style="list-style: none; padding: 8px 16px;">
+                                            <a href="<?= BASE_URL . "?act=dang-ky" ?>"
+                                                style="color: #333; text-decoration: none; transition: all 0.3s;"
+                                                onmouseover="this.style.color='#717fe0'"
+                                                onmouseout="this.style.color='#333'">Sign Up</a>
+                                        </li>
+                                    <?php endif; ?>
+                                </div>
+
                             </div>
+                        </div>
 
+                        <div class="flex-c-m h-full p-lr-19">
+                            <div class="p-lr-11 cl2 hov-cl1 icon-header-item js-show-sidebar trans-04">
+                                <i class="zmdi zmdi-menu"></i>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="flex-c-m h-full p-lr-19">
-                        <div class="p-lr-11 cl2 hov-cl1 icon-header-item js-show-sidebar trans-04">
-                            <i class="zmdi zmdi-menu"></i>
-                        </div>
-                    </div>
-                </div>
             </nav>
         </div>
     </div>
@@ -168,11 +172,10 @@
             <?php
             // Kiểm tra nếu không phải trang đăng ký hoặc đăng nhập và người dùng đã đăng nhập thì hiển thị giỏ hàng
             if ($currentPage != 'dang-nhap' && $currentPage != 'dang-ky' && isset($_SESSION['user_client'])):
-            ?>
+                ?>
                 <div class="flex-c-m h-full p-lr-10 bor5">
                     <div class="p-lr-11 cl2 hov-cl1 icon-header-item icon-header-noti js-show-cart trans-04"
-                        id="cart-icon-mobile"
-                        data-notify="<?= $itemCount ?>">
+                        id="cart-icon-mobile" data-notify="<?= $itemCount ?>">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
                 </div>
@@ -223,18 +226,36 @@
                     <span>Welcome, <?= $_SESSION['user_client'] ?></span>
                 </li>
                 <li>
-                    <a href="<?= BASE_URL . "?act=quan-ly-tai-khoan" ?>">Account Manage</a>
+                    <a href="<?= BASE_URL . "?act=quan-ly-tai-khoan" ?>"
+                        style="color: #333; text-decoration: none; transition: all 0.3s;"
+                        onmouseover="this.style.color='#717fe0'"
+                        onmouseout="this.style.color='#333'">Account Manage</a>
                 </li>
                 <li>
-                    <a href="<?= BASE_URL . "?act=dang-xuat" ?>">Sign Out</a>
+                    <a href="<?= BASE_URL . "?act=lich-su-mua-hang" ?>"
+                        style="color: #333; text-decoration: none; transition: all 0.3s;"
+                        onmouseover="this.style.color='#717fe0'"
+                        onmouseout="this.style.color='#333'">Order</a>
+                </li>
+                <li>
+                    <a href="<?= BASE_URL . "?act=dang-xuat" ?>"
+                        style="color: #333; text-decoration: none; transition: all 0.3s;"
+                        onmouseover="this.style.color='#717fe0'"
+                        onmouseout="this.style.color='#333'">Sign Out</a>
                 </li>
 
             <?php else: ?>
                 <li>
-                    <a href="<?= BASE_URL . "?act=dang-nhap" ?>">Sign In</a>
+                    <a href="<?= BASE_URL . "?act=dang-nhap" ?>"
+                        style="color: #333; text-decoration: none; transition: all 0.3s;"
+                        onmouseover="this.style.color='#717fe0'"
+                        onmouseout="this.style.color='#333'">Sign In</a>
                 </li>
                 <li>
-                    <a href="<?= BASE_URL . "?act=dang-ky" ?>">Sign Up</a>
+                    <a href="<?= BASE_URL . "?act=dang-ky" ?>"
+                        style="color: #333; text-decoration: none; transition: all 0.3s;"
+                        onmouseover="this.style.color='#717fe0'"
+                        onmouseout="this.style.color='#333'">Sign Up</a>
                 </li>
             <?php endif; ?>
         </ul>
@@ -277,32 +298,33 @@
                 </li>
 
                 <li class="p-b-13">
-                    <a href="#" class="cl2 hov-cl1 stext-102 trans-04">
-                        My Wishlist
+                    <a href="<?= BASE_URL . "?act=danh-sach-san-pham" ?>" class="cl2 hov-cl1 stext-102 trans-04">
+                        Products
                     </a>
                 </li>
 
                 <li class="p-b-13">
-                    <a href="#" class="cl2 hov-cl1 stext-102 trans-04">
+                    <a href="<?= isset($_SESSION['user_client']) ? BASE_URL . '?act=quan-ly-tai-khoan' : BASE_URL . '?act=dang-nhap' ?>"
+                        class="cl2 hov-cl1 stext-102 trans-04">
                         My Account
                     </a>
                 </li>
 
                 <li class="p-b-13">
-                    <a href="#" class="cl2 hov-cl1 stext-102 trans-04">
+                    <a href="<?= BASE_URL . "?act=gio-hang" ?>" class="cl2 hov-cl1 stext-102 trans-04">
                         Track Oder
                     </a>
                 </li>
 
                 <li class="p-b-13">
-                    <a href="#" class="cl2 hov-cl1 stext-102 trans-04">
-                        Refunds
+                    <a href="<?= BASE_URL . "?act=gioi-thieu" ?>" class="cl2 hov-cl1 stext-102 trans-04">
+                        About
                     </a>
                 </li>
 
                 <li class="p-b-13">
-                    <a href="#" class="cl2 hov-cl1 stext-102 trans-04">
-                        Help & FAQs
+                    <a href="<?= BASE_URL . "?act=lien-he" ?>" class="cl2 hov-cl1 stext-102 trans-04">
+                        Contact
                     </a>
                 </li>
 
@@ -311,7 +333,7 @@
 
             <div class="p-tb-30 w-full sidebar-gallery">
                 <span class="cl5 mtext-101">
-                    @ CozaStore
+                    @ SEULCHIC SHOP
                 </span>
 
                 <div class="flex-sb flex-w p-t-36 gallery-lb">
@@ -377,9 +399,15 @@
                 </span>
 
                 <p class="p-t-27 cl6 stext-108">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur maximus vulputate hendrerit.
-                    Praesent faucibus erat vitae rutrum gravida. Vestibulum tempus mi enim, in molestie sem fermentum
-                    quis.
+                    ✨ Sản phẩm đa dạng, phong cách độc đáo: Từ quần áo thời trang hiện đại, nhẹ nhàng đến đồ lưu niệm dễ
+                    thương, ý nghĩa, chúng tôi luôn cập nhật xu hướng mới nhất để mang đến cho bạn những trải nghiệm mua
+                    sắm thú vị và chất lượng. 🎁 Quà tặng và kỷ niệm – nhỏ xinh nhưng đầy ý nghĩa: Bạn muốn tìm một món
+                    quà tặng bạn bè, người thân hoặc lưu giữ khoảnh khắc đáng nhớ? SEULCHIC SHOP có rất nhiều lựa chọn
+                    sáng tạo, mang đậm dấu ấn riêng để bạn dễ dàng trao gửi tình cảm. 👗 Thời trang – tự tin là chính
+                    mình: Dù bạn yêu phong cách ngọt ngào, nữ tính, hay năng động, cá tính, SEULCHIC SHOP đều có những
+                    mẫu trang phục phù hợp với cá tính và gu thẩm mỹ của bạn. 🛍️ Mua sắm dễ dàng – Dịch vụ tận tâm:
+                    Chúng tôi không chỉ cung cấp sản phẩm mà còn mang đến trải nghiệm mua sắm tận tâm, với chính sách
+                    đổi trả linh hoạt, tư vấn nhiệt tình và hỗ trợ giao hàng toàn quốc.
                 </p>
             </div>
         </div>
@@ -388,7 +416,7 @@
 
 <!-- JavaScript to update cart count -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         // Function to update cart count
         function updateCartCount(count) {
             const cartIconDesktop = document.getElementById('cart-icon-desktop');
@@ -404,7 +432,7 @@
         }
 
         // Listen for custom event when item is added to cart
-        document.addEventListener('cartUpdated', function(e) {
+        document.addEventListener('cartUpdated', function (e) {
             if (e.detail && e.detail.count !== undefined) {
                 updateCartCount(e.detail.count);
             }

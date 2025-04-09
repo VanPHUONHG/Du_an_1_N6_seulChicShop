@@ -81,8 +81,9 @@ class ClientPay
                 $thanh_tiens = [$thanh_tiens];
             }
             
-            // Thêm chi tiết đơn hàng cho từng sản phẩm
+            // Thêm chi tiết đơn hàng và cập nhật số lượng cho từng sản phẩm
             for ($i = 0; $i < count($san_pham_ids); $i++) {
+                // Thêm chi tiết đơn hàng
                 $stmt->bindParam(':don_hang_id', $don_hang_id);
                 $stmt->bindParam(':san_pham_id', $san_pham_ids[$i]);
                 $stmt->bindParam(':bien_the_san_pham_id', $bien_the_san_pham_ids[$i]);
@@ -91,6 +92,32 @@ class ClientPay
                 
                 if (!$stmt->execute()) {
                     throw new PDOException("Không thể thêm chi tiết đơn hàng cho sản phẩm thứ " . ($i + 1));
+                }
+
+                // Cập nhật số lượng trong bảng bien_the_san_phams
+                if ($bien_the_san_pham_ids[$i]) {
+                    $update_sql = "UPDATE bien_the_san_phams 
+                                 SET so_luong = so_luong - :so_luong_giam
+                                 WHERE id = :bien_the_id";
+                    $update_stmt = $this->conn->prepare($update_sql);
+                    $update_stmt->bindParam(':so_luong_giam', $so_luongs[$i]);
+                    $update_stmt->bindParam(':bien_the_id', $bien_the_san_pham_ids[$i]);
+                    
+                    if (!$update_stmt->execute()) {
+                        throw new PDOException("Không thể cập nhật số lượng cho biến thể sản phẩm thứ " . ($i + 1));
+                    }
+                } else {
+                    // Nếu không có biến thể, cập nhật số lượng trong bảng san_phams
+                    $update_sql = "UPDATE san_phams 
+                                 SET so_luong = so_luong - :so_luong_giam
+                                 WHERE id = :san_pham_id";
+                    $update_stmt = $this->conn->prepare($update_sql);
+                    $update_stmt->bindParam(':so_luong_giam', $so_luongs[$i]);
+                    $update_stmt->bindParam(':san_pham_id', $san_pham_ids[$i]);
+                    
+                    if (!$update_stmt->execute()) {
+                        throw new PDOException("Không thể cập nhật số lượng cho sản phẩm thứ " . ($i + 1));
+                    }
                 }
             }
 

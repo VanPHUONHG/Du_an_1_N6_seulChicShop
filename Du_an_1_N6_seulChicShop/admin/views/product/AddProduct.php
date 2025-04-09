@@ -31,29 +31,33 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="<?= BASE_URL_ADMIN . '?act=them-san-pham' ?>" method="POST" enctype="multipart/form-data">
+                        <form action="<?= BASE_URL_ADMIN . '?act=them-san-pham' ?>" method="POST"
+                            enctype="multipart/form-data">
                             <div class="card-body row">
                                 <!-- Thông tin sản phẩm chính -->
                                 <div class="col-md-12">
                                     <h4>Thông tin sản phẩm chính</h4>
                                     <div class="form-group">
                                         <label>Tên sản phẩm</label>
-                                        <input type="text" class="form-control" name="ten_san_pham" placeholder="Nhập tên sản phẩm">
+                                        <input type="text" class="form-control" name="ten_san_pham"
+                                            placeholder="Nhập tên sản phẩm">
                                         <?php if (isset($_SESSION['error']['ten_san_pham'])) { ?>
                                             <p class="text-danger"><?= $_SESSION['error']['ten_san_pham'] ?></p>
-                                        <?php  } ?>
+                                        <?php } ?>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-6">
                                             <label>Giá tiền</label>
-                                            <input type="number" class="form-control" name="gia_san_pham" placeholder="Nhập giá sản phẩm">
+                                            <input type="number" class="form-control" name="gia_san_pham"
+                                                placeholder="Nhập giá sản phẩm">
                                             <?php if (isset($_SESSION['error']['gia_san_pham'])) { ?>
                                                 <p class="text-danger"><?= $_SESSION['error']['gia_san_pham'] ?></p>
-                                            <?php  } ?>
+                                            <?php } ?>
                                         </div>
                                         <div class="form-group col-6">
                                             <label>Giá khuyến mãi</label>
-                                            <input type="number" class="form-control" name="gia_khuyen_mai" placeholder="Nhập giá khuyến mãi">
+                                            <input type="number" class="form-control" name="gia_san_pham_khuyen_mai"
+                                                placeholder="Nhập giá khuyến mãi">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -62,14 +66,15 @@
                                             <input type="file" class="form-control" name="hinh_anh">
                                             <?php if (isset($_SESSION['error']['hinh_anh'])) { ?>
                                                 <p class="text-danger"><?= $_SESSION['error']['hinh_anh'] ?></p>
-                                            <?php  } ?>
+                                            <?php } ?>
                                         </div>
                                         <div class="form-group col-6">
                                             <label>Số lượng</label>
-                                            <input type="number" class="form-control" name="so_luong" placeholder="Nhập số lượng">
+                                            <input type="number" class="form-control" name="so_luong"
+                                                placeholder="Nhập số lượng">
                                             <?php if (isset($_SESSION['error']['so_luong'])) { ?>
                                                 <p class="text-danger"><?= $_SESSION['error']['so_luong'] ?></p>
-                                            <?php  } ?>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -77,13 +82,14 @@
                                             <label>Danh mục</label>
                                             <select class="form-control" name="danh_muc_id">
                                                 <option selected disabled>Chọn danh mục sản phẩm</option>
-                                                <?php foreach ($listCategory as $danhMuc) : ?>
-                                                    <option value="<?= $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></option>
+                                                <?php foreach ($listCategory as $danhMuc): ?>
+                                                    <option value="<?= $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?>
+                                                    </option>
                                                 <?php endforeach; ?>
                                             </select>
                                             <?php if (isset($_SESSION['error']['danh_muc_id'])) { ?>
                                                 <p class="text-danger"><?= $_SESSION['error']['danh_muc_id'] ?></p>
-                                            <?php  } ?>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -94,44 +100,13 @@
                                         </select>
                                         <?php if (isset($_SESSION['error']['trang_thai'])) { ?>
                                             <p class="text-danger"><?= $_SESSION['error']['trang_thai'] ?></p>
-                                        <?php  } ?>
+                                        <?php } ?>
                                     </div>
                                     <div class="form-group">
                                         <label for="mo_ta">Mô tả</label>
-                                        <textarea id="mo_ta" class="form-control" name="mo_ta" placeholder="Nhập mô tả"></textarea>
+                                        <textarea id="mo_ta" class="form-control" name="mo_ta"
+                                            placeholder="Nhập mô tả"></textarea>
                                     </div>
-                                </div>
-
-                                <!-- Biến thể sản phẩm -->
-                                <div class="col-md-12 mt-4">
-                                    <h4>Biến thể sản phẩm</h4>
-                                    <div id="variants-container">
-                                        <div class="variant-item border p-3 mb-3">
-                                            <div class="row">
-                                                <div class="form-group col-3">
-                                                    <label>Màu sắc</label>
-                                                    <input type="text" class="form-control" name="variant_name" placeholder="Nhập màu sắc">
-                                                </div>
-                                                <div class="form-group col-3">
-                                                    <label>Kích thước</label>
-                                                    <input type="text" class="form-control" name="variant_size" placeholder="Nhập kích thước">
-                                                </div>
-                                                <div class="form-group col-2">
-                                                    <label>Giá</label>
-                                                    <input type="number" class="form-control" name="variant_price" placeholder="Nhập giá">
-                                                </div>
-                                                <div class="form-group col-2">
-                                                    <label>Số lượng</label>
-                                                    <input type="number" class="form-control" name="variant_quantity" placeholder="Nhập số lượng">
-                                                </div>
-                                                <div class="form-group col-2">
-                                                    <label>Hình ảnh</label>
-                                                    <input type="file" class="form-control" name="variant_image">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-info" id="add-variant">Thêm biến thể</button>
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -157,13 +132,13 @@
 <!-- End Footer -->
 
 <script>
-    $(function() {
+    $(function () {
         $("#example1").DataTable({
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        
+
         $('#example2').DataTable({
             "paging": true,
             "lengthChange": false,
@@ -175,7 +150,7 @@
         });
 
         // Xử lý thêm biến thể
-        $('#add-variant').click(function() {
+        $('#add-variant').click(function () {
             var variantHtml = `
                 <div class="variant-item border p-3 mb-3">
                     <div class="row">
@@ -207,10 +182,11 @@
         });
 
         // Xử lý xóa biến thể
-        $(document).on('click', '.remove-variant', function() {
+        $(document).on('click', '.remove-variant', function () {
             $(this).closest('.variant-item').remove();
         });
     });
 </script>
 </body>
+
 </html>

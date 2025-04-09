@@ -10,17 +10,23 @@ class ClientHomeController
     }
     public function index()
     {
+        $id_danh_muc = $_GET['id_danh_muc'] ?? null;
+        $productBestSeller = $this->ModelClientProduct->getProductBestSeller();
+        $productSelling = $this->ModelClientProduct->getProductSelling();
+        $productTopRating = $this->ModelClientProduct->getProductTopRating();
+        $productNew = $this->ModelClientProduct->getProductNew();
+        $id_danh_muc = $_GET['id_danh_muc'] ?? null;
+        $categories = $this->ModelClientProduct->getCategory();
+        if ($id_danh_muc) {
+            $products = $this->ModelClientProduct->getProductByCategory($id_danh_muc);
+        } else {
+            $products = $this->ModelClientProduct->getAllProduct();
+        }
         require_once './views/Home.php';
     }
     public function about()
     {
         require_once './views/About.php';
-    }
-
-
-    public function detailProduct()
-    {
-        require_once './views/DetailProduct.php';
     }
     public function blog()
     {
@@ -167,7 +173,7 @@ class ClientHomeController
             if (empty($mat_khau)) {
                 $errors['mat_khau'] = 'Vui lòng nhập mật khẩu';
             }
-            
+
             if ($anh_dai_dien && $anh_dai_dien['error'] === UPLOAD_ERR_OK) {
                 deleteFile($old_file);
                 $file_thumb = uploadFile($anh_dai_dien, folderUpload: './uploads/');
@@ -176,7 +182,7 @@ class ClientHomeController
             }
             if (empty($errors)) {
                 $this->ModelClientUser->updateUser($ten_tai_khoan, $email, $file_thumb, $so_dien_thoai, $mat_khau);
-                header('Location: ' . BASE_URL );
+                header('Location: ' . BASE_URL);
                 exit();
             } else {
                 $_SESSION['errors'] = $errors;

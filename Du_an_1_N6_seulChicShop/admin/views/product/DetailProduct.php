@@ -81,7 +81,7 @@
                                     </table>
                                     <div class="mt-3">
                                         <h5>Mô tả:</h5>
-                                        <p><?= nl2br(htmlspecialchars($Product[0]['mo_ta'])) ?></p>
+                                        <p><?=$Product[0]['mo_ta'] ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -142,6 +142,7 @@
                                             <th>STT</th>
                                             <th>Khách hàng</th>
                                             <th>Nội dung</th>
+                                            <th>Số sao</th>
                                             <th>Ngày bình luận</th>
                                             <th>Trạng thái</th>
                                             <th>Thao tác</th>
@@ -157,9 +158,20 @@
                                                     </a>
                                                 </td>
                                                 <td><?= nl2br(htmlspecialchars($comment['noi_dung'])) ?></td>
+                                                <td>
+                                                    <?php
+                                                    for ($i = 1; $i <= 5; $i++) {
+                                                        if ($i <= $comment['danh_gia']) {
+                                                            echo '<i class="fas fa-star text-warning"></i>';
+                                                        } else {
+                                                            echo '<i class="far fa-star text-warning"></i>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </td>
                                                 <td><?= date('d/m/Y H:i', strtotime($comment['ngay_dang'])) ?></td>
                                                 <td><span class="badge <?= $comment['trang_thai'] == 1 ? 'badge-success' : 'badge-danger' ?>">
-                                                    <?= $comment['trang_thai'] == 1 ? 'Hiển thị' : 'Bị ẩn' ?>
+                                                    <?= $comment['trang_thai'] == 1 ? 'Đã duyệt' : 'Chờ duyệt' ?>
                                                 </span></td>
                                                 <td>
                                                     <a href="<?= BASE_URL_ADMIN . '?act=xoa-binh-luan&id=' . $comment['id'] ?>" 
