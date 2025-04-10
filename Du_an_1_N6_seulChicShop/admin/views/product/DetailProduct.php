@@ -81,7 +81,7 @@
                                     </table>
                                     <div class="mt-3">
                                         <h5>Mô tả:</h5>
-                                        <p><?= nl2br(htmlspecialchars($Product[0]['mo_ta'])) ?></p>
+                                        <p><?=$Product[0]['mo_ta'] ?></p>
                                     </div>
                                 </div>
                             </div>

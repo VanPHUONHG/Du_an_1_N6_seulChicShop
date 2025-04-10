@@ -30,6 +30,8 @@ class ClientHomeController
     }
     public function blog()
     {
+
+        
         require_once './views/Blog.php';
     }
     public function blogDetail()
