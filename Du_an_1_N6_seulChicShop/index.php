@@ -18,9 +18,7 @@ require_once './controllers/ClientContactController.php';
 require_once './controllers/ClientCartController.php';
 require_once './controllers/ClientPayController.php';
 require_once './controllers/ClientProductController.php';
-
 require_once './controllers/ClientProductController.php';
-
 require_once './controllers/ClientOderController.php';
 
 
@@ -29,7 +27,7 @@ require_once './models/ClientProduct.php';
 require_once './models/ClientContact.php';
 require_once './models/ClientUser.php';
 require_once './models/ClientPay.php';
-
+require_once './models/ClientComment.php';
 require_once './models/ClientCart.php';
 
 
@@ -42,12 +40,15 @@ $act = $_GET['act'] ?? '/';
 $response = match ($act) {
 
     '/' => (new ClientHomeController())->index(), // Trang chủ
+    // San pham
     'danh-sach-san-pham' => (new ClientProductController())->listProduct(), // Base_URL/?act=danh-sach-san-pham
+    'chi-tiet-san-pham' => (new ClientProductController())->detailProduct(), // Base_URL/?act=chi-tiet-san-pham
+    'them-binh-luan' => (new ClientProductController())->addComment(), // Base_URL/?act=them-binh-luan
     // lien he
     'lien-he' => (new ClientContactController())->listContact(), // Base_URL/?act=lien-he
     'them-lien-he' => (new ClientContactController())->addContact(), // Base_URL/?act=them-lien-he
     'gioi-thieu' => (new ClientHomeController())->about(), // Base_URL/?act=gioi-thieu
-    'chi-tiet-san-pham' => (new ClientProductController())->detailProduct(), // Base_URL/?act=chi-tiet-san-pham
+    
     'bai-viet' => (new ClientHomeController())->blog(), // Base_URL/?act=bai-viet
     'chi-tiet-bai-viet' => (new ClientHomeController())->blogDetail(), // Base_URL/?act=chi-tiet-bai-viet
     // Auth
