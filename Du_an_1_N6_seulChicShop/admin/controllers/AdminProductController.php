@@ -125,7 +125,7 @@ class AdminProductController
             $old_file = $sanPhamOld['hinh_anh']; // Lấy ảnh cũ để phục vụ cho sửa ảnh
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
             $gia_san_pham = $_POST['gia_san_pham'] ?? '';
-            $gia_san_pham_khuyen_mai = $_POST['gia_san_pham_khuyen_mai'] ?? "";
+            $gia_san_pham_khuyen_mai = $_POST['gia_san_pham_khuyen_mai'] ?? null;
             $so_luong = $_POST['so_luong'] ?? '';
             $ngay_nhap = $_POST['ngay_nhap'] ?? '';
             $danh_muc_id = $_POST['danh_muc_id'] ?? '';
@@ -225,11 +225,8 @@ class AdminProductController
             $file_thumb = uploadFile($hinh_anh, './uploads/');
             $errors = [];
 
-            if (empty($mau_sac)) {
-                $errors['mau_sac'] = 'Màu sắc không được để trống';
-            }
-            if (empty($kich_thuoc)) {
-                $errors['kich_thuoc'] = 'Kích thước không được để trống';
+            if (empty($mau_sac) && empty($kich_thuoc)) {
+                $errors['variant'] = 'Vui lòng nhập ít nhất một trong hai: màu sắc hoặc kích thước';
             }
             if (empty($gia)) {
                 $errors['gia'] = 'Giá không được để trống';
@@ -282,11 +279,8 @@ class AdminProductController
             $hinh_anh = $_FILES['hinh_anh_bien_the'] ?? null;
             $errors = [];
 
-            if (empty($mau_sac)) {
-                $errors['mau_sac'] = 'Màu sắc không được để trống';
-            }
-            if (empty($kich_thuoc)) {
-                $errors['kich_thuoc'] = 'Kích thước không được để trống';
+            if (empty($mau_sac) && empty($kich_thuoc)) {
+                $errors['variant'] = 'Vui lòng nhập ít nhất một trong hai: màu sắc hoặc kích thước';
             }
             if (empty($gia)) {
                 $errors['gia'] = 'Giá không được để trống';

@@ -3,48 +3,76 @@
 class ClientPosts {
     public $conn;
 
-    // Hàm khởi tạo: Đúng cú pháp và đảm bảo kết nối DB hợp lệ
     public function __construct()
     {
         $this->conn = connectDB();
     }
 
-    public function getAllPosts() {
+    public function getAllPosts()
+    {
         try {
-            $sql = "SELECT * FROM posts WHERE trang_thai = 1 ORDER BY ngay_tao_bai_viet DESC";
+            // Lấy tất cả bài viết có trạng thái = 1 (hiển thị)
+            $sql = "SELECT 
+                    id,
+                    hinh_anh,
+                    tieu_de, 
+                    bai_viet,
+                    tac_gia,
+                    ngay_tao_bai_viet,
+                    trang_thai
+                    FROM posts
+                    WHERE trang_thai = 1
+                    ORDER BY ngay_tao_bai_viet DESC";
+            
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            echo "Lỗi Truy Vấn: " . $e->getMessage();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            if ($result === false) {
+                throw new Exception("Không thể lấy dữ liệu bài viết");
+            }
+
+            return $result;
+
+        } catch(Exception $e) {
+            error_log("Lỗi truy vấn: " . $e->getMessage());
             return false;
         }
     }
 
-    public function getPostById($id) {
+    public function getPostsById($id) 
+    {
         try {
-            $sql = "SELECT * FROM posts WHERE id = :id AND trang_thai = 1";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id', $id);
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            echo "Lỗi Truy Vấn: " . $e->getMessage();
-            return false;
-        }
-    }
+            if (!$id) {
+                throw new Exception("ID bài viết không hợp lệ");
+            }
 
-    public function getRecentPosts($limit = 5) {
-        try {
-            $sql = "SELECT * FROM posts WHERE trang_thai = 1 ORDER BY ngay_tao_bai_viet DESC LIMIT :limit";
+            $sql = "SELECT 
+                    id,
+                    hinh_anh,
+                    tieu_de,
+                    bai_viet, 
+                    tac_gia,
+                    ngay_tao_bai_viet,
+                    trang_thai
+                FROM posts 
+                WHERE id = :id AND trang_thai = 1";
+
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            echo "Lỗi Truy Vấn: " . $e->getMessage();
+
+            $post = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$post) {
+                return null;
+            }
+
+            return $post;
+
+        } catch(Exception $e) {
+            error_log("Lỗi truy vấn: " . $e->getMessage());
             return false;
         }
     }
 }
-?>

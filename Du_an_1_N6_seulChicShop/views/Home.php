@@ -219,7 +219,7 @@
                             <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
                                 <div class="block2">
                                     <div class="block2-pic hov-img0">
-                                        <img src="<?= $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>">
+                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>">
                                         <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>" 
                                            class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                             Quick View
@@ -372,7 +372,7 @@
             <div class="col-sm-6 col-md-4 p-b-40">
                 <div class="blog-item">
                     <div class="hov-img0">
-                        <a href="blog-detail.html">
+                        <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>">
                             <img src="assets/images/blog-01.jpg" alt="IMG-BLOG">
                                                                                         </a>
                                                                                     </div>
@@ -396,7 +396,8 @@
                         </h4>
 
                         <p class="stext-108 cl6">
-                            Duis ut velit gravida nibh bibendum commodo. Suspendisse pellentesque mattis augue id euismod. Interdum et male-suada fames
+                            Duis ut velit gravida nibh bibendum commodo. Suspendisse pellentesque mattis augue id
+                            euismod. Interdum et male-suada fames
                         </p>
                                                                                     </div>
                                                                                 </div>
@@ -405,7 +406,7 @@
             <div class="col-sm-6 col-md-4 p-b-40">
                 <div class="blog-item">
                     <div class="hov-img0">
-                        <a href="blog-detail.html">
+                        <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>">
                             <img src="assets/images/blog-02.jpg" alt="IMG-BLOG">
                                                                                         </a>
                                                                                     </div>
@@ -429,7 +430,8 @@
                         </h4>
 
                         <p class="stext-108 cl6">
-                            Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
+                            Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla
+                            in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
                         </p>
                                                                                     </div>
                                                                                 </div>
@@ -438,7 +440,7 @@
             <div class="col-sm-6 col-md-4 p-b-40">
                 <div class="blog-item">
                     <div class="hov-img0">
-                        <a href="blog-detail.html">
+                        <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>">
                             <img src="assets/images/blog-03.jpg" alt="IMG-BLOG">
                                                                                         </a>
                                                                                     </div>
@@ -462,7 +464,8 @@
                         </h4>
 
                         <p class="stext-108 cl6">
-                            Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed hendrerit ligula porttitor. Fusce sit amet maximus nunc
+                            Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed
+                            hendrerit ligula porttitor. Fusce sit amet maximus nunc
                         </p>
                                                                                     </div>
                                                                                         </div>

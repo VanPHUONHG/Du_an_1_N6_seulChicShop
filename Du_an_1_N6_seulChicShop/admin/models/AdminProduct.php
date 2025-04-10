@@ -31,12 +31,8 @@ class AdminProduct
                         FROM bien_the_san_phams 
                         WHERE san_pham_id = san_phams.id
                     )
-                LEFT JOIN hinh_anh_san_phams ON san_phams.id = hinh_anh_san_phams.san_pham_id
-                    AND hinh_anh_san_phams.id = (
-                        SELECT MIN(id)
-                        FROM hinh_anh_san_phams
-                        WHERE san_pham_id = san_phams.id
-                    )';
+                LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
+                WHERE san_phams.trang_thai = 1';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -115,6 +111,7 @@ class AdminProduct
         // var_dump($gia_san_pham_khuyen_mai);
         // die;
         try {
+
             // Insert main product
             $sql = 'INSERT INTO san_phams (ten_san_pham, gia_san_pham, gia_san_pham_khuyen_mai, so_luong, ngay_nhap, danh_muc_id, trang_thai, mo_ta, hinh_anh)
                 VALUES (:ten_san_pham, :gia_san_pham, :gia_san_pham_khuyen_mai, :so_luong, :ngay_nhap, :danh_muc_id, :trang_thai, :mo_ta, :hinh_anh)';
@@ -188,7 +185,7 @@ class AdminProduct
             $stmt->execute([
                 ':ten_san_pham' => $ten_san_pham,
                 ':gia_san_pham' => $gia_san_pham,
-                ':gia_khuyen_mai' => $gia_san_pham_khuyen_mai,
+                ':gia_san_pham_khuyen_mai' => $gia_san_pham_khuyen_mai,
                 ':so_luong' => $so_luong,
                 ':ngay_nhap' => $ngay_nhap,
                 ':danh_muc_id' => $danh_muc_id,

@@ -52,13 +52,10 @@
                                             <td><?= $product['ten_san_pham'] ?></td>
                                             <td>
                                                 <img src="<?= BASE_URL . $product['hinh_anh'] ?>" style="width:100px" alt=""
-                                                        onerror="this.onerror=null; this.src='https:/tse2.mm.bing.net/th?id=OIP.DAwq4ufTfSCkcq3O8q_6AgHaHa&pid=Api&P=0&h=180'">
+                                                        onerror="this.onerror=null; this.src='<?= BASE_URL ?>assets/images/product-09.jpg'">
                                             </td>
-                                            <td><?= isset($product['gia']) ? number_format($product['gia']).'đ' : number_format($product['gia_san_pham']).'đ' ?></td>
-                                            <td><?php
-        $gia_km = $product['gia_khuyen_mai'] ?? $product['gia_san_pham_khuyen_mai'] ?? 0;
-        echo number_format((float)$gia_km) . 'đ';
-    ?></td>
+                                            <td><?= number_format($product['gia_san_pham']).'đ' ?></td>
+                                            <td><?= $product['gia_san_pham_khuyen_mai'] > 0 ? number_format($product['gia_san_pham_khuyen_mai']).'đ' : '0đ' ?></td>
                                             <td><?= $product['so_luong'] ?></td>
                                             <td><?= $product['ten_danh_muc'] ?></td>
                                             <td><?= $product['trang_thai'] == 1 ? 'Còn hàng' : 'Hết hàng'; ?></td>

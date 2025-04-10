@@ -3,36 +3,67 @@
 class ClientPostsController
 {
     public $ModelClientPosts;
-    
     public function __construct()
     {
         $this->ModelClientPosts = new ClientPosts();
     }
 
+    // Hiển thị danh sách bài viết
     public function listPosts()
     {
-        // Lấy tất cả bài viết có trạng thái hiển thị
-        $PostsProduct = $this->ModelClientPosts->getAllPosts();
-        
-        // Hiển thị view blog với dữ liệu bài viết
-        require_once 'views/Blog.php';
+        try {
+            // Lấy tất cả bài viết từ model
+            $PostsProduct = $this->ModelClientPosts->getAllPosts();
+
+            
+            if ($PostsProduct === false) {
+                throw new Exception("Không thể lấy dữ liệu bài viết");
+            }
+
+            // Truyền dữ liệu sang view để hiển thị
+            require_once './views/Blog.php';
+
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            // Nếu có lỗi thì trả về mảng rỗng
+            $PostsProduct = [];
+            require_once './views/Blog.php';
+        }
     }
 
-    public function postDetail()
+    // Hiển thị chi tiết bài viết
+    public function detailPosts()
     {
-        if(isset($_GET['id'])) {
-            $id = $_GET['id'];
-            // Lấy chi tiết bài viết theo id
-            $post = $this->ModelClientPosts->getPostById($id);
+        try {
+            // Lấy id bài viết từ URL
+            $id = isset($_GET['id']) ? $_GET['id'] : null;
             
-            // Lấy các bài viết gần đây để hiển thị bên sidebar
-            $recentPosts = $this->ModelClientPosts->getRecentPosts();
-            
+            if (!$id) {
+                throw new Exception("Không tìm thấy ID bài viết");
+            }
+
+            // Lấy thông tin chi tiết bài viết
+            $blog = $this->ModelClientPosts->getPostsById($id);
+
+            if ($blog === false) {
+                throw new Exception("Không thể lấy chi tiết bài viết");
+            }
+
+            // Nếu không tìm thấy bài viết, chuyển hướng về trang blog
+            if (!$blog) {
+                $_SESSION['error'] = "Không tìm thấy bài viết";
+                header("Location: " . BASE_URL . "?act=blog");
+                exit();
+            }
+
             // Hiển thị view chi tiết bài viết
-            require_once 'views/BlogDetail.php';
-        } else {
-            header('Location: ' . BASE_URL . '?act=blog');
+            require_once './views/BlogDetail.php';
+
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $_SESSION['error'] = "Có lỗi xảy ra, vui lòng thử lại";
+            header("Location: " . BASE_URL . "?act=blog");
+            exit();
         }
     }
 }
-?>
