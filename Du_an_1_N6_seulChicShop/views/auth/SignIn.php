@@ -10,18 +10,15 @@ include_once 'views/layouts/navbar.php';
 <!-- Body -->
 
 <body>
-    <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success text-center">
-            <p><?= $_SESSION['success'] ?></p>
-            <?php unset($_SESSION['success']); ?>
-        </div>
-    <?php endif; ?>
-    <?php if (isset($_SESSION['error'])): ?>
-        <div class="text-danger text-center">
-            <p><?= $_SESSION['error'] ?></p>
-            <?php unset($_SESSION['error']); ?>
-        </div>
-    <?php endif; ?>
+<?php if (isset($_SESSION['success'])): ?>
+    <div class="alert alert-success text-center">
+        <?php foreach ((array)$_SESSION['success'] as $msg): ?>
+            <p><?= htmlspecialchars($msg) ?></p>
+        <?php endforeach; ?>
+        <?php unset($_SESSION['success']); ?>
+    </div>
+<?php endif; ?>
+
     <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
         <div class="session">
             <div class="left">

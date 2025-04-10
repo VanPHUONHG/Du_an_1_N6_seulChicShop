@@ -102,7 +102,8 @@ if (!isset($donHang)) {
                                         <?= isset($item['kich_thuoc']) ? $item['kich_thuoc'] : '' ?>
                                     </td>
                                     <td class="text-center align-middle"><?= isset($item['so_luong']) ? $item['so_luong'] : '' ?></td>
-                                    <td class="text-right align-middle"><?= isset($item['don_gia']) ? formatPrice($item['don_gia']) : '' ?> VND</td>
+                                  
+                                    
                                     <td class="text-right align-middle"><?= isset($item['thanh_tien']) ? formatPrice($item['thanh_tien']) : '' ?> VND</td>
                                 </tr>
                                 <?php endforeach; ?>

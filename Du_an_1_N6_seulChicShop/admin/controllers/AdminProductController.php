@@ -101,17 +101,17 @@ class AdminProductController
 
         $id = $_GET['id_san_pham'];
         $Product = $this->ModelAdminProduct->getProductById($id);
-        
+
         if (!$Product || empty($Product)) {
             header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
             exit();
         }
 
         $listCategory = $this->ModelAdminDanhMuc->getAllDanhMuc();
-        
+
         // Since getProductById returns array of results, get first item
         $Product = $Product[0];
-        
+
         require_once './views/product/EditProduct.php';
         deleteSessionError();
     }
@@ -125,7 +125,7 @@ class AdminProductController
             $old_file = $sanPhamOld['hinh_anh']; // Lấy ảnh cũ để phục vụ cho sửa ảnh
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
             $gia_san_pham = $_POST['gia_san_pham'] ?? '';
-            $gia_san_pham_khuyen_mai = $_POST['gia_san_pham_khuyen_mai'] ?? null    ;
+            $gia_san_pham_khuyen_mai = $_POST['gia_san_pham_khuyen_mai'] ?? "";
             $so_luong = $_POST['so_luong'] ?? '';
             $ngay_nhap = $_POST['ngay_nhap'] ?? '';
             $danh_muc_id = $_POST['danh_muc_id'] ?? '';
