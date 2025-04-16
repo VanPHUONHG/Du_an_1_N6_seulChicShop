@@ -61,21 +61,29 @@ class AdminKhuyenMaiController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $ma_khuyen_mai = $_POST['ma_khuyen_mai'] ?? '';
             $mo_ta = $_POST['mo_ta'] ?? '';
-            $loai_giam_gia = $_POST['loai_giam_gia'] ?? '';
-            $gia_tri_giam = $_POST['gia_tri_giam'] ?? '';
-            $gia_tri_don_hang_toi_thieu = $_POST['gia_tri_don_hang_toi_thieu'] ?? '';
-            $so_luong_toi_da = $_POST['so_luong_toi_da'] ?? '';
-            $so_luong_da_dung = $_POST['so_luong_da_dung'] ?? '';
+            $loai = $_POST['loai'] ?? '';
+            $gia_tri = $_POST['gia_tri'] ?? '';
+            $dieu_kien_toi_thieu = $_POST['dieu_kien_toi_thieu'] ?? '';
+            $so_lan_su_dung = $_POST['so_lan_su_dung'] ?? '';
+            $so_lan_da_dung = $_POST['so_lan_da_dung'] ?? '';
             $ngay_bat_dau = $_POST['ngay_bat_dau'] ?? '';
             $ngay_ket_thuc = $_POST['ngay_ket_thuc'] ?? '';
             $trang_thai = $_POST['trang_thai'] ?? '';
+            $tai_khoan_id = $_POST['tai_khoan_id'] ?? '';
 
-            $this->ModelAdminKhuyenMai->addKhuyenMai(
-                $ma_khuyen_mai, $mo_ta, $loai_giam_gia, $gia_tri_giam,
-                $gia_tri_don_hang_toi_thieu, $so_luong_toi_da, $so_luong_da_dung,
-                $ngay_bat_dau, $ngay_ket_thuc, $trang_thai
+            $result = $this->ModelAdminKhuyenMai->addKhuyenMai(
+                $ma_khuyen_mai,
+                $mo_ta,
+                $loai,
+                $gia_tri,
+                $dieu_kien_toi_thieu,
+                $so_lan_su_dung,
+                $so_lan_da_dung,
+                $ngay_bat_dau,
+                $ngay_ket_thuc,
+                $trang_thai,
+                $tai_khoan_id
             );
-
             header("Location: " . BASE_URL_ADMIN . '?act=danh-sach-khuyenMai');
             exit();
         }
@@ -115,21 +123,21 @@ class AdminKhuyenMaiController
             // Lấy và kiểm tra dữ liệu từ form
             $ma_khuyen_mai = trim($_POST['ma_khuyen_mai'] ?? '');
             $mo_ta = trim($_POST['mo_ta'] ?? '');
-            $loai_giam_gia = trim($_POST['loai_giam_gia'] ?? '');
-            $gia_tri_giam = filter_var($_POST['gia_tri_giam'] ?? 0, FILTER_VALIDATE_INT);
-            $gia_tri_don_hang_toi_thieu = filter_var($_POST['gia_tri_don_hang_toi_thieu'] ?? 0, FILTER_VALIDATE_INT);
-            $so_luong_toi_da = filter_var($_POST['so_luong_toi_da'] ?? 0, FILTER_VALIDATE_INT);
-            $so_luong_da_dung = filter_var($_POST['so_luong_da_dung'] ?? 0, FILTER_VALIDATE_INT);
+            $loai = trim($_POST['loai'] ?? '');
+            $gia_tri = filter_var($_POST['gia_tri'] ?? 0, FILTER_VALIDATE_INT);
+            $dieu_kien_toi_thieu = filter_var($_POST['dieu_kien_toi_thieu'] ?? 0, FILTER_VALIDATE_INT);
+            $so_lan_su_dung = filter_var($_POST['so_lan_su_dung'] ?? 0, FILTER_VALIDATE_INT);
+            $so_lan_da_dung = filter_var($_POST['so_lan_da_dung'] ?? 0, FILTER_VALIDATE_INT);
             $ngay_bat_dau = trim($_POST['ngay_bat_dau'] ?? '');
             $ngay_ket_thuc = trim($_POST['ngay_ket_thuc'] ?? '');
             $trang_thai = filter_var($_POST['trang_thai'] ?? 0, FILTER_VALIDATE_INT);
-
+            $tai_khoan_id = filter_var($_POST['tai_khoan_id'] ?? 0, FILTER_VALIDATE_INT);
             // Kiểm tra dữ liệu hợp lệ
-            if (empty($ma_khuyen_mai) || empty($mo_ta) || empty($loai_giam_gia)) {
+            if (empty($ma_khuyen_mai) || empty($mo_ta) || empty($loai)) {
                 die("Vui lòng điền đầy đủ thông tin bắt buộc.");
             }
 
-            if ($gia_tri_giam < 0 || $gia_tri_don_hang_toi_thieu < 0 || $so_luong_toi_da < 0) {
+            if ($gia_tri < 0 || $dieu_kien_toi_thieu < 0 || $so_lan_su_dung < 0 || $so_lan_da_dung < 0) {
                 die("Các giá trị số không được âm.");
             }
 
@@ -138,14 +146,15 @@ class AdminKhuyenMaiController
                 (int)$id,
                 $ma_khuyen_mai,
                 $mo_ta,
-                $loai_giam_gia,
-                $gia_tri_giam,
-                $gia_tri_don_hang_toi_thieu,
-                $so_luong_toi_da,
-                $so_luong_da_dung,
+                $loai,
+                $gia_tri,
+                $dieu_kien_toi_thieu,
+                $so_lan_su_dung,
+                $so_lan_da_dung,
                 $ngay_bat_dau,
                 $ngay_ket_thuc,
-                $trang_thai
+                $trang_thai,
+                $tai_khoan_id
             );
 
             if ($result) {

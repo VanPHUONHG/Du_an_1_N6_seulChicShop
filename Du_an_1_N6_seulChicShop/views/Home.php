@@ -1,3 +1,4 @@
+
 <!-- Header -->
 <?php include 'layouts/header.php'; ?>
 
@@ -6,6 +7,7 @@
 
 <!-- Mini Cart -->
 <?php include 'layouts/miniCart.php'; ?>
+
 
 <?php if (isset($_SESSION['success'])): ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -729,178 +731,68 @@
 
 
 <!-- Blog -->
-<section class="sec-blog bg0 p-t-60 p-b-90">
+<section class="sec-product bg0 p-t-100 p-b-50">
     <div class="container">
-        <div class="p-b-66">
-            <h3 class="ltext-105 cl5 txt-center respon1">
-                Our Blogs
+        <div class="p-b-32">
+            <h3 class="ltext-105 cl5 txt-center respon1">     
+                Our Articles Page
             </h3>
         </div>
 
-        <div class="row">
-            <div class="col-sm-6 col-md-4 p-b-40">
-                <div class="blog-item">
-                    <div class="hov-img0">
-                        <a href="blog-detail.html">
-                            <img src="assets/images/blog-01.jpg" alt="IMG-BLOG">
-                        </a>
-                    </div>
-
-                    <div class="p-t-15">
-                        <div class="stext-107 flex-w p-b-14">
-                            <span class="m-r-3">
-                                <span class="cl4">
-                                    By
-                                </span>
-
-                                <div class="p-t-15">
-                                    <div class="flex-w p-b-14 stext-107">
-                                        <span class="m-r-3">
-                                            <span class="cl4">
-                                                By
-                                            </span>
-
-                                            <span class="cl5">
-                                                Nancy Ward
-                                            </span>
-                                        </span>
-
-                                        <span>
-                                            <span class="cl4">
-                                                on
-                                            </span>
-
-                                            <span class="cl5">
-                                                July 22, 2017
-                                            </span>
-                                        </span>
-                                    </div>
-
-                                    <h4 class="p-b-12">
-                                        <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>" class="cl2 hov-cl1 mtext-101 trans-04">
-                                            8 Inspiring Ways to Wear Dresses in the Winter
-                                        </a>
-                                    </h4>
-
-                                    <p class="cl6 stext-108">
-                                        Duis ut velit gravida nibh bibendum commodo. Suspendisse pellentesque mattis augue id
-                                        euismod. Interdum et male-suada fames
-                                    </p>
-                                </div>
+        <div class="row justify-content-center">
+            <!-- Block 1 -->
+            <div class="col-md-4 p-3">
+                <div class="block1 wrap-pic-w">
+                    <img src="assets/image_da1/HodiMixiKhoa1.webp" alt="IMG-BANNER" style="width: 100%; height: 500px; object-fit: cover;">
+                    <a href="<?php echo BASE_URL . '?act=bai-viet'; ?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                        <div class="block1-txt-child1 flex-col-l">
+                            <span class="block1-name ltext-102 trans-04 p-b-8">Áo Khoác</span>
+                            <span class="block1-info stext-102 trans-04">Spring 2025</span>
                         </div>
-                    </div>
-
-                    <h4 class="p-b-12">
-                        <a href="blog-detail.html" class="mtext-101 cl2 hov-cl1 trans-04">
-                            8 Inspiring Ways to Wear Dresses in the Winter
-                        </a>
-                    </h4>
-
-                    <p class="stext-108 cl6">
-                        Duis ut velit gravida nibh bibendum commodo. Suspendisse pellentesque mattis augue id
-                        euismod. Interdum et male-suada fames
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6 col-md-4 p-b-40">
-            <div class="blog-item">
-                <div class="hov-img0">
-                    <a href="blog-detail.html">
-                        <img src="assets/images/blog-02.jpg" alt="IMG-BLOG">
+                        <div class="block1-txt-child2 p-b-4 trans-05">
+                            <div class="block1-link stext-101 cl0 trans-09">Shop Now</div>
+                        </div>
                     </a>
                 </div>
-
-                <div class="p-t-15">
-                    <div class="stext-107 flex-w p-b-14">
-                        <span class="m-r-3">
-                            <span class="cl4">
-                                By
-                            </span>
-
-                            <span class="cl5">
-                                July 18, 2017
-                            </span>
-                        </span>
-                    </div>
-
-                    <h4 class="p-b-12">
-                        <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>" class="cl2 hov-cl1 mtext-101 trans-04">
-                            The Great Big List of Men's Gifts for the Holidays
-                        </a>
-                    </h4>
-
-                    <p class="cl6 stext-108">
-                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla
-                        in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <h4 class="p-b-12">
-            <a href="blog-detail.html" class="mtext-101 cl2 hov-cl1 trans-04">
-                The Great Big List of Men's Gifts for the Holidays
-            </a>
-        </h4>
-
-        <p class="stext-108 cl6">
-            Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla
-            in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
-        </p>
-    </div>
-    </div>
-    </div>
-
-    <div class="col-sm-6 col-md-4 p-b-40">
-        <div class="blog-item">
-            <div class="hov-img0">
-                <a href="blog-detail.html">
-                    <img src="assets/images/blog-03.jpg" alt="IMG-BLOG">
-                </a>
             </div>
 
-            <div class="p-t-15">
-                <div class="stext-107 flex-w p-b-14">
-                    <span class="m-r-3">
-                        <span class="cl4">
-                            By
-                        </span>
-
-                        <span class="cl5">
-                            July 2, 2017
-                        </span>
-                    </span>
-                </div>
-
-                <h4 class="p-b-12">
-                    <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>" class="cl2 hov-cl1 mtext-101 trans-04">
-                        5 Winter-to-Spring Fashion Trends to Try Now
+            <!-- Block 2 -->
+            <div class="col-md-4 p-3">
+                <div class="block1 wrap-pic-w">
+                    <img src="assets/image_da1/Boni4.webp" alt="IMG-BANNER" style="width: 100%; height: 500px; object-fit: cover;">
+                    <a href="<?php echo BASE_URL . '?act=bai-viet'; ?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                        <div class="block1-txt-child1 flex-col-l">
+                            <span class="block1-name ltext-102 trans-04 p-b-8">Áo Thun</span>
+                            <span class="block1-info stext-102 trans-04">Spring 2025</span>
+                        </div>
+                        <div class="block1-txt-child2 p-b-4 trans-05">
+                            <div class="block1-link stext-101 cl0 trans-09">Shop Now</div>
+                        </div>
                     </a>
-                </h4>
+                </div>
+            </div>
 
-                <p class="cl6 stext-108">
-                    Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed
-                    hendrerit ligula porttitor. Fusce sit amet maximus nunc
-                </p>
+            <!-- Block 3 -->
+            <div class="col-md-4 p-3">
+                <div class="block1 wrap-pic-w">
+                    <img src="assets/image_da1/coc_snecker2.webp" alt="IMG-BANNER" style="width: 100%; height: 500px; object-fit: cover;">
+                    <a href="<?php echo BASE_URL . '?act=chi-tiet-bai-viet'; ?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                        <div class="block1-txt-child1 flex-col-l">
+                            <span class="block1-name ltext-102 trans-04 p-b-8">Đồ lưu niệm</span>
+                            <span class="block1-info stext-102 trans-04">Hot Trend</span>
+                        </div>
+                        <div class="block1-txt-child2 p-b-4 trans-05">
+                            <div class="block1-link stext-101 cl0 trans-09">Shop Now</div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-
-    <h4 class="p-b-12">
-        <a href="blog-detail.html" class="mtext-101 cl2 hov-cl1 trans-04">
-            5 Winter-to-Spring Fashion Trends to Try Now
-        </a>
-    </h4>
-
-    <p class="stext-108 cl6">
-        Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed
-        hendrerit ligula porttitor. Fusce sit amet maximus nunc
-    </p>
-    </div>
     </div>
 </section>
+
+
+
 
 <!-- Footer -->
 <?php include 'layouts/footer.php'; ?>
