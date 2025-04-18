@@ -108,7 +108,9 @@
         <div class="col-md-4 p-3">
             <!-- Block1 -->
             <div class="block1 wrap-pic-w">
-                <img src="assets/image_da1/HodiMixiKhoa1.webp" alt="IMG-BANNER" style="width: 100%; height: 500px; object-fit: cover;">
+                <div class="banner-img" style="height: 500px; overflow: hidden;">
+                    <img src="assets/image_da1/HodiMixiKhoa1.webp" alt="IMG-BANNER" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
 
                 <a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                     <div class="block1-txt-child1 flex-col-l">
@@ -133,7 +135,9 @@
         <div class="col-md-4 p-3">
             <!-- Block1 -->
             <div class="block1 wrap-pic-w">
-                <img src="assets/image_da1/Boni4.webp" alt="IMG-BANNER" style="width: 100%; height: 500px; object-fit: cover;">
+                <div class="banner-img" style="height: 500px; overflow: hidden;">
+                    <img src="assets/image_da1/Boni4.webp" alt="IMG-BANNER" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
 
                 <a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                     <div class="block1-txt-child1 flex-col-l">
@@ -158,7 +162,9 @@
         <div class="col-md-4 p-3">
             <!-- Block1 -->
             <div class="block1 wrap-pic-w">
-                <img src="assets/image_da1/coc_snecker2.webp" alt="IMG-BANNER" style="width: 100%; height: 500px; object-fit: cover;">
+                <div class="banner-img" style="height: 500px; overflow: hidden;">
+                    <img src="assets/image_da1/coc_snecker2.webp" alt="IMG-BANNER" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
 
                 <a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                     <div class="block1-txt-child1 flex-col-l">
@@ -218,8 +224,8 @@
                             <?php foreach ($productBestSeller as $product): ?>
                             <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
                                 <div class="block2">
-                                    <div class="block2-pic hov-img0">
-                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>">
+                                    <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
+                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>" style="width: 100%; height: 100%; object-fit: cover;">
                                         <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>" 
                                            class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                             Quick View
@@ -266,8 +272,8 @@
                             <?php foreach($productSelling as $product): ?>
                             <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
                                 <div class="block2">
-                                    <div class="block2-pic hov-img0">
-                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>">
+                                    <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
+                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>" style="width: 100%; height: 100%; object-fit: cover;">
                                         <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
                                            class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                             Quick View
@@ -314,8 +320,8 @@
                             <?php foreach($productTopRating as $product): ?>
                             <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
                                 <div class="block2">
-                                    <div class="block2-pic hov-img0">
-                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>">
+                                    <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
+                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>" style="width: 100%; height: 100%; object-fit: cover;">
                                         <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
                                            class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                             Quick View
@@ -359,120 +365,68 @@
     </div>
 </section>
 
-<!-- Blog -->
-<section class="sec-blog bg0 p-t-60 p-b-90">
-    <div class="container">
-        <div class="p-b-66">
-            <h3 class="ltext-105 cl5 txt-center respon1">
-                Our Blogs
-            </h3>
-        </div>
 
-        <div class="row">
-            <div class="col-sm-6 col-md-4 p-b-40">
-                <div class="blog-item">
-                    <div class="hov-img0">
-                        <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>">
-                            <img src="assets/images/blog-01.jpg" alt="IMG-BLOG">
-                        </a>
-                    </div>
 
-                    <div class="p-t-15">
-                        <div class="stext-107 flex-w p-b-14">
-                            <span class="m-r-3">
-                                <span class="cl4">By</span>
-                                <span class="cl5">Nancy Ward</span>
-                            </span>
-                            <span>
-                                <span class="cl4">on</span>
-                                <span class="cl5">July 22, 2017</span>
-                            </span>
-                        </div>
+	<!-- Blog -->
+	<section class="sec-blog bg0 p-t-60 p-b-90">
+		<div class="container">
+			<div class="p-b-66">
+				<h3 class="ltext-105 cl5 txt-center respon1">
+					Our Blogs
+				</h3>
+			</div>
 
-                        <h4 class="p-b-12">
-                            <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>" class="mtext-101 cl2 hov-cl1 trans-04">
-                                8 Inspiring Ways to Wear Dresses in the Winter
-                            </a>
-                        </h4>
+			<div class="row">
+				<?php foreach ($postNew as $post): ?>
+				<div class="col-sm-6 col-md-4 p-b-40">
+					<div class="blog-item">
+						<div class="hov-img0">
+							<a href="<?= BASE_URL . '?act=chi-tiet-bai-viet&id=' . $post['id'] ?>">
+								<img src="<?= BASE_URL . $post['hinh_anh'] ?>" alt="<?= $post['tieu_de'] ?>" style="width: 100%; height: 100%; object-fit: cover;">
+							</a>
+						</div>
 
-                        <p class="stext-108 cl6">
-                            Duis ut velit gravida nibh bibendum commodo. Suspendisse pellentesque mattis augue id
-                            euismod. Interdum et male-suada fames
-                        </p>
-                    </div>
-                </div>
-            </div>
+						<div class="p-t-15">
+							<div class="stext-107 flex-w p-b-14">
+								<span class="m-r-3">
+									<span class="cl4">
+										By
+									</span>
 
-            <div class="col-sm-6 col-md-4 p-b-40">
-                <div class="blog-item">
-                    <div class="hov-img0">
-                        <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>">
-                            <img src="assets/images/blog-02.jpg" alt="IMG-BLOG">
-                        </a>
-                    </div>
+									<span class="cl5">
+										<?= $post['tac_gia'] ?>
+									</span>
+								</span>
 
-                    <div class="p-t-15">
-                        <div class="stext-107 flex-w p-b-14">
-                            <span class="m-r-3">
-                                <span class="cl4">By</span>
-                                <span class="cl5">Nancy Ward</span>
-                            </span>
-                            <span>
-                                <span class="cl4">on</span>
-                                <span class="cl5">July 18, 2017</span>
-                            </span>
-                        </div>
+								<span>
+									<span class="cl4">
+										on
+									</span>
 
-                        <h4 class="p-b-12">
-                            <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>" class="mtext-101 cl2 hov-cl1 trans-04">
-                                The Great Big List of Men's Gifts for the Holidays
-                            </a>
-                        </h4>
+									<span class="cl5">
+										<?= $post['ngay_tao_bai_viet'] ?>
+									</span>
+								</span>
+							</div>
 
-                        <p class="stext-108 cl6">
-                            Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla
-                            in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
-                        </p>
-                    </div>
-                </div>
-            </div>
+							<h4 class="p-b-12">
+								<a href="<?= BASE_URL . '?act=chi-tiet-bai-viet&id=' . $post['id'] ?>" class="mtext-101 cl2 hov-cl1 trans-04">
+									<?= $post['tieu_de'] ?>
+								</a>
+							</h4>
 
-            <div class="col-sm-6 col-md-4 p-b-40">
-                <div class="blog-item">
-                    <div class="hov-img0">
-                        <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>">
-                            <img src="assets/images/blog-03.jpg" alt="IMG-BLOG">
-                        </a>
-                    </div>
+							<p class="stext-108 cl6">
+								<?= $post['bai_viet'] ?>
+							</p>
+						</div>
+					</div>
+				</div>
+                <?php endforeach; ?>
+			</div>
+		</div>
+	</section>
 
-                    <div class="p-t-15">
-                        <div class="stext-107 flex-w p-b-14">
-                            <span class="m-r-3">
-                                <span class="cl4">By</span>
-                                <span class="cl5">Nancy Ward</span>
-                            </span>
-                            <span>
-                                <span class="cl4">on</span>
-                                <span class="cl5">July 2, 2017</span>
-                            </span>
-                        </div>
 
-                        <h4 class="p-b-12">
-                            <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet' ?>" class="mtext-101 cl2 hov-cl1 trans-04">
-                                5 Winter-to-Spring Fashion Trends to Try Now
-                            </a>
-                        </h4>
-
-                        <p class="stext-108 cl6">
-                            Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed
-                            hendrerit ligula porttitor. Fusce sit amet maximus nunc
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Footer -->
 <?php include 'layouts/footer.php'; ?>

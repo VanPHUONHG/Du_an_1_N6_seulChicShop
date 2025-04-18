@@ -28,6 +28,7 @@
                                         <th>Ảnh Đại Diện</th>
                                         <th>Số điện Thoại</th>
                                         <th>Ngày tạo</th>
+                                        <th>Trạng thái</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
@@ -45,8 +46,10 @@
 
                                             <td><?= $user['so_dien_thoai'] ?></td>
                                             <td><?= $user['ngay_tao'] ?></td>
+                                            <td><?= $user['trang_thai'] == 1 ? 'Hoạt động' : 'Không hoạt động' ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-tai-khoan-admin&id_tai_khoan_admin=' . $user['id'] ?>"><button class="btn btn-warning"><i class="far fa-eye"></i></button></a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-tai-khoan-khach-hang&id_tai_khoan_khach-hang=' . $user['id'] ?>"><button class="btn btn-warning"><i class="far fa-eye"></i></button></a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=form-sua-tai-khoan-khach-hang&id_tai_khoan_khach-hang=' . $user['id'] ?>"><button class="btn btn-primary"><i class="far fa-edit"></i></button></a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>

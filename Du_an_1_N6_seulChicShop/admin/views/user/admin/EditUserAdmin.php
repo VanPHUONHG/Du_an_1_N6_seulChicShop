@@ -75,6 +75,14 @@
                                         <p class="text-danger"><?= $_SESSION['error']['so_dien_thoai'] ?></p>
                                     <?php  } ?>
                                 </div>
+                                <div class="form-group col-6">
+                                    <label>Trạng thái</label>
+                                    <select class="form-control" name="trang_thai">
+                                        <option value="1" <?= $user['trang_thai'] == 1 ? 'selected' : '' ?>>Kích hoạt</option>
+                                        <option value="0" <?= $user['trang_thai'] == 2 ? 'selected' : '' ?>>Không kích hoạt</option>
+                                    </select>
+                                </div>
+                            </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">

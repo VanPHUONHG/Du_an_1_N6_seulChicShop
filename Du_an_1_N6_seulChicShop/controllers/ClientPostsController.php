@@ -11,24 +11,13 @@ class ClientPostsController
     // Hiển thị danh sách bài viết
     public function listPosts()
     {
-        try {
-            // Lấy tất cả bài viết từ model
-            $PostsProduct = $this->ModelClientPosts->getAllPosts();
-
-            
-            if ($PostsProduct === false) {
-                throw new Exception("Không thể lấy dữ liệu bài viết");
-            }
-
-            // Truyền dữ liệu sang view để hiển thị
-            require_once './views/Blog.php';
-
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            // Nếu có lỗi thì trả về mảng rỗng
-            $PostsProduct = [];
-            require_once './views/Blog.php';
+        $posts = $this->ModelClientPosts->getAllPost();
+        if ($posts === false) {
+            $_SESSION['error'] = "Không thể lấy dữ liệu bài viết.";
+            header("Location: " . BASE_URL . "?act=blog");
+            exit();
         }
+        require_once './views/Post.php';
     }
 
     // Hiển thị chi tiết bài viết
@@ -57,7 +46,7 @@ class ClientPostsController
             }
 
             // Hiển thị view chi tiết bài viết
-            require_once './views/BlogDetail.php';
+            require_once './views/PostDetail.php';
 
         } catch (Exception $e) {
             error_log($e->getMessage());

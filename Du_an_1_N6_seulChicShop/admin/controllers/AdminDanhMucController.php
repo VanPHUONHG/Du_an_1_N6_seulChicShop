@@ -115,9 +115,16 @@ class AdminDanhMucController
         $id = $_GET['id_danh_muc'];
         $danhMuc = $this->ModelAdminDanhMuc->getDetailDanhMuc($id);
 
-        if ($danhMuc) {
+        // Kiểm tra xem danh mục có sản phẩm không
+        $hasProducts = $this->ModelAdminDanhMuc->checkDanhMucHasProducts($id);
+
+        if ($hasProducts) {
+            $_SESSION['error'] = "Không thể xóa danh mục này vì đã có sản phẩm!";
+        } else if ($danhMuc) {
             $this->ModelAdminDanhMuc->destroyDanhMuc($id);
+            $_SESSION['success'] = "Xóa danh mục thành công!";
         }
+
         header("Location: " . BASE_URL_ADMIN . '?act=danh-muc');
         exit();
     }

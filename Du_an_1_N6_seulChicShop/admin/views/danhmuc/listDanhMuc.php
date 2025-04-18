@@ -10,8 +10,19 @@
 <?php include './views/layout/sidebar.php'; ?>
 
 
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+<?php
+if (isset($_SESSION['success'])) {
+    echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
+    unset($_SESSION['success']);
+}
+if (isset($_SESSION['error'])) {
+    echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';
+    unset($_SESSION['error']);
+}
+?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">

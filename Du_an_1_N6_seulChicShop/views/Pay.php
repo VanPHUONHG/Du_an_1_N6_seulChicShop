@@ -52,6 +52,7 @@ $discountAmount = 0;
         <input type="hidden" name="ngay_dat" value="<?= date('Y-m-d H:i:s') ?>">
         <input type="hidden" name="giam_gia" id="giam_gia" value="0">
         <input type="hidden" name="ma_khuyen_mai_id" id="ma_khuyen_mai_id" value="">
+        <input type="hidden" name="tien_giam" id="tien_giam" value="0">
 
         <h4 class="p-b-30 text-center cl2 mtext-109">
             Page Checkout
@@ -65,7 +66,7 @@ $discountAmount = 0;
             </div>
 
             <div class="size-209">
-                <span class="cl2 mtext-110">
+                <span class="cl2 mtext-110" id="total-price">
                     <?= number_format($totalCart) ?>đ
                 </span>
             </div>
@@ -84,7 +85,7 @@ $discountAmount = 0;
                         <label for="ten_nguoi_nhan" class="cl2 stext-110 m-b-6">Họ và tên</label>
                         <div class="bg0 bor8">
                             <input class="p-lr-15 cl8 plh3 size-111 stext-111" type="text" id="ten_nguoi_nhan" name="ten_nguoi_nhan"
-                                placeholder="Nhập họ và tên người nhận" required>
+                             value="<?= isset($_SESSION['user_client']) ? $_SESSION['user_client'] : '' ?>"   placeholder="Nhập họ và tên người nhận" required>
                         </div>
                     </div>
 
@@ -92,7 +93,7 @@ $discountAmount = 0;
                         <label for="sdt_nguoi_nhan" class="cl2 stext-110 m-b-6">Số điện thoại</label>
                         <div class="bg0 bor8">
                             <input class="p-lr-15 cl8 plh3 size-111 stext-111" type="text" id="sdt_nguoi_nhan" name="sdt_nguoi_nhan"
-                                placeholder="Nhập số điện thoại người nhận" required>
+                             value="<?= isset($user['so_dien_thoai']) ? $user['so_dien_thoai'] : '' ?>" placeholder="Nhập số điện thoại người nhận" required>
                         </div>
                     </div>
 
@@ -100,7 +101,7 @@ $discountAmount = 0;
                         <label for="email_nguoi_nhan" class="cl2 stext-110 m-b-6">Email</label>
                         <div class="bg0 bor8">
                             <input class="p-lr-15 cl8 plh3 size-111 stext-111" type="email" id="email_nguoi_nhan" name="email_nguoi_nhan"
-                                placeholder="Nhập email người nhận" required>
+                                value="<?= isset($user['email']) ? $user['email'] : '' ?>" placeholder="Nhập email người nhận" required>
                         </div>
                     </div>
 
@@ -180,13 +181,41 @@ $discountAmount = 0;
                 </span>
             </div>
             <div class="bg0 bor8 m-r-10 m-tb-5 size-117 d-flex">
-                <input class="p-lr-15 cl8 plh3 size-111 stext-111 flex-grow-1" type="text" name="ma_giam_gia" id="ma_giam_gia" placeholder="Nhập mã giảm giá">
-                <button type="button" class="btn btn-sm btn-primary ml-2" onclick="apDungMaKhuyenMai()">Áp dụng</button>
+                <select name="ma_giam_gia_id" id="ma_giam_gia_id" onchange="apDungMaKhuyenMai()">
+                    <option value="">Chọn mã khuyến mãi</option>
+                    <?php 
+                    if (!empty($coupons)) {
+                        foreach ($coupons as $coupon) { ?>
+                            <option value="<?=$coupon["id"]?>" 
+                                    data-type="<?=$coupon["loai"]?>" 
+                                    data-discount="<?=$coupon["gia_tri"]?>"
+                                    data-code="<?=$coupon["ma_khuyen_mai"]?>">
+                                <?=$coupon["ma_khuyen_mai"]?>
+                            </option>                     
+                        <?php }
+                    } else {
+                        echo '<option value="">Không có mã giảm giá khả dụng</option>';
+                    }
+                    ?>
+                </select>
             </div>
             <div class="text-success mt-2" id="coupon-success" style="display:none;"></div>
             <div class="text-danger mt-2" id="coupon-error" style="display:none;"></div>
         </div>
-        
+
+        <!-- Số tiền giảm -->
+        <div class="flex-t flex-w p-b-33 p-t-27">
+            <div class="size-208">
+                <span class="cl2 mtext-101">
+                    Discount Amount:
+                </span>
+            </div>
+            <div class="p-t-1 size-209">
+                <span class="cl2 mtext-110" id="discount-amount">
+                    0đ
+                </span>
+            </div>
+        </div>
         
         <!-- Chi tiết đơn hàng -->
         <div class="p-b-30 bor12 m-tb-20">
@@ -376,63 +405,47 @@ $discountAmount = 0;
 
     // Xử lý khuyến mại
     function apDungMaKhuyenMai() {
-        var maGiamGia = document.getElementById('ma_giam_gia').value.trim();
+        var selectedOption = document.getElementById('ma_giam_gia_id').options[document.getElementById('ma_giam_gia_id').selectedIndex];
         var shipping = document.getElementById('shipping-fee').innerText === '0đ' ? 0 : 30000;
         
-        if (maGiamGia === '') {
-            showError("Vui lòng nhập mã khuyến mãi.");
-            return;
-        }
-
-        // Gửi request kiểm tra mã khuyến mãi bằng fetch
-        fetch('<?= BASE_URL ?>?act=kiem-tra-ma-khuyen-mai', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'ma_khuyen_mai=' + encodeURIComponent(maGiamGia) + '&tong_tien=' + encodeURIComponent(totalCart)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                // Tính toán số tiền giảm
-                discountAmount = parseFloat(data.giam_gia);
-                
-                // Cập nhật tổng tiền
-                let tongTienMoi = totalCart + shipping - discountAmount;
-                document.getElementById('total-checkout').innerText = tongTienMoi.toLocaleString('vi-VN') + 'đ';
-                document.getElementById('tong-tien-input').value = tongTienMoi;
-                document.getElementById('giam_gia').value = discountAmount;
-                
-                // Hiển thị thông báo thành công
-                document.getElementById('coupon-success').innerText = "Áp dụng mã giảm giá thành công! " + data.mo_ta;
-                document.getElementById('coupon-success').style.display = 'block';
-                document.getElementById('coupon-error').style.display = 'none';
-                
-                // Khóa input mã giảm giá
-                document.getElementById('ma_giam_gia').readOnly = true;
-            } else {
-                showError(data.message);
+        if (selectedOption.value === '') {
+            // Reset discount if no coupon selected
+            discountAmount = 0;
+            document.getElementById('giam_gia').value = 0;
+            document.getElementById('ma_khuyen_mai_id').value = '';
+            document.getElementById('tien_giam').value = 0;
+            document.getElementById('coupon-success').style.display = 'none';
+            document.getElementById('coupon-error').style.display = 'none';
+            document.getElementById('discount-amount').innerText = '0đ';
+        } else {
+            var discountValue = parseFloat(selectedOption.getAttribute('data-discount'));
+            var discountType = selectedOption.getAttribute('data-type');
+            var couponCode = selectedOption.getAttribute('data-code');
+            
+            // Calculate discount amount based on type
+            if (discountType === 'phan_tram') {
+                discountAmount = Math.floor((totalCart * discountValue) / 100);
+                document.getElementById('coupon-success').innerText = `Áp dụng mã giảm giá ${discountValue}% thành công!`;
+            } else { // tien_mat
+                discountAmount = discountValue;
+                document.getElementById('coupon-success').innerText = `Áp dụng mã giảm giá ${discountValue.toLocaleString()}đ thành công!`;
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showError("Có lỗi xảy ra khi kiểm tra mã");
-        });
-    }
-
-    function showError(message) {
-        document.getElementById('coupon-error').innerText = message;
-        document.getElementById('coupon-error').style.display = 'block';
-        document.getElementById('coupon-success').style.display = 'none';
+            
+            document.getElementById('giam_gia').value = discountAmount;
+            document.getElementById('tien_giam').value = discountAmount;
+            document.getElementById('ma_khuyen_mai_id').value = selectedOption.value;
+            document.getElementById('coupon-success').style.display = 'block';
+            document.getElementById('coupon-error').style.display = 'none';
+            document.getElementById('discount-amount').innerText = discountAmount.toLocaleString() + 'đ';
+        }
         
-        // Reset các giá trị
-        document.getElementById('ma_giam_gia').readOnly = false;
-        document.getElementById('giam_gia').value = 0;
-        discountAmount = 0;
+        // Update total price
+        let tongTienMoi = totalCart + shipping - discountAmount;
+        document.getElementById('total-checkout').innerText = tongTienMoi.toLocaleString('vi-VN') + 'đ';
+        document.getElementById('tong-tien-input').value = tongTienMoi;
         
-        // Cập nhật lại tổng tiền
-        updateTotalPrice();
+        // Update displayed total price
+        document.getElementById('total-price').innerText = (totalCart - discountAmount).toLocaleString('vi-VN') + 'đ';
     }
 </script>
 

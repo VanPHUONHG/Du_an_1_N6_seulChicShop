@@ -21,10 +21,20 @@ class AdminProductController
     {
         $id = $_GET['id_san_pham'];
         $product = $this->ModelAdminProduct->getProductById($id);
-        if ($product) {
-            deleteFile($product['hinh_anh']);
-            $this->ModelAdminProduct->deleteProduct($id);
+        
+        // Kiểm tra xem sản phẩm có trong chi tiết đơn hàng không
+        $hasOrders = $this->ModelAdminProduct->checkProductHasOrders($id);
+
+        if ($hasOrders) {
+            // Nếu sản phẩm có trong chi tiết đơn hàng thì không cho xóa
+            $_SESSION['error'] = "Không thể xóa sản phẩm này vì đã có trong đơn hàng!";
+        } else if ($product) {
+            // Nếu không có trong đơn hàng thì cho phép xóa
+            deleteFile($product[0]['hinh_anh']); // Xóa file ảnh
+            $this->ModelAdminProduct->deleteProduct($id); // Xóa sản phẩm
+            $_SESSION['success'] = "Xóa sản phẩm thành công!";
         }
+
         header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
         exit();
     }
@@ -117,16 +127,18 @@ class AdminProductController
     }
     public function editProduct()
     {
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $san_pham_id = $_POST['san_pham_id'] ?? '';
 
+            // Kiểm tra sản phẩm có trong chi tiết đơn hàng không
+            $productInOrder = $this->ModelAdminProduct->checkProductInOrder($san_pham_id);
+            
             $sanPhamOld = $this->ModelAdminProduct->getProductById($san_pham_id);
-            $old_file = $sanPhamOld['hinh_anh']; // Lấy ảnh cũ để phục vụ cho sửa ảnh
+            $old_file = $sanPhamOld[0]['hinh_anh']; // Lấy ảnh cũ để phục vụ cho sửa ảnh
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
-            $gia_san_pham = $_POST['gia_san_pham'] ?? '';
+            $gia_san_pham = $_POST['gia_san_pham'] ?? null;
             $gia_san_pham_khuyen_mai = $_POST['gia_san_pham_khuyen_mai'] ?? null;
-            $so_luong = $_POST['so_luong'] ?? '';
+            $so_luong = $_POST['so_luong'] ?? null;
             $ngay_nhap = $_POST['ngay_nhap'] ?? '';
             $danh_muc_id = $_POST['danh_muc_id'] ?? '';
             $trang_thai = $_POST['trang_thai'] ?? '';
@@ -136,13 +148,6 @@ class AdminProductController
 
             if (empty($ten_san_pham)) {
                 $errors['ten_san_pham'] = 'Tên sản phẩm không được để trống';
-            }
-            if (empty($gia_san_pham)) {
-                $errors['gia_san_pham'] = 'giá sản phẩm không được để trống';
-            }
-
-            if (empty($so_luong)) {
-                $errors['so_luong'] = 'số lượng sản phẩm không được để trống';
             }
             if (empty($ngay_nhap)) {
                 $errors['ngay_nhap'] = 'ngày nhập sản phẩm không được để trống';
@@ -154,17 +159,28 @@ class AdminProductController
                 $errors['trang_thai'] = 'trạng thái sản phẩm phải chọn';
             }
 
-            $_SESSION['error'] = $errors;
-            if (isset($hinh_anh) && $hinh_anh['error'] == UPLOAD_ERR_OK) {
-                //upload ảnhh
-                $new_file = uploadFile($hinh_anh, './uploads/');
-                if (!empty($old_file)) {
-                    deleteFile($old_file);
+            // Nếu sản phẩm đã có trong đơn hàng, không cho phép sửa giá và số lượng
+            if ($productInOrder) {
+                if ($gia_san_pham != $sanPhamOld[0]['gia']) {
+                    $errors['gia_san_pham'] = 'Không thể thay đổi giá sản phẩm đã có trong đơn hàng';
+                    $gia_san_pham = $sanPhamOld[0]['gia'];
                 }
-            } else {
-                $new_file = $old_file;
+                if ($so_luong != $sanPhamOld[0]['so_luong']) {
+                    $errors['so_luong'] = 'Không thể thay đổi số lượng sản phẩm đã có trong đơn hàng';
+                    $so_luong = $sanPhamOld[0]['so_luong'];
+                }
             }
 
+            $_SESSION['error'] = $errors;
+            
+            // Chỉ xử lý ảnh mới nếu có upload file
+            $new_file = $old_file; // Mặc định giữ ảnh cũ
+            if (isset($hinh_anh) && $hinh_anh['error'] == UPLOAD_ERR_OK && !empty($hinh_anh['name'])) {
+                $new_file = uploadFile($hinh_anh, './uploads/');
+                if ($new_file && !empty($old_file)) {
+                    deleteFile($old_file);
+                }
+            }
 
             if (empty($errors)) {
                 $this->ModelAdminProduct->updateProduct(

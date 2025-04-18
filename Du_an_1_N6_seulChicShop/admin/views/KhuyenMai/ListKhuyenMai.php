@@ -31,14 +31,16 @@
                                         <th>Mã KM</th>
                                         <th>Mô tả</th>
                                         <th>Loại</th>
-                                        <th>Giá trị giảm</th>
-                                        <th>Giá trị đơn hàng tối thiểu</th>
-                                        <th>Số Lượng tối đa</th>
-                                        <th>Số lượng đã sử dụng </th>
+                                        <th>Giá trị </th>
+                                        <th>Điều kiện tối thiểu</th>
+                                        <th>Số lần sử dụng tối đa</th>
+                                        <th>Số lần đã sử dụng </th>
                                         <th>Ngày bắt đầu</th>
                                         <th>Ngày kết thúc</th>
                                         <th>Trạng thái</th>
+                                        <th>Tài khoản</th>
                                         <th>Thao tác</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -47,15 +49,15 @@
                                             <td><?= $key + 1 ?></td>
                                             <td><?= $khuyenMai['ma_khuyen_mai'] ?></td>
                                             <td><?= $khuyenMai['mo_ta'] ?></td>
-                                            <td><?= $khuyenMai['loai_giam_gia'] ?></td>
-                                            <td><?= $khuyenMai['gia_tri_giam'] ?></td>
+                                            <td><?= $khuyenMai['loai'] == 'phan_tram' ? 'Phần trăm' : 'Tiền' ?></td>
+                                            <td><?= $khuyenMai['loai'] == 'phan_tram' ? $khuyenMai['gia_tri'] . '%' : number_format($khuyenMai['gia_tri']) . 'đ' ?></td>
                                             
-                                            <td><?= $khuyenMai['gia_tri_don_hang_toi_thieu'] ?></td>
-                                            <td><?= $khuyenMai['so_luong_toi_da'] ?></td>
-                                            <td><?= $khuyenMai['so_luong_da_dung'] ?></td>
+                                            <td><?= $khuyenMai['dieu_kien_toi_thieu'] ?></td>
+                                            <td><?= $khuyenMai['so_lan_su_dung'] ?></td>
+                                            <td><?= $khuyenMai['so_lan_da_dung'] ?></td>
                                             <td><?= $khuyenMai['ngay_bat_dau'] ?></td>
                                             <td><?= $khuyenMai['ngay_ket_thuc'] ?></td>
-
+                                            <td><?= $khuyenMai['ten_tai_khoan'] ?></td>
                                             <td><?= $khuyenMai['trang_thai'] == 1 ? 'Hoạt động' : 'Ngừng' ?></td>
                                             <td>
                                                 <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-khuyenMai&id=' . $khuyenMai['id'] ?>">

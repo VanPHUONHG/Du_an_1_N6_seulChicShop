@@ -54,8 +54,8 @@ $response = match ($act) {
     'them-lien-he' => (new ClientContactController())->addContact(), // Base_URL/?act=them-lien-he
     'gioi-thieu' => (new ClientHomeController())->about(), // Base_URL/?act=gioi-thieu
 
-    'bai-viet' => (new ClientHomeController())->blog(), // Base_URL/?act=bai-viet
-    'chi-tiet-bai-viet' => (new ClientHomeController())->blogDetail(), // Base_URL/?act=chi-tiet-bai-viet
+    'bai-viet' => (new ClientPostsController())->listPosts(), // Base_URL/?act=bai-viet
+    'chi-tiet-bai-viet' => (new ClientPostsController())->detailPosts(), // Base_URL/?act=chi-tiet-bai-viet
     // Auth
     'dang-nhap' => (new ClientHomeController())->signIn(),
     'check-dang-nhap' => (new ClientHomeController())->checkSignIn(),
@@ -82,12 +82,5 @@ $response = match ($act) {
     'lich-su-mua-hang' => (new ClientOderController())->lichSuMuaHang(),
     'chi-tiet-mua-hang' => (new ClientOderController())->chiTietDonHang(),
     'huy-don-hang' => (new ClientOderController())->huyDonHang(),
-
-    // khuyến mại
-    'kiem-tra-ma-khuyen-mai' => ['controller' => 'KhuyenMaiController', 'action' => 'kiemTraMaKhuyenMai'],
-
-    'bai-viet' => (new ClientPostsController())->listPosts(), // Base_URL/?act=bai-viet
-    'chi-tiet-bai-viet' => (new ClientPostsController())->detailPosts(), // Base_URL/?act=chi-tiet-bai-viet
-
     default => '404 - Trang không tồn tại',
 };

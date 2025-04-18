@@ -9,6 +9,27 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+    <!-- Thông báo lỗi -->
+    <?php if (isset($_SESSION['error']) && count($_SESSION['error']) > 0) { ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?php foreach ($_SESSION['error'] as $error) { ?>
+                <div><?= $error ?></div>
+            <?php } ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php } ?>
+
+    <!-- Thông báo thành công -->
+    <?php if (isset($_SESSION['success'])) { ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= $_SESSION['success'] ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php } ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
