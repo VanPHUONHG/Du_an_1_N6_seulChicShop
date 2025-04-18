@@ -40,7 +40,7 @@ class AdminProduct
             echo "loi" . $e->getMessage();
         }
     }
-    
+
 
 
     public function deleteProduct($id)
@@ -104,7 +104,23 @@ class AdminProduct
         }
     }
 
-    
+    public function checkProductHasOrders($id)
+    {
+        try {
+            // Kiểm tra xem sản phẩm có trong chi tiết đơn hàng không
+            $sql = 'SELECT COUNT(*) FROM chi_tiet_don_hangs WHERE san_pham_id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id
+            ]);
+            
+            // Nếu có trong chi tiết đơn hàng (count > 0) thì trả về true để không cho xóa
+            return $stmt->fetchColumn() > 0;
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+            return false;
+        }
+    }
 
     public function insertProduct($ten_san_pham, $gia_san_pham, $gia_san_pham_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh)
     {
@@ -248,6 +264,18 @@ class AdminProduct
             $stmt1->bindParam(':bien_the_id', $bien_the_id);
             $stmt1->execute();
             return true;
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+            return false;
+        }
+    }
+    public function checkProductInOrder($san_pham_id){
+        try {
+            $sql = "SELECT COUNT(*) FROM chi_tiet_don_hangs WHERE san_pham_id = :san_pham_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':san_pham_id', $san_pham_id);
+            $stmt->execute();
+            return $stmt->fetchColumn() > 0;
         } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
             return false;

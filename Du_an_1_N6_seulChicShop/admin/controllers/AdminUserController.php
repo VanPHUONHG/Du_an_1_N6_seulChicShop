@@ -8,6 +8,79 @@ class AdminUserController
         $this->ModelAdminUser = new AdminUser();
         $this->ModelPosition = new AdminPosition();
     }
+    public function checkSignInAdmin()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // lấy dữ liệu từ form
+            $ten_tai_khoan = $_POST['ten_tai_khoan'];
+            $mat_khau = $_POST['mat_khau'];
+            // kiểm tra dữ liệu
+            $user = $this->ModelAdminUser->postSignInAdmin($ten_tai_khoan, $mat_khau);
+            if ($user == $ten_tai_khoan) {
+                // lưu dữ liệu vào session
+                $_SESSION['user_admin'] = $user;
+                header('Location: ' . BASE_URL_ADMIN);
+                exit();
+            } else {
+                // hiển thị thông báo lỗi
+                $_SESSION['error'] = $user;
+                header('Location: ' . BASE_URL_ADMIN . '?act=login-admin');
+                exit();
+            }
+        }
+    }
+    public function loginAdmin(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $ten_tai_khoan = $_POST['ten_tai_khoan'] ?? '';
+            $mat_khau = $_POST['mat_khau'] ?? '';
+            $errors = [];
+            
+            // Validate input
+            if(empty($ten_tai_khoan)) {
+                $errors['ten_tai_khoan'] = 'Vui lòng nhập tên tài khoản';
+            }
+            if(empty($mat_khau)) {
+                $errors['mat_khau'] = 'Vui lòng nhập mật khẩu';
+            }
+
+            if(empty($errors)) {
+                $user = $this->ModelAdminUser->postSignInAdmin($ten_tai_khoan, $mat_khau);
+                
+                if(is_array($user)) {
+                    if($user['trang_thai'] == 1) {
+                        $_SESSION['user'] = $user;
+                        $_SESSION['success'] = 'Đăng nhập thành công';
+                        header('Location: ' . BASE_URL_ADMIN);
+                        exit();
+                    } else {
+                        $errors['account'] = 'Tài khoản đã bị khóa';
+                    }
+                } else {
+                    $errors['login'] = $user; // Error message from model
+                }
+            }
+            
+            if(!empty($errors)) {
+                $_SESSION['error'] = reset($errors);
+                header('Location: ' . BASE_URL_ADMIN . '?act=login-admin');
+                exit();
+            }
+        }
+        
+        // Kiểm tra nếu đã đăng nhập thì chuyển hướng về trang chủ admin
+        if(isset($_SESSION['user'])) {
+            header('Location: ' . BASE_URL_ADMIN);
+            exit();
+        }
+        
+        require_once './views/auth-admin/SignIn.php';
+    }
+    public function logoutAdmin(){
+        unset($_SESSION['user']);
+        $_SESSION['success'] = 'Đăng xuất thành công';
+        header('Location: ' . BASE_URL_ADMIN . '?act=login-admin');
+        exit();
+    }
 
     public function listUserAdmin()
     {
@@ -19,16 +92,6 @@ class AdminUserController
         $id = $_GET['id_tai_khoan_admin'];
         $user = $this->ModelAdminUser->getAdminUserById($id);
         require_once './views/user/admin/DetailUserAdmin.php';
-    }
-    public function destroyUserAdmin()
-    {
-        $id = $_GET['id_tai_khoan_admin'];
-        $user = $this->ModelAdminUser->deleteUserAdmin($id);
-        if ($user) {
-            $this->ModelAdminUser->deleteUserAdmin($id);
-        }
-        header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-quan-tri');
-        exit();
     }
     public function formAddUserAdmin()
     {
@@ -103,8 +166,8 @@ class AdminUserController
             $email = $_POST['email'] ?? '';
             $mat_khau = $_POST['mat_khau'] ?? '';
             $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
-            $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
-
+            $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;    
+            $trang_thai = $_POST['trang_thai'] ?? '';
             $errors = [];
             if (empty($ten_tai_khoan)) {
                 $errors['ten_tai_khoan'] = 'Vui lòng nhập tên tài khoản';
@@ -118,6 +181,10 @@ class AdminUserController
             if (empty($so_dien_thoai)) {
                 $errors['so_dien_thoai'] = 'Vui lòng nhập số điện thoại';
             }
+            if (empty($trang_thai)) {
+                $errors['trang_thai'] = 'Vui lòng chọn trạng thái';
+            }
+
 
             $_SESSION['error'] = $errors;
 
@@ -137,7 +204,8 @@ class AdminUserController
                     $email,
                     $mat_khau,
                     $new_file,
-                    $so_dien_thoai
+                    $so_dien_thoai,
+                    $trang_thai
                 );
                 header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-quan-tri');
                 exit();
@@ -156,21 +224,10 @@ class AdminUserController
     }
     public function listUserClientById()
     {
-        $id_tai_khoan_client = $_GET['id_tai_khoan_client'];
+        $id_tai_khoan_client = $_GET['id_tai_khoan_khach-hang'];
         $userClient = $this->ModelAdminUser->getUserClentById($id_tai_khoan_client);
         require_once './views/user/client/DetailUserClient.php';
 
-    }
-
-    public function destroyUserClient()
-    {
-        $id = $_GET['id_tai_khoan_khach-hang'];
-        $user = $this->ModelAdminUser->deleteUserAdmin($id);
-        if ($user) {
-            $this->ModelAdminUser->deleteUserAdmin($id);
-        }
-        header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-khach-hang');
-        exit();
     }
     public function formAddUserClient()
     {
@@ -231,15 +288,15 @@ class AdminUserController
 
     public function formEditUserClient()
     {
-        $id_tai_khoan_admin = $_GET['id_tai_khoan_admin'];
-        $user = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
+        $id_tai_khoan_client = $_GET['id_tai_khoan_khach-hang'];
+        $user = $this->ModelAdminUser->getUserClentById($id_tai_khoan_client);
         require_once './views/user/client/EditUserClient.php';
     }
     public function updateUserClient()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $id_tai_khoan_admin = $_POST['id_tai_khoan_admin'] ?? '';
-            $userOld = $this->ModelAdminUser->getAdminUserById($id_tai_khoan_admin);
+            $id_tai_khoan_client = $_POST['id_tai_khoan_khach-hang'] ?? '';
+            $userOld = $this->ModelAdminUser->getUserClentById($id_tai_khoan_client);
             $old_file = $userOld['anh_dai_dien'];
 
             $ten_tai_khoan = $_POST['ten_tai_khoan'] ?? '';
@@ -247,7 +304,7 @@ class AdminUserController
             $mat_khau = $_POST['mat_khau'] ?? '';
             $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
             $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
-
+            $trang_thai = $_POST['trang_thai'] ?? '';
             $errors = [];
             if (empty($ten_tai_khoan)) {
                 $errors['ten_tai_khoan'] = 'Vui lòng nhập tên tài khoản';
@@ -274,13 +331,14 @@ class AdminUserController
             }
 
             if (empty($errors)) {
-                $this->ModelAdminUser->editUserAdmin(
-                    $id_tai_khoan_admin,
+                $this->ModelAdminUser->editUserClient(
+                    $id_tai_khoan_client,
                     $ten_tai_khoan,
                     $email,
                     $mat_khau,
                     $new_file,
-                    $so_dien_thoai
+                    $so_dien_thoai,
+                    $trang_thai
                 );
                 header("Location: " . BASE_URL_ADMIN . '?act=tai-khoan-khach-hang');
                 exit();

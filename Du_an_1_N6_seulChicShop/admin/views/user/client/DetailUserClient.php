@@ -52,6 +52,11 @@
                                             <span class="font-weight-bold mr-2">Ngày tạo:</span>
                                             <span><?= $userClient['ngay_tao'] ?></span>
                                         </div>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <i class="fas fa-calendar mr-2"></i>
+                                            <span class="font-weight-bold mr-2">Trạng thái:</span>
+                                            <span><?= $userClient['trang_thai'] == 1 ? 'Hoạt động' : 'Không hoạt động' ?></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

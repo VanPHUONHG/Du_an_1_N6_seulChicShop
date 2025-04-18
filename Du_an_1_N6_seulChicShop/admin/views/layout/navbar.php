@@ -12,11 +12,11 @@
     <ul class="navbar-nav ml-auto">
         <!-- User Dropdown -->
         <li class="nav-item dropdown">
-            <!-- <?php if (isset($_SESSION['user_admin'])) {
-                                        echo $_SESSION['user_admin'];
-                                    }?> -->
+            
             <a class="nav-link" href="#" id="userDropdown" role="button" data-toggle="dropdown">
-                <i class="far fa-user" style="font-size: 24px;"></i>
+                <?php if (isset($_SESSION['user'])) : ?>
+                <img src="<?=  BASE_URL . $_SESSION['user']['anh_dai_dien']  ?>" class="img-circle" alt="User Image" style="width: 30px; height: 30px;">
+            <?php endif; ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <span class="dropdown-header">Chào mừng đến trang Admin</span>

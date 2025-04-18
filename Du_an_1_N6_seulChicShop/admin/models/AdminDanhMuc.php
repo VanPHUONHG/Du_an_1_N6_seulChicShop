@@ -23,7 +23,19 @@ class AdminDanhMuc
             echo "lỗi" . $e->getMessage();
         }
     }
+    public function checkDanhMucHasProducts($id){
+        try {
+            $sql = 'SELECT COUNT(*) FROM san_phams WHERE danh_muc_id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id
+            ]);
 
+            return $stmt->fetchColumn() > 0;
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
     public function insertDanhMuc($ten_danh_muc, $mo_ta)
     {
         try {

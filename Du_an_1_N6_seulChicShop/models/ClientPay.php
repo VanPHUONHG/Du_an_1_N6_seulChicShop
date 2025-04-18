@@ -21,17 +21,50 @@ class ClientPay
         }
     }
 
+    public function getCouponByIdUser($tai_khoan_id){
+        try {
+            $currentDate = date('Y-m-d H:i:s');
+            $sql = "SELECT * FROM ma_giam_gias 
+                    WHERE tai_khoan_id = :tai_khoan_id 
+                    AND ngay_bat_dau <= :current_date 
+                    AND ngay_ket_thuc >= :current_date 
+                    AND trang_thai = 1 
+                    AND so_lan_su_dung > so_lan_da_dung";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':tai_khoan_id', $tai_khoan_id);
+            $stmt->bindParam(':current_date', $currentDate);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Lỗi getCouponByIdUser: " . $e->getMessage());
+            return false;
+        }
+    }
+
     // Thêm đơn hàng mới
-    public function createOrder($ma_don_hang, $tai_khoan_id, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $tinh_thanhpho, $huyen_quan, $xa_phuong, $dia_chi_cu_the, $ghi_chu, $tong_tien, $ngay_dat, $phuong_thuc_thanh_toan_id, $trang_thai_don_hang_id)
+    public function createOrder($ma_don_hang, $tai_khoan_id, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $tinh_thanhpho, $huyen_quan, $xa_phuong, $dia_chi_cu_the, $ghi_chu, $tong_tien, $ngay_dat, $phuong_thuc_thanh_toan_id, $trang_thai_don_hang_id, $ma_giam_gia_id = null, $tien_giam = 0)
     {
         try {
             $this->conn->beginTransaction();
 
+            // Kiểm tra tồn tại của các khóa ngoại
+            if ($tai_khoan_id) {
+                $check_sql = "SELECT id FROM tai_khoans WHERE id = :tai_khoan_id";
+                $check_stmt = $this->conn->prepare($check_sql);
+                $check_stmt->bindParam(':tai_khoan_id', $tai_khoan_id);
+                $check_stmt->execute();
+                if (!$check_stmt->fetch()) {
+                    throw new PDOException("Tài khoản không tồn tại");
+                }
+            }
+
             // Insert đơn hàng
-            $sql = "INSERT INTO don_hangs (ma_don_hang, tai_khoan_id, ten_nguoi_nhan, email_nguoi_nhan, sdt_nguoi_nhan, tinh_thanhpho, huyen_quan, xa_phuong, dia_chi_cu_the, ghi_chu, tong_tien, ngay_dat, phuong_thuc_thanh_toan_id, trang_thai_don_hang_id) 
-            VALUES (:ma_don_hang, :tai_khoan_id, :ten_nguoi_nhan, :email_nguoi_nhan, :sdt_nguoi_nhan, :tinh_thanhpho, :huyen_quan, :xa_phuong, :dia_chi_cu_the, :ghi_chu, :tong_tien, :ngay_dat, :phuong_thuc_thanh_toan_id, :trang_thai_don_hang_id)";
+            $sql = "INSERT INTO don_hangs (ma_don_hang, tai_khoan_id, ten_nguoi_nhan, email_nguoi_nhan, sdt_nguoi_nhan, tinh_thanhpho, huyen_quan, xa_phuong, dia_chi_cu_the, ghi_chu, tong_tien, ngay_dat, phuong_thuc_thanh_toan_id, trang_thai_don_hang_id, ma_giam_gia_id, tien_giam) 
+                   VALUES (:ma_don_hang, :tai_khoan_id, :ten_nguoi_nhan, :email_nguoi_nhan, :sdt_nguoi_nhan, :tinh_thanhpho, :huyen_quan, :xa_phuong, :dia_chi_cu_the, :ghi_chu, :tong_tien, :ngay_dat, :phuong_thuc_thanh_toan_id, :trang_thai_don_hang_id, :ma_giam_gia_id, :tien_giam)";
             
             $stmt = $this->conn->prepare($sql);
+
+            // Bind các tham số
             $stmt->bindParam(':ma_don_hang', $ma_don_hang);
             $stmt->bindParam(':tai_khoan_id', $tai_khoan_id);
             $stmt->bindParam(':ten_nguoi_nhan', $ten_nguoi_nhan);
@@ -46,14 +79,28 @@ class ClientPay
             $stmt->bindParam(':ngay_dat', $ngay_dat);
             $stmt->bindParam(':phuong_thuc_thanh_toan_id', $phuong_thuc_thanh_toan_id);
             $stmt->bindParam(':trang_thai_don_hang_id', $trang_thai_don_hang_id);
+            $stmt->bindParam(':ma_giam_gia_id', $ma_giam_gia_id, PDO::PARAM_INT);
+            $stmt->bindParam(':tien_giam', $tien_giam);
 
             if (!$stmt->execute()) {
                 throw new PDOException("Không thể thêm đơn hàng");
             }
 
             $don_hang_id = $this->conn->lastInsertId();
+
+            // Cập nhật số lần sử dụng mã giảm giá nếu có
+            if ($ma_giam_gia_id) {
+                $update_sql = "UPDATE ma_giam_gias 
+                             SET so_lan_da_dung = so_lan_da_dung + 1 
+                             WHERE id = :ma_giam_gia_id";
+                $update_stmt = $this->conn->prepare($update_sql);
+                $update_stmt->bindParam(':ma_giam_gia_id', $ma_giam_gia_id);
+                if (!$update_stmt->execute()) {
+                    throw new PDOException("Không thể cập nhật số lần sử dụng mã giảm giá");
+                }
+            }
+
             $this->conn->commit();
-            
             return $don_hang_id;
 
         } catch (PDOException $e) {
@@ -67,6 +114,15 @@ class ClientPay
     {
         try {
             $this->conn->beginTransaction();
+
+            // Kiểm tra tồn tại của đơn hàng
+            $check_sql = "SELECT id FROM don_hangs WHERE id = :don_hang_id";
+            $check_stmt = $this->conn->prepare($check_sql);
+            $check_stmt->bindParam(':don_hang_id', $don_hang_id);
+            $check_stmt->execute();
+            if (!$check_stmt->fetch()) {
+                throw new PDOException("Đơn hàng không tồn tại");
+            }
 
             $sql = "INSERT INTO chi_tiet_don_hangs(don_hang_id, san_pham_id, bien_the_san_pham_id, so_luong, thanh_tien)
                     VALUES (:don_hang_id, :san_pham_id, :bien_the_san_pham_id, :so_luong, :thanh_tien)";
@@ -83,10 +139,33 @@ class ClientPay
             
             // Thêm chi tiết đơn hàng và cập nhật số lượng cho từng sản phẩm
             for ($i = 0; $i < count($san_pham_ids); $i++) {
+                // Kiểm tra số lượng tồn kho trước khi thêm
+                if ($bien_the_san_pham_ids[$i]) {
+                    $check_stock_sql = "SELECT so_luong FROM bien_the_san_phams WHERE id = :id";
+                    $check_stock_stmt = $this->conn->prepare($check_stock_sql);
+                    $check_stock_stmt->bindParam(':id', $bien_the_san_pham_ids[$i]);
+                    $check_stock_stmt->execute();
+                    $current_stock = $check_stock_stmt->fetchColumn();
+                    
+                    if ($current_stock < $so_luongs[$i]) {
+                        throw new PDOException("Không đủ số lượng cho biến thể sản phẩm");
+                    }
+                } else {
+                    $check_stock_sql = "SELECT so_luong FROM san_phams WHERE id = :id";
+                    $check_stock_stmt = $this->conn->prepare($check_stock_sql);
+                    $check_stock_stmt->bindParam(':id', $san_pham_ids[$i]);
+                    $check_stock_stmt->execute();
+                    $current_stock = $check_stock_stmt->fetchColumn();
+                    
+                    if ($current_stock < $so_luongs[$i]) {
+                        throw new PDOException("Không đủ số lượng sản phẩm");
+                    }
+                }
+
                 // Thêm chi tiết đơn hàng
                 $stmt->bindParam(':don_hang_id', $don_hang_id);
                 $stmt->bindParam(':san_pham_id', $san_pham_ids[$i]);
-                $stmt->bindParam(':bien_the_san_pham_id', $bien_the_san_pham_ids[$i]);
+                $stmt->bindParam(':bien_the_san_pham_id', $bien_the_san_pham_ids[$i], PDO::PARAM_INT);
                 $stmt->bindParam(':so_luong', $so_luongs[$i]);
                 $stmt->bindParam(':thanh_tien', $thanh_tiens[$i]);
                 
@@ -131,25 +210,23 @@ class ClientPay
         }
     }
 
-    // Thêm chi tiết đơn hàng
-
     // Lấy chi tiết đơn hàng theo ID
     public function getOrderDetail($don_hang_id)
     {
         try {
-            $sql = "SELECT chi_tiet_don_hangs.*,
-                    san_phams.ten_san_pham,
-                    san_phams.hinh_anh,
-                    bien_the_san_phams.mau_sac,
-                    bien_the_san_phams.kich_thuoc,
-                    COALESCE(bien_the_san_phams.gia, san_phams.gia) AS gia,
-                    COALESCE(bien_the_san_phams.gia_khuyen_mai, san_phams.gia_khuyen_mai) AS gia_khuyen_mai,
-                    COALESCE(san_phams.hinh_anh,hinh_anh_san_phams.hinh_anh_bien_the) AS hinh_anh
-                    FROM chi_tiet_don_hangs
-                    JOIN san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
-                    JOIN bien_the_san_phams ON chi_tiet_don_hangs.bien_the_san_pham_id = bien_the_san_phams.id
-                    JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
-                    WHERE chi_tiet_don_hangs.don_hang_id = :don_hang_id";
+            $sql = "SELECT ctdh.*,
+                    sp.ten_san_pham,
+                    sp.hinh_anh as hinh_anh_sp,
+                    btsp.mau_sac,
+                    btsp.kich_thuoc,
+                    COALESCE(btsp.gia, sp.gia) AS gia,
+                    COALESCE(btsp.gia_khuyen_mai, sp.gia_khuyen_mai) AS gia_khuyen_mai,
+                    COALESCE(hasp.hinh_anh_bien_the, sp.hinh_anh) AS hinh_anh
+                    FROM chi_tiet_don_hangs ctdh
+                    JOIN san_phams sp ON ctdh.san_pham_id = sp.id
+                    LEFT JOIN bien_the_san_phams btsp ON ctdh.bien_the_san_pham_id = btsp.id
+                    LEFT JOIN hinh_anh_san_phams hasp ON btsp.id = hasp.bien_the_san_pham_id
+                    WHERE ctdh.don_hang_id = :don_hang_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':don_hang_id', $don_hang_id);
             $stmt->execute();
@@ -164,11 +241,11 @@ class ClientPay
     public function getOrderById($don_hang_id)
     {
         try {
-            $sql = "SELECT don_hangs.*, phuong_thuc_thanh_toans.ten_phuong_thuc, trang_thai_don_hangs.ten_trang_thai,
-                    FROM don_hangs
-                    JOIN phuong_thuc_thanh_toans ON don_hangs.phuong_thuc_thanh_toan_id = phuong_thuc_thanh_toans.id
-                    JOIN trang_thai_don_hangs ON don_hangs.trang_thai_don_hang_id = trang_thai_don_hangs.id
-                    WHERE don_hangs.id = :don_hang_id";
+            $sql = "SELECT dh.*, pttt.ten_phuong_thuc, ttdh.ten_trang_thai
+                    FROM don_hangs dh
+                    JOIN phuong_thuc_thanh_toans pttt ON dh.phuong_thuc_thanh_toan_id = pttt.id
+                    JOIN trang_thai_don_hangs ttdh ON dh.trang_thai_don_hang_id = ttdh.id
+                    WHERE dh.id = :don_hang_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':don_hang_id', $don_hang_id);
             $stmt->execute();

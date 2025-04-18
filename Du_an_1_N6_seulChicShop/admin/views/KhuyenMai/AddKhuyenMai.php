@@ -49,42 +49,42 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Loại Giảm giá</label>
-                                    <select class="form-control" name="loai_giam_gia">
+                                    <select class="form-control" name="loai">
                                         <option selected disabled>Chọn loại giảm giá</option>
-                                        <option value="1">Phần Trăm</option>
-                                        <option value="2">Number</option>
+                                        <option value="phan_tram">Phần trăm</option>
+                                        <option value="tien_mat">Tiền mặt</option>
                                     </select>
-                                    <?php if (isset($_SESSION['error']['loai_giam_gia'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['loai_giam_gia'] ?></p>
-                                    <?php  } ?>
+                                    <?php if (isset($_SESSION['error']['loai'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['error']['loai'] ?></p>
+                                    <?php  } ?> 
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Giá trị giảm</label>
-                                    <input type="number" class="form-control" name="gia_tri_giam">
-                                    <?php if (isset($_SESSION['error']['gia_tri_giam'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['gia_tri_giam'] ?></p>
+                                    <input type="number" class="form-control" name="gia_tri">
+                                    <?php if (isset($_SESSION['error']['gia_tri'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['error']['gia_tri'] ?></p>
                                     <?php  } ?>
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Giá trị đơn hàng tối thiểu</label>
-                                    <input type="number" class="form-control" name="gia_tri_don_hang_toi_thieu" placeholder="Nhập số lượng">
-                                    <?php if (isset($_SESSION['error']['gia_tri_don_hang_toi_thieu'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['gia_tri_don_hang_toi_thieu'] ?></p>
+                                    <input type="number" class="form-control" name="dieu_kien_toi_thieu" placeholder="Nhập số lượng">
+                                    <?php if (isset($_SESSION['error']['dieu_kien_toi_thieu'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['error']['dieu_kien_toi_thieu'] ?></p>
                                     <?php  } ?>
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Số lượng tối đa</label>
-                                    <input type="number" class="form-control" name="so_luong_toi_da">
-                                    <?php if (isset($_SESSION['error']['so_luong_toi_da'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['so_luong_toi_da'] ?></p>
+                                    <input type="number" class="form-control" name="so_lan_su_dung">
+                                    <?php if (isset($_SESSION['error']['so_lan_su_dung'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['error']['so_lan_su_dung'] ?></p>
                                     <?php  } ?>
                                 </div>
 
                                 <div class="form-group col-6">
                                     <label>Số lượng đã dùng</label>
-                                    <input type="number" class="form-control" name="so_luong_da_dung">
-                                    <?php if (isset($_SESSION['error']['so_luong_da_dung'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['so_luong_da_dung'] ?></p>
+                                    <input type="number" class="form-control" name="so_lan_da_dung">
+                                    <?php if (isset($_SESSION['error']['so_lan_da_dung'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['error']['so_lan_da_dung'] ?></p>
                                     <?php  } ?>
                                 </div>
 
@@ -108,18 +108,25 @@
                                 <div class="form-group col-6">
                                     <label>Trạng thái</label>
                                     <select class="form-control" name="trang_thai">
-                                        <option selected disabled>Chọn trạng thái</option>
-                                        <option value="1">on</option>
-                                        <option value="2">off</option>
+                                        <option value="1">Hoạt động</option>
+                                        <option value="2">Ngừng hoạt động</option>
                                     </select>
                                     <?php if (isset($_SESSION['error']['trang_thai'])) { ?>
                                         <p class="text-danger"><?= $_SESSION['error']['trang_thai'] ?></p>
                                     <?php  } ?>
                                 </div>
-
-
-                                
-
+                                <div class="form-group col-6">
+                                    <label>Tài khoản</label>
+                                    <select class="form-control" name="tai_khoan_id">
+                                        <option selected disabled>Chọn tài khoản</option>
+                                        <?php foreach ($users as $user) { ?>
+                                            <option value="<?= $user['id'] ?>"><?= $user['ten_tai_khoan'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <?php if (isset($_SESSION['error']['tai_khoan_id'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['error']['tai_khoan_id'] ?></p>
+                                    <?php  } ?>
+                                </div>
                             </div>
                     </div>
                     <!-- /.card-body -->

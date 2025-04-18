@@ -33,14 +33,15 @@
                         <h3 class="my-3">Mã khuyến mại: <?= $khuyenMai['ma_khuyen_mai'] ?></h3>
                         <hr>
                         <h4 class="mt-3">Mô tả: <?= $khuyenMai['mo_ta'] ?></h4>
-                        <h4 class="mt-3">Loại giảm giá : <?= $khuyenMai['loai_giam_gia'] ?></h4>
-                        <h4 class="mt-3">giá trị giảm : <?= $khuyenMai['gia_tri_giam'] ?></h4>
-                        <h4 class="mt-3">giá trị đơn hàng tối thiểu: <?= $khuyenMai['gia_tri_don_hang_toi_thieu'] ?></h4>
-                        <h4 class="mt-3">số lượng tối đa : <?= $khuyenMai['so_luong_toi_da'] ?></h4>
-                        <h4 class="mt-3">Số lượng đã dùng : <?= $khuyenMai['so_luong_da_dung']?></h4>
+                        <h4 class="mt-3">Loại giảm giá : <?= $khuyenMai['loai'] ?></h4>
+                        <h4 class="mt-3">giá trị giảm : <?= $khuyenMai['gia_tri'] ?></h4>
+                        <h4 class="mt-3">Điều kiện tối thiểu: <?= $khuyenMai['dieu_kien_toi_thieu'] ?></h4>
+                        <h4 class="mt-3">Số lượng tối đa : <?= $khuyenMai['so_lan_su_dung'] ?></h4>
+                        <h4 class="mt-3">Số lượng đã dùng : <?= $khuyenMai['so_lan_da_dung']?></h4>
                         <h4 class="mt-3">Ngày bắt đầu  : <?= $khuyenMai['ngay_bat_dau'] ?></h4>
                         <h4 class="mt-3">Ngày kết thúc : <?= $khuyenMai['ngay_ket_thuc'] ?></h4>
-                        <h4 class="mt-3">Trạng thái: <?= $khuyenMai['trang_thai'] == 1 ? 'Còn mã ' : 'hết mã '  ?></h4>
+                        <h4 class="mt-3">Trạng thái: <?= $khuyenMai['trang_thai'] == 1 ? 'Hoạt động' : 'Ngừng'  ?></h4>
+                        <h4 class="mt-3">Tài khoản: <?= $khuyenMai['ten_tai_khoan'] ?></h4>
 
 
                     </div>
