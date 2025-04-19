@@ -36,7 +36,7 @@
                 <div class="p-r-45 p-r-0-lg">
                     <!-- Blog Detail -->
                     <div class="wrap-pic-w how-pos5-parent">
-                        <img src="<?= isset($blog['hinh_anh']) ? $blog['hinh_anh'] : 'assets/images/no-image.png' ?>" alt="<?= isset($blog['tieu_de']) ? $blog['tieu_de'] : '' ?>">
+                        <img src="<?= isset($blog['hinh_anh']) ? $blog['hinh_anh'] : 'assets/images/product-01.jpg' ?>" alt="<?= isset($blog['tieu_de']) ? $blog['tieu_de'] : '' ?>">
                     </div>
 
                     <div class="p-t-32">

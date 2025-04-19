@@ -486,7 +486,7 @@
                                                     <td>
                                                         <div class="d-flex align-items-center">
                                                             <div class="product-img-container">
-                                                                <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" 
+                                                                <img src="<?= isset($sanPham['hinh_anh']) ? BASE_URL . $sanPham['hinh_anh'] : BASE_URL . 'assets/images/product-06.jpg' ?>" 
                                                                      alt="<?= htmlspecialchars($sanPham['ten_san_pham']) ?>"
                                                                      class="product-img" />
                                                                 <?php if (isset($sanPham['mau_sac']) && !empty($sanPham['mau_sac'])): ?>

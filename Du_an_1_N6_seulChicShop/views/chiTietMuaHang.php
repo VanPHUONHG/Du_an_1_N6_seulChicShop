@@ -106,7 +106,7 @@
                                             <?php foreach ($chiTietDonHang as $item): ?>
                                                 <tr>
                                                     <td class="text-center" style="width: 100px">
-                                                        <img src="<?= isset($item['hinh_anh']) ? $item['hinh_anh'] : 'assets/images/no-image.png' ?>"
+                                                        <img src="<?= !empty($item['hinh_anh']) ? $item['hinh_anh'] : './assets/images/product-01.jpg' ?>"
                                                             alt="<?= isset($item['ten_san_pham']) ? $item['ten_san_pham'] : '' ?>"
                                                             class="img-thumbnail" style="max-width: 80px">
                                                     </td>

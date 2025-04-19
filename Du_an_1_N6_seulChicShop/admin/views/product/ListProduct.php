@@ -224,7 +224,7 @@
         $("#example1").DataTable({
             "responsive": true,
             "lengthChange": false,
-            "pageLength": 5,
+            "pageLength": 10,
             "autoWidth": false,
             "language": {
                 "search": "Tìm kiếm:",

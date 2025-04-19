@@ -20,7 +20,24 @@ class ClientPay
             return false;
         }
     }
-
+    public function getCouponByUser($user_id){
+        try {
+            $sql = "SELECT * FROM ma_giam_gias 
+                    WHERE tai_khoan_id = :user_id 
+                    AND trang_thai = 1
+                    AND ngay_bat_dau <= CURRENT_DATE()
+                    AND ngay_ket_thuc >= CURRENT_DATE()
+                    AND so_lan_da_dung < so_lan_su_dung
+                    ORDER BY ngay_bat_dau DESC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Lỗi getCouponByUser: " . $e->getMessage());
+            return false;
+        }
+    }
     // Thêm đơn hàng mới
     public function createOrder($ma_don_hang, $tai_khoan_id, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $tinh_thanhpho, $huyen_quan, $xa_phuong, $dia_chi_cu_the, $ghi_chu, $tong_tien, $ngay_dat, $phuong_thuc_thanh_toan_id, $trang_thai_don_hang_id)
     {

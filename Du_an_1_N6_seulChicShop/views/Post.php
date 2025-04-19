@@ -25,7 +25,7 @@
                         <?php foreach ($posts as $post): ?>
                             <div class="p-b-63">
                                 <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet&id=' . $post['id'] ?>" class="hov-img0 how-pos5-parent">
-                                    <img src="<?= BASE_URL . $post['hinh_anh'] ?>" alt="<?= htmlspecialchars($post['tieu_de']) ?>">
+                                    <img src="<?= !empty($post['hinh_anh']) ? BASE_URL . $post['hinh_anh'] : BASE_URL . 'assets/images/blog-01.jpg' ?>" alt="<?= htmlspecialchars($post['tieu_de']) ?>">
 
                                     <div class="flex-col-c-m size-123 bg9 how-pos5">
                                         <span class="ltext-107 cl2 txt-center">
