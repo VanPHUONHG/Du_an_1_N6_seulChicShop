@@ -1,0 +1,130 @@
+/* Common styles for order pages */
+.order-header {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* Status badges */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.status-primary { background-color: #cfe2ff; color: #0a58ca; }
+.status-warning { background-color: #fff3cd; color: #997404; }
+.status-success { background-color: #d1e7dd; color: #0f5132; }
+.status-danger { background-color: #f8d7da; color: #842029; }
+
+/* Table styles */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.table th {
+    border-bottom: 2px solid #e3e6f0;
+    padding: 12px;
+    font-weight: 600;
+    color: #4e73df;
+    background-color: #f8f9fc;
+}
+
+.table td {
+    padding: 12px;
+    vertical-align: middle;
+    border-top: 1px solid #e3e6f0;
+}
+
+/* Filter section */
+.filter-section {
+    background-color: #f8f9fc;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.filter-section .form-control {
+    border-radius: 20px;
+    border: 1px solid #e3e6f0;
+    padding: 8px 15px;
+}
+
+.filter-section .form-control:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+/* Action buttons */
+.btn-action {
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.btn-warning {
+    background-color: #f6c23e;
+    border-color: #f6c23e;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+}
+
+/* Invoice section */
+.invoice-info {
+    background-color: #f8f9fc;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.invoice-col {
+    padding: 15px;
+}
+
+.invoice-col strong {
+    color: #4e73df;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Status select in edit form */
+.custom-select {
+    border-radius: 20px;
+    padding: 8px 15px;
+    border: 1px solid #e3e6f0;
+    background-color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .filter-section .col-md-3,
+    .filter-section .col-md-2 {
+        margin-bottom: 10px;
+    }
+    
+    .invoice-col {
+        margin-bottom: 15px;
+    }
+} 

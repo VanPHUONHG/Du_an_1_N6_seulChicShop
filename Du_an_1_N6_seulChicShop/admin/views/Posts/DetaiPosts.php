@@ -2,6 +2,9 @@
 <?php include './views/layout/navbar.php'; ?>
 <?php include './views/layout/sidebar.php'; ?>
 
+<!-- Add CSS link after header -->
+<link rel="stylesheet" href="<?= BASE_URL_ADMIN ?>assets/css/posts.css">
+
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">

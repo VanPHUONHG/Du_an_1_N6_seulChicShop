@@ -33,8 +33,16 @@ require_once './models/AdminPosts.php';
 // Route
 $act = $_GET['act'] ?? '/';
 
+// Kiểm tra đăng nhập trước khi cho phép truy cập các trang admin
+if (!isset($_SESSION['user']) && $act != 'login-admin') {
+  header('Location: ' . BASE_URL_ADMIN . '?act=login-admin');
+  exit();
+}
+
 match ($act) {
   '/' => (new AdminDashboardController())->trangChu(),
+  'login-admin' => (new AdminUserController())->loginAdmin(),
+  'logout-admin' => (new AdminUserController())->logoutAdmin(),
   //router danh muc
   'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
   'form-them-danh-muc' => (new AdminDanhMucController())->formAddDanhMuc(),
@@ -64,7 +72,6 @@ match ($act) {
   // router user admin
   'tai-khoan-quan-tri' => (new AdminUserController())->listUserAdmin(),
   'chi-tiet-tai-khoan-admin' => (new AdminUserController())->detailUserAdmin(),
-  'xoa-tai-khoan-admin' => (new AdminUserController())->destroyUserAdmin(),
   'form-them-tai-khoan-admin' => (new AdminUserController())->formAddUserAdmin(),
   'them-tai-khoan-admin' => (new AdminUserController())->insertUserAdmin(),
   'form-sua-tai-khoan-admin' => (new AdminUserController())->formEditUserAdmin(),
@@ -73,11 +80,10 @@ match ($act) {
   // router user client
   'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
   'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->listUserClientById(),
-  'xoa-tai-khoan-khach-hang' => (new AdminUserController())->destroyUserClient(),
-  'form-sua-tai-khoan-khach-hang' => (new AdminUserController())->formEditUserClient(),
-  'sua-tai-khoan-khach-hang' => (new AdminUserController())->updateUserClient(),
   'form-them-tai-khoan-khach-hang' => (new AdminUserController())->formAddUserClient(),
   'them-tai-khoan-khach-hang' => (new AdminUserController())->insertUserClient(),
+  'form-sua-tai-khoan-khach-hang' => (new AdminUserController())->formEditUserClient(),
+  'sua-tai-khoan-khach-hang' => (new AdminUserController())->updateUserClient(),
 
   'binh-luan' => (new AdminCommentController())->listComment(),
   'xoa-binh-luan' => (new AdminCommentController())->deleteComment(),

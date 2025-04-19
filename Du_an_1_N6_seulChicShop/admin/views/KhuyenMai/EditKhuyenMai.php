@@ -7,6 +7,9 @@
 <!-- Main Sidebar Container -->
 <?php include './views/layout/sidebar.php'; ?>
 
+<!-- Add CSS link after header -->
+<link rel="stylesheet" href="<?= BASE_URL_ADMIN ?>assets/css/khuyenmai.css">
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

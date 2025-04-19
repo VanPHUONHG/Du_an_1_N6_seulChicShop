@@ -87,10 +87,10 @@ class AdminBannerController
             if (empty($trang_thai)) {
                 $errors['trang_thai'] = 'Trạng thái không được để trống';
             }
-            if (empty($hinh_anh_url)) {
-                $errors['hinh_anh_url'] = 'Hình ảnh không được để trống';
-            }
+
             $_SESSION['error'] = $errors;
+
+            // Handle file upload
             if (isset($hinh_anh_url) && $hinh_anh_url['error'] == UPLOAD_ERR_OK) {
                 $new_file = uploadFile($hinh_anh_url, './uploads/');
                 if (!empty($old_file)) {
@@ -99,11 +99,12 @@ class AdminBannerController
             } else {
                 $new_file = $old_file;
             }
+
             if (empty($errors)) {
                 $this->ModelAdminBanner->editBanner(
                     $id,
                     $tieu_de,
-                    $hinh_anh_url,
+                    $new_file, // Pass new_file instead of hinh_anh_url
                     $mo_ta,
                     $trang_thai
                 );

@@ -10,13 +10,12 @@
     <div class="container">
         <div class="flex-sb-m flex-w p-b-52">
             <div class="flex-l-m flex-w m-tb-10 filter-tope-group">
-                <a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>"
-                    class="m-r-32 m-tb-5 bor3 cl6 hov1 <?= !isset($_GET['id_danh_muc']) ? 'how-active1' : '' ?> stext-106 trans-04">
+                <a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>" class="m-r-32 m-tb-5 bor3 cl6 hov1 <?= !isset($_GET['id_danh_muc']) ? 'how-active1' : '' ?> stext-106 trans-04">
                     All Products
                 </a>
                 <?php foreach ($categories as $category): ?>
-                    <a href="<?= BASE_URL . '?act=danh-sach-san-pham&id_danh_muc=' . $category['id'] ?>"
-                        class="m-r-32 m-tb-5 bor3 cl6 hov1 <?= isset($_GET['id_danh_muc']) && $_GET['id_danh_muc'] == $category['id'] ? 'how-active1' : '' ?> stext-106 trans-04">
+                    <a href="<?= BASE_URL . '?act=danh-sach-san-pham&id_danh_muc=' . $category['id'] ?>" 
+                       class="m-r-32 m-tb-5 bor3 cl6 hov1 <?= isset($_GET['id_danh_muc']) && $_GET['id_danh_muc'] == $category['id'] ? 'how-active1' : '' ?> stext-106 trans-04">
                         <?= $category['ten_danh_muc'] ?>
                     </a>
                 <?php endforeach; ?>
@@ -56,19 +55,13 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 p-b-35 isotope-item women">
                     <!-- Block2 -->
                     <div class="block2">
-                        <div class="block2-pic hov-img0">
+                        <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
                             <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>">
-                                <?php if (!empty($product['hinh_anh'])): ?>
-                                    <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="IMG-PRODUCT"
-                                        onerror="this.onerror=null; this.src='<?= BASE_URL ?>assets/images/product-14.jpg'">
-                                <?php else: ?>
-                                    <img src="<?= BASE_URL . 'assets/images/product-14.jpg' ?>" alt="NO IMAGE"
-                                        onerror="this.onerror=null; this.src='<?= BASE_URL ?>assets/images/product-14.jpg'">
-                                <?php endif; ?>
-                            </a>
-                            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                            <?php if ($product['hinh_anh']): ?>
+                                <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="IMG-PRODUCT" style="width: 100%; height: 100%; object-fit: cover;">
+                            <?php else: ?>
+                                <img src="assets/images/product-01.jpg" alt="NO IMAGE" style="width: 100%; height: 100%; object-fit: cover;">
+                            <?php endif; ?>
                             </a>
                         </div>
 
@@ -81,10 +74,8 @@
 
                                 <span class="cl3 stext-105">
                                     <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
-                                        <span
-                                            class="text-decoration-line-through"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
-                                        <span
-                                            class="text-danger"><?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?></span>
+                                        <span class="text-decoration-line-through"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
+                                        <span class="text-danger"><?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?></span>
                                     <?php else: ?>
                                         <?= number_format($product['gia_san_pham']) . 'đ' ?>
                                     <?php endif; ?>
@@ -100,7 +91,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div>  
                 </div>
             <?php endforeach; ?>
         </div>

@@ -1,0 +1,194 @@
+/* Common styles for KhuyenMai pages */
+.content-wrapper {
+    background: #f4f6f9;
+    padding: 20px;
+}
+
+/* Header styles */
+.promotion-header {
+    background: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.promotion-header h1 {
+    color: #fff;
+    font-size: 24px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Card styles */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background: linear-gradient(to right, #f8f9fa, #ffffff);
+    border-bottom: 1px solid #edf2f7;
+    padding: 15px 20px;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* Form styles */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    padding: 10px 15px;
+    height: auto;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #6B73FF;
+    box-shadow: 0 0 0 0.2rem rgba(107, 115, 255, 0.25);
+}
+
+.form-group label {
+    color: #2d3748;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+/* Table styles */
+.table {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: #f8fafc;
+    color: #2d3748;
+    font-weight: 600;
+    border-bottom: 2px solid #edf2f7;
+    padding: 12px;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    padding: 12px;
+    vertical-align: middle;
+    border-top: 1px solid #edf2f7;
+}
+
+/* Button styles */
+.btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-success {
+    background: #48BB78;
+    border-color: #48BB78;
+}
+
+.btn-success:hover {
+    background: #38A169;
+    border-color: #38A169;
+}
+
+.btn-warning {
+    background: #F6AD55;
+    border-color: #F6AD55;
+    color: white;
+}
+
+.btn-warning:hover {
+    background: #ED8936;
+    border-color: #ED8936;
+}
+
+.btn-primary {
+    background: #6B73FF;
+    border-color: #6B73FF;
+}
+
+.btn-primary:hover {
+    background: #000DFF;
+    border-color: #000DFF;
+}
+
+.btn-danger {
+    background: #F56565;
+    border-color: #F56565;
+}
+
+.btn-danger:hover {
+    background: #E53E3E;
+    border-color: #E53E3E;
+}
+
+/* Status badges */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.status-active {
+    background: #C6F6D5;
+    color: #22543D;
+}
+
+.status-inactive {
+    background: #FED7D7;
+    color: #822727;
+}
+
+/* Detail view styles */
+.detail-section {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.detail-section h4 {
+    color: #2D3748;
+    font-size: 16px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .table-responsive {
+        margin: 0;
+    }
+    
+    .btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+    
+    .promotion-header h1 {
+        font-size: 20px;
+    }
+}
+
+/* DataTables customization */
+.dataTables_wrapper .dataTables_filter input {
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    padding: 8px 12px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #6B73FF;
+    border-color: #6B73FF;
+    color: white !important;
+} 
