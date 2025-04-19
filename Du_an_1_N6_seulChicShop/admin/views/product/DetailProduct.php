@@ -3,63 +3,178 @@
 <style>
 .content-wrapper {
     background-color: #f8f9fa;
-    padding: 20px;
+    padding: 30px;
 }
 
 .card {
     border: none;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
 }
 
 .product-details {
-    padding: 30px;
+    padding: 40px;
 }
 
 .product-image {
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+.product-image:hover {
+    transform: scale(1.02);
 }
 
 .product-info {
-    padding: 20px;
+    padding: 30px;
+    background: linear-gradient(to right bottom, #ffffff, #f8f9fa);
+    border-radius: 15px;
 }
 
 .product-info h3 {
     color: #2c3e50;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 2rem;
 }
 
 .table {
-    margin-top: 15px;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .table th {
-    background-color: #f8f9fa;
-    color: #2c3e50;
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    font-weight: 500;
+    border: none;
+    padding: 15px;
+}
+
+.table td {
+    padding: 15px;
+    vertical-align: middle;
 }
 
 .badge {
-    padding: 8px 12px;
-    border-radius: 20px;
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.badge-danger {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
 }
 
 .variant-section, .comment-section {
-    margin-top: 40px;
-    padding: 20px;
+    margin-top: 50px;
+    padding: 30px;
     background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.btn {
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.img-thumbnail {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.img-thumbnail:hover {
+    transform: scale(1.1);
+}
+
+.table-responsive {
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0,0,0,0.05);
 }
 
-.btn {
-    border-radius: 8px;
-    padding: 8px 16px;
-    transition: all 0.3s;
+.btn-group {
+    gap: 8px;
 }
 
-.btn:hover {
-    transform: translateY(-2px);
+.fa-star {
+    color: #f1c40f;
+}
+
+/* Animation for alerts */
+.alert {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #2980b9, #2c3e50);
 }
 </style>
 <!-- End Header -->
@@ -100,7 +215,7 @@
                             <!-- Thông tin sản phẩm chính -->
                             <div class="row">
                                 <div class="col-md-6">
-                                    <img src="<?= BASE_URL . $Product[0]['hinh_anh'] ?>" class="img-fluid product-image" alt="Product Image">
+                                    <img src="<?= $Product[0]['hinh_anh'] ? BASE_URL . $Product[0]['hinh_anh'] : BASE_URL . 'assets/images/product-05.jpg' ?>" class="img-fluid product-image" alt="Product Image">
                                 </div>
                                 <div class="col-md-6 product-info">
                                     <h3><?= $Product[0]['ten_san_pham'] ?></h3>
@@ -167,14 +282,14 @@
                                     <table class="table table-bordered table-hover">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>Màu sắc</th>
-                                                <th>Kích thước</th>
-                                                <th>Giá</th>
-                                                <th>Giá khuyến mãi</th>
-                                                <th>Giá nhập</th>
-                                                <th>Số lượng</th>
-                                                <th>Hình ảnh</th>
-                                                <th>Thao tác</th>
+                                                <th style="color: white">Màu sắc</th>
+                                                <th style="color: white">Kích thước</th>
+                                                <th style="color: white">Giá</th>
+                                                <th style="color: white">Giá khuyến mãi</th>
+                                                <th style="color: white">Giá nhập</th>
+                                                <th style="color: white">Số lượng</th>
+                                                <th style="color: white">Hình ảnh</th>
+                                                <th style="color: white">Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>

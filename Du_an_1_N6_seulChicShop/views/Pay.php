@@ -185,14 +185,17 @@ $discountAmount = 0;
                     <option value="">Chọn mã khuyến mãi</option>
                     <?php 
                     if (!empty($coupons)) {
-                        foreach ($coupons as $coupon) { ?>
-                            <option value="<?=$coupon["id"]?>" 
-                                    data-type="<?=$coupon["loai"]?>" 
-                                    data-discount="<?=$coupon["gia_tri"]?>"
-                                    data-code="<?=$coupon["ma_khuyen_mai"]?>">
-                                <?=$coupon["ma_khuyen_mai"]?>
-                            </option>                     
-                        <?php }
+                        foreach ($coupons as $coupon) {
+                            if ($totalCart >= $coupon["dieu_kien_toi_thieu"]) { ?>
+                                <option value="<?=$coupon["id"]?>" 
+                                        data-type="<?=$coupon["loai"]?>" 
+                                        data-ifuse="<?=$coupon["dieu_kien_toi_thieu"]?>"
+                                        data-discount="<?=$coupon["gia_tri"]?>"
+                                        data-code="<?=$coupon["ma_khuyen_mai"]?>">
+                                    <?=$coupon["ma_khuyen_mai"]?>
+                                </option>                     
+                            <?php }
+                        }
                     } else {
                         echo '<option value="">Không có mã giảm giá khả dụng</option>';
                     }

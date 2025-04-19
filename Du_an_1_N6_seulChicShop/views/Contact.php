@@ -88,11 +88,7 @@
                         </span>
 
                         <p class="p-t-18 cl6 size-213 stext-115">
-<<<<<<< HEAD
                         2PQW+6JJ Tòa nhà FPT Polytechnic., Cổng số 2, 13 P. Trịnh Văn Bô, Xuân Phương, Nam Từ Liêm, Hà Nội 100000
-=======
-                            Số 1, Trịnh Văn Bô, Nam Từ Liêm, Hà Nội
->>>>>>> 03ac13452c07dcb88f36412834cdff70283adac5
                         </p>
                     </div>
                 </div>
@@ -108,12 +104,7 @@
                         </span>
 
                         <p class="p-t-18 cl1 size-213 stext-115">
-<<<<<<< HEAD
-                            <a href="tel:0345678910">0345678910</a>
-                           
-=======
                             (+84) 96 716 6879
->>>>>>> 03ac13452c07dcb88f36412834cdff70283adac5
                         </p>
                     </div>
                 </div>
@@ -129,11 +120,7 @@
                         </span>
 
                         <p class="p-t-18 cl1 size-213 stext-115">
-<<<<<<< HEAD
-                            pro1014@gmail.com
-=======
                             seulchicshop@gmail.com
->>>>>>> 03ac13452c07dcb88f36412834cdff70283adac5
                         </p>
                     </div>
                 </div>

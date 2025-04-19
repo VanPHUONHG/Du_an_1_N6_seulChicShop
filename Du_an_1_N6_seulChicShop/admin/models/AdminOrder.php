@@ -45,7 +45,6 @@ class AdminOrder
                     LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
                     INNER JOIN don_hangs ON chi_tiet_don_hangs.don_hang_id = don_hangs.id
                     LEFT JOIN ma_giam_gias ON don_hangs.ma_giam_gia_id = ma_giam_gias.id
-                    WHERE don_hangs.trang_thai_don_hang_id = 4
                     GROUP BY 
                         chi_tiet_don_hangs.san_pham_id,
                         bien_the_san_phams.id

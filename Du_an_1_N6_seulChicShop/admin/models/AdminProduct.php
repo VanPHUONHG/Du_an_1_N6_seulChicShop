@@ -225,7 +225,7 @@ class AdminProduct
     public function getProductVariantById($id)
     {
         try {
-            $sql = "SELECT bien_the_san_phams.*, hinh_anh_san_phams.hinh_anh_bien_the, san_phams.ten_san_pham,san_phams.id as san_pham_id
+            $sql = "SELECT bien_the_san_phams.*, hinh_anh_san_phams.hinh_anh_bien_the, san_phams.ten_san_pham, san_phams.id as san_pham_id
                     FROM bien_the_san_phams
                     LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
                     LEFT JOIN san_phams ON bien_the_san_phams.san_pham_id = san_phams.id
@@ -233,7 +233,8 @@ class AdminProduct
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
         } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
             return false;
@@ -276,7 +277,6 @@ class AdminProduct
             return false;
         }
     }
-    
     public function checkProductInOrder($san_pham_id){
         try {
             $sql = "SELECT COUNT(*) FROM chi_tiet_don_hangs WHERE san_pham_id = :san_pham_id";

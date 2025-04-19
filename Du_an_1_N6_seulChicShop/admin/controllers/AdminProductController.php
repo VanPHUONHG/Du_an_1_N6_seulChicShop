@@ -21,7 +21,7 @@ class AdminProductController
     {
         $id = $_GET['id_san_pham'];
         $product = $this->ModelAdminProduct->getProductById($id);
-        
+
         // Kiểm tra xem sản phẩm có trong chi tiết đơn hàng không
         $hasOrders = $this->ModelAdminProduct->checkProductHasOrders($id);
 
@@ -100,17 +100,17 @@ class AdminProductController
 
         $id = $_GET['id_san_pham'];
         $Product = $this->ModelAdminProduct->getProductById($id);
-        
+
         if (!$Product || empty($Product)) {
             header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
             exit();
         }
 
         $listCategory = $this->ModelAdminDanhMuc->getAllDanhMuc();
-        
+
         // Since getProductById returns array of results, get first item
         $Product = $Product[0];
-        
+
         require_once './views/product/EditProduct.php';
         deleteSessionError();
     }
@@ -118,7 +118,7 @@ class AdminProductController
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $san_pham_id = $_POST['san_pham_id'] ?? '';
-            
+
             $sanPhamOld = $this->ModelAdminProduct->getProductById($san_pham_id);
             $old_file = $sanPhamOld[0]['hinh_anh']; // Lấy ảnh cũ để phục vụ cho sửa ảnh
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
@@ -154,7 +154,7 @@ class AdminProductController
                 $new_file,
                 $gia_nhap
             );
-            
+
             $_SESSION['success'] = "Cập nhật sản phẩm thành công!";
             header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
             exit();
@@ -212,20 +212,31 @@ class AdminProductController
     }
     public function formEditVariantProduct()
     {
-        $id = $_GET['id_bien_the'];
+        $id = $_GET['id_bien_the'] ?? null;
+        if (!$id) {
+            header("Location: " . BASE_URL_ADMIN . '?act=san-pham'); 
+            exit();
+        }
+
         $Product = $this->ModelAdminProduct->getProductVariantById($id);
-        if ($Product) {
-            require_once './views/product/EditVariantProduct.php';
-            deleteSessionError();
-        } else {
+        if (!$Product) {
             header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
             exit();
         }
+
+        require_once './views/product/EditVariantProduct.php';
+        deleteSessionError();
     }
+
     public function editVariantProduct()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $bien_the_id = $_POST['bien_the_id'] ?? '';
+            if (!$bien_the_id) {
+                header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
+                exit(); 
+            }
+
             $mau_sac = $_POST['mau_sac'] ?? '';
             $kich_thuoc = $_POST['kich_thuoc'] ?? '';
             $gia = $_POST['gia'] ?? '';
@@ -233,13 +244,18 @@ class AdminProductController
             $so_luong = $_POST['so_luong'] ?? '';
             $hinh_anh = $_FILES['hinh_anh_bien_the'] ?? null;
 
-            // Lấy hình ảnh hiện tại của biến thể
+            // Lấy thông tin biến thể hiện tại
             $currentProduct = $this->ModelAdminProduct->getProductVariantById($bien_the_id);
+            if (!$currentProduct) {
+                header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
+                exit();
+            }
+
             $file_thumb = $currentProduct[0]['hinh_anh_bien_the'];
 
-            // Nếu có upload hình ảnh mới
+            // Xử lý upload hình ảnh mới nếu có
             if ($hinh_anh && $hinh_anh['size'] > 0) {
-                // Xóa file ảnh cũ
+                // Xóa file ảnh cũ nếu tồn tại
                 if ($file_thumb && file_exists('./uploads/' . basename($file_thumb))) {
                     unlink('./uploads/' . basename($file_thumb));
                 }
@@ -247,7 +263,8 @@ class AdminProductController
                 $file_thumb = uploadFile($hinh_anh, './uploads/');
             }
 
-            $this->ModelAdminProduct->editProductVariant(
+            // Cập nhật biến thể
+            $result = $this->ModelAdminProduct->editProductVariant(
                 $bien_the_id,
                 $mau_sac,
                 $kich_thuoc,
@@ -257,10 +274,13 @@ class AdminProductController
                 $file_thumb
             );
 
-            // Get san_pham_id from the variant to redirect back
-            $variant = $this->ModelAdminProduct->getProductVariantById($bien_the_id);
-            $san_pham_id = $variant[0]['san_pham_id'];
+            if (!$result) {
+                // Xử lý lỗi nếu cập nhật thất bại
+                header("Location: " . BASE_URL_ADMIN . '?act=form-sua-bien-the&id_bien_the=' . $bien_the_id);
+                exit();
+            }
 
+            $san_pham_id = $currentProduct[0]['san_pham_id'];
             header("Location: " . BASE_URL_ADMIN . '?act=chi-tiet-san-pham&id_san_pham=' . $san_pham_id);
             exit();
         }
