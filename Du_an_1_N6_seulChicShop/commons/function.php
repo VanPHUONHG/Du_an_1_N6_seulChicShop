@@ -86,3 +86,16 @@ function checkLoginAdmin(){
 }
 
 // debug
+
+function getCategories() {
+    $conn = connectDB();
+    try {
+        $sql = "SELECT * FROM danh_mucs";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch (Exception $e) {
+        error_log("Error getting categories: " . $e->getMessage());
+        return [];
+    }
+}

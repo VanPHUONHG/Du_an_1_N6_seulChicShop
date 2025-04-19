@@ -41,6 +41,10 @@ class ClientOrder
     public function addChiTietDonHang($don_hang_id, $san_pham_id, $don_gia, $so_luong, $thanh_tien)
     {
         try {
+            // Làm sạch giá trị trước khi lưu
+            $don_gia = floatval($don_gia);
+            $thanh_tien = floatval($thanh_tien);
+            
             $sql = "INSERT INTO chi_tiet_don_hangs (don_hang_id, san_pham_id, don_gia, so_luong, thanh_tien)
             VALUES (:don_hang_id, :san_pham_id, :don_gia, :so_luong, :thanh_tien)";
 
@@ -57,6 +61,7 @@ class ClientOrder
             return true;
         } catch (Exception $e) {
             echo "Lỗi" . $e->getMessage();
+            return false;
         }
     }
 

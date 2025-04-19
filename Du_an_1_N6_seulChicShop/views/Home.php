@@ -1,4 +1,3 @@
-
 <!-- Header -->
 <?php include 'layouts/header.php'; ?>
 
@@ -374,7 +373,7 @@
 <section class="sec-product bg0 p-t-100 p-b-50">
     <div class="container">
         <div class="p-b-32">
-            <h3 class="ltext-105 cl5 txt-center respon1">     
+            <h3 class="ltext-105 cl5 txt-center respon1">
                 Our Articles Page
             </h3>
         </div>
