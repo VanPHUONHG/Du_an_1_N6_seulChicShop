@@ -174,7 +174,7 @@
 <script>
     function increaseQuantity(id) {
         const input = document.getElementById('quantity-' + id);
-        input.value = parseInt(input.value) + 1;
+        input.value = parseInt(input.value);
         validateQuantity(id);
         updateCartItem(id, input.value);
     }
@@ -182,7 +182,7 @@
     function decreaseQuantity(id) {
         const input = document.getElementById('quantity-' + id);
         if (parseInt(input.value) > 1) {
-            input.value = parseInt(input.value) - 1;
+            input.value = parseInt(input.value) ;
             updateCartItem(id, input.value);
         }
         validateQuantity(id);

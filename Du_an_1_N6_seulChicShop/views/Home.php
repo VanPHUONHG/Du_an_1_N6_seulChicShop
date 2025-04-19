@@ -7,6 +7,7 @@
 <!-- Mini Cart -->
 <?php include 'layouts/miniCart.php'; ?>
 
+
 <?php if (isset($_SESSION['success'])): ?>
     <div class="alert alert-success alert-dismissible fade show shadow-sm mx-3" role="alert">
         <i class="fas fa-check-circle mr-2"></i>
@@ -328,12 +329,11 @@
 </section>
 
 <!-- Blog -->
-<section class="sec-blog bg0 p-t-60 p-b-90">
+<section class="sec-product bg0 p-t-100 p-b-50">
     <div class="container">
-        <div class="p-b-66">
-            <h3 class="ltext-105 cl5 txt-center respon1 position-relative text-center w-100">
-                Our Blogs
-                <span class="position-absolute w-50 border-bottom border-primary" style="bottom: -10px; left: 25%;"></span>
+        <div class="p-b-32">
+            <h3 class="ltext-105 cl5 txt-center respon1">
+                Our Articles Page
             </h3>
         </div>
 

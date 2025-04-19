@@ -110,6 +110,8 @@ class AdminProduct
 
     public function checkProductHasOrders($id)
     {
+        // var_dump($gia_san_pham_khuyen_mai);
+        // die;
         try {
             $sql = 'SELECT COUNT(*) FROM chi_tiet_don_hangs WHERE san_pham_id = :id';
             $stmt = $this->conn->prepare($sql);
