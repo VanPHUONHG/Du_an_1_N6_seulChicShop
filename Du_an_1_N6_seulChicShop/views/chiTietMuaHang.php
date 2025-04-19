@@ -119,8 +119,8 @@
                                                     <td class="text-center"><?= isset($item['so_luong']) ? $item['so_luong'] : '' ?></td>
                                                     <td class="text-right"><?= isset($item['don_gia']) ? formatPrice($item['don_gia']) : '' ?> VND</td>
                                                     <td class="text-right"><?= isset($item['thanh_tien']) ? formatPrice($item['thanh_tien']) : '' ?> VND</td>
-                                                    <td class="text-center"><?= isset($item['ma_khuyen_mai']) ? $item['ma_khuyen_mai'] : '' ?></td>
-                                                    <td class="text-right"><?= isset($item['tien_giam']) ? formatPrice($item['tien_giam']) : '' ?> VND</td>
+                                                    <td class="text-center"><?= isset($item['ma_khuyen_mai']) && !empty($item['ma_khuyen_mai']) ? $item['ma_khuyen_mai'] : 'Không dùng mã giảm giá' ?></td>
+                                                    <td class="text-right"><?= isset($item['tien_giam']) && !empty($item['tien_giam']) ? formatPrice($item['tien_giam']) . ' VND' : '0 VND' ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php endif; ?>

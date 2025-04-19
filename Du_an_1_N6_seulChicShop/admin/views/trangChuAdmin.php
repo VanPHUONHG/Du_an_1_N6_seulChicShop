@@ -146,6 +146,117 @@
         font-size: 0.8rem;
         font-weight: 500;
     }
+
+    .search-box {
+        position: relative;
+        min-width: 250px;
+    }
+
+    .search-box input {
+        padding: 8px 15px;
+        border-radius: 6px;
+        border: 1px solid #e2e8f0;
+    }
+
+    .form-select {
+        min-width: 180px;
+        padding: 8px 15px;
+        border-radius: 6px;
+        border: 1px solid #e2e8f0;
+        cursor: pointer;
+        background-color: #fff;
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .income-card {
+        background: linear-gradient(135deg, #0396FF 0%, #ABDCFF 100%);
+        color: white;
+    }
+
+    .customer-card {
+        background: linear-gradient(135deg, #32CD32 0%, #90EE90 100%);
+        color: white;
+    }
+
+    .order-card {
+        background: linear-gradient(135deg, #FF6B6B 0%, #FFB4B4 100%);
+        color: white;
+    }
+
+    .profit-card {
+        background: linear-gradient(135deg, #7367F0 0%, #A9A7F5 100%);
+        color: white;
+    }
+
+    .stat-card .text-muted,
+    .stat-card .card-title-full,
+    .stat-card .stat-label {
+        color: white !important;
+    }
+
+    .stat-card .growth-badge {
+        background: rgba(255, 255, 255, 0.2) !important;
+        color: white !important;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .table-responsive {
+        border-radius: 8px;
+        background: white;
+        padding: 1rem;
+    }
+
+    .table thead th {
+        background: #f8f9fa;
+        padding: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: #495057;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .filter-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 1rem;
+    }
+
+    .filter-container .form-control,
+    .filter-container .form-select {
+        box-shadow: none;
+        transition: all 0.3s;
+    }
+
+    .filter-container .form-control:focus,
+    .filter-container .form-select:focus {
+        border-color: #7367F0;
+        box-shadow: 0 0 0 0.2rem rgba(115, 103, 240, 0.25);
+    }
+
+    .status-badge {
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 2rem;
+        color: #6c757d;
+        font-style: italic;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
 </style>
 <?php include './views/layout/navbar.php'; ?>
 <?php include './views/layout/sidebar.php'; ?>
@@ -167,7 +278,7 @@
                             <div class="row d-flex justify-content-center">
                                 <!-- Thống kê tổng thu nhập -->
                                 <div class="col-xl-3 col-md-6">
-                                    <div class="card card-animate stat-card">
+                                    <div class="card card-animate stat-card income-card">
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="flex-grow-1">
@@ -176,9 +287,20 @@
                                                     </p>
                                                 </div>
                                                 <div class="flex-shrink-0">
-                                                    <div class="growth-badge <?= $totalIncome['tang_truong'] >= 0 ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger' ?>">
-                                                        <i class="ri-arrow-<?= $totalIncome['tang_truong'] >= 0 ? 'up' : 'down' ?>-line align-middle"></i>
-                                                        <?= number_format(abs($totalIncome['tang_truong']), 2) ?>%
+                                                    <?php 
+                                                    $growthClass = isset($totalIncome['tang_truong']) && $totalIncome['tang_truong'] >= 0 
+                                                        ? 'bg-success-subtle text-success' 
+                                                        : 'bg-danger-subtle text-danger';
+                                                    $growthIcon = isset($totalIncome['tang_truong']) && $totalIncome['tang_truong'] >= 0 
+                                                        ? 'up' 
+                                                        : 'down';
+                                                    $growthValue = isset($totalIncome['tang_truong']) 
+                                                        ? abs(floatval($totalIncome['tang_truong'])) 
+                                                        : 0;
+                                                    ?>
+                                                    <div class="growth-badge <?= $growthClass ?>">
+                                                        <i class="ri-arrow-<?= $growthIcon ?>-line align-middle"></i>
+                                                        <?= number_format($growthValue, 1) ?>%
                                                     </div>
                                                 </div>
                                             </div>
@@ -194,7 +316,7 @@
 
                                 <!-- Thống kê tổng khách hàng -->
                                 <div class="col-xl-3 col-md-6">
-                                    <div class="card card-animate stat-card">
+                                    <div class="card card-animate stat-card customer-card">
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="flex-grow-1">
@@ -203,9 +325,20 @@
                                                     </p>
                                                 </div>
                                                 <div class="flex-shrink-0">
-                                                    <div class="growth-badge <?= $totalCustomers['tang_truong'] >= 0 ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger' ?>">
-                                                        <i class="ri-arrow-<?= $totalCustomers['tang_truong'] >= 0 ? 'up' : 'down' ?>-line align-middle"></i>
-                                                        <?= number_format(abs($totalCustomers['tang_truong']), 2) ?>%
+                                                    <?php 
+                                                    $growthClass = isset($totalCustomers['tang_truong']) && $totalCustomers['tang_truong'] >= 0 
+                                                        ? 'bg-success-subtle text-success' 
+                                                        : 'bg-danger-subtle text-danger';
+                                                    $growthIcon = isset($totalCustomers['tang_truong']) && $totalCustomers['tang_truong'] >= 0 
+                                                        ? 'up' 
+                                                        : 'down';
+                                                    $growthValue = isset($totalCustomers['tang_truong']) 
+                                                        ? abs(floatval($totalCustomers['tang_truong'])) 
+                                                        : 0;
+                                                    ?>
+                                                    <div class="growth-badge <?= $growthClass ?>">
+                                                        <i class="ri-arrow-<?= $growthIcon ?>-line align-middle"></i>
+                                                        <?= number_format($growthValue, 1) ?>%
                                                     </div>
                                                 </div>
                                             </div>
@@ -221,7 +354,7 @@
 
                                 <!-- Thống kê tổng đơn hàng -->
                                 <div class="col-xl-3 col-md-6">
-                                    <div class="card card-animate stat-card">
+                                    <div class="card card-animate stat-card order-card">
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="flex-grow-1">
@@ -230,9 +363,20 @@
                                                     </p>
                                                 </div>
                                                 <div class="flex-shrink-0">
-                                                    <div class="growth-badge <?= $totalOrders['tang_truong'] >= 0 ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger' ?>">
-                                                        <i class="ri-arrow-<?= $totalOrders['tang_truong'] >= 0 ? 'up' : 'down' ?>-line align-middle"></i>
-                                                        <?= number_format(abs($totalOrders['tang_truong']), 2) ?>%
+                                                    <?php 
+                                                    $growthClass = isset($totalOrders['tang_truong']) && $totalOrders['tang_truong'] >= 0 
+                                                        ? 'bg-success-subtle text-success' 
+                                                        : 'bg-danger-subtle text-danger';
+                                                    $growthIcon = isset($totalOrders['tang_truong']) && $totalOrders['tang_truong'] >= 0 
+                                                        ? 'up' 
+                                                        : 'down';
+                                                    $growthValue = isset($totalOrders['tang_truong']) 
+                                                        ? abs(floatval($totalOrders['tang_truong'])) 
+                                                        : 0;
+                                                    ?>
+                                                    <div class="growth-badge <?= $growthClass ?>">
+                                                        <i class="ri-arrow-<?= $growthIcon ?>-line align-middle"></i>
+                                                        <?= number_format($growthValue, 1) ?>%
                                                     </div>
                                                 </div>
                                             </div>
@@ -248,7 +392,7 @@
 
                                 <!-- Thống kê lợi nhuận -->
                                 <div class="col-xl-3 col-md-6">
-                                    <div class="card card-animate stat-card">
+                                    <div class="card card-animate stat-card profit-card">
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="flex-grow-1">
@@ -257,9 +401,20 @@
                                                     </p>
                                                 </div>
                                                 <div class="flex-shrink-0">
-                                                    <div class="growth-badge <?= $profit['tang_truong'] >= 0 ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger' ?>">
-                                                        <i class="ri-arrow-<?= $profit['tang_truong'] >= 0 ? 'up' : 'down' ?>-line align-middle"></i>
-                                                        <?= number_format(abs($profit['tang_truong']), 2) ?>%
+                                                    <?php 
+                                                    $growthClass = isset($profit['tang_truong']) && $profit['tang_truong'] >= 0 
+                                                        ? 'bg-success-subtle text-success' 
+                                                        : 'bg-danger-subtle text-danger';
+                                                    $growthIcon = isset($profit['tang_truong']) && $profit['tang_truong'] >= 0 
+                                                        ? 'up' 
+                                                        : 'down';
+                                                    $growthValue = isset($profit['tang_truong']) 
+                                                        ? abs(floatval($profit['tang_truong'])) 
+                                                        : 0;
+                                                    ?>
+                                                    <div class="growth-badge <?= $growthClass ?>">
+                                                        <i class="ri-arrow-<?= $growthIcon ?>-line align-middle"></i>
+                                                        <?= number_format($growthValue, 1) ?>%
                                                     </div>
                                                 </div>
                                             </div>
@@ -287,20 +442,35 @@
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">
-                                    <i class="ri-fire-line text-danger me-2"></i>Sản phẩm bán chạy nhất
+                                    <i class="ri-fire-line text-danger me-2"></i>Danh sách sản phẩm đã bán
                                 </h4>
-                                <div class="flex-shrink-0">
-                                    <button type="button" class="btn btn-soft-info btn-sm">
-                                        <i class="ri-file-list-3-line align-middle"></i> Xem tất cả
-                                    </button>
+                                <div class="flex-shrink-0 d-flex gap-2">
+                                    <div class="search-box">
+                                        <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm sản phẩm...">
+                                    </div>
+                                    <select class="form-select" id="filterVariant">
+                                        <option value="">Tất cả biến thể</option>
+                                        <option value="has_variant">Có biến thể</option>
+                                        <option value="no_variant">Không biến thể</option>
+                                    </select>
+                                    <select class="form-select" id="sortOrder">
+                                        <option value="">Sắp xếp theo</option>
+                                        <option value="quantity_desc">Số lượng bán (Cao → Thấp)</option>
+                                        <option value="quantity_asc">Số lượng bán (Thấp → Cao)</option>
+                                        <option value="revenue_desc">Doanh thu (Cao → Thấp)</option>
+                                        <option value="revenue_asc">Doanh thu (Thấp → Cao)</option>
+                                        <option value="date_desc">Ngày bán (Mới → Cũ)</option>
+                                        <option value="date_asc">Ngày bán (Cũ → Mới)</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="card-body">
                                 <div class="table-responsive table-card">
-                                    <table class="table table-hover table-bordered align-middle table-nowrap mb-0">
+                                    <table class="table table-hover table-bordered align-middle table-nowrap mb-0" id="productTable">
                                         <thead class="table-light">
                                             <tr>
+                                                <th scope="col">STT</th>
                                                 <th scope="col">Sản phẩm</th>
                                                 <th scope="col">Giá</th>
                                                 <th scope="col">Đơn đặt</th>
@@ -310,60 +480,57 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
-                                            $maxProducts = 5;
-                                            $count = 0;
-                                            foreach ($listDetailOrder as $sanPham) {
-                                                if ($count >= $maxProducts)
-                                                    break;
-                                            ?>
+                                            <?php foreach ($listDetailOrder as $index => $sanPham): ?>
                                                 <tr>
+                                                    <td><?= $index + 1 ?></td>
                                                     <td>
                                                         <div class="d-flex align-items-center">
                                                             <div class="product-img-container">
                                                                 <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" 
-                                                                    alt="<?= $sanPham['ten_san_pham'] ?>"
-                                                                    class="product-img" />
+                                                                     alt="<?= htmlspecialchars($sanPham['ten_san_pham']) ?>"
+                                                                     class="product-img" />
                                                                 <?php if (isset($sanPham['mau_sac']) && !empty($sanPham['mau_sac'])): ?>
-                                                                <span class="variant-badge" 
-                                                                      data-bs-toggle="tooltip" 
-                                                                      data-bs-placement="top" 
-                                                                      title="<?= $sanPham['mau_sac'] . ' - ' . $sanPham['kich_thuoc'] ?>">
-                                                                    BT
-                                                                </span>
+                                                                    <span class="variant-badge" 
+                                                                          data-bs-toggle="tooltip" 
+                                                                          data-bs-placement="top" 
+                                                                          title="<?= htmlspecialchars($sanPham['mau_sac'] . ' - ' . $sanPham['kich_thuoc']) ?>">
+                                                                        BT
+                                                                    </span>
                                                                 <?php endif; ?>
                                                             </div>
                                                             <div class="ms-3">
-                                                                <h5 class="fs-14 my-1"><a
-                                                                        href="<?= BASE_URL_ADMIN . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['san_pham_id'] ?> "
-                                                                        class="text-reset"><?= $sanPham['ten_san_pham'] ?></a>
+                                                                <h5 class="fs-14 my-1">
+                                                                    <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['san_pham_id'] ?>"
+                                                                       class="text-reset">
+                                                                        <?= htmlspecialchars($sanPham['ten_san_pham']) ?>
+                                                                    </a>
                                                                 </h5>
-                                                                <span
-                                                                    class="text-muted"><?= formatDate($sanPham['ngay_dat']) ?></span>
+                                                                <span class="text-muted"><?= formatDate($sanPham['ngay_dat']) ?></span>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
+                                                        <?php
+                                                        $gia = $sanPham['gia'] 
+                                                            ? ($sanPham['gia_khuyen_mai'] ?: $sanPham['gia'])
+                                                            : ($sanPham['gia_san_pham_khuyen_mai'] ?: $sanPham['gia_san_pham']);
+                                                        ?>
                                                         <h5 class="fs-14 my-1 fw-normal">
-                                                            <?php if ($sanPham['gia']): ?>
-                                                                <?= number_format($sanPham['gia_khuyen_mai'] ? $sanPham['gia_khuyen_mai'] : $sanPham['gia'], 0, ',', '.') ?>
-                                                            <?php else: ?>
-                                                                <?= number_format($sanPham['gia_san_pham_khuyen_mai'] ? $sanPham['gia_san_pham_khuyen_mai'] : $sanPham['gia_san_pham'], 0, ',', '.') ?>
-                                                            <?php endif; ?>
-                                                            VNĐ
-                                                        </h5>   
-                                                        <span class="text-muted">Giá</span>
+                                                            <?= number_format($gia, 0, ',', '.') ?> VNĐ
+                                                        </h5>
                                                     </td>
                                                     <td>
                                                         <h5 class="fs-14 my-1 fw-normal"><?= $sanPham['so_don_dat'] ?></h5>
                                                     </td>
                                                     <td>
-                                                        <h5 class="fs-14 my-1 fw-normal"><?= $sanPham['mau_sac'] . ' - ' . $sanPham['kich_thuoc'] ?>
+                                                        <h5 class="fs-14 my-1 fw-normal">
+                                                            <?= $sanPham['mau_sac'] && $sanPham['kich_thuoc'] 
+                                                                ? htmlspecialchars($sanPham['mau_sac'] . ' - ' . $sanPham['kich_thuoc'])
+                                                                : 'Không có' ?>
                                                         </h5>
                                                     </td>
                                                     <td>
-                                                        <h5 class="fs-14 my-1 fw-normal"><?= $sanPham['tong_so_luong'] ?>
-                                                        </h5>
+                                                        <h5 class="fs-14 my-1 fw-normal"><?= $sanPham['tong_so_luong'] ?></h5>
                                                     </td>
                                                     <td>
                                                         <h5 class="fs-14 my-1 fw-normal text-success">
@@ -371,20 +538,21 @@
                                                         </h5>
                                                     </td>
                                                 </tr>
-                                            <?php
-                                                $count++;
-                                            } ?>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>
 
-                                <div class="align-items-center mt-4 pt-2 justify-content-between row text-center text-sm-start">
-                                    <div class="col-sm">
-                                        <div class="text-muted">
-                                            Hiển thị <span class="fw-semibold">5</span> Kết quả bán chạy nhất trong
-                                            tháng <?= date('m/Y') ?>
-                                        </div>
+                                <!-- Phân trang -->
+                                <div class="d-flex justify-content-between align-items-center mt-4">
+                                    <div class="text-muted">
+                                        Hiển thị <span class="fw-semibold"><?= count($listDetailOrder) ?></span> sản phẩm
                                     </div>
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination justify-content-end mb-0">
+                                            <!-- Thêm phân trang nếu cần -->
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
                         </div>
@@ -409,6 +577,56 @@
                             </div>
                             <div class="card-body">
                                 <canvas id="orderPieChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">Lợi nhuận theo tuần</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Thời gian</th>
+                                                <th>Doanh thu</th>
+                                                <th>Vốn</th>
+                                                <th>Lợi nhuận</th>
+                                                <th>Số đơn hàng</th>
+                                                <th>Tăng trưởng</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($weeklyProfits as $week): ?>
+                                                <tr>
+                                                    <td><?= $week['ngay_bat_dau'] ?> - <?= $week['ngay_ket_thuc'] ?></td>
+                                                    <td><?= number_format($week['doanh_thu'], 0, ',', '.') ?> VNĐ</td>
+                                                    <td><?= number_format($week['von'], 0, ',', '.') ?> VNĐ</td>
+                                                    <td><?= number_format($week['loi_nhuan'], 0, ',', '.') ?> VNĐ</td>
+                                                    <td><?= $week['so_don_hang'] ?></td>
+                                                    <td>
+                                                        <?php if ($week['tang_truong'] > 0): ?>
+                                                            <span class="text-success">
+                                                                <i class="ri-arrow-up-line"></i> <?= $week['tang_truong'] ?>%
+                                                            </span>
+                                                        <?php elseif ($week['tang_truong'] < 0): ?>
+                                                            <span class="text-danger">
+                                                                <i class="ri-arrow-down-line"></i> <?= abs($week['tang_truong']) ?>%
+                                                            </span>
+                                                        <?php else: ?>
+                                                            <span class="text-muted">0%</span>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -518,6 +736,118 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    const table = document.getElementById('productTable');
+    const tbody = table.querySelector('tbody');
+    const searchInput = document.getElementById('searchInput');
+    const filterVariant = document.getElementById('filterVariant');
+    const sortOrder = document.getElementById('sortOrder');
+    
+    // Lưu trữ dữ liệu gốc
+    const originalRows = Array.from(tbody.querySelectorAll('tr'));
+    
+    // Hàm lọc và sắp xếp
+    function filterAndSortTable() {
+        let filteredRows = [...originalRows];
+        
+        // Lọc theo tìm kiếm
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        if (searchTerm) {
+            filteredRows = filteredRows.filter(row => {
+                const productName = row.querySelector('.fs-14 a').textContent.toLowerCase();
+                return productName.includes(searchTerm);
+            });
+        }
+        
+        // Lọc theo biến thể
+        const variantFilter = filterVariant.value;
+        if (variantFilter) {
+            filteredRows = filteredRows.filter(row => {
+                const variantText = row.querySelector('td:nth-child(5)').textContent.trim();
+                if (variantFilter === 'has_variant') {
+                    return variantText !== 'Không có';
+                } else {
+                    return variantText === 'Không có';
+                }
+            });
+        }
+        
+        // Sắp xếp
+        const [sortBy, direction] = (sortOrder.value || '').split('_');
+        if (sortBy) {
+            filteredRows.sort((a, b) => {
+                let aValue, bValue;
+                
+                switch(sortBy) {
+                    case 'quantity':
+                        aValue = parseInt(a.querySelector('td:nth-child(6)').textContent);
+                        bValue = parseInt(b.querySelector('td:nth-child(6)').textContent);
+                        break;
+                    case 'revenue':
+                        aValue = parseInt(a.querySelector('td:nth-child(7)').textContent.replace(/[^\d]/g, ''));
+                        bValue = parseInt(b.querySelector('td:nth-child(7)').textContent.replace(/[^\d]/g, ''));
+                        break;
+                    case 'date':
+                        aValue = new Date(a.querySelector('.text-muted').textContent);
+                        bValue = new Date(b.querySelector('.text-muted').textContent);
+                        break;
+                }
+                
+                return direction === 'asc' ? aValue - bValue : bValue - aValue;
+            });
+        }
+        
+        // Xóa nội dung bảng hiện tại
+        tbody.innerHTML = '';
+        
+        // Hiển thị kết quả
+        if (filteredRows.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" class="no-results">
+                        <div class="text-center">
+                            <i class="ri-search-line fs-24 mb-2"></i>
+                            <p class="mb-0">Không tìm thấy sản phẩm phù hợp</p>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        } else {
+            filteredRows.forEach((row, index) => {
+                row.querySelector('td:first-child').textContent = index + 1;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // Cập nhật số lượng hiển thị
+        updateDisplayCount(filteredRows.length);
+    }
+    
+    // Cập nhật số lượng hiển thị
+    function updateDisplayCount(count) {
+        const countElement = document.querySelector('.text-muted .fw-semibold');
+        if (countElement) {
+            countElement.textContent = count;
+        }
+    }
+    
+    // Thêm event listeners
+    searchInput.addEventListener('input', debounce(filterAndSortTable, 300));
+    filterVariant.addEventListener('change', filterAndSortTable);
+    sortOrder.addEventListener('change', filterAndSortTable);
+    
+    // Debounce function
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
 });
 </script>
 

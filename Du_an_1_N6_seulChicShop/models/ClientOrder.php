@@ -82,19 +82,7 @@ class ClientOrder
     public function getAllTrangThaiDonHang()
     {
         try {
-            $sql = "SELECT trang_thai_don_hangs.*,
-            don_hangs.ma_giam_gia_id,
-            don_hangs.tien_giam,
-            ma_giam_gias.ma_khuyen_mai,
-            ma_giam_gias.gia_tri,
-            ma_giam_gias.loai,
-            ma_giam_gias.ma_khuyen_mai,
-            don_hangs.tien_giam
-            FROM trang_thai_don_hangs
-            INNER JOIN don_hangs ON trang_thai_don_hangs.id = don_hangs.trang_thai_don_hang_id
-            LEFT JOIN ma_giam_gias ON don_hangs.ma_giam_gia_id = ma_giam_gias.id
-            WHERE don_hangs.ma_giam_gia_id IS NOT NULL
-            ";
+            $sql = "SELECT * FROM trang_thai_don_hangs";
 
             $stmt = $this->conn->prepare($sql);
 

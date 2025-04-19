@@ -222,44 +222,46 @@
                     <div class="wrap-slick2">
                         <div class="slick2">
                             <?php foreach ($productBestSeller as $product): ?>
-                            <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                                <div class="block2">
-                                    <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
-                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>" style="width: 100%; height: 100%; object-fit: cover;">
-                                        <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>" 
-                                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-                                            Quick View
-                                        </a>
-                                    </div>
-
-                                    <div class="block2-txt flex-w flex-t p-t-14">
-                                        <div class="block2-txt-child1 flex-col-l">
-                                            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
-                                               class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                <?= $product['ten_san_pham'] ?>
+                                <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+                                    <div class="block2">
+                                        <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
+                                            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>">
+                                                <img src="<?= !empty($product['hinh_anh']) ? $product['hinh_anh'] : 'assets/images/product-01.jpg' ?>" alt="<?= $product['ten_san_pham'] ?>" style="width: 100%; height: 100%; object-fit: cover;">
                                             </a>
-
-                                            <span class="stext-105 cl3">
-                                                <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
-                                                    <span class="text-decoration-line-through"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
-                                                    <span class="text-danger"><?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?></span>
-                                                <?php else: ?>
-                                                    <?= number_format($product['gia_san_pham']) . 'đ' ?>
-                                                <?php endif; ?>
-                                            </span>
+                                            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
+                                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                                Quick View
+                                            </a>
                                         </div>
 
-                                        <div class="block2-txt-child2 flex-r p-t-3">
-                                            <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                <img class="icon-heart1 dis-block trans-04" 
-                                                     src="assets/images/icons/icon-heart-01.png" alt="ICON">
-                                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                                     src="assets/images/icons/icon-heart-02.png" alt="ICON">
-                                            </a>
+                                        <div class="block2-txt flex-w flex-t p-t-14">
+                                            <div class="block2-txt-child1 flex-col-l">
+                                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
+                                                    class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                                    <?= $product['ten_san_pham'] ?>
+                                                </a>
+
+                                                <span class="stext-105 cl3">
+                                                    <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
+                                                        <span class="text-decoration-line-through"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
+                                                        <span class="text-danger"><?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?></span>
+                                                    <?php else: ?>
+                                                        <?= number_format($product['gia_san_pham']) . 'đ' ?>
+                                                    <?php endif; ?>
+                                                </span>
+                                            </div>
+
+                                            <div class="block2-txt-child2 flex-r p-t-3">
+                                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                                    <img class="icon-heart1 dis-block trans-04"
+                                                        src="assets/images/icons/icon-heart-01.png" alt="ICON">
+                                                    <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                                        src="assets/images/icons/icon-heart-02.png" alt="ICON">
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -269,45 +271,45 @@
                 <div class="tab-pane fade" id="sale" role="tabpanel">
                     <div class="wrap-slick2">
                         <div class="slick2">
-                            <?php foreach($productSelling as $product): ?>
-                            <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                                <div class="block2">
-                                    <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
-                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>" style="width: 100%; height: 100%; object-fit: cover;">
-                                        <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
-                                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-                                            Quick View
-                                        </a>
-                                    </div>
-
-                                    <div class="block2-txt flex-w flex-t p-t-14">
-                                        <div class="block2-txt-child1 flex-col-l">
+                            <?php foreach ($productSelling as $product): ?>
+                                <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+                                    <div class="block2">
+                                        <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
+                                            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"><img src="<?= !empty($product['hinh_anh']) ? $product['hinh_anh'] : 'assets/images/product-02.jpg' ?>" alt="<?= $product['ten_san_pham'] ?>" style="width: 100%; height: 100%; object-fit: cover;"></a>
                                             <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
-                                               class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                <?= $product['ten_san_pham'] ?>
+                                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                                Quick View
                                             </a>
-
-                                            <span class="stext-105 cl3">
-                                                <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
-                                                    <span class="text-decoration-line-through"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
-                                                    <span class="text-danger"><?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?></span>
-                                                <?php else: ?>
-                                                    <?= number_format($product['gia_san_pham']) . 'đ' ?>
-                                                <?php endif; ?>
-                                            </span>
                                         </div>
 
-                                        <div class="block2-txt-child2 flex-r p-t-3">
-                                            <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                <img class="icon-heart1 dis-block trans-04"
-                                                     src="assets/images/icons/icon-heart-01.png" alt="ICON">
-                                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                                     src="assets/images/icons/icon-heart-02.png" alt="ICON">
-                                            </a>
+                                        <div class="block2-txt flex-w flex-t p-t-14">
+                                            <div class="block2-txt-child1 flex-col-l">
+                                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
+                                                    class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                                    <?= $product['ten_san_pham'] ?>
+                                                </a>
+
+                                                <span class="stext-105 cl3">
+                                                    <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
+                                                        <span class="text-decoration-line-through"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
+                                                        <span class="text-danger"><?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?></span>
+                                                    <?php else: ?>
+                                                        <?= number_format($product['gia_san_pham']) . 'đ' ?>
+                                                    <?php endif; ?>
+                                                </span>
+                                            </div>
+
+                                            <div class="block2-txt-child2 flex-r p-t-3">
+                                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                                    <img class="icon-heart1 dis-block trans-04"
+                                                        src="assets/images/icons/icon-heart-01.png" alt="ICON">
+                                                    <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                                        src="assets/images/icons/icon-heart-02.png" alt="ICON">
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -317,45 +319,45 @@
                 <div class="tab-pane fade" id="top-rate" role="tabpanel">
                     <div class="wrap-slick2">
                         <div class="slick2">
-                            <?php foreach($productTopRating as $product): ?>
-                            <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                                <div class="block2">
-                                    <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
-                                        <img src="<?= BASE_URL . $product['hinh_anh'] ?>" alt="<?= $product['ten_san_pham'] ?>" style="width: 100%; height: 100%; object-fit: cover;">
-                                        <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
-                                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-                                            Quick View
-                                        </a>
-                                    </div>
-
-                                    <div class="block2-txt flex-w flex-t p-t-14">
-                                        <div class="block2-txt-child1 flex-col-l">
+                            <?php foreach ($productTopRating as $product): ?>
+                                <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+                                    <div class="block2">
+                                        <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
+                                            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"><img src="<?= !empty($product['hinh_anh']) ? $product['hinh_anh'] : 'assets/images/product-01.jpg' ?>" alt="<?= $product['ten_san_pham'] ?>" style="width: 100%; height: 100%; object-fit: cover;"></a>
                                             <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
-                                               class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                <?= $product['ten_san_pham'] ?>
+                                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                                Quick View
                                             </a>
-
-                                            <span class="stext-105 cl3">
-                                                <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
-                                                    <span class="text-decoration-line-through"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
-                                                    <span class="text-danger"><?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?></span>
-                                                <?php else: ?>
-                                                    <?= number_format($product['gia_san_pham']) . 'đ' ?>
-                                                <?php endif; ?>
-                                            </span>
                                         </div>
 
-                                        <div class="block2-txt-child2 flex-r p-t-3">
-                                            <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                <img class="icon-heart1 dis-block trans-04"
-                                                     src="assets/images/icons/icon-heart-01.png" alt="ICON">
-                                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                                     src="assets/images/icons/icon-heart-02.png" alt="ICON">
-                                            </a>
+                                        <div class="block2-txt flex-w flex-t p-t-14">
+                                            <div class="block2-txt-child1 flex-col-l">
+                                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
+                                                    class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                                    <?= $product['ten_san_pham'] ?>
+                                                </a>
+
+                                                <span class="stext-105 cl3">
+                                                    <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
+                                                        <span class="text-decoration-line-through"><?= number_format($product['gia_san_pham']) . 'đ' ?></span>
+                                                        <span class="text-danger"><?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?></span>
+                                                    <?php else: ?>
+                                                        <?= number_format($product['gia_san_pham']) . 'đ' ?>
+                                                    <?php endif; ?>
+                                                </span>
+                                            </div>
+
+                                            <div class="block2-txt-child2 flex-r p-t-3">
+                                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                                    <img class="icon-heart1 dis-block trans-04"
+                                                        src="assets/images/icons/icon-heart-01.png" alt="ICON">
+                                                    <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                                        src="assets/images/icons/icon-heart-02.png" alt="ICON">
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -366,65 +368,64 @@
 </section>
 
 
+<!-- Blog -->
+<section class="sec-blog bg0 p-t-60 p-b-90">
+    <div class="container">
+        <div class="p-b-66">
+            <h3 class="ltext-105 cl5 txt-center respon1">
+                Our Blogs
+            </h3>
+        </div>
 
-	<!-- Blog -->
-	<section class="sec-blog bg0 p-t-60 p-b-90">
-		<div class="container">
-			<div class="p-b-66">
-				<h3 class="ltext-105 cl5 txt-center respon1">
-					Our Blogs
-				</h3>
-			</div>
+        <div class="row">
+            <?php foreach ($postNew as $post): ?>
+                <div class="col-sm-6 col-md-4 p-b-40">
+                    <div class="blog-item">
+                        <div class="hov-img0">
+                            <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet&id=' . $post['id'] ?>">
+                                <img src="<?= !empty($post['hinh_anh']) ? $post['hinh_anh'] : 'assets/images/blog-01.jpg' ?>" alt="<?= $post['tieu_de'] ?>" style="width: 100%; height: 250px; object-fit: cover;">
+                            </a>
+                        </div>
 
-			<div class="row">
-				<?php foreach ($postNew as $post): ?>
-				<div class="col-sm-6 col-md-4 p-b-40">
-					<div class="blog-item">
-						<div class="hov-img0">
-							<a href="<?= BASE_URL . '?act=chi-tiet-bai-viet&id=' . $post['id'] ?>">
-								<img src="<?= BASE_URL . $post['hinh_anh'] ?>" alt="<?= $post['tieu_de'] ?>" style="width: 100%; height: 100%; object-fit: cover;">
-							</a>
-						</div>
+                        <div class="p-t-15">
+                            <div class="stext-107 flex-w p-b-14">
+                                <span class="m-r-3">
+                                    <span class="cl4">
+                                        By
+                                    </span>
 
-						<div class="p-t-15">
-							<div class="stext-107 flex-w p-b-14">
-								<span class="m-r-3">
-									<span class="cl4">
-										By
-									</span>
+                                    <span class="cl5">
+                                        <?= $post['tac_gia'] ?>
+                                    </span>
+                                </span>
 
-									<span class="cl5">
-										<?= $post['tac_gia'] ?>
-									</span>
-								</span>
+                                <span>
+                                    <span class="cl4">
+                                        on
+                                    </span>
 
-								<span>
-									<span class="cl4">
-										on
-									</span>
+                                    <span class="cl5">
+                                        <?= $post['ngay_tao_bai_viet'] ?>
+                                    </span>
+                                </span>
+                            </div>
 
-									<span class="cl5">
-										<?= $post['ngay_tao_bai_viet'] ?>
-									</span>
-								</span>
-							</div>
+                            <h4 class="p-b-12">
+                                <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet&id=' . $post['id'] ?>" class="mtext-101 cl2 hov-cl1 trans-04">
+                                    <?= $post['tieu_de'] ?>
+                                </a>
+                            </h4>
 
-							<h4 class="p-b-12">
-								<a href="<?= BASE_URL . '?act=chi-tiet-bai-viet&id=' . $post['id'] ?>" class="mtext-101 cl2 hov-cl1 trans-04">
-									<?= $post['tieu_de'] ?>
-								</a>
-							</h4>
-
-							<p class="stext-108 cl6">
-								<?= $post['bai_viet'] ?>
-							</p>
-						</div>
-					</div>
-				</div>
-                <?php endforeach; ?>
-			</div>
-		</div>
-	</section>
+                            <p class="stext-108 cl6">
+                                <?= $post['bai_viet'] ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
 
 
 
@@ -460,8 +461,8 @@
                                     <div class="wrap-pic-w pos-relative">
                                         <img src="assets/images/product-detail-01.jpg" alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" 
-                                           href="assets/images/product-detail-01.jpg">
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                            href="assets/images/product-detail-01.jpg">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
@@ -471,8 +472,8 @@
                                     <div class="wrap-pic-w pos-relative">
                                         <img src="assets/images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" 
-                                           href="assets/images/product-detail-02.jpg">
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                            href="assets/images/product-detail-02.jpg">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
@@ -482,8 +483,8 @@
                                     <div class="wrap-pic-w pos-relative">
                                         <img src="assets/images/product-detail-03.jpg" alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" 
-                                           href="assets/images/product-detail-03.jpg">
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                            href="assets/images/product-detail-03.jpg">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
@@ -492,7 +493,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6 col-lg-5 p-b-30">
                     <div class="p-r-50 p-t-5 p-lr-0-lg">
                         <h4 class="mtext-105 cl2 js-name-detail p-b-14">
@@ -506,7 +507,7 @@
                         <p class="stext-102 cl3 p-t-23">
                             Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
                         </p>
-                        
+
                         <div class="p-t-33">
                             <div class="flex-w flex-r-m p-b-10">
                                 <div class="size-203 flex-c-m respon6">
@@ -564,7 +565,7 @@
                                         Add to cart
                                     </button>
                                 </div>
-                            </div>	
+                            </div>
                         </div>
 
                         <div class="flex-w flex-m p-l-100 p-t-40 respon7">
@@ -602,7 +603,7 @@
 <!--===============================================================================================-->
 <script src="assets/vendor/select2/select2.min.js"></script>
 <script>
-    $(".js-select2").each(function () {
+    $(".js-select2").each(function() {
         $(this).select2({
             minimumResultsForSearch: 20,
             dropdownParent: $(this).next('.dropDownSelect2')
@@ -623,7 +624,7 @@
 <!--===============================================================================================-->
 <script src="assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <script>
-    $('.gallery-lb').each(function () { // the containers for all your galleries
+    $('.gallery-lb').each(function() { // the containers for all your galleries
         $(this).magnificPopup({
             delegate: 'a', // the selector for gallery item
             type: 'image',
@@ -638,9 +639,9 @@
 <!--===============================================================================================-->
 <script src="assets/vendor/sweetalert/sweetalert.min.js"></script>
 <script>
-    $('.js-addcart-detail').each(function () {
+    $('.js-addcart-detail').each(function() {
         var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').text();
-        $(this).on('click', function () {
+        $(this).on('click', function() {
             swal(nameProduct, "is added to cart !", "success");
         });
     });
@@ -648,7 +649,7 @@
 <!--===============================================================================================-->
 <script src="assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
-    $('.js-pscroll').each(function () {
+    $('.js-pscroll').each(function() {
         $(this).css('position', 'relative');
         $(this).css('overflow', 'hidden');
         $(this).append('<div class="pscroll" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow-y: hidden; pointer-events: none;"><div style="position: absolute; left: 0; top: 0;"></div></div>');

@@ -24,7 +24,7 @@
                     <?php if (!empty($posts)): ?>
                         <?php foreach ($posts as $post): ?>
                             <div class="p-b-63">
-                                <a href="<?= BASE_URL . '?act=chi-tiet-blog&id=' . $post['id'] ?>" class="hov-img0 how-pos5-parent">
+                                <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet&id=' . $post['id'] ?>" class="hov-img0 how-pos5-parent">
                                     <img src="<?= BASE_URL . $post['hinh_anh'] ?>" alt="<?= htmlspecialchars($post['tieu_de']) ?>">
 
                                     <div class="flex-col-c-m size-123 bg9 how-pos5">
@@ -39,7 +39,7 @@
 
                                 <div class="p-t-32">
                                     <h4 class="p-b-15">
-                                        <a href="<?= BASE_URL . '?act=chi-tiet-blog&id=' . $post['id'] ?>" class="ltext-108 cl2 hov-cl1 trans-04">
+                                        <a href="<?= BASE_URL . '?act=chi-tiet-bai-viet&id=' . $post['id'] ?>" class="ltext-108 cl2 hov-cl1 trans-04">
                                             <?= htmlspecialchars($post['tieu_de']) ?>
                                         </a>
                                     </h4>
@@ -86,25 +86,17 @@
                             Danh mục
                         </h4>
                         <ul>
-                            <li class="bor18">
-                                <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                    Thời trang
-                                </a>
-                            </li>
-                            <li class="bor18">
-                                <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                    Làm đẹp
-                                </a>
-                            </li>
-                            <li class="bor18">
-                                <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                    Phong cách sống
-                                </a>
-                            </li>
+                            <?php foreach ($category as $item): ?>
+                                <li class="bor18">
+                                    <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                        <?= $item['ten_danh_muc'] ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
 
-                    <!-- Archive -->
+                    <!-- Archive
                     <div class="p-t-55">
                         <h4 class="mtext-112 cl2 p-b-20">
                             Lưu trữ
@@ -123,7 +115,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

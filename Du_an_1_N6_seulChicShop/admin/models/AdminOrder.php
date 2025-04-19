@@ -14,7 +14,8 @@ class AdminOrder
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC)['tong_thu_nhap'] ?? 0;
         } catch (Exception $e) {
-            echo "Lỗi Truy Vấn:" . $e->getMessage();
+            error_log("Lỗi totalPriceOrder: " . $e->getMessage());
+            return 0;
         }
     }
 
@@ -44,7 +45,10 @@ class AdminOrder
                     LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
                     INNER JOIN don_hangs ON chi_tiet_don_hangs.don_hang_id = don_hangs.id
                     LEFT JOIN ma_giam_gias ON don_hangs.ma_giam_gia_id = ma_giam_gias.id
-                    WHERE don_hangs.trang_thai_don_hang_id = 1
+                    WHERE don_hangs.trang_thai_don_hang_id = 4
+                    GROUP BY 
+                        chi_tiet_don_hangs.san_pham_id,
+                        bien_the_san_phams.id
                     ORDER BY tong_so_luong DESC, tong_doanh_thu DESC";
 
             $stmt = $this->conn->prepare($sql);
@@ -94,7 +98,7 @@ class AdminOrder
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result['total_orders'];
         } catch (Exception $e) {
-            echo "Lỗi Truy Vấn:" . $e->getMessage();
+            error_log("Lỗi getAllOrder: " . $e->getMessage());
             return 0;
         }
     }
@@ -111,37 +115,37 @@ class AdminOrder
 
             return $stmt->fetchAll();
         } catch (Exception $e) {
-            echo "Lỗi Truy Vấn:" . $e->getMessage();
+            error_log("Lỗi getAllTrangThaiOder: " . $e->getMessage());
+            return [];
         }
     }
 
-    public function getDetailDonHang($id)
+    public function getDetailOrder($id)
     {
         try {
-            $sql = 'SELECT don_hangs.*,
-          trang_thai_don_hangs.ten_trang_thai,
-          tai_khoans.ten_tai_khoan,
-          tai_khoans.email, 
-          tai_khoans.so_dien_thoai,
-          phuong_thuc_thanh_toans.ten_phuong_thuc,
-          ma_giam_gias.ma_khuyen_mai,
-          ma_giam_gias.gia_tri
-           FROM don_hangs
-           INNER JOIN trang_thai_don_hangs ON don_hangs.trang_thai_don_hang_id = trang_thai_don_hangs.id 
-           
-           INNER JOIN tai_khoans ON don_hangs.tai_khoan_id = tai_khoans.id 
-           
-           INNER JOIN phuong_thuc_thanh_toans ON don_hangs.phuong_thuc_thanh_toan_id = phuong_thuc_thanh_toans.id 
-           INNER JOIN ma_giam_gias ON don_hangs.ma_giam_gia_id = ma_giam_gias.id
-           WHERE don_hangs.id = :id ';
-
+            $sql = "SELECT 
+                        don_hangs.*,
+                        trang_thai_don_hangs.ten_trang_thai,
+                        tai_khoans.ten_tai_khoan,
+                        tai_khoans.email,
+                        tai_khoans.so_dien_thoai,
+                        phuong_thuc_thanh_toans.ten_phuong_thuc,
+                        ma_giam_gias.ma_khuyen_mai,
+                        ma_giam_gias.gia_tri,
+                        ma_giam_gias.loai
+                    FROM don_hangs
+                    INNER JOIN trang_thai_don_hangs ON don_hangs.trang_thai_don_hang_id = trang_thai_don_hangs.id
+                    INNER JOIN tai_khoans ON don_hangs.tai_khoan_id = tai_khoans.id
+                    INNER JOIN phuong_thuc_thanh_toans ON don_hangs.phuong_thuc_thanh_toan_id = phuong_thuc_thanh_toans.id
+                    LEFT JOIN ma_giam_gias ON don_hangs.ma_giam_gia_id = ma_giam_gias.id
+                    WHERE don_hangs.id = :id";
             $stmt = $this->conn->prepare($sql);
-
-            $stmt->execute([':id' => $id]);
-
-            return $stmt->fetch();
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
-            echo "lỗi" . $e->getMessage();
+            error_log("Error in getDetailOrder: " . $e->getMessage());
+            return [];
         }
     }
 
@@ -151,11 +155,24 @@ class AdminOrder
     {
         try {
             $sql = 'SELECT chi_tiet_don_hangs.*,
-          san_phams.ten_san_pham
+          don_hangs.ma_giam_gia_id,
+          don_hangs.tien_giam,
+          san_phams.ten_san_pham,
+          san_phams.gia_san_pham,
+          san_phams.gia_san_pham_khuyen_mai,
+          bien_the_san_phams.gia,
+          bien_the_san_phams.gia_khuyen_mai,
+          bien_the_san_phams.mau_sac,
+          bien_the_san_phams.kich_thuoc,
+          ma_giam_gias.ma_khuyen_mai,
+          ma_giam_gias.gia_tri,
+          ma_giam_gias.loai
           
            FROM chi_tiet_don_hangs
+           INNER JOIN don_hangs ON chi_tiet_don_hangs.don_hang_id = don_hangs.id
            INNER JOIN san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id 
-           
+           LEFT JOIN bien_the_san_phams ON chi_tiet_don_hangs.bien_the_san_pham_id = bien_the_san_phams.id
+           LEFT JOIN ma_giam_gias ON don_hangs.ma_giam_gia_id = ma_giam_gias.id
            WHERE chi_tiet_don_hangs.don_hang_id = :id ';
 
             $stmt = $this->conn->prepare($sql);
@@ -164,7 +181,8 @@ class AdminOrder
 
             return $stmt->fetchAll();
         } catch (Exception $e) {
-            echo "lỗi" . $e->getMessage();
+            error_log("Lỗi getListDonHang: " . $e->getMessage());
+            return [];
         }
     }
 
@@ -174,37 +192,59 @@ class AdminOrder
             $sql = "UPDATE don_hangs SET trang_thai_don_hang_id = :trang_thai_don_hang_id WHERE id=:id";
 
             $stmt = $this->conn->prepare($sql);
-            //    var_dump($stmt);die;
             $stmt->execute([
                 ':trang_thai_don_hang_id' => $trang_thai_don_hang_id,
                 ':id' => $id
-
             ]);
 
             return true;
         } catch (Exception $e) {
-            echo "lỗi" . $e->getMessage();
+            error_log("Lỗi updateOrder: " . $e->getMessage());
+            return false;
         }
     }
 
     public function getProfit() {
         try {
             $sql = "SELECT 
-                    SUM(chi_tiet_don_hangs.thanh_tien) as doanh_thu,
+                    SUM(
+                        CASE 
+                            WHEN chi_tiet_don_hangs.bien_the_san_pham_id IS NOT NULL THEN 
+                                COALESCE(bien_the_san_phams.gia_khuyen_mai, bien_the_san_phams.gia)
+                            ELSE 
+                                COALESCE(san_phams.gia_san_pham_khuyen_mai, san_phams.gia_san_pham)
+                        END * chi_tiet_don_hangs.so_luong
+                    ) as doanh_thu,
                     SUM(san_phams.gia_nhap * chi_tiet_don_hangs.so_luong) as von,
-                    SUM(chi_tiet_don_hangs.thanh_tien - (san_phams.gia_nhap * chi_tiet_don_hangs.so_luong)) as loi_nhuan,
+                    SUM(
+                        (CASE 
+                            WHEN chi_tiet_don_hangs.bien_the_san_pham_id IS NOT NULL THEN 
+                                COALESCE(bien_the_san_phams.gia_khuyen_mai, bien_the_san_phams.gia)
+                            ELSE 
+                                COALESCE(san_phams.gia_san_pham_khuyen_mai, san_phams.gia_san_pham)
+                        END - san_phams.gia_nhap) * chi_tiet_don_hangs.so_luong
+                    ) as loi_nhuan,
                     (
-                        SELECT SUM(ctdh.thanh_tien - (sp.gia_nhap * ctdh.so_luong))
-                        FROM chi_tiet_don_hangs ctdh
-                        JOIN don_hangs dh ON ctdh.don_hang_id = dh.id
-                        JOIN san_phams sp ON ctdh.san_pham_id = sp.id
-                        WHERE MONTH(dh.ngay_dat) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)
-                        AND YEAR(dh.ngay_dat) = YEAR(CURRENT_DATE)
-                        AND dh.trang_thai_don_hang_id = 4
+                        SELECT SUM(
+                            (CASE 
+                                WHEN chi_tiet_don_hangs.bien_the_san_pham_id IS NOT NULL THEN 
+                                    COALESCE(bien_the_san_phams.gia_khuyen_mai, bien_the_san_phams.gia)
+                                ELSE 
+                                    COALESCE(san_phams.gia_san_pham_khuyen_mai, san_phams.gia_san_pham)
+                            END - san_phams.gia_nhap) * chi_tiet_don_hangs.so_luong
+                        )
+                        FROM chi_tiet_don_hangs 
+                        JOIN don_hangs ON chi_tiet_don_hangs.don_hang_id = don_hangs.id
+                        JOIN san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
+                        LEFT JOIN bien_the_san_phams ON chi_tiet_don_hangs.bien_the_san_pham_id = bien_the_san_phams.id
+                        WHERE MONTH(don_hangs.ngay_dat) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)
+                        AND YEAR(don_hangs.ngay_dat) = YEAR(CURRENT_DATE)
+                        AND don_hangs.trang_thai_don_hang_id = 4
                     ) as loi_nhuan_thang_truoc
                     FROM chi_tiet_don_hangs
                     JOIN don_hangs ON chi_tiet_don_hangs.don_hang_id = don_hangs.id
                     JOIN san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
+                    LEFT JOIN bien_the_san_phams ON chi_tiet_don_hangs.bien_the_san_pham_id = bien_the_san_phams.id
                     WHERE MONTH(don_hangs.ngay_dat) = MONTH(CURRENT_DATE)
                     AND YEAR(don_hangs.ngay_dat) = YEAR(CURRENT_DATE)
                     AND don_hangs.trang_thai_don_hang_id = 4";
@@ -213,13 +253,14 @@ class AdminOrder
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            // Tính tỷ lệ tăng trưởng lợi nhuận
-            $currentProfit = $result['loi_nhuan'] ?? 0;
-            $lastProfit = $result['loi_nhuan_thang_truoc'] ?? 0;
+            $currentProfit = floatval($result['loi_nhuan'] ?? 0);
+            $lastProfit = floatval($result['loi_nhuan_thang_truoc'] ?? 0);
             $growthRate = 0;
             
-            if ($lastProfit > 0) {
-                $growthRate = (($currentProfit - $lastProfit) / $lastProfit) * 100;
+            if ($lastProfit != 0) {
+                $growthRate = round((($currentProfit - $lastProfit) / abs($lastProfit)) * 100, 1);
+            } elseif ($lastProfit == 0 && $currentProfit > 0) {
+                $growthRate = 100;
             }
             
             return [
@@ -253,10 +294,8 @@ class AdminOrder
             $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
-            // Khởi tạo mảng 12 tháng với giá trị 0
             $monthlyRevenue = array_fill(0, 12, 0);
             
-            // Cập nhật doanh thu cho các tháng có dữ liệu
             foreach ($results as $row) {
                 $monthlyRevenue[$row['thang'] - 1] = (float)$row['doanh_thu'];
             }
@@ -332,13 +371,14 @@ class AdminOrder
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            // Tính phần trăm tăng trưởng
-            $currentRevenue = $result['tong_thu_nhap'] ?? 0;
-            $lastRevenue = $result['doanh_thu_thang_truoc'] ?? 0;
+            $currentRevenue = floatval($result['tong_thu_nhap'] ?? 0);
+            $lastRevenue = floatval($result['doanh_thu_thang_truoc'] ?? 0);
             $growthRate = 0;
             
-            if ($lastRevenue > 0) {
-                $growthRate = (($currentRevenue - $lastRevenue) / $lastRevenue) * 100;
+            if ($lastRevenue != 0) {
+                $growthRate = round((($currentRevenue - $lastRevenue) / abs($lastRevenue)) * 100, 1);
+            } elseif ($lastRevenue == 0 && $currentRevenue > 0) {
+                $growthRate = 100;
             }
             
             return [
@@ -354,30 +394,40 @@ class AdminOrder
     public function getTotalCustomers() {
         try {
             $sql = "SELECT 
-                    COUNT(DISTINCT tai_khoan_id) as tong_khach_hang,
+                    COUNT(DISTINCT d.tai_khoan_id) as tong_khach_hang,
                     (
-                        SELECT COUNT(DISTINCT tai_khoan_id)
-                        FROM don_hangs
-                        WHERE MONTH(ngay_dat) = MONTH(CURRENT_DATE)
-                        AND YEAR(ngay_dat) = YEAR(CURRENT_DATE)
-                    ) as khach_hang_moi
-                    FROM don_hangs
-                    WHERE trang_thai_don_hang_id = 4"; // Chỉ đếm đơn hàng đã hoàn thành
+                        SELECT COUNT(DISTINCT d2.tai_khoan_id)
+                        FROM don_hangs d2
+                        WHERE MONTH(d2.ngay_dat) = MONTH(CURRENT_DATE)
+                        AND YEAR(d2.ngay_dat) = YEAR(CURRENT_DATE)
+                        AND d2.trang_thai_don_hang_id = 4
+                    ) as khach_hang_thang_nay,
+                    (
+                        SELECT COUNT(DISTINCT d3.tai_khoan_id)
+                        FROM don_hangs d3
+                        WHERE MONTH(d3.ngay_dat) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)
+                        AND YEAR(d3.ngay_dat) = YEAR(CURRENT_DATE)
+                        AND d3.trang_thai_don_hang_id = 4
+                    ) as khach_hang_thang_truoc
+                    FROM don_hangs d
+                    WHERE d.trang_thai_don_hang_id = 4";
             
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            $totalCustomers = $result['tong_khach_hang'] ?? 0;
-            $newCustomers = $result['khach_hang_moi'] ?? 0;
+            $currentMonthCustomers = floatval($result['khach_hang_thang_nay'] ?? 0);
+            $lastMonthCustomers = floatval($result['khach_hang_thang_truoc'] ?? 0);
             $growthRate = 0;
             
-            if ($totalCustomers > 0) {
-                $growthRate = ($newCustomers / $totalCustomers) * 100;
+            if ($lastMonthCustomers != 0) {
+                $growthRate = round((($currentMonthCustomers - $lastMonthCustomers) / abs($lastMonthCustomers)) * 100, 1);
+            } elseif ($lastMonthCustomers == 0 && $currentMonthCustomers > 0) {
+                $growthRate = 100;
             }
             
             return [
-                'tong_khach_hang' => $totalCustomers,
+                'tong_khach_hang' => (int)($result['tong_khach_hang'] ?? 0),
                 'tang_truong' => $growthRate
             ];
         } catch (Exception $e) {
@@ -394,31 +444,98 @@ class AdminOrder
                         (SELECT COUNT(*)
                         FROM don_hangs
                         WHERE MONTH(ngay_dat) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)
-                        AND YEAR(ngay_dat) = YEAR(CURRENT_DATE)), 0
+                        AND YEAR(ngay_dat) = YEAR(CURRENT_DATE)
+                        AND trang_thai_don_hang_id = 4), 0
                     ) as don_hang_thang_truoc
                     FROM don_hangs
                     WHERE MONTH(ngay_dat) = MONTH(CURRENT_DATE)
-                    AND YEAR(ngay_dat) = YEAR(CURRENT_DATE)";
+                    AND YEAR(ngay_dat) = YEAR(CURRENT_DATE)
+                    AND trang_thai_don_hang_id = 4";
             
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            $currentOrders = $result['tong_don_hang'] ?? 0;
-            $lastOrders = $result['don_hang_thang_truoc'] ?? 0;
+            $currentOrders = floatval($result['tong_don_hang'] ?? 0);
+            $lastOrders = floatval($result['don_hang_thang_truoc'] ?? 0);
             $growthRate = 0;
             
-            if ($lastOrders > 0) {
-                $growthRate = (($currentOrders - $lastOrders) / $lastOrders) * 100;
+            if ($lastOrders != 0) {
+                $growthRate = round((($currentOrders - $lastOrders) / abs($lastOrders)) * 100, 1);
+            } elseif ($lastOrders == 0 && $currentOrders > 0) {
+                $growthRate = 100;
             }
             
             return [
-                'tong_don_hang' => $currentOrders,
+                'tong_don_hang' => (int)$currentOrders,
                 'tang_truong' => $growthRate
             ];
         } catch (Exception $e) {
             error_log("Lỗi getTotalOrders: " . $e->getMessage());
             return ['tong_don_hang' => 0, 'tang_truong' => 0];
+        }
+    }
+
+    public function getWeeklyProfit() {
+        try {
+            $sql = "SELECT 
+                    YEARWEEK(don_hangs.ngay_dat, 1) as tuan,
+                    DATE_FORMAT(MIN(don_hangs.ngay_dat), '%d/%m') as ngay_bat_dau,
+                    DATE_FORMAT(MAX(don_hangs.ngay_dat), '%d/%m') as ngay_ket_thuc,
+                    SUM(
+                        CASE 
+                            WHEN chi_tiet_don_hangs.bien_the_san_pham_id IS NOT NULL THEN 
+                                COALESCE(bien_the_san_phams.gia_khuyen_mai, bien_the_san_phams.gia)
+                            ELSE 
+                                COALESCE(san_phams.gia_san_pham_khuyen_mai, san_phams.gia_san_pham)
+                        END * chi_tiet_don_hangs.so_luong
+                    ) as doanh_thu,
+                    SUM(san_phams.gia_nhap * chi_tiet_don_hangs.so_luong) as von,
+                    SUM(
+                        (CASE 
+                            WHEN chi_tiet_don_hangs.bien_the_san_pham_id IS NOT NULL THEN 
+                                COALESCE(bien_the_san_phams.gia_khuyen_mai, bien_the_san_phams.gia)
+                            ELSE 
+                                COALESCE(san_phams.gia_san_pham_khuyen_mai, san_phams.gia_san_pham)
+                        END - san_phams.gia_nhap) * chi_tiet_don_hangs.so_luong
+                    ) as loi_nhuan,
+                    COUNT(DISTINCT don_hangs.id) as so_don_hang
+                    FROM chi_tiet_don_hangs
+                    JOIN don_hangs ON chi_tiet_don_hangs.don_hang_id = don_hangs.id
+                    JOIN san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
+                    LEFT JOIN bien_the_san_phams ON chi_tiet_don_hangs.bien_the_san_pham_id = bien_the_san_phams.id
+                    WHERE don_hangs.ngay_dat >= CURDATE() - INTERVAL 4 WEEK
+                    AND don_hangs.trang_thai_don_hang_id = 4
+                    GROUP BY YEARWEEK(don_hangs.ngay_dat, 1)
+                    ORDER BY tuan DESC
+                    LIMIT 4";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            for ($i = 0; $i < count($results) - 1; $i++) {
+                $currentWeekProfit = floatval($results[$i]['loi_nhuan']);
+                $lastWeekProfit = floatval($results[$i + 1]['loi_nhuan']);
+                $growthRate = 0;
+                
+                if ($lastWeekProfit != 0) {
+                    $growthRate = round((($currentWeekProfit - $lastWeekProfit) / abs($lastWeekProfit)) * 100, 1);
+                } elseif ($lastWeekProfit == 0 && $currentWeekProfit > 0) {
+                    $growthRate = 100;
+                }
+                
+                $results[$i]['tang_truong'] = $growthRate;
+            }
+            
+            if (!empty($results)) {
+                $results[count($results) - 1]['tang_truong'] = 0;
+            }
+            
+            return $results;
+        } catch (Exception $e) {
+            error_log("Lỗi getWeeklyProfit: " . $e->getMessage());
+            return [];
         }
     }
 }

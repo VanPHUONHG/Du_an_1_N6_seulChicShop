@@ -1,0 +1,204 @@
+/* Main styles for posts management */
+.content-wrapper {
+    background: #f4f6f9;
+    padding: 20px;
+}
+
+/* Header styles */
+.posts-header {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.posts-header h1 {
+    color: #fff;
+    font-size: 24px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Card styles */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    background: #fff;
+}
+
+.card-header {
+    background: linear-gradient(to right, #f8f9fa, #ffffff);
+    border-bottom: 1px solid #edf2f7;
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* Form styles */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    color: #2d3748;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Image preview */
+.image-preview {
+    margin-top: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.image-preview img {
+    max-width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Table styles */
+.posts-table {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.posts-table thead th {
+    background: #f8fafc;
+    color: #2d3748;
+    font-weight: 600;
+    padding: 15px;
+    border-bottom: 2px solid #edf2f7;
+}
+
+.posts-table tbody td {
+    padding: 15px;
+    vertical-align: middle;
+    border-top: 1px solid #edf2f7;
+}
+
+.posts-image {
+    max-width: 100px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.posts-image:hover {
+    transform: scale(1.1);
+}
+
+/* Button styles */
+.btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-success {
+    background: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.btn-success:hover {
+    background: #45a049;
+    border-color: #45a049;
+}
+
+.btn-primary {
+    background: #2196F3;
+    border-color: #2196F3;
+}
+
+.btn-primary:hover {
+    background: #1e88e5;
+    border-color: #1e88e5;
+}
+
+.btn-danger {
+    background: #f44336;
+    border-color: #f44336;
+}
+
+.btn-danger:hover {
+    background: #e53935;
+    border-color: #e53935;
+}
+
+/* Status badges */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.status-active {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-inactive {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* Editor styles */
+.post-editor {
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    min-height: 200px;
+}
+
+/* Action buttons group */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.action-buttons .btn {
+    padding: 6px 12px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .posts-header {
+        padding: 20px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+    
+    .posts-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+} 

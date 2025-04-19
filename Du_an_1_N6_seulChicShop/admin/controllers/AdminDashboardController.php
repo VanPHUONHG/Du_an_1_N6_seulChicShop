@@ -28,6 +28,9 @@ class AdminDashboardController
         $orderStats = $this->ModelAdminOrder->getOrderStatistics();
         $profit = $this->ModelAdminOrder->getProfit();
         
+        // Thêm dữ liệu lợi nhuận theo tuần
+        $weeklyProfits = $this->ModelAdminOrder->getWeeklyProfit();
+        
         // Gán giá trị mặc định nếu không có dữ liệu
         if (!$monthlyRevenue) {
             $monthlyRevenue = array_fill(0, 12, 0);

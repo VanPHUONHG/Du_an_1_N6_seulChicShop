@@ -37,9 +37,9 @@
                         <div class="flex-sb-m flex-w wrap-slick3-arrows"></div>
 
                         <div class="gallery-lb slick3">
-                            <div class="item-slick3" data-thumb="<?= $Product['hinh_anh'] ?>">
+                            <div class="item-slick3" data-thumb="<?= !empty($Product['hinh_anh']) ? $Product['hinh_anh'] : 'assets/images/product-04.jpg' ?>">
                                 <div class="pos-relative wrap-pic-w">
-                                    <img src="<?= $Product['hinh_anh'] ?>" alt="IMG-PRODUCT">
+                                    <img src="<?= !empty($Product['hinh_anh']) ? $Product['hinh_anh'] : 'assets/images/product-04.jpg' ?>" alt="IMG-PRODUCT">
 
                                     <a class="flex-c-m bg0 bor0 cl10 fs-16 hov-btn3 how-pos1 size-108 trans-04"
                                         href="assets/images/product-detail-01.jpg">
@@ -49,12 +49,12 @@
                             </div>
                             <?php if ($listVariant): ?>
                                 <?php foreach ($listVariant as $variant): ?>
-                                    <div class="item-slick3" data-thumb="<?= $variant['hinh_anh_bien_the'] ?>">
+                                    <div class="item-slick3" data-thumb="<?= !empty($variant['hinh_anh_bien_the']) ? $variant['hinh_anh_bien_the'] : 'assets/images/product-04.jpg' ?>">
                                         <div class="pos-relative wrap-pic-w">
-                                            <img src="<?= $variant['hinh_anh_bien_the'] ?>" alt="IMG-PRODUCT">
+                                            <img src="<?= !empty($variant['hinh_anh_bien_the']) ? $variant['hinh_anh_bien_the'] : 'assets/images/product-04.jpg' ?>" alt="IMG-PRODUCT">
 
                                             <a class="flex-c-m bg0 bor0 cl10 fs-16 hov-btn3 how-pos1 size-108 trans-04"
-                                                href="<?= $variant['hinh_anh_bien_the'] ?>">
+                                                href="<?= !empty($variant['hinh_anh_bien_the']) ? $variant['hinh_anh_bien_the'] : 'assets/images/product-04.jpg' ?>">
                                                 <i class="fa fa-expand"></i>
                                             </a>
                                         </div>
@@ -273,7 +273,7 @@
                                 <?php foreach ($listComment as $comment): ?>
                                     <div class="flex-t flex-w p-b-68">
                                         <div class="m-r-18 m-t-6 bor0 of-hidden size-109 wrap-pic-s">
-                                            <img src="<?php echo $comment['anh_dai_dien'] ?>" alt="AVATAR">
+                                            <img src="<?= !empty($comment['anh_dai_dien']) ? $comment['anh_dai_dien'] : 'assets/images/avatar-default.jpg' ?>" alt="AVATAR">
                                         </div>
 
                                         <div class="size-207">
@@ -399,7 +399,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="<?= $product['hinh_anh'] ?>" alt="IMG-PRODUCT">
+                            <img src="<?= !empty($product['hinh_anh']) ? $product['hinh_anh'] : 'assets/images/product-04.jpg' ?>" alt="IMG-PRODUCT">
 
                             <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
                                 class="flex-c-m p-lr-15 bg0 block2-btn bor2 cl2 hov-btn1 js-show-modal1 size-102 stext-103 trans-04">
