@@ -7,7 +7,7 @@
 
 
 <!-- Calculate total cart value -->
-<?php 
+<?php
 $totalCart = 0;
 if (!empty($detailCart)) {
     foreach ($detailCart as $item) {
@@ -22,272 +22,260 @@ if (!empty($detailCart)) {
 }
 
 // Generate random order code
-$ma_don_hang = 'DH' . date('YmdHis') . rand(100,999);
+$ma_don_hang = 'DH' . date('YmdHis') . rand(100, 999);
 
 // Initialize discount amount
 $discountAmount = 0;
 ?>
 
 <!-- Content -->
-<div class="col-lg-10 col-sm-10 col-xl-10 m-b-50 m-lr-auto">
-    <!-- Hiển thị thông báo lỗi nếu có -->
-    <?php if(isset($_SESSION['error'])): ?>
-        <div class="alert alert-danger mb-4">
-            <?= $_SESSION['error']; ?>
-            <?php unset($_SESSION['error']); ?>
-        </div>
-    <?php endif; ?>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Error Messages -->
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+                    <?= $_SESSION['error']; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <?php unset($_SESSION['error']); ?>
+                </div>
+            <?php endif; ?>
 
-    <!-- Hiển thị thông báo thành công nếu có -->
-    <?php if(isset($_SESSION['success'])): ?>
-        <div class="alert alert-success mb-4">
-            <?= $_SESSION['success']; ?>
-            <?php unset($_SESSION['success']); ?>
-        </div>
-    <?php endif; ?>
-    
-    <form action="<?=BASE_URL.'?act=dat-hang' ?>" method="POST" class="m-l-63 m-lr-0-xl m-r-40 p-b-40 p-lr-15-sm p-lr-40 p-t-30 bor10" onsubmit="return validateForm()">
-        <input type="hidden" name="ma_don_hang" value="<?= $ma_don_hang ?>">
-        <input type="hidden" name="tai_khoan_id" value="<?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '' ?>">
-        <input type="hidden" name="ngay_dat" value="<?= date('Y-m-d H:i:s') ?>">
-        <input type="hidden" name="giam_gia" id="giam_gia" value="0">
-        <input type="hidden" name="ma_khuyen_mai_id" id="ma_khuyen_mai_id" value="">
-        <input type="hidden" name="tien_giam" id="tien_giam" value="0">
+            <!-- Success Messages -->
+            <?php if (isset($_SESSION['success'])): ?>
+                <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+                    <?= $_SESSION['success']; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <?php unset($_SESSION['success']); ?>
+                </div>
+            <?php endif; ?>
 
-        <h4 class="p-b-30 text-center cl2 mtext-109">
-            Page Checkout
-        </h4>
+            <!-- Checkout Form -->
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h3 class="text-center mb-4">Checkout</h3>
 
-        <div class="flex-t flex-w p-b-13 bor12">
-            <div class="size-208">
-                <span class="cl2 stext-110">
-                    Total price:
-                </span>
-            </div>
+                    <form action="<?= BASE_URL . '?act=dat-hang' ?>" method="POST" class="needs-validation" onsubmit="return validateForm()" novalidate id="checkout-form">
+                        <!-- Hidden Fields -->
+                        <input type="hidden" name="ma_don_hang" value="<?= $ma_don_hang ?>">
+                        <input type="hidden" name="tai_khoan_id" value="<?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '' ?>">
+                        <input type="hidden" name="ngay_dat" value="<?= date('Y-m-d H:i:s') ?>">
+                        <input type="hidden" name="giam_gia" id="giam_gia" value="0">
+                        <input type="hidden" name="ma_khuyen_mai_id" id="ma_khuyen_mai_id" value="">
+                        <input type="hidden" name="tien_giam" id="tien_giam" value="0">
 
-            <div class="size-209">
-                <span class="cl2 mtext-110" id="total-price">
-                    <?= number_format($totalCart) ?>đ
-                </span>
-            </div>
-        </div>
-
-        <div class="flex-t flex-w p-b-30 p-t-15 bor12">
-            <div class="w-full-ssm size-208">
-                <span class="cl2 stext-110">
-                    Information of recipient:
-                </span>
-            </div>
-
-            <div class="p-r-0-sm p-r-18 w-full-ssm size-209">
-                <div class="p-t-15">
-                    <div class="m-b-12">
-                        <label for="ten_nguoi_nhan" class="cl2 stext-110 m-b-6">Họ và tên</label>
-                        <div class="bg0 bor8">
-                            <input class="p-lr-15 cl8 plh3 size-111 stext-111" type="text" id="ten_nguoi_nhan" name="ten_nguoi_nhan"
-                             value="<?= isset($_SESSION['user_client']) ? $_SESSION['user_client'] : '' ?>"   placeholder="Nhập họ và tên người nhận" required>
+                        <!-- Order Summary -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Order Summary</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span>Subtotal:</span>
+                                    <span class="font-weight-bold" id="total-price"><?= number_format($totalCart) ?>đ</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="m-b-12">
-                        <label for="sdt_nguoi_nhan" class="cl2 stext-110 m-b-6">Số điện thoại</label>
-                        <div class="bg0 bor8">
-                            <input class="p-lr-15 cl8 plh3 size-111 stext-111" type="text" id="sdt_nguoi_nhan" name="sdt_nguoi_nhan"
-                             value="<?= isset($user['so_dien_thoai']) ? $user['so_dien_thoai'] : '' ?>" placeholder="Nhập số điện thoại người nhận" required>
-                        </div>
-                    </div>
+                        <!-- Shipping Information -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Shipping Information</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="ten_nguoi_nhan">Full Name</label>
+                                        <input type="text" class="form-control" id="ten_nguoi_nhan" name="ten_nguoi_nhan"
+                                            value="<?= isset($_SESSION['user_client']) ? $_SESSION['user_client'] : '' ?>" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="sdt_nguoi_nhan">Phone Number</label>
+                                        <input type="tel" class="form-control" id="sdt_nguoi_nhan" name="sdt_nguoi_nhan"
+                                            value="<?= isset($user['so_dien_thoai']) ? $user['so_dien_thoai'] : '' ?>" required>
+                                    </div>
+                                </div>
 
-                    <div class="m-b-12">
-                        <label for="email_nguoi_nhan" class="cl2 stext-110 m-b-6">Email</label>
-                        <div class="bg0 bor8">
-                            <input class="p-lr-15 cl8 plh3 size-111 stext-111" type="email" id="email_nguoi_nhan" name="email_nguoi_nhan"
-                                value="<?= isset($user['email']) ? $user['email'] : '' ?>" placeholder="Nhập email người nhận" required>
-                        </div>
-                    </div>
+                                <div class="mb-3">
+                                    <label for="email_nguoi_nhan">Email</label>
+                                    <input type="email" class="form-control" id="email_nguoi_nhan" name="email_nguoi_nhan"
+                                        value="<?= isset($user['email']) ? $user['email'] : '' ?>" required>
+                                </div>
 
-                    <div class="m-b-12">
-                        <label for="city" class="cl2 stext-110 m-b-6">Tỉnh/Thành phố</label>
-                        <div class="bg0 bor8">
-                            <select class="p-lr-15 cl8 plh3 size-111 stext-111" id="city" name="tinh_thanhpho" required>
-                                <option value="">Chọn tỉnh thành</option>
-                            </select>
-                        </div>
-                    </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="city">City/Province</label>
+                                        <select class="custom-select" id="city" name="tinh_thanhpho" required>
+                                            <option value="">Select city...</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="district">District</label>
+                                        <select class="custom-select" id="district" name="huyen_quan" required>
+                                            <option value="">Select district...</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="ward">Ward</label>
+                                        <select class="custom-select" id="ward" name="xa_phuong" required>
+                                            <option value="">Select ward...</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                    <div class="m-b-12">
-                        <label for="district" class="cl2 stext-110 m-b-6">Quận/Huyện</label>
-                        <div class="bg0 bor8">
-                            <select class="p-lr-15 cl8 plh3 size-111 stext-111" id="district" name="huyen_quan" required>
-                                <option value="">Chọn quận huyện</option>
-                            </select>
-                        </div>
-                    </div>
+                                <div class="mb-3">
+                                    <label for="dia_chi_cu_the">Detailed Address</label>
+                                    <textarea class="form-control" id="dia_chi_cu_the" name="dia_chi_cu_the" rows="2" required></textarea>
+                                </div>
 
-                    <div class="m-b-12">
-                        <label for="ward" class="cl2 stext-110 m-b-6">Phường/Xã</label>
-                        <div class="bg0 bor8">
-                            <select class="p-lr-15 cl8 plh3 size-111 stext-111" id="ward" name="xa_phuong" required>
-                                <option value="">Chọn phường xã</option>
-                            </select>
+                                <div class="mb-3">
+                                    <label for="ghi_chu">Order Notes</label>
+                                    <textarea class="form-control" id="ghi_chu" name="ghi_chu" rows="3"></textarea>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="m-b-22">
-                        <label for="dia_chi_cu_the" class="cl2 stext-110 m-b-6">Địa chỉ cụ thể</label>
-                        <div class="bg0 bor8">
-                            <textarea class="p-lr-15 cl8 plh3 size-111 stext-111" id="dia_chi_cu_the" name="dia_chi_cu_the"
-                                placeholder="Nhập địa chỉ cụ thể" required></textarea>
+                        <!-- Payment Method -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Payment Method</h5>
+                            </div>
+                            <div class="card-body">
+                                <select class="custom-select" name="phuong_thuc_thanh_toan_id" id="phuong_thuc_thanh_toan" onchange="handlePaymentMethodChange()" required>
+                                    <option value="">Select payment method...</option>
+                                    <option value="3">Thanh toán MoMo</option>
+                                    <option value="1">Thanh toán COD</option>
+                                    <option value="2">Thanh toán bằng thẻ</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="m-b-22">
-                        <label for="ghi_chu" class="cl2 stext-110 m-b-6">Ghi chú đơn hàng</label>
-                        <div class="bg0 bor8">
-                            <textarea class="p-lr-15 cl8 plh3 size-111 stext-111" id="ghi_chu" name="ghi_chu"
-                                placeholder="Nhập ghi chú đơn hàng"></textarea>
+
+                        <!-- Coupon Code -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Discount Code</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="input-group">
+                                    <select class="custom-select" name="ma_giam_gia_id" id="ma_giam_gia_id" onchange="apDungMaKhuyenMai()">
+                                        <option value="">Select discount code...</option>
+                                        <?php
+                                        if (!empty($coupons)) {
+                                            foreach ($coupons as $coupon) {
+                                                if ($totalCart >= $coupon["dieu_kien_toi_thieu"]) { ?>
+                                                    <option value="<?= $coupon["id"] ?>"
+                                                        data-type="<?= $coupon["loai"] ?>"
+                                                        data-ifuse="<?= $coupon["dieu_kien_toi_thieu"] ?>"
+                                                        data-discount="<?= $coupon["gia_tri"] ?>"
+                                                        data-code="<?= $coupon["ma_khuyen_mai"] ?>">
+                                                        <?= $coupon["ma_khuyen_mai"] ?>
+                                                    </option>
+                                        <?php }
+                                            }
+                                        } ?>
+                                    </select>
+                                </div>
+                                <div class="text-success small mt-2" id="coupon-success" style="display:none;"></div>
+                                <div class="text-danger small mt-2" id="coupon-error" style="display:none;"></div>
+                            </div>
                         </div>
-                    </div>
-                    <input type="hidden" name="trang_thai_don_hang_id" value="1">
-                    <div class="m-b-12">
-                        <label for="phuong_thuc_thanh_toan" class="cl2 stext-110 m-b-6">Phương thức thanh toán</label>
-                        <div class="bg0 bor8">
-                            <select class="p-lr-15 cl8 plh3 size-111 stext-111" name="phuong_thuc_thanh_toan_id" id="phuong_thuc_thanh_toan" required>
-                                <option value="">Chọn phương thức thanh toán</option>
-                                <?php foreach ($payMethod as $key => $value) { ?>
-                                    <option value="<?= $value['id'] ?>"><?= $value['ten_phuong_thuc'] ?></option>
-                                <?php } ?>
-                            </select>
+
+                        <!-- Order Details -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Order Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Name</th>
+                                                <th class="text-right">Price</th>
+                                                <th>Color</th>
+                                                <th>Size</th>
+                                                <th class="text-center">Quantity</th>
+                                                <th class="text-right">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            if (!empty($detailCart)) :
+                                                foreach ($detailCart as $item) :
+                                                    $price = $item['gia_san_pham_khuyen_mai'] > 0 ? $item['gia_san_pham_khuyen_mai'] : $item['gia_san_pham'];
+                                                    $totalItem = $price * $item['so_luong'];
+                                            ?>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <img src="<?= BASE_URL . $item['hinh_anh'] ?>" alt="<?= $item['ten_san_pham'] ?>" class="img-thumbnail" style="width: 50px;">
+                                                            <input type="hidden" name="san_pham_id[]" value="<?= $item['san_pham_id'] ?>">
+                                                            <input type="hidden" name="bien_the_san_pham_id[]" value="<?= $item['bien_the_san_pham_id'] ?>">
+                                                        </td>
+                                                        <td><?= $item['ten_san_pham'] ?></td>
+                                                        <td class="text-right"><?= number_format($price) ?>đ</td>
+                                                        <td class="text-center"><?= $item['mau_sac'] ?></td>
+                                                        <td class="text-center"><?= $item['kich_thuoc'] ?></td>
+                                                        <td class="text-center"><?= $item['so_luong'] ?>
+                                                            <input type="hidden" name="so_luong[]" value="<?= $item['so_luong'] ?>">
+                                                        </td>
+                                                        <td class="text-right"><?= number_format($totalItem) ?>đ
+                                                            <input type="hidden" name="thanh_tien[]" value="<?= $totalItem ?>">
+                                                        </td>
+                                                    </tr>
+                                            <?php
+                                                endforeach;
+                                            endif;
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+
+                        <!-- Order Summary -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Shipping Fee:</span>
+                                    <span id="shipping-fee">30,000đ</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Discount Amount:</span>
+                                    <span id="discount-amount">0đ</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="h5">Total Amount:</span>
+                                    <span class="h5" id="total-checkout"><?= number_format($totalCart + 30000) ?>đ</span>
+                                </div>
+                                <input type="hidden" name="tong_tien" value="<?= $totalCart + 30000 ?>" id="tong-tien-input">
+                            </div>
+                        </div>
+
+                        <div id="payment-buttons">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" id="normal-payment-btn">
+                                Place Order
+                            </button>
+                        </div>
+                    </form>
+
+
+                    <form action="<?= BASE_URL . '?act=thanh-toan-momo' ?>" method="POST" id="momo-payment-form" style="display: none;">
+                        <input type="hidden" name="payment_method" value="momo">
+                        <input type="hidden" name="amount" value="<?= $totalCart + 30000 ?>" id="tong-tien-input">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block mt-2">
+                            <img src="<?= BASE_URL ?>public/images/momo-logo.png" alt="MoMo" height="30">
+                            Thanh toán qua MoMo
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="flex-t flex-w p-b-33 p-t-27">
-            <div class="size-208">
-                <span class="cl2 mtext-101">
-                    Shipping fee:
-                </span>
-            </div>
-            <div class="p-t-1 size-209">
-                <span class="cl2 mtext-110" id="shipping-fee">
-                    30,000đ
-                </span>
-            </div>
-        </div>
-        <!-- Khuyến mại - đạt -->
-        <div class="flex-m flex-w m-r-20 m-tb-5">
-            <div class="size-208">
-                <span class="cl2 mtext-101">
-                    Coupon Code:
-                </span>
-            </div>
-            <div class="bg0 bor8 m-r-10 m-tb-5 size-117 d-flex">
-                <select name="ma_giam_gia_id" id="ma_giam_gia_id" onchange="apDungMaKhuyenMai()">
-                    <option value="">Chọn mã khuyến mãi</option>
-                    <?php 
-                    if (!empty($coupons)) {
-                        foreach ($coupons as $coupon) {
-                            if ($totalCart >= $coupon["dieu_kien_toi_thieu"]) { ?>
-                                <option value="<?=$coupon["id"]?>" 
-                                        data-type="<?=$coupon["loai"]?>" 
-                                        data-ifuse="<?=$coupon["dieu_kien_toi_thieu"]?>"
-                                        data-discount="<?=$coupon["gia_tri"]?>"
-                                        data-code="<?=$coupon["ma_khuyen_mai"]?>">
-                                    <?=$coupon["ma_khuyen_mai"]?>
-                                </option>                     
-                            <?php }
-                        }
-                    } else {
-                        echo '<option value="">Không có mã giảm giá khả dụng</option>';
-                    }
-                    ?>
-                </select>
-            </div>
-            <div class="text-success mt-2" id="coupon-success" style="display:none;"></div>
-            <div class="text-danger mt-2" id="coupon-error" style="display:none;"></div>
-        </div>
-
-        <!-- Số tiền giảm -->
-        <div class="flex-t flex-w p-b-33 p-t-27">
-            <div class="size-208">
-                <span class="cl2 mtext-101">
-                    Discount Amount:
-                </span>
-            </div>
-            <div class="p-t-1 size-209">
-                <span class="cl2 mtext-110" id="discount-amount">
-                    0đ
-                </span>
-            </div>
-        </div>
-        
-        <!-- Chi tiết đơn hàng -->
-        <div class="p-b-30 bor12 m-tb-20">
-            <h5 class="cl2 stext-110 p-b-15">Chi tiết đơn hàng</h5> 
-            <div class="wrap-table-shopping-cart">
-                <table class="table-shopping-cart w-100">
-                    <thead>
-                        <tr class="table_head">
-                            <th class="column-1 text-center" style="width: 10%">Sản phẩm</th>
-                            <th class="column-2" style="width: 35%">Tên sản phẩm</th>
-                            <th class="column-3 text-right" style="width: 15%">Giá</th>
-                            <th class="column-4 text-center" style="width: 10%">Màu sắc</th>
-                            <th class="column-5 text-center" style="width: 10%">Kích thước</th>
-                            <th class="column-6 text-center" style="width: 10%">Số lượng</th>
-                            <th class="column-7 text-right" style="width: 10%">Thành tiền</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        if (!empty($detailCart)) : 
-                            foreach ($detailCart as $item) : 
-                                $price = $item['gia_san_pham_khuyen_mai'] > 0 ? $item['gia_san_pham_khuyen_mai'] : $item['gia_san_pham'];
-                                $totalItem = $price * $item['so_luong'];
-                        ?>
-                        <tr class="table_row">
-                            <td class="column-1 text-center">
-                                <div class="how-itemcart1">
-                                    <img src="<?= BASE_URL . $item['hinh_anh'] ?>" alt="<?= $item['ten_san_pham'] ?>" style="width: 60px; height: 60px; object-fit: cover;">
-                                </div>
-                                <!-- Thêm hidden inputs để lưu thông tin sản phẩm -->
-                                <input type="hidden" name="san_pham_id[]" value="<?= $item['san_pham_id'] ?>">
-                                <input type="hidden" name="bien_the_san_pham_id[]" value="<?= $item['bien_the_san_pham_id'] ?>">
-                            </td>
-                            
-                            <td class="column-2"><?= $item['ten_san_pham'] ?></td>
-                            <td class="column-3 text-right"><?= number_format($price).' '.'đ' ?></td>
-                            <td class="column-4 text-center"><?= $item['mau_sac'] ?></td>
-                            <td class="column-5 text-center"><?= $item['kich_thuoc'] ?></td>
-                            <td class="column-6 text-center"><?= $item['so_luong'] ?></td>
-                            <input type="hidden" name="so_luong[]" value="<?= $item['so_luong'] ?>">
-                            <td class="column-7 text-right"><?= number_format($totalItem).' '.'đ' ?></td>
-                            <input type="hidden" name="thanh_tien[]" value="<?= $totalItem ?>">
-                        </tr>
-                        <?php 
-                            endforeach; 
-                        endif; 
-                        ?>
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="flex-t flex-w p-b-33 p-t-27">
-            <div class="size-208">
-                <span class="cl2 mtext-101">
-                    Total checkout:
-                </span>
-            </div>
-            <div class="p-t-1 size-209">
-                <span class="cl2 mtext-110" id="total-checkout">
-                    <?= number_format($totalCart + 30000) ?>đ
-                </span>
-                <input type="hidden" name="tong_tien" value="<?= $totalCart + 30000 ?>" id="tong-tien-input">
-            </div>
-        </div>                           
-        <button type="submit" class="flex-c-m p-lr-15 bg3 bor14 cl0 hov-btn3 pointer size-116 stext-101 trans-04">
-            Checkout
-        </button>
-    </form>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -304,6 +292,21 @@ $discountAmount = 0;
     var tongTienInput = document.getElementById("tong-tien-input");
     var totalCart = <?= $totalCart ?>;
     var discountAmount = 0;
+
+    // Handle payment method change
+    function handlePaymentMethodChange() {
+        var paymentMethod = document.getElementById('phuong_thuc_thanh_toan').value;
+        var momoForm = document.getElementById('momo-payment-form');
+        var normalPaymentBtn = document.getElementById('normal-payment-btn');
+
+        if (paymentMethod === '3') { // MoMo payment
+            momoForm.style.display = 'block';
+            normalPaymentBtn.style.display = 'none';
+        } else {
+            momoForm.style.display = 'none';
+            normalPaymentBtn.style.display = 'block';
+        }
+    }
 
     // Gọi API và lấy dữ liệu
     var Parameter = {
@@ -365,12 +368,12 @@ $discountAmount = 0;
             }
         };
     }
-    
+
     // Hàm cập nhật tổng tiền
     function updateTotalPrice() {
         let shippingCost = 30000;
         let selectedCity = citis.value;
-        
+
         if (selectedCity === "Thành phố Hà Nội" || selectedCity === "Thành phố Hồ Chí Minh") {
             shippingCost = 0;
             shippingFee.textContent = "0đ";
@@ -378,7 +381,7 @@ $discountAmount = 0;
             shippingCost = 30000;
             shippingFee.textContent = "30,000đ";
         }
-        
+
         let finalTotal = totalCart + shippingCost - discountAmount;
         totalCheckout.textContent = finalTotal.toLocaleString() + "đ";
         tongTienInput.value = finalTotal;
@@ -388,21 +391,21 @@ $discountAmount = 0;
     function validateForm() {
         var phoneNumber = document.getElementById("sdt_nguoi_nhan").value;
         var email = document.getElementById("email_nguoi_nhan").value;
-        
+
         // Validate phone number (10 digits)
         var phoneRegex = /^[0-9]{10}$/;
         if (!phoneRegex.test(phoneNumber)) {
             alert("Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số.");
             return false;
         }
-        
+
         // Validate email
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             alert("Email không hợp lệ.");
             return false;
         }
-        
+
         return true;
     }
 
@@ -410,7 +413,7 @@ $discountAmount = 0;
     function apDungMaKhuyenMai() {
         var selectedOption = document.getElementById('ma_giam_gia_id').options[document.getElementById('ma_giam_gia_id').selectedIndex];
         var shipping = document.getElementById('shipping-fee').innerText === '0đ' ? 0 : 30000;
-        
+
         if (selectedOption.value === '') {
             // Reset discount if no coupon selected
             discountAmount = 0;
@@ -424,7 +427,7 @@ $discountAmount = 0;
             var discountValue = parseFloat(selectedOption.getAttribute('data-discount'));
             var discountType = selectedOption.getAttribute('data-type');
             var couponCode = selectedOption.getAttribute('data-code');
-            
+
             // Calculate discount amount based on type
             if (discountType === 'phan_tram') {
                 discountAmount = Math.floor((totalCart * discountValue) / 100);
@@ -433,7 +436,7 @@ $discountAmount = 0;
                 discountAmount = discountValue;
                 document.getElementById('coupon-success').innerText = `Áp dụng mã giảm giá ${discountValue.toLocaleString()}đ thành công!`;
             }
-            
+
             document.getElementById('giam_gia').value = discountAmount;
             document.getElementById('tien_giam').value = discountAmount;
             document.getElementById('ma_khuyen_mai_id').value = selectedOption.value;
@@ -441,12 +444,12 @@ $discountAmount = 0;
             document.getElementById('coupon-error').style.display = 'none';
             document.getElementById('discount-amount').innerText = discountAmount.toLocaleString() + 'đ';
         }
-        
+
         // Update total price
         let tongTienMoi = totalCart + shipping - discountAmount;
         document.getElementById('total-checkout').innerText = tongTienMoi.toLocaleString('vi-VN') + 'đ';
         document.getElementById('tong-tien-input').value = tongTienMoi;
-        
+
         // Update displayed total price
         document.getElementById('total-price').innerText = (totalCart - discountAmount).toLocaleString('vi-VN') + 'đ';
     }

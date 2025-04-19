@@ -7,7 +7,7 @@ class ClientComment
     {
         $this->conn = connectDB();
     }
-
+    
     public function getCommentByProductId($id)
     {
         try {

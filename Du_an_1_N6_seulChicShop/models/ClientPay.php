@@ -195,4 +195,53 @@ class ClientPay
             return false;
         }
     }
+    public function payWithMomo($amount)
+    {
+        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+        $partnerCode = "MOMO";
+        $accessKey = "F8BBA842ECF85";
+        $secretKey = "K951B6PE1waDMi640xX08PD3vg6EkVlz";
+
+        $orderId = time() . "";
+        $orderInfo = "Thanh toán đơn hàng qua MoMo";
+        $redirectUrl = "http://localhost/thankyou.php";
+        $ipnUrl = "http://localhost/ipn.php";
+        $extraData = "";
+        $requestId = time() . "";
+        $requestType = "captureWallet";
+
+        $rawHash = "accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType";
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+
+        $data = array(
+            'partnerCode' => $partnerCode,
+            'accessKey' => $accessKey,
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature,
+            'lang' => 'vi'
+        );
+
+        $ch = curl_init($endpoint);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        $jsonResult = json_decode($result, true);
+        if (isset($jsonResult['payUrl'])) {
+            header('Location: ' . $jsonResult['payUrl']);
+            exit();
+        } else {
+            echo "Lỗi khi tạo thanh toán MoMo:";
+            var_dump($jsonResult);
+        }
+    }
 }

@@ -20,10 +20,10 @@ class ClientPayController
             $coupons = $this->ModelClientPay->getCouponByUser($user['id']);
             // Lấy giỏ hàng của người dùng
             $cart = $this->ModelClientCart->getCartFromUser($user['id']);
-            
+
             // Lấy phương thức thanh toán
             $payMethod = $this->ModelClientPay->getPayMethod();
-            
+
             // Kiểm tra và khởi tạo giỏ hàng nếu chưa có
             if (!$cart) {
                 $cartId = $this->ModelClientCart->addCart($user['id']);
@@ -41,7 +41,7 @@ class ClientPayController
             exit;
         }
     }
-    
+
     // Thêm đơn hàng mới
     public function addOrderAndDetailOder()
     {
@@ -52,40 +52,40 @@ class ClientPayController
                 header('Location: ' . BASE_URL . '?act=dang-nhap');
                 exit;
             }
-            
+
             // Lấy thông tin người dùng
             $user = $this->ModelClientUser->getAccountByNameUser($_SESSION['user_client']);
             $tai_khoan_id = $user['id'];
 
             // Validate dữ liệu đầu vào
             $errors = [];
-            
-            if(empty($_POST['ten_nguoi_nhan'])) {
+
+            if (empty($_POST['ten_nguoi_nhan'])) {
                 $errors[] = "Vui lòng nhập tên người nhận";
             }
-            if(empty($_POST['email_nguoi_nhan'])) {
+            if (empty($_POST['email_nguoi_nhan'])) {
                 $errors[] = "Vui lòng nhập email người nhận";
             }
-            if(empty($_POST['sdt_nguoi_nhan'])) {
+            if (empty($_POST['sdt_nguoi_nhan'])) {
                 $errors[] = "Vui lòng nhập số điện thoại người nhận";
             }
-            if(empty($_POST['tinh_thanhpho'])) {
+            if (empty($_POST['tinh_thanhpho'])) {
                 $errors[] = "Vui lòng chọn tỉnh/thành phố";
             }
-            if(empty($_POST['huyen_quan'])) {
+            if (empty($_POST['huyen_quan'])) {
                 $errors[] = "Vui lòng chọn quận/huyện";
             }
-            if(empty($_POST['xa_phuong'])) {
+            if (empty($_POST['xa_phuong'])) {
                 $errors[] = "Vui lòng chọn xã/phường";
             }
-            if(empty($_POST['dia_chi_cu_the'])) {
+            if (empty($_POST['dia_chi_cu_the'])) {
                 $errors[] = "Vui lòng nhập địa chỉ cụ thể";
             }
-            if(empty($_POST['phuong_thuc_thanh_toan_id'])) {
+            if (empty($_POST['phuong_thuc_thanh_toan_id'])) {
                 $errors[] = "Vui lòng chọn phương thức thanh toán";
             }
 
-            if(!empty($errors)) {
+            if (!empty($errors)) {
                 $_SESSION['error'] = implode("<br>", $errors);
                 header('Location: ' . BASE_URL . '?act=thanh-toan');
                 exit;
@@ -102,7 +102,7 @@ class ClientPayController
             $ghi_chu = isset($_POST['ghi_chu']) ? $_POST['ghi_chu'] : '';
             $tong_tien = $_POST['tong_tien'];
             $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'];
-            $ma_don_hang = isset($_POST['ma_don_hang']) ? $_POST['ma_don_hang'] : 'DH'. rand(10000, 99999);
+            $ma_don_hang = isset($_POST['ma_don_hang']) ? $_POST['ma_don_hang'] : 'DH' . rand(10000, 99999);
 
             // Lấy thông tin giỏ hàng
             $cart = $this->ModelClientCart->getCartFromUser($tai_khoan_id);
@@ -134,23 +134,23 @@ class ClientPayController
                     $phuong_thuc_thanh_toan_id,
                     $trang_thai_don_hang_id
                 );
-                
+
                 if ($order_id) {
                     // Chuẩn bị dữ liệu cho chi tiết đơn hàng
                     $san_pham_ids = [];
                     $bien_the_san_pham_ids = [];
                     $so_luongs = [];
                     $thanh_tiens = [];
-                    
+
                     foreach ($detailCart as $item) {
                         $san_pham_ids[] = $item['san_pham_id'];
                         $bien_the_san_pham_ids[] = $item['bien_the_san_pham_id'];
                         $so_luongs[] = $item['so_luong'];
-                        $gia = isset($item['gia_san_pham_khuyen_mai']) && $item['gia_san_pham_khuyen_mai'] > 0 
-                              ? $item['gia_san_pham_khuyen_mai'] : $item['gia_san_pham'];
+                        $gia = isset($item['gia_san_pham_khuyen_mai']) && $item['gia_san_pham_khuyen_mai'] > 0
+                            ? $item['gia_san_pham_khuyen_mai'] : $item['gia_san_pham'];
                         $thanh_tiens[] = $gia * $item['so_luong'];
                     }
-                    
+
                     // Thêm chi tiết đơn hàng
                     $this->ModelClientPay->createOrderDetail(
                         $order_id,
@@ -164,7 +164,7 @@ class ClientPayController
                     if ($cart) {
                         $this->ModelClientCart->clearCart($cart['id']);
                     }
-                    
+
                     // Thông báo thành công và chuyển hướng
                     $_SESSION['success'] = "Đặt hàng thành công! Mã đơn hàng của bạn là: " . $ma_don_hang;
                     header('Location: ' . BASE_URL);
@@ -178,8 +178,25 @@ class ClientPayController
                 exit;
             }
         }
-        
+
         header('Location: ' . BASE_URL . '?act=thanh-toan');
         exit;
+    }
+    public function payWithMomo()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $method = $_POST['payment_method'] ?? '';
+            $amount = $_POST['amount'] ?? 0;
+
+            $model = new ClientPay();
+
+            if ($method === 'momo') {
+                $model->payWithMomo($amount);
+            } elseif ($method === 'cod') {
+                echo "Đặt hàng thành công. Thanh toán khi nhận hàng.";
+            } else {
+                echo "Phương thức thanh toán không hợp lệ.";
+            }
+        }
     }
 }

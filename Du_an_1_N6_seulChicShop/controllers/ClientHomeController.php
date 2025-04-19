@@ -4,15 +4,18 @@ class ClientHomeController
     public $ModelClientUser;
     public $ModelClientPosts;
     public $ModelClientProduct;
+    public $ModelClientBanner;
     public function __construct()
     {
         $this->ModelClientUser = new ClientUser();
         $this->ModelClientProduct = new ClientProduct();
         $this->ModelClientPosts = new ClientPosts();
+        $this->ModelClientBanner = new ClientBanner();
     }
     public function index()
     {
         $id_danh_muc = $_GET['id_danh_muc'] ?? null;
+        $banners = $this->ModelClientBanner->getAllBanner();
         $productBestSeller = $this->ModelClientProduct->getProductBestSeller();
         $productSelling = $this->ModelClientProduct->getProductSelling();
         $productTopRating = $this->ModelClientProduct->getProductTopRating();
@@ -27,23 +30,8 @@ class ClientHomeController
         }
         require_once './views/Home.php';
     }
-    public function about()
-    {
+    public function About(){
         require_once './views/About.php';
-    }
-    public function blog()
-    {
-
-        
-        require_once './views/Blog.php';
-    }
-    public function blogDetail()
-    {
-        require_once './views/BlogDetail.php';
-    }
-    public function cart()
-    {
-        require_once './views/Cart.php';
     }
     public function signIn()
     {
@@ -63,11 +51,12 @@ class ClientHomeController
             if ($user == $ten_tai_khoan) {
                 // lưu dữ liệu vào session
                 $_SESSION['user_client'] = $user;
+                $_SESSION['success'] = "Đăng nhập thành công!";
                 header('Location: ' . BASE_URL);
                 exit();
             } else {
                 // hiển thị thông báo lỗi
-                $_SESSION['error'] = $user;
+                $_SESSION['error'] = "Tên tài khoản hoặc mật khẩu không chính xác!";
                 header('Location: ' . BASE_URL . '?act=dang-nhap');
                 exit();
             }
@@ -142,6 +131,7 @@ class ClientHomeController
     public function signOut()
     {
         unset($_SESSION['user_client']);
+        $_SESSION['success'] = "Đăng xuất thành công!";
         header('Location: ' . BASE_URL);
         exit();
     }
@@ -185,10 +175,11 @@ class ClientHomeController
             }
             if (empty($errors)) {
                 $this->ModelClientUser->updateUser($ten_tai_khoan, $email, $file_thumb, $so_dien_thoai, $mat_khau);
+                $_SESSION['success'] = "Cập nhật tài khoản thành công!";
                 header('Location: ' . BASE_URL);
                 exit();
             } else {
-                $_SESSION['errors'] = $errors;
+                $_SESSION['errors'] = 'Cập nhật tài khoản thất bại!';
                 $_SESSION['flash'] = true;
                 header('Location: ' . BASE_URL . '?act=quan-ly-tai-khoan');
                 exit();
