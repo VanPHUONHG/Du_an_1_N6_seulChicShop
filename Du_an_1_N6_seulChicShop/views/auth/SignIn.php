@@ -85,7 +85,6 @@ include_once 'views/layouts/navbar.php';
                     style="background: rgb(182, 157, 230); color: #fff; box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);">Đăng
                     nhập</button>
                 <a href="<?= BASE_URL . "?act=dang-ky" ?>" class="discrete">Chưa có tài khoản? Đăng ký</a>
-                <a href="<?= BASE_URL ?>?act=quen-mat-khau" class="discrete">Quên mật khẩu</a>
             </form>
         </div>
     </div>

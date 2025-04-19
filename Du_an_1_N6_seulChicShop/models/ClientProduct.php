@@ -31,7 +31,6 @@ class ClientProduct
                     )
                 LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
                 WHERE san_phams.trang_thai = 1
-                AND don_hangs.trang_thai_don_hang_id = 4
                 GROUP BY 
                     san_phams.id,
                     danh_mucs.ten_danh_muc,

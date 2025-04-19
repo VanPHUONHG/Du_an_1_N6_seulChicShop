@@ -1,167 +1,172 @@
-<!-- Header -->
 <?php include './views/layout/header.php'; ?>
-<!-- End Header -->
-<!-- Navbar -->
 <?php include './views/layout/navbar.php'; ?>
-<!-- /.navbar -->
-
-<!-- Main Sidebar Container -->
 <?php include './views/layout/sidebar.php'; ?>
 
-<!-- Content Wrapper. Contains page content -->
+<link rel="stylesheet" href="<?= BASE_URL_ADMIN ?>assets/css/khuyenmai.css">
+
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Quản Lý Khuyến Mại</h1>
-                </div>
-            </div><!-- /.container-fluid -->
+            <div class="promotion-header">
+                <h1><i class="fas fa-plus-circle"></i> Thêm Khuyến Mãi Mới</h1>
+            </div>
+        </div>
     </section>
 
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card card-success">
-                        <div class="card-header">
-                            <h3 class="card-title">Thêm Khuyến Mại</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <form action="<?= BASE_URL_ADMIN . '?act=them-khuyenMai' ?>" method="POST" enctype="multipart/form-data">
-                            <div class="card-body row">
-                                <div class="form-group col-12">
-                                    <label>Mã Khuyến Mại</label>
-                                    <input type="text" class="form-control" name="ma_khuyen_mai" placeholder="Nhập mã khuyến mại">
-                                    <?php if (isset($_SESSION['error']['ma_khuyen_mai'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['ma_khuyen_mai'] ?></p>
-                                    <?php  } ?>
+            <div class="card">
+                <div class="card-body">
+                    <form action="<?= BASE_URL_ADMIN . '?act=them-khuyenMai' ?>" method="POST">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mã Khuyến Mại <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="ma_khuyen_mai" required>
+                                    <?php if (isset($_SESSION['error']['ma_khuyen_mai'])): ?>
+                                        <small class="text-danger"><?= $_SESSION['error']['ma_khuyen_mai'] ?></small>
+                                    <?php endif; ?>
                                 </div>
-                                <div class="form-group col-6">
-                                    <label>Mô Tả </label>
-                                    <input type="text" class="form-control" name="mo_ta" placeholder="Nhập  mô tả">
-                                    <?php if (isset($_SESSION['error']['mo_ta'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['mo_ta'] ?></p>
-                                    <?php  } ?>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mô Tả</label>
+                                    <input type="text" class="form-control" name="mo_ta">
+                                    <?php if (isset($_SESSION['error']['mo_ta'])): ?>
+                                        <small class="text-danger"><?= $_SESSION['error']['mo_ta'] ?></small>
+                                    <?php endif; ?>
                                 </div>
-                                <div class="form-group col-6">
-                                    <label>Loại Giảm giá</label>
-                                    <select class="form-control" name="loai_giam_gia">
-                                        <option selected disabled>Chọn loại giảm giá</option>
-                                        <option value="1">Phần Trăm</option>
-                                        <option value="2">Number</option>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Loại Giảm giá <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="loai" required>
+                                        <option value="">Chọn loại giảm giá</option>
+                                        <option value="phan_tram">Phần trăm</option>
+                                        <option value="tien_mat">Tiền mặt</option>
                                     </select>
-                                    <?php if (isset($_SESSION['error']['loai_giam_gia'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['loai_giam_gia'] ?></p>
-                                    <?php  } ?>
+                                    <?php if (isset($_SESSION['error']['loai'])): ?>
+                                        <small class="text-danger"><?= $_SESSION['error']['loai'] ?></small>
+                                    <?php endif; ?>
                                 </div>
-                                <div class="form-group col-6">
-                                    <label>Giá trị giảm</label>
-                                    <input type="number" class="form-control" name="gia_tri_giam">
-                                    <?php if (isset($_SESSION['error']['gia_tri_giam'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['gia_tri_giam'] ?></p>
-                                    <?php  } ?>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Giá trị giảm <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="gia_tri" required min="0">
+                                    <?php if (isset($_SESSION['error']['gia_tri'])): ?>
+                                        <small class="text-danger"><?= $_SESSION['error']['gia_tri'] ?></small>
+                                    <?php endif; ?>
                                 </div>
-                                <div class="form-group col-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label>Giá trị đơn hàng tối thiểu</label>
-                                    <input type="number" class="form-control" name="gia_tri_don_hang_toi_thieu" placeholder="Nhập số lượng">
-                                    <?php if (isset($_SESSION['error']['gia_tri_don_hang_toi_thieu'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['gia_tri_don_hang_toi_thieu'] ?></p>
-                                    <?php  } ?>
+                                    <input type="number" class="form-control" name="dieu_kien_toi_thieu" min="0" value="0">
+                                    <?php if (isset($_SESSION['error']['dieu_kien_toi_thieu'])): ?>
+                                        <small class="text-danger"><?= $_SESSION['error']['dieu_kien_toi_thieu'] ?></small>
+                                    <?php endif; ?>
                                 </div>
-                                <div class="form-group col-6">
-                                    <label>Số lượng tối đa</label>
-                                    <input type="number" class="form-control" name="so_luong_toi_da">
-                                    <?php if (isset($_SESSION['error']['so_luong_toi_da'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['so_luong_toi_da'] ?></p>
-                                    <?php  } ?>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Số lượng tối đa <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="so_lan_su_dung" value="1" min="0">
+                                    <?php if (isset($_SESSION['error']['so_lan_su_dung'])): ?>
+                                        <small class="text-danger"><?= $_SESSION['error']['so_lan_su_dung'] ?></small>
+                                    <?php endif; ?>
                                 </div>
-
-                                <div class="form-group col-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label>Số lượng đã dùng</label>
-                                    <input type="number" class="form-control" name="so_luong_da_dung">
-                                    <?php if (isset($_SESSION['error']['so_luong_da_dung'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['so_luong_da_dung'] ?></p>
-                                    <?php  } ?>
+                                    <input type="number" class="form-control" name="so_lan_da_dung" value="0" min="0">
+                                    <?php if (isset($_SESSION['error']['so_lan_da_dung'])): ?>
+                                        <small class="text-danger"><?= $_SESSION['error']['so_lan_da_dung'] ?></small>
+                                    <?php endif; ?>
                                 </div>
-
-                                <div class="form-group col-6">
-                                    <label>Ngày bắt đầu</label>
-                                    <input type="datetime-local" class="form-control" name="ngay_bat_dau">
-                                    <?php if (isset($_SESSION['error']['ngay_bat_dau'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['ngay_bat_dau'] ?></p>
-                                    <?php  } ?>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Ngày bắt đầu <span class="text-danger">*</span></label>
+                                    <input type="datetime-local" class="form-control" name="ngay_bat_dau" required>
+                                    <?php if (isset($_SESSION['error']['ngay_bat_dau'])): ?>
+                                        <small class="text-danger"><?= $_SESSION['error']['ngay_bat_dau'] ?></small>
+                                    <?php endif; ?>
                                 </div>
-
-                                <div class="form-group col-6">
-                                    <label>Ngày kết thúc</label>
-                                    <input type="datetime-local" class="form-control" name="ngay_ket_thuc">
-                                    <?php if (isset($_SESSION['error']['ngay_ket_thuc'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['ngay_ket_thuc'] ?></p>
-                                    <?php  } ?>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Ngày kết thúc <span class="text-danger">*</span></label>
+                                    <input type="datetime-local" class="form-control" name="ngay_ket_thuc" required>
+                                    <?php if (isset($_SESSION['error']['ngay_ket_thuc'])): ?>
+                                        <small class="text-danger"><?= $_SESSION['error']['ngay_ket_thuc'] ?></small>
+                                    <?php endif; ?>
                                 </div>
-                                
-
-                                <div class="form-group col-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label>Trạng thái</label>
                                     <select class="form-control" name="trang_thai">
-                                        <option selected disabled>Chọn trạng thái</option>
-                                        <option value="1">on</option>
-                                        <option value="2">off</option>
+                                        <option value="1">Hoạt động</option>
+                                        <option value="0">Ngừng hoạt động</option>
                                     </select>
-                                    <?php if (isset($_SESSION['error']['trang_thai'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['trang_thai'] ?></p>
-                                    <?php  } ?>
+                                    <?php if (isset($_SESSION['error']['trang_thai'])): ?>
+                                        <small class="text-danger"><?= $_SESSION['error']['trang_thai'] ?></small>
+                                    <?php endif; ?>
                                 </div>
-
-
-                                
-
                             </div>
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-success" fdprocessedid="6mz4gp">Thêm Khuyến Mại</button>
-                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tài khoản</label>
+                                    <select class="form-control" name="tai_khoan_id">
+                                        <option value="">Chọn tài khoản</option>
+                                        <?php foreach ($users as $user): ?>
+                                            <option value="<?= $user['id'] ?>"><?= htmlspecialchars($user['ten_tai_khoan']) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <?php if (isset($_SESSION['error']['tai_khoan_id'])): ?>
+                                        <small class="text-danger"><?= $_SESSION['error']['tai_khoan_id'] ?></small>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Lưu Khuyến Mãi
+                            </button>
+                            <a href="<?= BASE_URL_ADMIN ?>?act=danh-sach-khuyenMai" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Hủy
+                            </a>
+                        </div>
                     </form>
                 </div>
-                <!-- /.card -->
             </div>
-            <!-- /.col -->
         </div>
-        <!-- /.row -->
+    </section>
 </div>
-<!-- /.container-fluid -->
-</section>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
-<!-- Footer -->
+
 <?php include './views/layout/footer.php'; ?>
-<!-- End Footer -->
 
 <script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+$(function() {
+    $("#example1").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    
+    $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
     });
+});
 </script>
 </body>
-
 </html>

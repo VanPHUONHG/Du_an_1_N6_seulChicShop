@@ -11,7 +11,7 @@ class AdminPosts {
 
     public function getAllPosts() {
         try {
-            $sql = "SELECT * FROM posts";
+            $sql = "SELECT * FROM bai_viets WHERE trang_thai = 1";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -23,7 +23,7 @@ class AdminPosts {
 
     public function getPostsById($id) {
         try {
-            $sql = "SELECT * FROM posts WHERE id = ?";
+            $sql = "SELECT * FROM bai_viets WHERE id = ?";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -35,7 +35,7 @@ class AdminPosts {
 
     public function deletePosts($id) {
         try {
-            $sql = "DELETE FROM posts WHERE id = :id";
+            $sql = "DELETE FROM bai_viets WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
@@ -60,7 +60,7 @@ class AdminPosts {
             }
 
             // Prepare SQL statement
-            $sql = "INSERT INTO posts (hinh_anh, tieu_de, bai_viet, tac_gia, ngay_tao_bai_viet, trang_thai) 
+            $sql = "INSERT INTO bai_viets (hinh_anh, tieu_de, bai_viet, tac_gia, ngay_tao_bai_viet, trang_thai) 
                     VALUES (:hinh_anh, :tieu_de, :bai_viet, :tac_gia, :ngay_tao_bai_viet, :trang_thai)";
             
             // Prepare and execute with parameters
@@ -98,7 +98,7 @@ class AdminPosts {
             }
 
             // Check if post exists
-            $checkSql = "SELECT id FROM posts WHERE id = :id";
+            $checkSql = "SELECT id FROM bai_viets WHERE id = :id";
             $checkStmt = $this->conn->prepare($checkSql);
             $checkStmt->bindParam(':id', $id, PDO::PARAM_INT);
             $checkStmt->execute();
@@ -108,7 +108,7 @@ class AdminPosts {
             }
 
             // Update post
-            $sql = "UPDATE posts SET 
+            $sql = "UPDATE bai_viets SET 
                         hinh_anh = :hinh_anh,
                         tieu_de = :tieu_de,
                         bai_viet = :bai_viet,
@@ -140,7 +140,7 @@ class AdminPosts {
     public function togglePostStatus($id) {
         try {
             // Kiểm tra bài viết tồn tại
-            $sql = "SELECT trang_thai FROM posts WHERE id = :id";
+            $sql = "SELECT trang_thai FROM bai_viets WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
@@ -156,7 +156,7 @@ class AdminPosts {
             $newStatus = $post['trang_thai'] == 1 ? 0 : 1;
             
             // Cập nhật trạng thái mới
-            $sql = "UPDATE posts SET 
+            $sql = "UPDATE bai_viets SET 
                     trang_thai = :trang_thai,
                     ngay_cap_nhat = NOW() 
                     WHERE id = :id";

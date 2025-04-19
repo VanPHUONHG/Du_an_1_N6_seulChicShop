@@ -1,0 +1,203 @@
+/* Main styles for comment management */
+.content-wrapper {
+    background: #f8f9fa;
+    padding: 20px;
+}
+
+/* Header styles */
+.comment-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header h1 {
+    color: #fff;
+    font-size: 24px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+.breadcrumb-item a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.breadcrumb-item.active {
+    color: #fff;
+}
+
+/* Card styles */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    background: #fff;
+}
+
+.card-header {
+    background: linear-gradient(to right, #f8f9fa, #ffffff);
+    border-bottom: 1px solid #edf2f7;
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+}
+
+.card-header h3 {
+    color: #2d3748;
+    font-size: 18px;
+    margin: 0;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* Table styles */
+.table {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: #f8fafc;
+    color: #2d3748;
+    font-weight: 600;
+    border-bottom: 2px solid #edf2f7;
+    padding: 15px;
+    vertical-align: middle;
+}
+
+.table tbody td {
+    padding: 15px;
+    vertical-align: middle;
+    border-top: 1px solid #edf2f7;
+}
+
+/* Comment content styles */
+.comment-content {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+/* Rating stars */
+.rating-display {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.fa-star.text-warning {
+    color: #ffc107 !important;
+}
+
+.fa-star.text-secondary {
+    color: #e2e8f0 !important;
+}
+
+/* Status badges */
+.badge {
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.badge-success {
+    background: #48bb78;
+    color: #fff;
+}
+
+.badge-warning {
+    background: #ed8936;
+    color: #fff;
+}
+
+/* Avatar styles */
+.comment-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Button styles */
+.btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #667eea;
+    border-color: #667eea;
+}
+
+.btn-primary:hover {
+    background: #5a67d8;
+    border-color: #5a67d8;
+}
+
+.btn-danger {
+    background: #f56565;
+    border-color: #f56565;
+}
+
+.btn-danger:hover {
+    background: #e53e3e;
+    border-color: #e53e3e;
+}
+
+/* Form styles */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .comment-header {
+        padding: 20px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+    
+    .table thead {
+        display: none;
+    }
+    
+    .table tbody td {
+        display: block;
+        padding: 10px;
+        text-align: right;
+        border: none;
+    }
+    
+    .table tbody td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+} 

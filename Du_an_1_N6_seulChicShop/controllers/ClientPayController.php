@@ -17,7 +17,7 @@ class ClientPayController
         if (isset($_SESSION['user_client'])) {
             // Lấy thông tin người dùng
             $user = $this->ModelClientUser->getAccountByNameUser($_SESSION['user_client']);
-            
+            $coupons = $this->ModelClientPay->getCouponByUser($user['id']);
             // Lấy giỏ hàng của người dùng
             $cart = $this->ModelClientCart->getCartFromUser($user['id']);
             

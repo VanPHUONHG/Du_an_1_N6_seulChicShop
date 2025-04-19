@@ -33,7 +33,7 @@
                 ?>
                 <li class="flex-t flex-w m-b-12 header-cart-item">
                     <div class="header-cart-item-img">
-                        <img src="<?= BASE_URL . $item['hinh_anh'] ?>" alt="<?= $item['ten_san_pham'] ?>">
+                        <img src="<?= empty($item['hinh_anh']) ? 'assets/images/product-01.jpg' : $item['hinh_anh'] ?>" alt="<?= $item['ten_san_pham'] ?>">
                     </div>
 
                     <div class="p-t-8 header-cart-item-txt">

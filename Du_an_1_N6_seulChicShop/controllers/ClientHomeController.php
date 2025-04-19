@@ -2,11 +2,13 @@
 class ClientHomeController
 {
     public $ModelClientUser;
+    public $ModelClientPosts;
     public $ModelClientProduct;
     public function __construct()
     {
         $this->ModelClientUser = new ClientUser();
         $this->ModelClientProduct = new ClientProduct();
+        $this->ModelClientPosts = new ClientPosts();
     }
     public function index()
     {
@@ -16,6 +18,7 @@ class ClientHomeController
         $productTopRating = $this->ModelClientProduct->getProductTopRating();
         $productNew = $this->ModelClientProduct->getProductNew();
         $id_danh_muc = $_GET['id_danh_muc'] ?? null;
+        $postNew = $this->ModelClientPosts->getPostNew();
         $categories = $this->ModelClientProduct->getCategory();
         if ($id_danh_muc) {
             $products = $this->ModelClientProduct->getProductByCategory($id_danh_muc);
