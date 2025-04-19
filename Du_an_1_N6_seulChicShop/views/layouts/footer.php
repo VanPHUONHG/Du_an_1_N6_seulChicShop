@@ -8,7 +8,10 @@
                 </h4>
 
                 <ul>
-                    <?php foreach ($categories as $category) : ?>
+                    <?php 
+                    $ModelClientProduct = new ClientProduct();
+                    $categories = $ModelClientProduct->getCategory();
+                    foreach ($categories as $category) : ?>
                         <li class="p-b-10">
                             <a href="<?= BASE_URL ?>?act=danh-sach-san-pham&id_danh_muc=<?= $category['id'] ?>" class="cl7 hov-cl1 stext-107 trans-04">
                                 <?= $category['ten_danh_muc'] ?>

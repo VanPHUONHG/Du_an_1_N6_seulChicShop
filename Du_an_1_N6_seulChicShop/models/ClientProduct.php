@@ -6,7 +6,8 @@ class ClientProduct
     {
         $this->conn = connectDB();
     }
-    public function getProductBestSeller(){
+    public function getProductBestSeller()
+    {
         try {
             $sql = "SELECT 
                     san_phams.*,
@@ -28,12 +29,7 @@ class ClientProduct
                         FROM bien_the_san_phams 
                         WHERE san_pham_id = san_phams.id
                     )
-                LEFT JOIN hinh_anh_san_phams ON san_phams.id = hinh_anh_san_phams.san_pham_id
-                    AND hinh_anh_san_phams.id = (
-                        SELECT MIN(id)
-                        FROM hinh_anh_san_phams
-                        WHERE san_pham_id = san_phams.id
-                    )
+                LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
                 WHERE san_phams.trang_thai = 1
                 AND don_hangs.trang_thai_don_hang_id = 4
                 GROUP BY 
@@ -54,7 +50,8 @@ class ClientProduct
             return [];
         }
     }
-    public function getProductSelling() {
+    public function getProductSelling()
+    {
         try {
             $sql = "SELECT 
                     san_phams.*,
@@ -71,12 +68,7 @@ class ClientProduct
                         FROM bien_the_san_phams 
                         WHERE san_pham_id = san_phams.id
                     )
-                LEFT JOIN hinh_anh_san_phams ON san_phams.id = hinh_anh_san_phams.san_pham_id
-                    AND hinh_anh_san_phams.id = (
-                        SELECT MIN(id)
-                        FROM hinh_anh_san_phams
-                        WHERE san_pham_id = san_phams.id
-                    )
+                LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
                 WHERE san_phams.trang_thai = 1
                 AND (san_phams.gia_san_pham_khuyen_mai > 0 OR bien_the_san_phams.gia_khuyen_mai > 0)
                 LIMIT 8";
@@ -89,7 +81,8 @@ class ClientProduct
             return [];
         }
     }
-    public function getProductNew(){
+    public function getProductNew()
+    {
         try {
             $sql = "SELECT * FROM san_phams WHERE trang_thai = 1 ORDER BY ngay_nhap DESC LIMIT 8";
             $stmt = $this->conn->prepare($sql);
@@ -101,7 +94,8 @@ class ClientProduct
         }
     }
     // Top Ratting
-    public function getProductTopRating(){
+    public function getProductTopRating()
+    {
         try {
             $sql = "SELECT 
                     san_phams.*,
@@ -119,12 +113,7 @@ class ClientProduct
                         FROM bien_the_san_phams 
                         WHERE san_pham_id = san_phams.id
                     )
-                LEFT JOIN hinh_anh_san_phams ON san_phams.id = hinh_anh_san_phams.san_pham_id
-                    AND hinh_anh_san_phams.id = (
-                        SELECT MIN(id)
-                        FROM hinh_anh_san_phams
-                        WHERE san_pham_id = san_phams.id
-                    )
+                LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
                 LEFT JOIN binh_luans ON san_phams.id = binh_luans.san_pham_id
                 WHERE san_phams.trang_thai = 1
                 GROUP BY 
@@ -174,12 +163,8 @@ class ClientProduct
                         FROM bien_the_san_phams 
                         WHERE san_pham_id = san_phams.id
                     )
-                LEFT JOIN hinh_anh_san_phams ON san_phams.id = hinh_anh_san_phams.san_pham_id
-                    AND hinh_anh_san_phams.id = (
-                        SELECT MIN(id)
-                        FROM hinh_anh_san_phams
-                        WHERE san_pham_id = san_phams.id
-                    )';
+                LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
+                WHERE san_phams.trang_thai = 1';
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -195,7 +180,8 @@ class ClientProduct
             echo "lỗi" . $e->getMessage();
         }
     }
-    public function getProductByCategory($id_danh_muc){
+    public function getProductByCategory($id_danh_muc)
+    {
         try {
             $sql = "SELECT san_phams.*,
             danh_mucs.ten_danh_muc,
@@ -212,12 +198,7 @@ class ClientProduct
                     FROM bien_the_san_phams 
                     WHERE san_pham_id = san_phams.id
                 )
-            LEFT JOIN hinh_anh_san_phams ON san_phams.id = hinh_anh_san_phams.san_pham_id
-                AND hinh_anh_san_phams.id = (
-                    SELECT MIN(id)
-                    FROM hinh_anh_san_phams
-                    WHERE san_pham_id = san_phams.id
-                )
+            LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
             WHERE danh_muc_id = ?";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$id_danh_muc]);
@@ -227,7 +208,8 @@ class ClientProduct
             return false;
         }
     }
-    public function getProductById($id){
+    public function getProductById($id)
+    {
         try {
             $sql = "SELECT 
                 san_phams.*,
@@ -252,32 +234,57 @@ class ClientProduct
                         FROM bien_the_san_phams 
                         WHERE san_pham_id = san_phams.id
                     )
-                LEFT JOIN hinh_anh_san_phams ON san_phams.id = hinh_anh_san_phams.san_pham_id
-                    AND hinh_anh_san_phams.id = (
-                        SELECT MIN(id)
-                        FROM hinh_anh_san_phams
-                        WHERE san_pham_id = san_phams.id
-                    )
+                LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
                 WHERE san_phams.id = ?";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             error_log("Database error: " . $e->getMessage());
             return false;
         }
     }
 
-    public function getProductVariantById($san_pham_id) {
+    public function getProductVariantById($san_pham_id)
+    {
         try {
             $sql = "SELECT * FROM bien_the_san_phams WHERE san_pham_id = ?";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$san_pham_id]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             error_log("Database error: " . $e->getMessage());
             return false;
         }
     }
-    
+    public function getProductSameCategory($danh_muc_id)
+    {
+        try {
+            $sql = "SELECT 
+                san_phams.*,
+                danh_mucs.ten_danh_muc,
+                bien_the_san_phams.id AS bien_the_id,
+                COALESCE(bien_the_san_phams.gia, san_phams.gia_san_pham) AS gia_san_pham,
+                COALESCE(bien_the_san_phams.gia_khuyen_mai, san_phams.gia_san_pham_khuyen_mai) AS gia_san_pham_khuyen_mai,
+                COALESCE(hinh_anh_san_phams.hinh_anh_bien_the, san_phams.hinh_anh) AS hinh_anh
+            FROM san_phams
+            LEFT JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+            LEFT JOIN bien_the_san_phams ON san_phams.id = bien_the_san_phams.san_pham_id 
+                AND bien_the_san_phams.id = (
+                    SELECT MIN(id) 
+                    FROM bien_the_san_phams 
+                    WHERE san_pham_id = san_phams.id
+                )
+            LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
+            WHERE san_phams.danh_muc_id = ? AND san_phams.trang_thai = 1
+            LIMIT 4";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$danh_muc_id]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Database error: " . $e->getMessage());
+            return false;
+        }
+    }
+
 }

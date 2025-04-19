@@ -4,9 +4,11 @@ class ClientCartController
 {
     public $ModelClientUser;
     public $ModelClientCart;
+    public $ModelClientProduct;
     public function __construct(){
         $this->ModelClientUser = new ClientUser();
         $this->ModelClientCart = new ClientCart();
+        $this->ModelClientProduct = new ClientProduct();
     }
     public function addProductCart(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){

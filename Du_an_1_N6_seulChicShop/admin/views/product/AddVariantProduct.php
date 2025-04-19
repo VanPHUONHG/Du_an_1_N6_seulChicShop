@@ -40,15 +40,15 @@
                                     <div class="form-group col-6">
                                         <label>Màu sắc</label>
                                         <input type="text" class="form-control" name="mau_sac" placeholder="Nhập màu sắc">
-                                        <?php if (isset($_SESSION['error']['mau_sac'])) { ?>
-                                            <p class="text-danger"><?= $_SESSION['error']['mau_sac'] ?></p>
+                                        <?php if (isset($_SESSION['error']['variant'])) { ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['variant'] ?></p>
                                         <?php  } ?>
                                     </div>
                                     <div class="form-group col-6">
                                         <label>Kích thước</label>
                                         <input type="text" class="form-control" name="kich_thuoc" placeholder="Nhập kích thước">
-                                        <?php if (isset($_SESSION['error']['kich_thuoc'])) { ?>
-                                            <p class="text-danger"><?= $_SESSION['error']['kich_thuoc'] ?></p>
+                                        <?php if (isset($_SESSION['error']['variant'])) { ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['variant'] ?></p>
                                         <?php  } ?>
                                     </div>
                                 </div>
