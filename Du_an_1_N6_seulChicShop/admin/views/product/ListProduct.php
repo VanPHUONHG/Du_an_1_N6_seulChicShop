@@ -4,83 +4,172 @@
 .content-wrapper {
     background-color: #f8f9fa;
     padding: 20px;
+    min-height: 100vh;
 }
 
 .card {
     border: none;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
 }
 
 .card-header {
-    background: linear-gradient(135deg, #2C3E50 0%, #3498DB 100%);
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
     border-radius: 15px 15px 0 0 !important;
-    padding: 20px;
+    padding: 25px;
+    border: none;
 }
 
 .btn-success {
-    background: #2ecc71;
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
     border: none;
-    padding: 10px 20px;
+    padding: 12px 25px;
     transition: all 0.3s;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .btn-success:hover {
-    background: #27ae60;
+    background: linear-gradient(135deg, #27ae60 0%, #219a52 100%);
     transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
 }
 
 .table {
     margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0 8px;
 }
 
 .table thead th {
-    background: #f1f3f4;
+    background: #f8f9fa;
     color: #2C3E50;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.85rem;
-    padding: 15px;
+    padding: 20px 15px;
+    border: none;
+    letter-spacing: 1px;
 }
 
 .table tbody td {
-    padding: 15px;
+    padding: 20px 15px;
     vertical-align: middle;
+    border-top: 1px solid #f1f3f4;
+    background: white;
+}
+
+.table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+    transform: scale(1.01);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .table img {
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s;
+    object-fit: cover;
 }
 
 .table img:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
-.btn {
-    padding: 8px 12px;
-    margin: 0 3px;
-    border-radius: 6px;
+.btn-group .btn {
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-group .btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+    border: none;
+    color: white;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border: none;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    border: none;
 }
 
 .alert {
-    border-radius: 10px;
-    margin-bottom: 20px;
-    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    padding: 20px;
     border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    display: none;
+}
+
+.alert.show {
+    display: block;
+    animation: slideDown 0.5s ease forwards;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .alert-success {
     background-color: rgba(46, 204, 113, 0.1);
-    color: #2ecc71;
-    border-left: 4px solid #2ecc71;
+    color: #27ae60;
+    border-left: 5px solid #2ecc71;
 }
 
 .alert-danger {
     background-color: rgba(231, 76, 60, 0.1);
-    color: #e74c3c;
-    border-left: 4px solid #e74c3c;
+    color: #c0392b;
+    border-left: 5px solid #e74c3c;
+}
+
+.badge {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.badge-success {
+    background: rgba(46, 204, 113, 0.1);
+    color: #27ae60;
+}
+
+.badge-danger {
+    background: rgba(231, 76, 60, 0.1); 
+    color: #c0392b;
+}
+
+.text-primary {
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
 }
 </style>
 
@@ -116,7 +205,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
+            <div class="row mb-4">
                 <div class="col-sm-6">
                     <h1 class="text-primary">Quản lý sản phẩm</h1>
                 </div>
@@ -131,14 +220,16 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h3 class="card-title text-white mb-0">Danh sách sản phẩm</h3>
+                            <h3 class="card-title text-white mb-0 font-weight-bold">
+                                <i class="fas fa-box-open mr-2"></i>Danh sách sản phẩm
+                            </h3>
                             <a href="<?= BASE_URL_ADMIN . '?act=form-them-san-pham'  ?>" class="btn btn-success">
                                 <i class="fas fa-plus mr-2"></i>Thêm sản phẩm
                             </a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-hover">
+                            <table id="example1" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>STT</th>
@@ -161,7 +252,7 @@
                                                 <td class="font-weight-bold"><?= $product['ten_san_pham'] ?></td>
                                                 <td>
                                                     <img src="<?= BASE_URL . $product['hinh_anh'] ?>" 
-                                                         style="width:100px; height:100px; object-fit:cover;" 
+                                                         style="width:100px; height:100px;" 
                                                          alt="<?= $product['ten_san_pham'] ?>"
                                                          onerror="this.onerror=null; this.src='<?= BASE_URL ?>assets/images/product-09.jpg'">
                                                 </td>
@@ -235,14 +326,14 @@
                     "previous": "Trước"
                 },
                 "info": "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
-                "infoEmpty": "Hiển thị 0 đến 0 của 0 mục",
+                "infoEmpty": "Hiển thị 0 đến 0 của 0 mục", 
                 "zeroRecords": "Không tìm thấy dữ liệu phù hợp"
             }
         });
 
         // Auto hide alerts after 5 seconds
         setTimeout(function() {
-            $('.alert').alert('close');
+            $('.alert').fadeOut('slow');
         }, 5000);
     });
 </script>

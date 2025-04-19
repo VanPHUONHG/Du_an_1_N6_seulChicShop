@@ -11,6 +11,7 @@ class AdminOrderController
 
     public function listOrder()
     {
+        
         $listOrder = $this->ModelAdminOrder->getAllOrders();
         require_once './views/order/ListOrder.php';
     }

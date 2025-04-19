@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background: linear-gradient(180deg, #2C3E50 0%, #3498DB 100%);">
+<aside class="main-sidebar sidebar-dark-primary elevation-4 position-fixed" style="background: linear-gradient(180deg, #2C3E50 0%, #3498DB 100%); height: 100vh; overflow-y: auto;">
   <!-- Brand Logo -->
   <a href="<?= BASE_URL ?>" class="brand-link text-center" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0;">
     <span class="brand-text font-weight-light" style="color: #fff; font-size: 24px; font-weight: 600;">SEUL CHIC</span>

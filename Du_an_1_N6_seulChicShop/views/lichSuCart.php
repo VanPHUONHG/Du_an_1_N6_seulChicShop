@@ -8,8 +8,9 @@
 
 <!-- Display success message if set -->
 <?php if (isset($_SESSION['success'])): ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> <?= $_SESSION['success'] ?>
+    <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+        <i class="fas fa-check-circle mr-2"></i>
+        <?= $_SESSION['success'] ?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -19,8 +20,9 @@
 
 <!-- Display error message if set -->
 <?php if (isset($_SESSION['error_message'])): ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Error!</strong> <?= $_SESSION['error_message'] ?>
+    <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        <?= $_SESSION['error_message'] ?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -28,64 +30,82 @@
     <?php unset($_SESSION['error_message']); ?>
 <?php endif; ?>
 
-<!-- breadcrumb -->
+<!-- Breadcrumb -->
 <div class="container">
-    <div class="flex-w p-l-25 p-lr-0-lg p-r-15 p-t-30 bread-crumb">
-        <a href="<?= BASE_URL ?>" class="cl8 hov-cl1 stext-109 trans-04">
-            Home
-            <i class="m-l-9 m-r-10 fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-
-        <span class="cl4 stext-109">
-            Shopping Cart
-        </span>
-    </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent py-2">
+            <li class="breadcrumb-item">
+                <a href="<?= BASE_URL ?>" class="text-decoration-none">
+                    <i class="fas fa-home mr-1"></i>Home
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Order History</li>
+        </ol>
+    </nav>
 </div>
 
-
-<!-- Shopping Cart -->
-<form class="p-b-85 p-t-75 bg0" method="POST" action="<?= BASE_URL ?>?act=cap-nhat-so-luong" enctype="multipart/form-data">
-    <div class="container mx-auto my-10">
-        <h2 class="text-3xl font-semibold text-center text-blue-600 mb-8">Bills</h2>
-        <div class="flex justify-center">
-            <div class="w-full lg:w-10/12 xl:w-7/12 bg-white shadow-md rounded-lg overflow-hidden">
-                <div class="p-4">
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full border border-gray-300 bg-white">
-                            <thead>
-                                <tr class="bg-blue-600 text-red-888 text-left">
-                                    <th class="py-3 px-4 border border-gray-300">Mã Đơn Hàng</th>
-                                    <th class="py-3 px-4 border border-gray-300">Ngày Đặt</th>
-                                    <th class="py-3 px-4 border border-gray-300">Tổng Tiền</th>
-                                    <th class="py-3 px-4 border border-gray-300">Phương Thức Thanh Toán</th>
-                                    <th class="py-3 px-4 border border-gray-300">Trạng Thái Đơn Hàng</th>
-                                    <th class="py-3 px-4 border border-gray-300">Thao Tác</th>
+<!-- Order History -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0 text-center">
+                        <i class="fas fa-history mr-2"></i>Order History
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Order Code</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">Total Amount</th>
+                                    <th scope="col">Payment Method</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($donHang as $donHangs): ?>
-                                    <tr class="border-b hover:bg-gray-100">
-                                        <td class="py-3 px-4 border border-gray-300"><?= $donHangs['ma_don_hang'] ?></td>
-                                        <td class="py-3 px-4 border border-gray-300"><?= $donHangs['ngay_dat'] ?></td>
-                                        <td class="py-3 px-4 border border-gray-300"><?= formatPrice($donHangs['tong_tien']) ?> VND</td>
-                                        <td class="py-3 px-4 border border-gray-300"><?= $phuongThucThanhToan[$donHangs['phuong_thuc_thanh_toan_id']] ?></td>
-                                        <td class="py-3 px-4 border border-gray-300"><?= $trangThaiOrder[$donHangs['trang_thai_don_hang_id']] ?></td>
-                                        <td class="py-3 px-4 border border-gray-300">
-
-                                            <a href="<?= BASE_URL ?>?act=chi-tiet-mua-hang&id=<?= $donHangs['id'] ?>"
-                                                class="btn btn-warning">
-                                                Chi tiết đơn hàng
-                                            </a>
-
-                                            <?php if ($donHangs['trang_thai_don_hang_id'] === 1) { ?>
-                                                <a href="<?= BASE_URL ?>?act=huy-don-hang&id=<?= $donHangs['id'] ?>"
-                                                    class="btn btn-warning"
-                                                    onclick="return confirm('Bạn xác nhận huỷ đơn hàng?')">
-                                                    Hủy
-                                                </a>
-                                            <?php } ?>
+                                    <tr>
+                                        <td class="align-middle font-weight-bold">
+                                            #<?= $donHangs['ma_don_hang'] ?>
                                         </td>
+                                        <td class="align-middle">
+                                            <i class="far fa-calendar-alt mr-1"></i>
+                                            <?= date('d/m/Y H:i', strtotime($donHangs['ngay_dat'])) ?>
+                                        </td>
+                                        <td class="align-middle text-success font-weight-bold">
+                                            <?= formatPrice($donHangs['tong_tien']) ?> VND
+                                        </td>
+                                        <td class="align-middle">
+                                            <span class="badge badge-info">
+                                                <?= $phuongThucThanhToan[$donHangs['phuong_thuc_thanh_toan_id']] ?>
+                                            </span>
+                                        </td>
+                                        <td class="align-middle">
+                                            <span class="badge badge-<?= $donHangs['trang_thai_don_hang_id'] === 1 ? 'warning' : 'success' ?>">
+                                                <?= $trangThaiOrder[$donHangs['trang_thai_don_hang_id']] ?>
+                                            </span>
+                                        </td>
+                                        <td class="align-middle">
+                                            <div class="btn-group" role="group">
+                                                <a href="<?= BASE_URL ?>?act=chi-tiet-mua-hang&id=<?= $donHangs['id'] ?>"
+                                                   class="btn btn-info btn-sm">
+                                                    <i class="fas fa-eye mr-1"></i>Details
+                                                </a>
 
+                                                <?php if ($donHangs['trang_thai_don_hang_id'] === 1): ?>
+                                                    <a href="<?= BASE_URL ?>?act=huy-don-hang&id=<?= $donHangs['id'] ?>"
+                                                       class="btn btn-danger btn-sm ml-2"
+                                                       onclick="return confirm('Are you sure you want to cancel this order?')">
+                                                        <i class="fas fa-times mr-1"></i>Cancel
+                                                    </a>
+                                                <?php endif; ?>
+                                            </div>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -95,8 +115,7 @@
             </div>
         </div>
     </div>
-</form>
-
+</div>
 
 <!-- Footer -->
 <?php include './views/layouts/footer.php'; ?>

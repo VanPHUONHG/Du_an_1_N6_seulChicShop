@@ -265,10 +265,10 @@
                                                        class="btn-action btn-edit" title="Chỉnh sửa">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button onclick="deleteBanner(<?= $banner['id'] ?>)" 
-                                                            class="btn-action btn-delete" title="Xóa">
+                                                    <a href="<?= BASE_URL_ADMIN ?>?act=xoa-banner&id=<?= $banner['id'] ?>" 
+                                                       class="btn-action btn-delete" title="Xóa" onclick="return confirm('Bạn có chắc chắn muốn xóa banner này?')">
                                                         <i class="fas fa-trash"></i>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
