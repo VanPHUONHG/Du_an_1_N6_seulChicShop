@@ -7,121 +7,145 @@
 <!-- Mini Cart -->
 <?php include './views/layouts/miniCart.php'; ?>
 
-<!-- Hiển thị thông báo lỗi và thành công -->
+<!-- Notifications -->
 <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])): ?>
-    <div class="alert alert-danger">
+    <div class="alert alert-danger alert-dismissible fade show shadow-sm mx-3" role="alert">
+        <i class="fas fa-exclamation-circle mr-2"></i>
         <?php foreach ($_SESSION['error'] as $error): ?>
-            <p><?= $error ?></p>
+            <p class="mb-0"><?= $error ?></p>
         <?php endforeach; ?>
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
     </div>
     <?php unset($_SESSION['error']); ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['success'])): ?>
-    <div class="alert alert-success">
-        <p><?= $_SESSION['success'] ?></p>
+    <div class="alert alert-success alert-dismissible fade show shadow-sm mx-3" role="alert">
+        <i class="fas fa-check-circle mr-2"></i>
+        <p class="mb-0"><?= $_SESSION['success'] ?></p>
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
     </div>
     <?php unset($_SESSION['success']); ?>
 <?php endif; ?>
 
 <!-- Title page -->
-<section class="bg-img1 p-lr-15 p-tb-92 txt-center" style="background-image: url('assets/images/bg-01.jpg');">
-    <h2 class="cl0 ltext-105 txt-center">
-        Contact
+<section class="bg-img1 p-lr-15 p-tb-92 txt-center position-relative" style="background-image: url('assets/images/bg-01.jpg'); background-position: center; background-size: cover;">
+    <div class="overlay" style="background: rgba(0,0,0,0.5); position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div>
+    <h2 class="cl0 ltext-105 txt-center position-relative" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+        Contact Us
     </h2>
 </section>
 
-
 <!-- Content page -->
-<section class="p-b-116 p-t-104 bg0">
+<section class="py-5 bg-light">
     <div class="container">
-        <div class="flex-tr flex-w">
-            <div class="p-b-70 p-lr-15-lg p-lr-70 p-t-55 w-full-md bor10 size-210">
-                <form action="<?= BASE_URL . '?act=them-lien-he' ?>" method="post" enctype="multipart/form-data">
-                    <h4 class="p-b-30 cl2 mtext-105 txt-center">
-                        Liên hệ với chúng tôi
-                    </h4>
-                    <div class="m-b-20 bor8 how-pos4-parent">
-                        <input class="p-l-62 p-r-30 cl2 plh3 size-116 stext-111" type="text" name="ho_ten"
-                            placeholder="Họ Và Tên" required>
-                        <i class="how-pos4 pointer-none fas fa-user"></i>
-                    </div>
-                    <div class="m-b-20 bor8 how-pos4-parent">
-                        <input class="p-l-62 p-r-30 cl2 plh3 size-116 stext-111" type="text" name="email"
-                            placeholder="Địa chỉ email" required>
-                        <img class="how-pos4 pointer-none" src="assets/images/icons/icon-email.png" alt="ICON">
-                    </div>
-                    <div class="m-b-20 bor8 how-pos4-parent">
-                        <input class="p-l-62 p-r-30 cl2 plh3 size-116 stext-111" type="text" name="so_dien_thoai"
-                            placeholder="Số diện thoại" required>
-                        <i class="how-pos4 pointer-none fas fa-phone"></i>
-                    </div>
-                    <div class="m-b-20 bor8 how-pos4-parent">
-                        <input class="p-l-62 p-r-30 cl2 plh3 size-116 stext-111" type="text" name="tieu_de"
-                            placeholder="Tiêu đề" required>
-                        <i class="how-pos4 pointer-none fas fa-heading"></i>
-                    </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="card shadow-lg border-0 rounded-lg h-100">
+                    <div class="card-body p-5">
+                        <h4 class="text-center text-primary font-weight-bold mb-4">
+                            <i class="fas fa-envelope mr-2"></i>Send Us a Message
+                        </h4>
+                        <form action="<?= BASE_URL . '?act=them-lien-he' ?>" method="post" class="needs-validation">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" name="ho_ten" placeholder="Full Name" required>
+                                </div>
+                            </div>
 
-                    <div class="m-b-30 bor8">
-                        <textarea class="p-lr-28 p-tb-25 cl2 plh3 size-120 stext-111" name="noi_dung"
-                            placeholder="Tin nhắn" required></textarea>
-                    </div>
-                    <input type="hidden" name="trang_thai" value="0">
-                    <input type="hidden" name="tai_khoan_id" value="<?= $_SESSION['tai_khoan_id'] ?? '' ?>">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-envelope"></i>
+                                        </span>
+                                    </div>
+                                    <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+                                </div>
+                            </div>
 
-                    <button type="submit"
-                        class="flex-c-m p-lr-15 bg3 bor1 cl0 hov-btn3 pointer size-121 stext-101 trans-04">
-                        Gửi liên hệ
-                    </button>
-                </form>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-phone"></i>
+                                        </span>
+                                    </div>
+                                    <input type="tel" class="form-control" name="so_dien_thoai" placeholder="Phone Number" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-heading"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" name="tieu_de" placeholder="Subject" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea class="form-control" name="noi_dung" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+
+                            <input type="hidden" name="trang_thai" value="0">
+                            <input type="hidden" name="tai_khoan_id" value="<?= $_SESSION['tai_khoan_id'] ?? '' ?>">
+
+                            <button type="submit" class="btn btn-primary btn-block py-2 font-weight-bold">
+                                <i class="fas fa-paper-plane mr-2"></i>Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
 
-            <div class="flex-col-m flex-w p-lr-15-lg p-lr-93 p-tb-30 w-full-md bor10 size-210">
-                <div class="flex-w p-b-42 w-full">
-                    <span class="cl5 fs-18 size-211 txt-center">
-                        <span class="lnr lnr-map-marker"></span>
-                    </span>
+            <div class="col-lg-6">
+                <div class="card shadow-lg border-0 rounded-lg h-100">
+                    <div class="card-body p-5">
+                        <h4 class="text-center text-primary font-weight-bold mb-4">
+                            <i class="fas fa-info-circle mr-2"></i>Contact Information
+                        </h4>
+                        
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary text-white rounded-circle p-3 mr-3">
+                                <i class="fas fa-map-marker-alt fa-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-weight-bold mb-1">Address</h5>
+                                <p class="mb-0">2PQW+6JJ FPT Polytechnic Building, Gate 2, 13 Trinh Van Bo Street, Xuan Phuong, Nam Tu Liem, Hanoi 100000</p>
+                            </div>
+                        </div>
 
-                    <div class="p-t-2 size-212">
-                        <span class="cl2 mtext-110">
-                            Địa chỉ
-                        </span>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary text-white rounded-circle p-3 mr-3">
+                                <i class="fas fa-phone fa-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-weight-bold mb-1">Phone</h5>
+                                <p class="mb-0"><a href="tel:+84967166879" class="text-dark">(+84) 96 716 6879</a></p>
+                            </div>
+                        </div>
 
-                        <p class="p-t-18 cl6 size-213 stext-115">
-                        2PQW+6JJ Tòa nhà FPT Polytechnic., Cổng số 2, 13 P. Trịnh Văn Bô, Xuân Phương, Nam Từ Liêm, Hà Nội 100000
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex-w p-b-42 w-full">
-                    <span class="cl5 fs-18 size-211 txt-center">
-                        <span class="lnr lnr-phone-handset"></span>
-                    </span>
-
-                    <div class="p-t-2 size-212">
-                        <span class="cl2 mtext-110">
-                            Số điện thoại
-                        </span>
-
-                        <p class="p-t-18 cl1 size-213 stext-115">
-                            (+84) 96 716 6879
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex-w w-full">
-                    <span class="cl5 fs-18 size-211 txt-center">
-                        <span class="lnr lnr-envelope"></span>
-                    </span>
-
-                    <div class="p-t-2 size-212">
-                        <span class="cl2 mtext-110">
-                            Email Hỗ trợ
-                        </span>
-
-                        <p class="p-t-18 cl1 size-213 stext-115">
-                            seulchicshop@gmail.com
-                        </p>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary text-white rounded-circle p-3 mr-3">
+                                <i class="fas fa-envelope fa-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-weight-bold mb-1">Email</h5>
+                                <p class="mb-0"><a href="mailto:seulchicshop@gmail.com" class="text-dark">seulchicshop@gmail.com</a></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -129,20 +153,16 @@
     </div>
 </section>
 
-
 <!-- Map -->
-<div class="map">
-    <div class="size-303" id="google_map" data-map-x="40.691446" data-map-y="-73.886787"
-        data-pin="assets/images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11">
+<div class="container-fluid px-0">
+    <div class="map" style="height: 450px;">
         <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14895.455803504903!2d105.73388883199723!3d21.038128992796025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313455e940879933%3A0xcf10b34e9f1a03df!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1sen!2s!4v1742630448976!5m2!1sen!2s"
             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
     </div>
 </div>
-
-
-
 
 <!-- Footer -->
 <?php include './views/layouts/footer.php'; ?>

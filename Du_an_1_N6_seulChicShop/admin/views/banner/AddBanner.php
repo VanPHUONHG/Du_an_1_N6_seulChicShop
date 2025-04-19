@@ -13,163 +13,154 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
+            <div class="row mb-4">
                 <div class="col-sm-6">
-                    <h1>Quản lý banner</h1>
+                    <h1 class="text-gradient">Quản Lý Banner</h1>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
+        </div>
     </section>
 
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card card-success">
-                        <div class="card-header">
-                            <h3 class="card-title">Thêm banner</h3>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="card shadow-lg border-0 rounded-lg">
+                        <div class="card-header bg-primary-gradient p-4">
+                            <h3 class="card-title text-white mb-0">
+                                <i class="fas fa-plus-circle mr-2"></i>Thêm Banner Mới
+                            </h3>
                         </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
+
                         <style>
-                            .banner-form {
-                                padding: 20px;
-                                background-color: #f8f9fa;
+                            .bg-primary-gradient {
+                                background: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
                             }
-
-                            .banner-form-card {
-                                background: white;
-                                border-radius: 12px;
-                                box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-                                border: none;
-                            }
-
-                            .banner-form-header {
-                                background: linear-gradient(135deg, #0396FF 0%, #ABDCFF 100%);
-                                color: white;
-                                padding: 20px;
-                                border-radius: 12px 12px 0 0;
-                            }
-
-                            .form-group {
-                                margin-bottom: 1.5rem;
-                            }
-
-                            .form-label {
-                                font-weight: 500;
-                                color: #495057;
-                                margin-bottom: 0.5rem;
+                            
+                            .text-gradient {
+                                background: linear-gradient(135deg, #333 0%, #666 100%);
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
                             }
 
                             .form-control {
-                                border-radius: 6px;
-                                border: 1px solid #e2e8f0;
-                                padding: 0.75rem 1rem;
+                                border-radius: 10px;
+                                border: 2px solid #eee;
+                                padding: 12px 20px;
+                                font-size: 1rem;
                                 transition: all 0.3s ease;
                             }
 
                             .form-control:focus {
-                                border-color: #0396FF;
-                                box-shadow: 0 0 0 2px rgba(3, 150, 255, 0.1);
+                                border-color: #6B73FF;
+                                box-shadow: 0 0 15px rgba(107, 115, 255, 0.2);
+                            }
+
+                            .form-label {
+                                font-weight: 600;
+                                font-size: 0.95rem;
+                                color: #444;
+                                margin-bottom: 0.75rem;
+                            }
+
+                            .btn-submit {
+                                background: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
+                                color: white;
+                                border: none;
+                                padding: 15px 30px;
+                                border-radius: 10px;
+                                font-weight: 600;
+                                letter-spacing: 0.5px;
+                                transition: all 0.3s ease;
+                            }
+
+                            .btn-submit:hover {
+                                transform: translateY(-2px);
+                                box-shadow: 0 8px 20px rgba(107, 115, 255, 0.3);
                             }
 
                             .image-preview {
-                                margin-top: 10px;
-                                border-radius: 8px;
+                                margin-top: 15px;
+                                border-radius: 15px;
                                 overflow: hidden;
-                                max-width: 300px;
+                                max-width: 400px;
+                                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
                             }
 
                             .image-preview img {
                                 width: 100%;
                                 height: auto;
                                 display: block;
+                                transition: transform 0.3s ease;
                             }
 
-                            .btn-submit {
-                                background: linear-gradient(135deg, #0396FF 0%, #ABDCFF 100%);
-                                color: white;
-                                border: none;
-                                padding: 12px 24px;
-                                border-radius: 6px;
-                                font-weight: 600;
-                                transition: all 0.3s ease;
-                            }
-
-                            .btn-submit:hover {
-                                transform: translateY(-2px);
-                                box-shadow: 0 4px 15px rgba(3, 150, 255, 0.3);
+                            .image-preview img:hover {
+                                transform: scale(1.05);
                             }
 
                             .error-message {
                                 color: #dc3545;
                                 font-size: 0.875rem;
-                                margin-top: 0.25rem;
+                                margin-top: 0.5rem;
+                                font-style: italic;
+                            }
+
+                            .form-group {
+                                margin-bottom: 2rem;
                             }
                         </style>
 
-                        <div class="banner-form">
-                            <div class="banner-form-card">
-                                <div class="banner-form-header">
-                                    <h3 class="mb-0">Thêm Banner Mới</h3>
-                                </div>
-                                <div class="card-body">
-                                    <form action="<?= BASE_URL_ADMIN . '?act=them-banner' ?>" method="POST" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <label class="form-label">Tiêu đề</label>
-                                            <input type="text" class="form-control" name="tieu_de" placeholder="Nhập tiêu đề banner">
-                                            <?php if (isset($_SESSION['error']['tieu_de'])): ?>
-                                                <div class="error-message"><?= $_SESSION['error']['tieu_de'] ?></div>
-                                            <?php endif; ?>
+                        <div class="card-body p-5">
+                            <form action="<?= BASE_URL_ADMIN . '?act=them-banner' ?>" method="POST" enctype="multipart/form-data" class="needs-validation">
+                                <div class="form-group">
+                                    <label class="form-label">Tiêu đề banner</label>
+                                    <input type="text" class="form-control" name="tieu_de" placeholder="Nhập tiêu đề cho banner">
+                                    <?php if (isset($_SESSION['error']['tieu_de'])): ?>
+                                        <div class="error-message"><?= $_SESSION['error']['tieu_de'] ?></div>
+                                    <?php endif; ?>
                                 </div>
 
-                                        <div class="form-group">
-                                            <label class="form-label">Hình ảnh</label>
-                                            <input type="file" class="form-control" name="hinh_anh_url" onchange="previewImage(this)">
-                                            <div class="image-preview" id="imagePreview"></div>
-                                            <?php if (isset($_SESSION['error']['hinh_anh_url'])): ?>
-                                                <div class="error-message"><?= $_SESSION['error']['hinh_anh_url'] ?></div>
-                                            <?php endif; ?>
+                                <div class="form-group">
+                                    <label class="form-label">Hình ảnh banner</label>
+                                    <input type="file" class="form-control" name="hinh_anh_url" onchange="previewImage(this)">
+                                    <div class="image-preview" id="imagePreview"></div>
+                                    <?php if (isset($_SESSION['error']['hinh_anh_url'])): ?>
+                                        <div class="error-message"><?= $_SESSION['error']['hinh_anh_url'] ?></div>
+                                    <?php endif; ?>
                                 </div>
 
-                                        <div class="form-group">
-                                            <label class="form-label">Trạng thái</label>
+                                <div class="form-group">
+                                    <label class="form-label">Trạng thái hiển thị</label>
                                     <select class="form-control" name="trang_thai">
-                                                <option value="">Chọn trạng thái</option>
+                                        <option value="">-- Chọn trạng thái --</option>
                                         <option value="1">Hiển thị</option>
                                         <option value="2">Ẩn</option>
                                     </select>
-                                            <?php if (isset($_SESSION['error']['trang_thai'])): ?>
-                                                <div class="error-message"><?= $_SESSION['error']['trang_thai'] ?></div>
-                                            <?php endif; ?>
+                                    <?php if (isset($_SESSION['error']['trang_thai'])): ?>
+                                        <div class="error-message"><?= $_SESSION['error']['trang_thai'] ?></div>
+                                    <?php endif; ?>
                                 </div>
 
-                                        <div class="form-group">
-                                            <label class="form-label">Mô tả</label>
-                                            <textarea class="form-control" name="mo_ta" rows="4" placeholder="Nhập mô tả banner"></textarea>
+                                <div class="form-group">
+                                    <label class="form-label">Mô tả banner</label>
+                                    <textarea class="form-control" name="mo_ta" rows="4" placeholder="Nhập mô tả chi tiết về banner"></textarea>
                                 </div>
 
-                                        <div class="text-end">
-                                            <button type="submit" class="btn-submit">
-                                                <i class="fas fa-plus me-2"></i>Thêm Banner
-                                            </button>
-                            </div>
-                        </form>
+                                <div class="text-end mt-4">
+                                    <button type="submit" class="btn-submit">
+                                        <i class="fas fa-plus-circle mr-2"></i>Thêm Banner
+                                    </button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+
 <!-- Footer -->
 <?php include './views/layout/footer.php'; ?>
 <!-- End Footer -->
@@ -177,7 +168,7 @@
 <script>
     $(function () {
         $("#example1").DataTable({
-            "responsive": true,
+            "responsive": true, 
             "lengthChange": false,
             "autoWidth": false,
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
@@ -204,5 +195,4 @@
     }
 </script>
 </body>
-
 </html>

@@ -34,6 +34,7 @@ require_once './models/ClientPay.php';
 require_once './models/ClientComment.php';
 require_once './models/ClientCart.php';
 require_once './models/ClientPosts.php';
+require_once './models/ClientBanner.php';
 
 
 // Route
@@ -52,10 +53,9 @@ $response = match ($act) {
     // lien he
     'lien-he' => (new ClientContactController())->listContact(), // Base_URL/?act=lien-he
     'them-lien-he' => (new ClientContactController())->addContact(), // Base_URL/?act=them-lien-he
-    'gioi-thieu' => (new ClientHomeController())->about(), // Base_URL/?act=gioi-thieu
-
     'bai-viet' => (new ClientPostsController())->listPosts(), // Base_URL/?act=bai-viet
     'chi-tiet-bai-viet' => (new ClientPostsController())->detailPosts(), // Base_URL/?act=chi-tiet-bai-viet
+    'gioi-thieu' => (new ClientHomeController())->About(), // Base_URL/?act=gioi-thieu
     // Auth
     'dang-nhap' => (new ClientHomeController())->signIn(),
     'check-dang-nhap' => (new ClientHomeController())->checkSignIn(),
@@ -82,5 +82,6 @@ $response = match ($act) {
     'lich-su-mua-hang' => (new ClientOderController())->lichSuMuaHang(),
     'chi-tiet-mua-hang' => (new ClientOderController())->chiTietDonHang(),
     'huy-don-hang' => (new ClientOderController())->huyDonHang(),
+    'thanh-toan-momo' => (new ClientPayController())->payWithMomo(),
     default => '404 - Trang không tồn tại',
 };
