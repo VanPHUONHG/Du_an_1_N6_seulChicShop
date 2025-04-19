@@ -1,3 +1,4 @@
+
 <!-- Header -->
 <?php include 'layouts/header.php'; ?>
 
@@ -6,6 +7,7 @@
 
 <!-- Mini Cart -->
 <?php include 'layouts/miniCart.php'; ?>
+
 
 <?php if (isset($_SESSION['success'])): ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -369,11 +371,11 @@
 
 
 <!-- Blog -->
-<section class="sec-blog bg0 p-t-60 p-b-90">
+<section class="sec-product bg0 p-t-100 p-b-50">
     <div class="container">
-        <div class="p-b-66">
-            <h3 class="ltext-105 cl5 txt-center respon1">
-                Our Blogs
+        <div class="p-b-32">
+            <h3 class="ltext-105 cl5 txt-center respon1">     
+                Our Articles Page
             </h3>
         </div>
 

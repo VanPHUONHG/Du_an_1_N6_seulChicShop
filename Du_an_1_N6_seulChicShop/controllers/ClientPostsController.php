@@ -10,7 +10,26 @@ class ClientPostsController
         $this->ModelClientProduct = new ClientProduct();
     }
 
-    // Hiển thị danh sách bài viết
+    // Trang chủ - Hiển thị bài viết mới nhất (3 bài viết)
+    public function homePosts()
+    {
+        try {
+            // Lấy tất cả bài viết
+            $allPosts = $this->ModelClientPosts->getAllPosts();
+
+            // Nếu có dữ liệu, chỉ lấy 3 bài đầu tiên
+            $PostsProduct = $allPosts ? array_slice($allPosts, 0, 3) : [];
+
+            require_once './views/Home.php';
+
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $PostsProduct = [];
+            require_once './views/Home.php';
+        }
+    }
+
+    // Trang Blog - Danh sách đầy đủ bài viết
     public function listPosts()
     {
         $posts = $this->ModelClientPosts->getAllPost();
@@ -23,7 +42,7 @@ class ClientPostsController
         require_once './views/Post.php';
     }
 
-    // Hiển thị chi tiết bài viết
+    // Trang Chi tiết bài viết
     public function detailPosts()
     {
         // Lấy id bài viết từ URL
