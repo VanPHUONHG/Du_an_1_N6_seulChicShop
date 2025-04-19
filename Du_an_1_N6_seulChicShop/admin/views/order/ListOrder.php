@@ -2,6 +2,9 @@
 <?php include './views/layout/navbar.php'; ?>
 <?php include './views/layout/sidebar.php'; ?>
 
+<!-- Add CSS link after header -->
+<link rel="stylesheet" href="<?= BASE_URL_ADMIN ?>assets/css/order.css">
+
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
@@ -72,7 +75,7 @@
                                             <td><?= $order['ma_khuyen_mai'] ?></td>
                                             <td><?= $order['loai'] == 'tien_mat' ? number_format($order['gia_tri']) . 'đ' : $order['gia_tri'] . '%' ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . $order['id'] ?>" class="btn btn-warning">
+                                                <a href="<?= BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' .($order['id']) ?>" class="btn btn-warning">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                             </td>

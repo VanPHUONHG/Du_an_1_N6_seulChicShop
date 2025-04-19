@@ -183,61 +183,85 @@ class AdminUser
             echo "Lỗi Truy Vấn:" . $e->getMessage();
         }
     }
-    public function addUserClient($ten_tai_khoan, $email, $mat_khau, $anh_dai_dien, $so_dien_thoai, $chuc_vu_id)
+    public function addUserClient($ten_tai_khoan, $email, $mat_khau, $anh_dai_dien, $ngay_tao, $so_dien_thoai, $chuc_vu_id, $trang_thai)
     {
         try {
-            $ngay_tao = date('Y-m-d H:i:s'); //
+            // Validate required fields
+            if (empty($ten_tai_khoan) || empty($email) || empty($mat_khau)) {
+                throw new Exception("Missing required fields");
+            }
 
-            $sql = "INSERT INTO tai_khoans(ten_tai_khoan, email, mat_khau, anh_dai_dien, so_dien_thoai, ngay_tao, chuc_vu_id) 
-                VALUES(:ten_tai_khoan, :email, :mat_khau, :anh_dai_dien, :so_dien_thoai, :ngay_tao, :chuc_vu_id)";
+            $sql = "INSERT INTO tai_khoans(ten_tai_khoan, email, mat_khau, anh_dai_dien, so_dien_thoai, ngay_tao, chuc_vu_id, trang_thai) 
+                VALUES(:ten_tai_khoan, :email, :mat_khau, :anh_dai_dien, :so_dien_thoai, :ngay_tao, :chuc_vu_id, :trang_thai)";
+            
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':ten_tai_khoan', $ten_tai_khoan);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':mat_khau', $mat_khau);
-            $stmt->bindParam(':anh_dai_dien', $anh_dai_dien);
-            $stmt->bindParam(':so_dien_thoai', $so_dien_thoai);
-            $stmt->bindParam(':ngay_tao', $ngay_tao);
-            $stmt->bindParam(':chuc_vu_id', $chuc_vu_id);
+            
+            $params = [
+                ':ten_tai_khoan' => $ten_tai_khoan,
+                ':email' => $email,
+                ':mat_khau' => $mat_khau,
+                ':anh_dai_dien' => $anh_dai_dien,
+                ':so_dien_thoai' => $so_dien_thoai,
+                ':ngay_tao' => $ngay_tao,
+                ':chuc_vu_id' => $chuc_vu_id,
+                ':trang_thai' => $trang_thai
+            ];
+            
+            $result = $stmt->execute($params);
 
-            $stmt->execute();
+            if (!$result) {
+                $errorInfo = $stmt->errorInfo();
+                error_log("Database error in addUserClient: " . print_r($errorInfo, true));
+                return false;
+            }
+
             return true;
+
         } catch (Exception $e) {
-            echo "Lỗi Truy Vấn: " . $e->getMessage();
+            error_log("Error in addUserClient: " . $e->getMessage());
+            return false;
         }
     }
     public function editUserClient($id_tai_khoan_client, $ten_tai_khoan, $email, $mat_khau, $anh_dai_dien, $so_dien_thoai, $trang_thai)
     {
         try {
+            // Validate input parameters
+            if (empty($id_tai_khoan_client) || empty($ten_tai_khoan) || empty($email)) {
+                throw new Exception("Missing required parameters");
+            }
+
             $sql = "UPDATE tai_khoans SET 
                 ten_tai_khoan = :ten_tai_khoan,
                 email = :email,
-                mat_khau = :mat_khau, 
+                mat_khau = :mat_khau,
                 anh_dai_dien = :anh_dai_dien,
                 so_dien_thoai = :so_dien_thoai,
                 trang_thai = :trang_thai
                 WHERE id = :id";
-
+            
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id', $id_tai_khoan_client);
-            $stmt->bindParam(':ten_tai_khoan', $ten_tai_khoan);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':mat_khau', $mat_khau);
-            $stmt->bindParam(':anh_dai_dien', $anh_dai_dien);
-            $stmt->bindParam(':so_dien_thoai', $so_dien_thoai);
-            $stmt->bindParam(':trang_thai', $trang_thai);
-            $result = $stmt->execute();
-
-            if ($result) {
-                return true;
-            } else {
-                $errorInfo = $stmt->errorInfo();
-                error_log("Database error: " . print_r($errorInfo, true));
+            
+            $params = [
+                ':id' => $id_tai_khoan_client,
+                ':ten_tai_khoan' => $ten_tai_khoan,
+                ':email' => $email,
+                ':mat_khau' => $mat_khau,
+                ':anh_dai_dien' => $anh_dai_dien,
+                ':so_dien_thoai' => $so_dien_thoai,
+                ':trang_thai' => $trang_thai
+            ];
+            
+            $result = $stmt->execute($params);
+            
+            if (!$result) {
+                error_log("Database error: " . print_r($stmt->errorInfo(), true));
                 return false;
             }
+            
+            return true;
         } catch (Exception $e) {
-            error_log("Exception in editUserAdmin: " . $e->getMessage());
+            error_log("Error in editUserClient: " . $e->getMessage());
             return false;
         }
     }
-
 }

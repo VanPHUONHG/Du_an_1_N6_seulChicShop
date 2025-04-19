@@ -22,7 +22,8 @@ class AdminProduct
                 san_phams.ngay_nhap,
                 san_phams.mo_ta,
                 san_phams.danh_muc_id,
-                san_phams.trang_thai
+                san_phams.trang_thai,
+                san_phams.gia_nhap
                 FROM san_phams
                 LEFT JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
                 LEFT JOIN bien_the_san_phams ON san_phams.id = bien_the_san_phams.san_pham_id 
@@ -32,12 +33,14 @@ class AdminProduct
                         WHERE san_pham_id = san_phams.id
                     )
                 LEFT JOIN hinh_anh_san_phams ON bien_the_san_phams.id = hinh_anh_san_phams.bien_the_san_pham_id
-                WHERE san_phams.trang_thai = 1';
+                WHERE san_phams.trang_thai = 1 
+                ORDER BY san_phams.ngay_nhap DESC';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             echo "loi" . $e->getMessage();
+            return false;
         }
     }
 
@@ -87,7 +90,8 @@ class AdminProduct
                 COALESCE(bien_the_san_phams.gia, san_phams.gia_san_pham) AS gia_san_pham,
                 COALESCE(bien_the_san_phams.gia_khuyen_mai, san_phams.gia_san_pham_khuyen_mai) AS gia_khuyen_mai,
                 COALESCE(bien_the_san_phams.so_luong, san_phams.so_luong) AS so_luong,
-                COALESCE(hinh_anh_san_phams.hinh_anh_bien_the, san_phams.hinh_anh) AS hinh_anh
+                COALESCE(hinh_anh_san_phams.hinh_anh_bien_the, san_phams.hinh_anh) AS hinh_anh,
+                san_phams.gia_nhap
             FROM san_phams 
             LEFT JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
             LEFT JOIN bien_the_san_phams ON san_phams.id = bien_the_san_phams.san_pham_id
@@ -107,14 +111,11 @@ class AdminProduct
     public function checkProductHasOrders($id)
     {
         try {
-            // Kiểm tra xem sản phẩm có trong chi tiết đơn hàng không
             $sql = 'SELECT COUNT(*) FROM chi_tiet_don_hangs WHERE san_pham_id = :id';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':id' => $id
             ]);
-            
-            // Nếu có trong chi tiết đơn hàng (count > 0) thì trả về true để không cho xóa
             return $stmt->fetchColumn() > 0;
         } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
@@ -122,25 +123,24 @@ class AdminProduct
         }
     }
 
-    public function insertProduct($ten_san_pham, $gia_san_pham, $gia_san_pham_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh)
+    public function insertProduct($ten_san_pham, $gia_san_pham, $gia_san_pham_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh, $gia_nhap)
     {
         try {
-
-            // Insert main product
-            $sql = 'INSERT INTO san_phams (ten_san_pham, gia_san_pham, gia_san_pham_khuyen_mai, so_luong, ngay_nhap, danh_muc_id, trang_thai, mo_ta, hinh_anh)
-                VALUES (:ten_san_pham, :gia_san_pham, :gia_san_pham_khuyen_mai, :so_luong, :ngay_nhap, :danh_muc_id, :trang_thai, :mo_ta, :hinh_anh)';
+            $sql = 'INSERT INTO san_phams (ten_san_pham, gia_san_pham, gia_san_pham_khuyen_mai, so_luong, ngay_nhap, danh_muc_id, trang_thai, mo_ta, hinh_anh, gia_nhap)
+                VALUES (:ten_san_pham, :gia_san_pham, :gia_san_pham_khuyen_mai, :so_luong, :ngay_nhap, :danh_muc_id, :trang_thai, :mo_ta, :hinh_anh, :gia_nhap)';
 
             $stmt = $this->conn->prepare($sql);
 
             $stmt->bindParam(':ten_san_pham', $ten_san_pham);
-            $stmt->bindParam(':gia_san_pham', $gia_san_pham, PDO::PARAM_INT);
-            $stmt->bindParam(':gia_san_pham_khuyen_mai', $gia_san_pham_khuyen_mai, PDO::PARAM_INT);
+            $stmt->bindParam(':gia_san_pham', $gia_san_pham);
+            $stmt->bindParam(':gia_san_pham_khuyen_mai', $gia_san_pham_khuyen_mai);
             $stmt->bindParam(':so_luong', $so_luong);
             $stmt->bindParam(':ngay_nhap', $ngay_nhap);
             $stmt->bindParam(':danh_muc_id', $danh_muc_id);
             $stmt->bindParam(':trang_thai', $trang_thai);
             $stmt->bindParam(':mo_ta', $mo_ta);
             $stmt->bindParam(':hinh_anh', $hinh_anh);
+            $stmt->bindParam(':gia_nhap', $gia_nhap);
 
             $stmt->execute();
             return $this->conn->lastInsertId();
@@ -155,8 +155,7 @@ class AdminProduct
         try {
             $sql = "INSERT INTO bien_the_san_phams(san_pham_id, mau_sac, kich_thuoc, gia, gia_khuyen_mai, so_luong)
                     VALUES (:san_pham_id, :mau_sac, :kich_thuoc, :gia, :gia_khuyen_mai, :so_luong)";
-            $sql1 = "INSERT INTO hinh_anh_san_phams(bien_the_san_pham_id, hinh_anh_bien_the)
-                    VALUES (:bien_the_san_pham_id, :hinh_anh_bien_the)";
+            
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':san_pham_id', $san_pham_id);
             $stmt->bindParam(':mau_sac', $mau_sac);
@@ -167,11 +166,16 @@ class AdminProduct
             $stmt->execute();
 
             $bien_the_id = $this->conn->lastInsertId();
-            $stmt1 = $this->conn->prepare($sql1);
 
-            $stmt1->bindParam(':bien_the_san_pham_id', $bien_the_id);
-            $stmt1->bindParam(':hinh_anh_bien_the', $hinh_anh_bien_the);
-            $stmt1->execute();
+            if($hinh_anh_bien_the) {
+                $sql1 = "INSERT INTO hinh_anh_san_phams(bien_the_san_pham_id, hinh_anh_bien_the)
+                        VALUES (:bien_the_san_pham_id, :hinh_anh_bien_the)";
+                $stmt1 = $this->conn->prepare($sql1);
+                $stmt1->bindParam(':bien_the_san_pham_id', $bien_the_id);
+                $stmt1->bindParam(':hinh_anh_bien_the', $hinh_anh_bien_the);
+                $stmt1->execute();
+            }
+
             return $bien_the_id;
         } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
@@ -179,7 +183,7 @@ class AdminProduct
         }
     }
 
-    public function updateProduct($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_san_pham_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh)
+    public function updateProduct($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_san_pham_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh, $gia_nhap)
     {
         try {
             $sql = 'UPDATE san_phams SET 
@@ -191,7 +195,8 @@ class AdminProduct
                         danh_muc_id = :danh_muc_id,
                         trang_thai = :trang_thai,
                         mo_ta = :mo_ta,
-                        hinh_anh = :hinh_anh
+                        hinh_anh = :hinh_anh,
+                        gia_nhap = :gia_nhap
                     WHERE id = :id';
 
             $stmt = $this->conn->prepare($sql);
@@ -206,6 +211,7 @@ class AdminProduct
                 ':trang_thai' => $trang_thai,
                 ':mo_ta' => $mo_ta,
                 ':hinh_anh' => $hinh_anh,
+                ':gia_nhap' => $gia_nhap,
                 ':id' => $san_pham_id
             ]);
 
@@ -227,11 +233,7 @@ class AdminProduct
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if (empty($result)) {
-                return false;
-            }
-            return $result;
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
             return false;
@@ -248,9 +250,7 @@ class AdminProduct
                 gia_khuyen_mai = :gia_khuyen_mai,
                 so_luong = :so_luong
             WHERE id = :bien_the_id";
-            $sql1 = "UPDATE hinh_anh_san_phams 
-            SET hinh_anh_bien_the = :hinh_anh_bien_the 
-            WHERE bien_the_san_pham_id = :bien_the_id";
+            
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':mau_sac', $mau_sac);
             $stmt->bindParam(':kich_thuoc', $kich_thuoc);
@@ -259,16 +259,24 @@ class AdminProduct
             $stmt->bindParam(':so_luong', $so_luong);
             $stmt->bindParam(':bien_the_id', $bien_the_id);
             $stmt->execute();
-            $stmt1 = $this->conn->prepare($sql1);
-            $stmt1->bindParam(':hinh_anh_bien_the', $hinh_anh_bien_the);
-            $stmt1->bindParam(':bien_the_id', $bien_the_id);
-            $stmt1->execute();
+
+            if($hinh_anh_bien_the) {
+                $sql1 = "UPDATE hinh_anh_san_phams 
+                SET hinh_anh_bien_the = :hinh_anh_bien_the 
+                WHERE bien_the_san_pham_id = :bien_the_id";
+                $stmt1 = $this->conn->prepare($sql1);
+                $stmt1->bindParam(':hinh_anh_bien_the', $hinh_anh_bien_the);
+                $stmt1->bindParam(':bien_the_id', $bien_the_id);
+                $stmt1->execute();
+            }
+            
             return true;
         } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
             return false;
         }
     }
+    
     public function checkProductInOrder($san_pham_id){
         try {
             $sql = "SELECT COUNT(*) FROM chi_tiet_don_hangs WHERE san_pham_id = :san_pham_id";

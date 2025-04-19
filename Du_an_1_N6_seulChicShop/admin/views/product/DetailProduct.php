@@ -1,5 +1,67 @@
 <!-- Header -->
 <?php include './views/layout/header.php'; ?>
+<style>
+.content-wrapper {
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.product-details {
+    padding: 30px;
+}
+
+.product-image {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-info h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.table {
+    margin-top: 15px;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+}
+
+.badge {
+    padding: 8px 12px;
+    border-radius: 20px;
+}
+
+.variant-section, .comment-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+}
+
+.btn {
+    border-radius: 8px;
+    padding: 8px 16px;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+</style>
 <!-- End Header -->
 <!-- Navbar -->
 <?php include './views/layout/navbar.php'; ?>
@@ -15,7 +77,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Chi tiết sản phẩm</h1>
+                    <h1 class="text-primary">Chi tiết sản phẩm</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -27,33 +89,40 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <a href="<?= BASE_URL_ADMIN . '?act=san-pham'  ?>" class="btn btn-secondary">Quay lại</a>
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h3 class="card-title">Thông tin chi tiết</h3>
+                            <a href="<?= BASE_URL_ADMIN . '?act=san-pham'  ?>" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left mr-2"></i>Quay lại
+                            </a>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
+                        <div class="card-body product-details">
                             <!-- Thông tin sản phẩm chính -->
                             <div class="row">
                                 <div class="col-md-6">
-                                    <img src="<?= BASE_URL . $Product[0]['hinh_anh'] ?>" class="img-fluid" alt="Product Image">
+                                    <img src="<?= BASE_URL . $Product[0]['hinh_anh'] ?>" class="img-fluid product-image" alt="Product Image">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 product-info">
                                     <h3><?= $Product[0]['ten_san_pham'] ?></h3>
-                                    <table class="table">
+                                    <table class="table table-hover">
                                         <?php if($Product[0]['bien_the_id'] == null): ?>
                                             <?php if($Product[0]['gia_san_pham'] != null): ?>
                                             <tr>
-                                                <th>Giá tiền:</th>
+                                                <th width="30%">Giá bán:</th>
                                                 <td><?= number_format($Product[0]['gia_san_pham']) ?> VNĐ</td>
                                             </tr>
                                             <?php if($Product[0]['gia_san_pham_khuyen_mai'] != null): ?>
                                             <tr>
                                                 <th>Giá khuyến mãi:</th>
-                                                <td><?= number_format($Product[0]['gia_san_pham_khuyen_mai']) ?> VNĐ</td>
+                                                <td class="text-danger"><?= number_format($Product[0]['gia_san_pham_khuyen_mai']) ?> VNĐ</td>
                                             </tr>
                                             <?php endif; ?>
                                             <?php endif; ?>
                                         <?php endif; ?>
+                                        <tr>
+                                            <th>Giá nhập:</th>
+                                            <td><?= number_format($Product[0]['gia_nhap']) ?> VNĐ</td>
+                                        </tr>
                                         <tr>
                                             <th>Số lượng:</th>
                                             <td><?php
@@ -79,63 +148,69 @@
                                             </span></td>
                                         </tr>
                                     </table>
-                                    <div class="mt-3">
-                                        <h5>Mô tả:</h5>
-                                        <p><?=$Product[0]['mo_ta'] ?></p>
+                                    <div class="mt-4">
+                                        <h5 class="text-primary">Mô tả:</h5>
+                                        <p class="text-muted"><?=$Product[0]['mo_ta'] ?></p>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Biến thể sản phẩm -->
-                            <div class="mt-4">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4>Biến thể sản phẩm</h4>
+                            <div class="variant-section">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h4 class="text-primary">Biến thể sản phẩm</h4>
                                     <a href="<?= BASE_URL_ADMIN . '?act=form-them-bien-the-san-pham&id_san_pham=' . $Product[0]['id'] ?>" class="btn btn-success">
-                                        <i class="fas fa-plus"></i> Thêm biến thể
+                                        <i class="fas fa-plus mr-2"></i>Thêm biến thể
                                     </a>
                                 </div>
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Màu sắc</th>
-                                            <th>Kích thước</th>
-                                            <th>Giá</th>
-                                            <th>Giá khuyến mãi</th>
-                                            <th>Số lượng</th>
-                                            <th>Hình ảnh</th>
-                                            <th>Thao tác</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($Product as $variant): ?>
-                                            <?php if (!empty($variant['bien_the_id'])): ?>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="thead-light">
                                             <tr>
-                                                <td><?= $variant['mau_sac'] ?></td>
-                                                <td><?= $variant['kich_thuoc'] ?></td>
-                                                <td><?= number_format($variant['gia_san_pham'], 0, ',', '.') ?> VNĐ</td>
-                                                <td><?= $variant['gia_khuyen_mai'] ? number_format($variant['gia_khuyen_mai'], 0, ',', '.') . ' VNĐ' : 'Không có' ?></td>
-                                                <td><?= $variant['so_luong'] ?></td>
-                                                <td>
-                                                    <img src="<?= BASE_URL . $variant['hinh_anh'] ?>" alt="Variant Image" style="max-width: 100px;">
-                                                </td>
-                                                <td>
-                                                    <a href="<?= BASE_URL_ADMIN . '?act=form-sua-bien-the&id_bien_the=' . $variant['bien_the_id'] ?>" class="btn btn-primary btn-sm">
-                                                        <i class="fas fa-edit"></i> Sửa
-                                                    </a>
-                                                    <a href="<?= BASE_URL_ADMIN . '?act=xoa-bien-the&id_bien_the=' . $variant['bien_the_id'] . '&id_san_pham=' . $Product[0]['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa biến thể này không?')">
-                                                        <i class="fas fa-trash"></i> Xóa
-                                                    </a>
-                                                </td>
+                                                <th>Màu sắc</th>
+                                                <th>Kích thước</th>
+                                                <th>Giá</th>
+                                                <th>Giá khuyến mãi</th>
+                                                <th>Giá nhập</th>
+                                                <th>Số lượng</th>
+                                                <th>Hình ảnh</th>
+                                                <th>Thao tác</th>
                                             </tr>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($Product as $variant): ?>
+                                                <?php if (!empty($variant['bien_the_id'])): ?>
+                                                <tr>
+                                                    <td><?= $variant['mau_sac'] ?></td>
+                                                    <td><?= $variant['kich_thuoc'] ?></td>
+                                                    <td><?= number_format($variant['gia_san_pham'], 0, ',', '.') ?> VNĐ</td>
+                                                    <td><?= $variant['gia_khuyen_mai'] ? number_format($variant['gia_khuyen_mai'], 0, ',', '.') . ' VNĐ' : 'Không có' ?></td>
+                                                    <td><?= number_format($variant['gia_nhap'], 0, ',', '.') ?> VNĐ</td>
+                                                    <td><?= $variant['so_luong'] ?></td>
+                                                    <td>
+                                                        <img src="<?= BASE_URL . $variant['hinh_anh'] ?>" alt="Variant Image" class="img-thumbnail" style="max-width: 100px;">
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <a href="<?= BASE_URL_ADMIN . '?act=form-sua-bien-the&id_bien_the=' . $variant['bien_the_id'] ?>" class="btn btn-primary btn-sm">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                            <a href="<?= BASE_URL_ADMIN . '?act=xoa-bien-the&id_bien_the=' . $variant['bien_the_id'] . '&id_san_pham=' . $Product[0]['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa biến thể này không?')">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
                             <!-- Lịch sử bình luận -->
-                            <div class="mt-4">
-                                <h4>Lịch sử bình luận</h4>
+                            <div class="comment-section">
+                                <h4 class="text-primary mb-4">Lịch sử bình luận</h4>
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
@@ -177,7 +252,7 @@
                                                     <a href="<?= BASE_URL_ADMIN . '?act=xoa-binh-luan&id=' . $comment['id'] ?>" 
                                                        class="btn btn-danger btn-sm"
                                                        onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận này không?')">
-                                                        <i class="fas fa-trash"></i> Xóa
+                                                        <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>

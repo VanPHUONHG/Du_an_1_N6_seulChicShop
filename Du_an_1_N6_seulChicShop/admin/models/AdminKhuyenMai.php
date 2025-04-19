@@ -56,10 +56,46 @@ class AdminKhuyenMai
     public function addKhuyenMai($ma_khuyen_mai, $mo_ta, $loai, $gia_tri, $dieu_kien_toi_thieu, $so_lan_su_dung, $so_lan_da_dung, $ngay_bat_dau, $ngay_ket_thuc, $trang_thai, $tai_khoan_id)
     {
         try {
-            $sql = "INSERT INTO ma_giam_gias (ma_khuyen_mai, mo_ta, loai, gia_tri, dieu_kien_toi_thieu, so_lan_su_dung, so_lan_da_dung, ngay_bat_dau, ngay_ket_thuc, trang_thai, tai_khoan_id) 
-                    VALUES (:ma_khuyen_mai, :mo_ta, :loai, :gia_tri, :dieu_kien_toi_thieu, :so_lan_su_dung, :so_lan_da_dung, :ngay_bat_dau, :ngay_ket_thuc, :trang_thai, :tai_khoan_id)";
+            // Kiểm tra mã khuyến mãi đã tồn tại
+            $check_sql = "SELECT COUNT(*) FROM ma_giam_gias WHERE ma_khuyen_mai = :ma_khuyen_mai";
+            $check_stmt = $this->conn->prepare($check_sql);
+            $check_stmt->bindParam(':ma_khuyen_mai', $ma_khuyen_mai, PDO::PARAM_STR);
+            $check_stmt->execute();
+            
+            if ($check_stmt->fetchColumn() > 0) {
+                $_SESSION['error']['ma_khuyen_mai'] = 'Mã khuyến mãi đã tồn tại';
+                return false;
+            }
+
+            $sql = "INSERT INTO ma_giam_gias (
+                ma_khuyen_mai, 
+                mo_ta, 
+                loai, 
+                gia_tri, 
+                dieu_kien_toi_thieu, 
+                so_lan_su_dung, 
+                so_lan_da_dung, 
+                ngay_bat_dau, 
+                ngay_ket_thuc, 
+                trang_thai, 
+                tai_khoan_id
+            ) VALUES (
+                :ma_khuyen_mai,
+                :mo_ta,
+                :loai,
+                :gia_tri,
+                :dieu_kien_toi_thieu,
+                :so_lan_su_dung,
+                :so_lan_da_dung,
+                :ngay_bat_dau,
+                :ngay_ket_thuc,
+                :trang_thai,
+                :tai_khoan_id
+            )";
 
             $stmt = $this->conn->prepare($sql);
+            
+            // Bind parameters với kiểu dữ liệu phù hợp
             $stmt->bindParam(':ma_khuyen_mai', $ma_khuyen_mai, PDO::PARAM_STR);
             $stmt->bindParam(':mo_ta', $mo_ta, PDO::PARAM_STR);
             $stmt->bindParam(':loai', $loai, PDO::PARAM_STR);
@@ -71,10 +107,11 @@ class AdminKhuyenMai
             $stmt->bindParam(':ngay_ket_thuc', $ngay_ket_thuc, PDO::PARAM_STR);
             $stmt->bindParam(':trang_thai', $trang_thai, PDO::PARAM_INT);
             $stmt->bindParam(':tai_khoan_id', $tai_khoan_id, PDO::PARAM_INT);
-            $stmt->execute();
-            return true;
+
+            return $stmt->execute();
+
         } catch (Exception $e) {
-            error_log("Lỗi Truy Vấn: " . $e->getMessage());
+            error_log("Lỗi thêm mã khuyến mãi: " . $e->getMessage());
             return false;
         }
     }

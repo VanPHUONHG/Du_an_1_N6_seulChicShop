@@ -1,6 +1,9 @@
 <!-- header -->
 <?php include './views/layout/header.php'; ?>
 
+<!-- Add CSS link after header -->
+<link rel="stylesheet" href="<?= BASE_URL_ADMIN ?>assets/css/category.css">
+
 <!-- Navbar -->
 <?php include './views/layout/navbar.php'; ?>
 
@@ -13,93 +16,69 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-<?php
-if (isset($_SESSION['success'])) {
-    echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
-    unset($_SESSION['success']);
-}
-if (isset($_SESSION['error'])) {
-    echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';
-    unset($_SESSION['error']);
-}
-?>
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Quản Lý Danh Mục Sản Phẩm</h1>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <a href="<?= BASE_URL_ADMIN . '?act=form-them-danh-muc' ?>">
-                                <button class="btn btn-success"><i class="fas fa-plus"></i>Thêm danh mục</button>
-                            </a>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <td>STT</td>
-                                        <td>Tên Danh Mục </td>
-                                        <td>Mô Tả</td>
-                                        <td>Thao Tác</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($listDanhmuc as $key => $danhMuc): ?>
-                                        <tr>
-                                            <td><?= $key + 1 ?></td>
-                                            <td><?= $danhMuc['ten_danh_muc'] ?></td>
-                                            <td><?= $danhMuc['mo_ta'] ?></td>
-                                            <td>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=form-sua-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>" class="btn btn-warning icon-button">
-                                                    <i class="fas fa-edit"></i> <!-- Icon sửa -->
-                                                </a>
-
-                                                <a href="<?= BASE_URL_ADMIN . '?act=xoa-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>"
-                                                    onclick="return confirm('Bạn có chắc muốn xóa không?')"
-                                                    class="btn btn-danger icon-button">
-                                                    <i class="fas fa-trash"></i> <!-- Icon xóa -->
-                                                </a>
-                                            </td>
-
-                                        </tr>
-                                    <?php endforeach ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td>STT</td>
-                                        <td>Tên Danh Mục </td>
-                                        <td>Mô Tả</td>
-                                        <td>Thao Tác</td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
+    <?php if (isset($_SESSION['success']) || isset($_SESSION['error'])): ?>
+        <div class="alert alert-<?= isset($_SESSION['success']) ? 'success' : 'danger' ?>">
+            <?= isset($_SESSION['success']) ? $_SESSION['success'] : $_SESSION['error'] ?>
         </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+        <?php unset($_SESSION['success'], $_SESSION['error']); ?>
+    <?php endif; ?>
+
+    <div class="category-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1><i class="fas fa-folder me-2"></i>Quản lý danh mục sản phẩm</h1>
+            <a href="<?= BASE_URL_ADMIN . '?act=form-them-danh-muc' ?>" class="btn btn-success">
+                <i class="fas fa-plus"></i>
+                <span>Thêm danh mục</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="category-filters">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="form-control" id="searchCategory" placeholder="Tìm kiếm danh mục...">
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table id="categoryTable" class="table category-table">
+                    <thead>
+                        <tr>
+                            <th width="5%">STT</th>
+                            <th width="30%">Tên danh mục</th>
+                            <th width="45%">Mô tả</th>
+                            <th width="20%">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($listDanhmuc as $key => $danhMuc): ?>
+                        <tr>
+                            <td><?= $key + 1 ?></td>
+                            <td class="font-weight-medium"><?= $danhMuc['ten_danh_muc'] ?></td>
+                            <td><?= $danhMuc['mo_ta'] ?></td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a href="<?= BASE_URL_ADMIN . '?act=form-sua-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>" 
+                                       class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="<?= BASE_URL_ADMIN . '?act=xoa-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>" 
+                                       onclick="return confirm('Bạn có chắc muốn xóa danh mục này?')"
+                                       class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-wrapper -->
 
 <!-- footer -->
 <?php include './views/layout/footer.php'; ?>
@@ -107,23 +86,31 @@ if (isset($_SESSION['error'])) {
 
 <!-- Page specific script -->
 <script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+$(document).ready(function() {
+    // Initialize DataTable with custom options
+    $('#categoryTable').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "language": {
+            "search": "Tìm kiếm:",
+            "paginate": {
+                "first": "Đầu",
+                "last": "Cuối",
+                "next": "Sau",
+                "previous": "Trước"
+            },
+            "info": "Hiển thị _START_ đến _END_ của _TOTAL_ danh mục",
+            "infoEmpty": "Hiển thị 0 đến 0 của 0 danh mục",
+            "zeroRecords": "Không tìm thấy danh mục nào"
+        }
     });
+
+    // Custom search functionality
+    $('#searchCategory').on('keyup', function() {
+        $('#categoryTable').DataTable().search(this.value).draw();
+    });
+});
 </script>
 <!-- Code injected by live-server -->
 <script>

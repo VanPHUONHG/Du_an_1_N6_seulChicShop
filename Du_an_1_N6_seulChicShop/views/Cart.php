@@ -74,7 +74,7 @@
                             <tr class="table_row">
                                 <td class="column-1">
                                     <div class="how-itemcart1">
-                                        <img src="<?= BASE_URL . $item['hinh_anh'] ?>" alt="<?= $item['ten_san_pham'] ?>">
+                                        <img src="<?= !empty($item['hinh_anh']) ? $item['hinh_anh'] : 'assets/images/product-04.jpg' ?>" alt="<?= $item['ten_san_pham'] ?>">
                                     </div>
                                 </td>
                                 <td class="column-2"><?= $item['ten_san_pham'] ?></td>

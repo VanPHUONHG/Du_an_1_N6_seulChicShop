@@ -35,8 +35,8 @@ $act = $_GET['act'] ?? '/';
 
 // Kiểm tra đăng nhập trước khi cho phép truy cập các trang admin
 if (!isset($_SESSION['user']) && $act != 'login-admin') {
-    header('Location: ' . BASE_URL_ADMIN . '?act=login-admin');
-    exit();
+  header('Location: ' . BASE_URL_ADMIN . '?act=login-admin');
+  exit();
 }
 
 match ($act) {
@@ -80,10 +80,10 @@ match ($act) {
   // router user client
   'tai-khoan-khach-hang' => (new AdminUserController())->listUserClient(),
   'chi-tiet-tai-khoan-khach-hang' => (new AdminUserController())->listUserClientById(),
-  'form-sua-tai-khoan-khach-hang' => (new AdminUserController())->formEditUserClient(),
-  'sua-tai-khoan-khach-hang' => (new AdminUserController())->updateUserClient(),
   'form-them-tai-khoan-khach-hang' => (new AdminUserController())->formAddUserClient(),
   'them-tai-khoan-khach-hang' => (new AdminUserController())->insertUserClient(),
+  'form-sua-tai-khoan-khach-hang' => (new AdminUserController())->formEditUserClient(),
+  'sua-tai-khoan-khach-hang' => (new AdminUserController())->updateUserClient(),
 
   'binh-luan' => (new AdminCommentController())->listComment(),
   'xoa-binh-luan' => (new AdminCommentController())->deleteComment(),

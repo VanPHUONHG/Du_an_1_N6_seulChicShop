@@ -15,103 +15,125 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Quản lý banner</h1>
+                    <h1><i class="fas fa-image"></i> Quản lý banner</h1>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
+        </div>
     </section>
 
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Sửa banner</h3>
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="card card-primary shadow">
+                        <div class="card-header bg-primary">
+                            <h3 class="card-title"><i class="fas fa-edit"></i> Sửa banner</h3>
                         </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
+
                         <form action="<?= BASE_URL_ADMIN . '?act=cap-nhat-banner&id=' . $banner['id'] ?>" method="POST"
-                            enctype="multipart/form-data">
-                            <div class="card-body row">
-                                <input type="hidden" name="id" value="<?= $banner['id'] ?>">
-                                <div class="form-group col-12">
-                                    <label>Tiêu đề</label>
-                                    <input type="text" class="form-control" name="tieu_de"
-                                        value="<?= $banner['tieu_de'] ?>" placeholder="Nhập tiêu đề banner">
+                            enctype="multipart/form-data" class="needs-validation" novalidate>
+                            <div class="card-body">
+                                <input type="hidden" name="id" value="<?= htmlspecialchars($banner['id']) ?>">
+                                
+                                <div class="form-group">
+                                    <label for="tieu_de"><i class="fas fa-heading"></i> Tiêu đề</label>
+                                    <input type="text" class="form-control" id="tieu_de" name="tieu_de"
+                                        value="<?= htmlspecialchars($banner['tieu_de']) ?>" placeholder="Nhập tiêu đề banner" required>
                                     <?php if (isset($_SESSION['error']['tieu_de'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['tieu_de'] ?></p>
+                                        <small class="text-danger"><i class="fas fa-exclamation-circle"></i> <?= htmlspecialchars($_SESSION['error']['tieu_de']) ?></small>
                                     <?php } ?>
                                 </div>
 
-                                <div class="form-group col-12">
-                                    <label>Hình ảnh</label>
-                                    <input type="file" class="form-control" name="hinh_anh_url">
-                                    <img src="<?= BASE_URL . $banner['hinh_anh_url'] ?>" width="200" class="mt-3">
+                                <div class="form-group">
+                                    <label for="hinh_anh"><i class="fas fa-image"></i> Hình ảnh</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="hinh_anh" name="hinh_anh_url" accept="image/*">
+                                        <label class="custom-file-label" for="hinh_anh">Chọn file</label>
+                                    </div>
+                                    <div class="mt-3">
+                                        <?php if (!empty($banner['hinh_anh_url'])) { ?>
+                                            <img src="<?= htmlspecialchars(BASE_URL . $banner['hinh_anh_url']) ?>" class="img-thumbnail" style="max-width: 300px" alt="Banner image">
+                                        <?php } ?>
+                                    </div>
                                     <?php if (isset($_SESSION['error']['hinh_anh_url'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['hinh_anh_url'] ?></p>
+                                        <small class="text-danger"><i class="fas fa-exclamation-circle"></i> <?= htmlspecialchars($_SESSION['error']['hinh_anh_url']) ?></small>
                                     <?php } ?>
                                 </div>
 
-                                <div class="form-group col-12">
-                                    <label>Trạng thái</label>
-                                    <select class="form-control" name="trang_thai">
-                                        <option disabled>Chọn trạng thái</option>
-                                        <option value="1" <?= $banner['trang_thai'] == 1 ? 'selected' : '' ?>>Hiển thị
+                                <div class="form-group">
+                                    <label for="trang_thai"><i class="fas fa-toggle-on"></i> Trạng thái</label>
+                                    <select class="form-control" id="trang_thai" name="trang_thai" required>
+                                        <option value="" disabled>Chọn trạng thái</option>
+                                        <option value="1" <?= ($banner['trang_thai'] == 1) ? 'selected' : '' ?>>
+                                            <i class="fas fa-eye"></i> Hiển thị
                                         </option>
-                                        <option value="2" <?= $banner['trang_thai'] == 2 ? 'selected' : '' ?>>Ẩn</option>
+                                        <option value="2" <?= ($banner['trang_thai'] == 2) ? 'selected' : '' ?>>
+                                            <i class="fas fa-eye-slash"></i> Ẩn
+                                        </option>
                                     </select>
                                     <?php if (isset($_SESSION['error']['trang_thai'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['trang_thai'] ?></p>
+                                        <small class="text-danger"><i class="fas fa-exclamation-circle"></i> <?= htmlspecialchars($_SESSION['error']['trang_thai']) ?></small>
                                     <?php } ?>
                                 </div>
 
-                                <div class="form-group col-12">
-                                    <label for="mo_ta">Mô tả</label>
-                                    <textarea id="mo_ta" class="form-control" name="mo_ta"
-                                        placeholder="Nhập mô tả"><?= $banner['mo_ta'] ?></textarea>
+                                <div class="form-group">
+                                    <label for="mo_ta"><i class="fas fa-align-left"></i> Mô tả</label>
+                                    <textarea id="mo_ta" class="form-control" name="mo_ta" rows="4"
+                                        placeholder="Nhập mô tả"><?= htmlspecialchars($banner['mo_ta']) ?></textarea>
                                 </div>
 
                             </div>
                             <!-- /.card-body -->
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Cập nhật banner</button>
+                            <div class="card-footer text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-save"></i> Cập nhật banner
+                                </button>
+                                <a href="<?= BASE_URL_ADMIN . '?act=danh-sach-banner' ?>" class="btn btn-secondary btn-lg">
+                                    <i class="fas fa-arrow-left"></i> Quay lại
+                                </a>
                             </div>
                         </form>
                     </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+
 <!-- Footer -->
 <?php include './views/layout/footer.php'; ?>
 <!-- End Footer -->
 
 <script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+$(function() {
+    // File input
+    bsCustomFileInput.init();
+    
+    // Form validation
+    var forms = document.getElementsByClassName('needs-validation');
+    var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
     });
+
+    // Image preview
+    $('#hinh_anh').on('change', function() {
+        var file = this.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('.img-thumbnail').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+});
 </script>
 </body>
-
 </html>
