@@ -182,22 +182,124 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item p-b-10">
-                    <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
+                    <a class="nav-link active" data-toggle="tab" href="#reviews" role="tab">Reviews</a>
+                </li>
+                <li class="nav-item p-b-10">
+                    <a class="nav-link" data-toggle="tab" href="#description" role="tab">Description</a>
                 </li>
 
                 <li class="nav-item p-b-10">
                     <a class="nav-link" data-toggle="tab" href="#information" role="tab">Additional information</a>
                 </li>
-
-                <li class="nav-item p-b-10">
-                    <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews</a>
-                </li>
             </ul>
 
             <!-- Tab panes -->
             <div class="p-t-43 tab-content">
-                <!-- - -->
-                <div class="active fade show tab-pane" id="description" role="tabpanel">
+                <!-- Reviews -->
+                <div class="active fade show tab-pane" id="reviews" role="tabpanel">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-8 col-sm-10 m-lr-auto">
+                            <div class="m-lr-15-sm p-b-30">
+                                <!-- Review -->
+                                <?php foreach ($listComment as $comment): ?>
+                                    <div class="flex-t flex-w p-b-68">
+                                        <div class="m-r-18 m-t-6 bor0 of-hidden size-109 wrap-pic-s">
+                                            <img src="<?= !empty($comment['anh_dai_dien']) ? $comment['anh_dai_dien'] : 'assets/images/avatar-default.jpg' ?>" alt="AVATAR">
+                                        </div>
+
+                                        <div class="size-207">
+                                            <div class="flex-sb-m flex-w p-b-17">
+                                                <span class="p-r-20 cl2 mtext-107">
+                                                    <?php echo $comment['ten_tai_khoan'] ?>
+                                                </span>
+                                                <span class="cl11 fs-18">
+                                                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                                                        <?php if ($i <= $comment['danh_gia']): ?>
+                                                            <i class="zmdi zmdi-star"></i>
+                                                        <?php else: ?>
+                                                            <i class="zmdi zmdi-star-outline"></i>
+                                                        <?php endif; ?>
+                                                    <?php endfor; ?>
+                                                </span>
+                                            </div>
+
+                                            <p class="cl6 stext-102">
+                                                <?php echo $comment['noi_dung'] ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+
+                                <!-- Add review -->
+                                <?php if (isset($_SESSION['success'])): ?>
+                                    <div class="alert alert-success">
+                                        <?php echo $_SESSION['success']; ?>
+                                        <?php unset($_SESSION['success']); ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if (isset($_SESSION['error'])): ?>
+                                    <div class="alert alert-danger">
+                                        <?php echo $_SESSION['error']; ?>
+                                        <?php unset($_SESSION['error']); ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if (isset($_SESSION['user_client'])): ?>
+                                    <form class="w-full"
+                                        action="<?= BASE_URL . '?act=them-binh-luan&id=' . $Product['id'] ?>" method="post">
+                                        <h5 class="p-b-7 cl2 mtext-108">
+                                            Add a review
+                                        </h5>
+                                        <p class="cl6 stext-102">
+                                            Your email address will not be published. Required fields are marked *
+                                        </p>
+
+                                        <div class="flex-m flex-w p-b-23 p-t-50">
+                                            <span class="m-r-16 cl3 stext-102">
+                                                Your Rating
+                                            </span>
+
+                                            <span class="cl11 fs-18 pointer wrap-rating">
+                                                <i class="item-rating pointer zmdi zmdi-star-outline" data-value="1"
+                                                    onclick="rateProduct(1)"></i>
+                                                <i class="item-rating pointer zmdi zmdi-star-outline" data-value="2"
+                                                    onclick="rateProduct(2)"></i>
+                                                <i class="item-rating pointer zmdi zmdi-star-outline" data-value="3"
+                                                    onclick="rateProduct(3)"></i>
+                                                <i class="item-rating pointer zmdi zmdi-star-outline" data-value="4"
+                                                    onclick="rateProduct(4)"></i>
+                                                <i class="item-rating pointer zmdi zmdi-star-outline" data-value="5"
+                                                    onclick="rateProduct(5)"></i>
+                                                <input class="dis-none" type="number" name="danh_gia" id="rating-input" required>
+                                            </span>
+                                        </div>
+
+                                        <div class="row p-b-25">
+                                            <div class="col-12 p-b-5">
+                                                <label class="cl3 stext-102" for="review">Your review</label>
+                                                <textarea class="p-lr-20 p-tb-10 bor8 cl2 size-110 stext-102" id="noi_dung"
+                                                    name="noi_dung" required></textarea>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit"
+                                            class="flex-c-m m-b-10 p-lr-15 bg7 bor11 cl0 hov-btn3 size-112 stext-101 trans-04">
+                                            Submit
+                                        </button>
+                                    </form>
+                                <?php else: ?>
+                                    <div class="alert alert-info">
+                                        Vui lòng <a href="<?= BASE_URL . '?act=dang-nhap' ?>">đăng nhập</a> để bình luận
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="fade tab-pane" id="description" role="tabpanel">
                     <div class="p-lr-15-md how-pos2">
                         <p class="cl6 stext-102">
                             <?php echo $Product['mo_ta'] ?>
@@ -205,7 +307,7 @@
                     </div>
                 </div>
 
-                <!-- - -->
+                <!-- Additional information -->
                 <div class="fade tab-pane" id="information" role="tabpanel">
                     <div class="row">
                         <div class="col-lg-6 col-md-8 col-sm-10 m-lr-auto">
@@ -263,109 +365,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- - -->
-                <div class="fade tab-pane" id="reviews" role="tabpanel">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-8 col-sm-10 m-lr-auto">
-                            <div class="m-lr-15-sm p-b-30">
-                                <!-- Review -->
-                                <?php foreach ($listComment as $comment): ?>
-                                    <div class="flex-t flex-w p-b-68">
-                                        <div class="m-r-18 m-t-6 bor0 of-hidden size-109 wrap-pic-s">
-                                            <img src="<?= !empty($comment['anh_dai_dien']) ? $comment['anh_dai_dien'] : 'assets/images/avatar-default.jpg' ?>" alt="AVATAR">
-                                        </div>
-
-                                        <div class="size-207">
-                                            <div class="flex-sb-m flex-w p-b-17">
-                                                <span class="p-r-20 cl2 mtext-107">
-                                                    <?php echo $comment['ten_tai_khoan'] ?>
-                                                </span>
-                                                <span class="cl11 fs-18">
-                                                    <?php for ($i = 1; $i <= 5; $i++): ?>
-                                                        <?php if ($i <= $comment['danh_gia']): ?>
-                                                            <i class="zmdi zmdi-star"></i>
-                                                        <?php else: ?>
-                                                            <i class="zmdi zmdi-star-outline"></i>
-                                                        <?php endif; ?>
-                                                    <?php endfor; ?>
-                                                </span>
-                                            </div>
-
-                                            <p class="cl6 stext-102">
-                                                <?php echo $comment['noi_dung'] ?>
-                                            </p>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-
-                                <!-- Add review -->
-                                <?php if(isset($_SESSION['success'])): ?>
-                                    <div class="alert alert-success">
-                                        <?php echo $_SESSION['success']; ?>
-                                        <?php unset($_SESSION['success']); ?>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if(isset($_SESSION['error'])): ?>
-                                    <div class="alert alert-danger">
-                                        <?php echo $_SESSION['error']; ?>
-                                        <?php unset($_SESSION['error']); ?>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if(isset($_SESSION['user_client'])): ?>
-                                <form class="w-full"
-                                    action="<?= BASE_URL . '?act=them-binh-luan&id=' . $Product['id'] ?>" method="post">
-                                    <h5 class="p-b-7 cl2 mtext-108">
-                                        Add a review
-                                    </h5>
-                                    <p class="cl6 stext-102">
-                                        Your email address will not be published. Required fields are marked *
-                                    </p>
-
-                                    <div class="flex-m flex-w p-b-23 p-t-50">
-                                        <span class="m-r-16 cl3 stext-102">
-                                            Your Rating
-                                        </span>
-
-                                        <span class="cl11 fs-18 pointer wrap-rating">
-                                            <i class="item-rating pointer zmdi zmdi-star-outline" data-value="1"
-                                                onclick="rateProduct(1)"></i>
-                                            <i class="item-rating pointer zmdi zmdi-star-outline" data-value="2"
-                                                onclick="rateProduct(2)"></i>
-                                            <i class="item-rating pointer zmdi zmdi-star-outline" data-value="3"
-                                                onclick="rateProduct(3)"></i>
-                                            <i class="item-rating pointer zmdi zmdi-star-outline" data-value="4"
-                                                onclick="rateProduct(4)"></i>
-                                            <i class="item-rating pointer zmdi zmdi-star-outline" data-value="5"
-                                                onclick="rateProduct(5)"></i>
-                                            <input class="dis-none" type="number" name="danh_gia" id="rating-input" required>
-                                        </span>
-                                    </div>
-
-                                    <div class="row p-b-25">
-                                        <div class="col-12 p-b-5">
-                                            <label class="cl3 stext-102" for="review">Your review</label>
-                                            <textarea class="p-lr-20 p-tb-10 bor8 cl2 size-110 stext-102" id="noi_dung"
-                                                name="noi_dung" required></textarea>
-                                        </div>
-                                    </div>
-
-                                    <button type="submit"
-                                        class="flex-c-m m-b-10 p-lr-15 bg7 bor11 cl0 hov-btn3 size-112 stext-101 trans-04">
-                                        Submit
-                                    </button>
-                                </form>
-                                <?php else: ?>
-                                    <div class="alert alert-info">
-                                        Vui lòng <a href="<?= BASE_URL . '?act=dang-nhap' ?>">đăng nhập</a> để bình luận
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -395,49 +394,49 @@
         <div class="wrap-slick2">
             <div class="slick2">
                 <?php foreach ($listProductSameCategory as $product): ?>
-                <div class="p-b-15 p-l-15 p-r-15 p-t-15 item-slick2">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="<?= !empty($product['hinh_anh']) ? $product['hinh_anh'] : 'assets/images/product-04.jpg' ?>" alt="IMG-PRODUCT">
+                    <div class="p-b-15 p-l-15 p-r-15 p-t-15 item-slick2">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-pic hov-img0">
+                                <img src="<?= !empty($product['hinh_anh']) ? $product['hinh_anh'] : 'assets/images/product-04.jpg' ?>" alt="IMG-PRODUCT">
 
-                            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
-                                class="flex-c-m p-lr-15 bg0 block2-btn bor2 cl2 hov-btn1 js-show-modal1 size-102 stext-103 trans-04">
-                                Quick View
-                            </a>
-                        </div>
-
-                        <div class="flex-t flex-w p-t-14 block2-txt">
-                            <div class="flex-col-l block2-txt-child1">
-                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>" class="p-b-6 cl4 hov-cl1 js-name-b2 stext-104 trans-04">
-                                    <?= $product['ten_san_pham'] ?>
+                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
+                                    class="flex-c-m p-lr-15 bg0 block2-btn bor2 cl2 hov-btn1 js-show-modal1 size-102 stext-103 trans-04">
+                                    Quick View
                                 </a>
-
-                                <span class="cl3 stext-105">
-                                    <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
-                                        <span class="cl2 mtext-106 text-decoration-line-through">
-                                            <?= number_format($product['gia_san_pham']) . 'đ' ?>
-                                        </span>
-                                        <span class="cl2 mtext-106 text-danger">
-                                            <?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?>
-                                        </span>
-                                    <?php else: ?>
-                                        <?= number_format($product['gia_san_pham']) . 'đ' ?>
-                                    <?php endif; ?>
-                                </span>
                             </div>
 
-                            <div class="flex-r p-t-3 block2-txt-child2">
-                                <a href="#" class="btn-addwish-b2 dis-block js-addwish-b2 pos-relative">
-                                    <img class="dis-block icon-heart1 trans-04"
-                                        src="assets/images/icons/icon-heart-01.png" alt="ICON">
-                                    <img class="ab-t-l dis-block icon-heart2 trans-04"
-                                        src="assets/images/icons/icon-heart-02.png" alt="ICON">
-                                </a>
+                            <div class="flex-t flex-w p-t-14 block2-txt">
+                                <div class="flex-col-l block2-txt-child1">
+                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>" class="p-b-6 cl4 hov-cl1 js-name-b2 stext-104 trans-04">
+                                        <?= $product['ten_san_pham'] ?>
+                                    </a>
+
+                                    <span class="cl3 stext-105">
+                                        <?php if ($product['gia_san_pham_khuyen_mai'] > 0): ?>
+                                            <span class="cl2 mtext-106 text-decoration-line-through">
+                                                <?= number_format($product['gia_san_pham']) . 'đ' ?>
+                                            </span>
+                                            <span class="cl2 mtext-106 text-danger">
+                                                <?= number_format($product['gia_san_pham_khuyen_mai']) . 'đ' ?>
+                                            </span>
+                                        <?php else: ?>
+                                            <?= number_format($product['gia_san_pham']) . 'đ' ?>
+                                        <?php endif; ?>
+                                    </span>
+                                </div>
+
+                                <div class="flex-r p-t-3 block2-txt-child2">
+                                    <a href="#" class="btn-addwish-b2 dis-block js-addwish-b2 pos-relative">
+                                        <img class="dis-block icon-heart1 trans-04"
+                                            src="assets/images/icons/icon-heart-01.png" alt="ICON">
+                                        <img class="ab-t-l dis-block icon-heart2 trans-04"
+                                            src="assets/images/icons/icon-heart-02.png" alt="ICON">
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 <?php endforeach; ?>
             </div>
         </div>
