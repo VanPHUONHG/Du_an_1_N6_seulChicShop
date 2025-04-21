@@ -206,36 +206,14 @@ class AdminOrder
     public function getProfit() {
         try {
             $sql = "SELECT 
-                    SUM(
-                        CASE 
-                            WHEN chi_tiet_don_hangs.bien_the_san_pham_id IS NOT NULL THEN 
-                                COALESCE(bien_the_san_phams.gia_khuyen_mai, bien_the_san_phams.gia)
-                            ELSE 
-                                COALESCE(san_phams.gia_san_pham_khuyen_mai, san_phams.gia_san_pham)
-                        END * chi_tiet_don_hangs.so_luong
-                    ) as doanh_thu,
+                    SUM(chi_tiet_don_hangs.thanh_tien) as doanh_thu,
                     SUM(san_phams.gia_nhap * chi_tiet_don_hangs.so_luong) as von,
-                    SUM(
-                        (CASE 
-                            WHEN chi_tiet_don_hangs.bien_the_san_pham_id IS NOT NULL THEN 
-                                COALESCE(bien_the_san_phams.gia_khuyen_mai, bien_the_san_phams.gia)
-                            ELSE 
-                                COALESCE(san_phams.gia_san_pham_khuyen_mai, san_phams.gia_san_pham)
-                        END - san_phams.gia_nhap) * chi_tiet_don_hangs.so_luong
-                    ) as loi_nhuan,
+                    SUM(chi_tiet_don_hangs.thanh_tien - (san_phams.gia_nhap * chi_tiet_don_hangs.so_luong)) as loi_nhuan,
                     (
-                        SELECT SUM(
-                            (CASE 
-                                WHEN chi_tiet_don_hangs.bien_the_san_pham_id IS NOT NULL THEN 
-                                    COALESCE(bien_the_san_phams.gia_khuyen_mai, bien_the_san_phams.gia)
-                                ELSE 
-                                    COALESCE(san_phams.gia_san_pham_khuyen_mai, san_phams.gia_san_pham)
-                            END - san_phams.gia_nhap) * chi_tiet_don_hangs.so_luong
-                        )
+                        SELECT SUM(chi_tiet_don_hangs.thanh_tien - (san_phams.gia_nhap * chi_tiet_don_hangs.so_luong))
                         FROM chi_tiet_don_hangs 
                         JOIN don_hangs ON chi_tiet_don_hangs.don_hang_id = don_hangs.id
                         JOIN san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
-                        LEFT JOIN bien_the_san_phams ON chi_tiet_don_hangs.bien_the_san_pham_id = bien_the_san_phams.id
                         WHERE MONTH(don_hangs.ngay_dat) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)
                         AND YEAR(don_hangs.ngay_dat) = YEAR(CURRENT_DATE)
                         AND don_hangs.trang_thai_don_hang_id = 4
@@ -243,7 +221,6 @@ class AdminOrder
                     FROM chi_tiet_don_hangs
                     JOIN don_hangs ON chi_tiet_don_hangs.don_hang_id = don_hangs.id
                     JOIN san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
-                    LEFT JOIN bien_the_san_phams ON chi_tiet_don_hangs.bien_the_san_pham_id = bien_the_san_phams.id
                     WHERE MONTH(don_hangs.ngay_dat) = MONTH(CURRENT_DATE)
                     AND YEAR(don_hangs.ngay_dat) = YEAR(CURRENT_DATE)
                     AND don_hangs.trang_thai_don_hang_id = 4";
@@ -393,40 +370,33 @@ class AdminOrder
     public function getTotalCustomers() {
         try {
             $sql = "SELECT 
-                    COUNT(DISTINCT d.tai_khoan_id) as tong_khach_hang,
-                    (
-                        SELECT COUNT(DISTINCT d2.tai_khoan_id)
-                        FROM don_hangs d2
-                        WHERE MONTH(d2.ngay_dat) = MONTH(CURRENT_DATE)
-                        AND YEAR(d2.ngay_dat) = YEAR(CURRENT_DATE)
-                        AND d2.trang_thai_don_hang_id = 4
-                    ) as khach_hang_thang_nay,
-                    (
-                        SELECT COUNT(DISTINCT d3.tai_khoan_id)
-                        FROM don_hangs d3
-                        WHERE MONTH(d3.ngay_dat) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)
-                        AND YEAR(d3.ngay_dat) = YEAR(CURRENT_DATE)
-                        AND d3.trang_thai_don_hang_id = 4
+                    COUNT(DISTINCT tai_khoan_id) as tong_khach_hang,
+                    COALESCE(
+                        (SELECT COUNT(DISTINCT tai_khoan_id)
+                        FROM don_hangs
+                        WHERE MONTH(ngay_dat) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)
+                        AND YEAR(ngay_dat) = YEAR(CURRENT_DATE)), 0
                     ) as khach_hang_thang_truoc
-                    FROM don_hangs d
-                    WHERE d.trang_thai_don_hang_id = 4";
+                    FROM don_hangs
+                    WHERE MONTH(ngay_dat) = MONTH(CURRENT_DATE)
+                    AND YEAR(ngay_dat) = YEAR(CURRENT_DATE)";
             
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            $currentMonthCustomers = floatval($result['khach_hang_thang_nay'] ?? 0);
-            $lastMonthCustomers = floatval($result['khach_hang_thang_truoc'] ?? 0);
+            $currentCustomers = (int)($result['tong_khach_hang'] ?? 0);
+            $lastCustomers = (int)($result['khach_hang_thang_truoc'] ?? 0);
             $growthRate = 0;
             
-            if ($lastMonthCustomers != 0) {
-                $growthRate = round((($currentMonthCustomers - $lastMonthCustomers) / abs($lastMonthCustomers)) * 100, 1);
-            } elseif ($lastMonthCustomers == 0 && $currentMonthCustomers > 0) {
+            if ($lastCustomers != 0) {
+                $growthRate = round((($currentCustomers - $lastCustomers) / abs($lastCustomers)) * 100, 1);
+            } elseif ($lastCustomers == 0 && $currentCustomers > 0) {
                 $growthRate = 100;
             }
             
             return [
-                'tong_khach_hang' => (int)($result['tong_khach_hang'] ?? 0),
+                'tong_khach_hang' => $currentCustomers,
                 'tang_truong' => $growthRate
             ];
         } catch (Exception $e) {
@@ -443,13 +413,11 @@ class AdminOrder
                         (SELECT COUNT(*)
                         FROM don_hangs
                         WHERE MONTH(ngay_dat) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)
-                        AND YEAR(ngay_dat) = YEAR(CURRENT_DATE)
-                        AND trang_thai_don_hang_id = 4), 0
+                        AND YEAR(ngay_dat) = YEAR(CURRENT_DATE)), 0
                     ) as don_hang_thang_truoc
                     FROM don_hangs
                     WHERE MONTH(ngay_dat) = MONTH(CURRENT_DATE)
-                    AND YEAR(ngay_dat) = YEAR(CURRENT_DATE)
-                    AND trang_thai_don_hang_id = 4";
+                    AND YEAR(ngay_dat) = YEAR(CURRENT_DATE)";
             
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
@@ -498,7 +466,23 @@ class AdminOrder
                                 COALESCE(san_phams.gia_san_pham_khuyen_mai, san_phams.gia_san_pham)
                         END - san_phams.gia_nhap) * chi_tiet_don_hangs.so_luong
                     ) as loi_nhuan,
-                    COUNT(DISTINCT don_hangs.id) as so_don_hang
+                    COUNT(DISTINCT don_hangs.id) as so_don_hang,
+                    COALESCE(
+                        (SELECT SUM(
+                            (CASE 
+                                WHEN ctdh.bien_the_san_pham_id IS NOT NULL THEN 
+                                    COALESCE(bt.gia_khuyen_mai, bt.gia)
+                                ELSE 
+                                    COALESCE(sp.gia_san_pham_khuyen_mai, sp.gia_san_pham)
+                            END - sp.gia_nhap) * ctdh.so_luong
+                        )
+                        FROM chi_tiet_don_hangs ctdh
+                        JOIN don_hangs dh ON ctdh.don_hang_id = dh.id
+                        JOIN san_phams sp ON ctdh.san_pham_id = sp.id
+                        LEFT JOIN bien_the_san_phams bt ON ctdh.bien_the_san_pham_id = bt.id
+                        WHERE YEARWEEK(dh.ngay_dat, 1) = YEARWEEK(don_hangs.ngay_dat - INTERVAL 1 WEEK, 1)
+                        AND dh.trang_thai_don_hang_id = 4), 0
+                    ) as loi_nhuan_tuan_truoc
                     FROM chi_tiet_don_hangs
                     JOIN don_hangs ON chi_tiet_don_hangs.don_hang_id = don_hangs.id
                     JOIN san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
@@ -513,9 +497,9 @@ class AdminOrder
             $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
-            for ($i = 0; $i < count($results) - 1; $i++) {
+            for ($i = 0; $i < count($results); $i++) {
                 $currentWeekProfit = floatval($results[$i]['loi_nhuan']);
-                $lastWeekProfit = floatval($results[$i + 1]['loi_nhuan']);
+                $lastWeekProfit = floatval($results[$i]['loi_nhuan_tuan_truoc']);
                 $growthRate = 0;
                 
                 if ($lastWeekProfit != 0) {
@@ -525,10 +509,6 @@ class AdminOrder
                 }
                 
                 $results[$i]['tang_truong'] = $growthRate;
-            }
-            
-            if (!empty($results)) {
-                $results[count($results) - 1]['tang_truong'] = 0;
             }
             
             return $results;

@@ -397,8 +397,10 @@
                     <div class="p-b-15 p-l-15 p-r-15 p-t-15 item-slick2">
                         <!-- Block2 -->
                         <div class="block2">
-                            <div class="block2-pic hov-img0">
-                                <img src="<?= !empty($product['hinh_anh']) ? $product['hinh_anh'] : 'assets/images/product-04.jpg' ?>" alt="IMG-PRODUCT">
+                            <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
+                                <img src="<?= !empty($product['hinh_anh']) ? $product['hinh_anh'] : 'assets/images/product-04.jpg' ?>" 
+                                     alt="IMG-PRODUCT"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
 
                                 <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['id'] ?>"
                                     class="flex-c-m p-lr-15 bg0 block2-btn bor2 cl2 hov-btn1 js-show-modal1 size-102 stext-103 trans-04">

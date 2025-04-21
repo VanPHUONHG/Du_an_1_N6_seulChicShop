@@ -86,7 +86,15 @@
                                             </span>
                                         </td>
                                         <td class="align-middle">
-                                            <span class="badge badge-<?= $donHangs['trang_thai_don_hang_id'] === 1 ? 'warning' : 'success' ?>">
+                                            <span class="badge badge-<?php 
+                                                if ($donHangs['trang_thai_don_hang_id'] === 1) {
+                                                    echo 'warning';
+                                                } elseif ($donHangs['trang_thai_don_hang_id'] === 5) {
+                                                    echo 'danger'; 
+                                                } else {
+                                                    echo 'success';
+                                                }
+                                            ?>">
                                                 <?= $trangThaiOrder[$donHangs['trang_thai_don_hang_id']] ?>
                                             </span>
                                         </td>
