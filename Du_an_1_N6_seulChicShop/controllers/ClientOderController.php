@@ -72,21 +72,6 @@ class ClientOderController
                         $item['so_luong'],
                         $donGia * $item['so_luong']
                     );
-
-                    //khi nao lam trang sp hoan thien thi chinh lại và mo commit ra
-                    // $soLuongHienTai = $this->ModelsClientProduct->getSoLuong($item['san_pham_id']);
-                    // if ($soLuongHienTai < $item['so_luong']) {
-                    //     var_dump("Không đủ số lượng trong kho sản phẩm: " . $item['ten_san_pham']);
-                    //     die();
-                    // }
-
-                    // Giảm số lượng trên database -> khi nao lam trang sp hoan thien thi chinh lại và mo commit ra
-                    //  $capNhatSoLuong = $this->modelSanPham->giamSoLuong($item['san_pham_id'], $item['so_luong']);
-                    //  if (!$capNhatSoLuong) {
-                    //      $soLuongHienTai = $this->modelSanPham->getSoLuong($item['san_pham_id']);
-                    //      var_dump("Không cập nhật được kho cho sản phẩm: " . $item['ten_san_pham']);
-                    //      die();
-                    //  }
                 }
 
                 // sau khi them phai tien hanh xoa san pham trong gio hang
@@ -186,19 +171,6 @@ class ClientOderController
                 echo "Bạn không có quyền truy cập đơn hàng này";
                 exit;
             }
-
-            // Debug để kiểm tra dữ liệu
-            // echo "<pre>";
-            // echo "Thông tin đơn hàng:\n";
-            // print_r($donHang);
-            // echo "\nChi tiết đơn hàng:\n"; 
-            // print_r($chiTietDonHang);
-            // echo "\nTrạng thái đơn hàng:\n";
-            // print_r($trangThaiOrder);
-            // echo "\nPhương thức thanh toán:\n";
-            // print_r($phuongThucThanhToan);
-            // echo "</pre>";
-            // die();
             require_once './views/chiTietMuaHang.php';
           
         } else {
@@ -220,7 +192,7 @@ class ClientOderController
 
             //kiem tra don hang
             $donHang = $this->ModelClientOrder->getDonHangById($donHangId);
-            $this->ModelClientOrder->updateTrangThaiDonHang($donHangId, 6);
+            $this->ModelClientOrder->updateTrangThaiDonHang($donHangId, 5);
             header("Location: " . BASE_URL . '?act=lich-su-mua-hang');
             exit();
         } else {

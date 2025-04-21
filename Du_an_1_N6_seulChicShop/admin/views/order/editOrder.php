@@ -229,7 +229,7 @@
                                                         </option>
                                                     <?php endif; ?>
                                                 <?php else: ?>
-                                                    <?php if ($trangThai['id'] == $donHang['trang_thai_don_hang_id'] + 1): ?>
+                                                    <?php if ($trangThai['id'] == $donHang['trang_thai_don_hang_id'] || $trangThai['id'] == $donHang['trang_thai_don_hang_id'] + 1): ?>
                                                         <option value="<?= $trangThai['id'] ?>" <?= $trangThai['id'] == $donHang['trang_thai_don_hang_id'] ? 'selected' : '' ?>>
                                                             <?= $trangThai['ten_trang_thai'] ?>
                                                         </option>

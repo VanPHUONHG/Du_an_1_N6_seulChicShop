@@ -68,7 +68,7 @@ class ClientProductController
             }
 
             $ngay_dang = date('Y-m-d H:i:s');
-            $trang_thai = 1;
+            $trang_thai = 0;
             
             $result = $this->ModelClientComment->createComment($id, $tai_khoan_id, $noi_dung, $danh_gia, $ngay_dang, $trang_thai);
             

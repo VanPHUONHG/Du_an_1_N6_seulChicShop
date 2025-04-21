@@ -18,7 +18,6 @@ require_once './controllers/ClientContactController.php';
 require_once './controllers/ClientCartController.php';
 require_once './controllers/ClientPayController.php';
 require_once './controllers/ClientPostsController.php';
-require_once './controllers/ClientKhuyenMaiController.php';
 require_once './controllers/ClientProductController.php';
 require_once './controllers/ClientOderController.php';
 
@@ -29,7 +28,6 @@ require_once './controllers/ClientOderController.php';
 require_once './models/ClientProduct.php';
 require_once './models/ClientContact.php';
 require_once './models/ClientUser.php';
-require_once './models/ClientKhuyenMai.php';
 require_once './models/ClientPay.php';
 require_once './models/ClientComment.php';
 require_once './models/ClientCart.php';
